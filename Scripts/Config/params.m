@@ -987,7 +987,7 @@ switch site
                 % Final Flux Calculation (OPEC_Fluxes)
                 GEPcutstart = 151; GEPcutend = 273; corr_1 = 1; corr_2 = 0;
                 % Footprint Information (measurement and tree height)
-                z_meas = 6; z_tree = 5.8; % Actual measurement
+                z_meas = 6; z_tree = 6.03; % Actual measurement
 !      
                 case '2014'
                 % CO2 storage
@@ -1005,7 +1005,7 @@ switch site
                 % In 
                 z_meas = NaN.*ones(yr_length(str2num(year),30),1);
                 z_meas(1:9827,1)=6;z_meas(9828:end)=10;                
-                z_tree = 5.7.*ones(yr_length(str2num(year),30),1); %  % Actual measurement
+                z_tree = 6.26.*ones(yr_length(str2num(year),30),1); %  % Actual measurement
                 
                 %%% ALL 2015 VALUES STRAIGHT UP COPIED FROM 2013/2014 -
                 %%% REPLACE!!      
@@ -1020,7 +1020,7 @@ switch site
                 GEPcutstart = 151; GEPcutend = 273; corr_1 = 1; corr_2 = 0;
                 % Footprint Information (measurement and tree height)
                 
-                z_meas = 10; z_tree = 5.7; % COPIED FROM 2014 - REPLACE!!!
+                z_meas = 10; z_tree = 6.5; % COPIED FROM 2014 - REPLACE!!!
                 
                 %%% ALL 2016 VALUES STRAIGHT UP COPIED FROM 2015 - REPLACE!!      
                 case '2016'
@@ -1033,7 +1033,7 @@ switch site
                 % Final Flux Calculation (OPEC_Fluxes)
                 GEPcutstart = 151; GEPcutend = 273; corr_1 = 1; corr_2 = 0;
                 % Footprint Information (measurement and tree height)
-                z_meas = 10; z_tree = 5.7; % COPIED FROM 2015 - REPLACE!!!
+                z_meas = 10; z_tree = 6.85; % COPIED FROM 2015 - REPLACE!!!
                 
                 %%% ALL 2017 VALUES STRAIGHT UP COPIED FROM 2016 - REPLACE!!      
                 case '2017'
@@ -1046,7 +1046,7 @@ switch site
                 % Final Flux Calculation (OPEC_Fluxes)
                 GEPcutstart = 151; GEPcutend = 273; corr_1 = 1; corr_2 = 0;
                 % Footprint Information (measurement and tree height)
-                z_meas = 10; z_tree = 5.7; % COPIED FROM 2016 - REPLACE!!!
+                z_meas = 10; z_tree = 7.13; % COPIED FROM 2016 - REPLACE!!!
                 
                 %%% ALL 2018 VALUES STRAIGHT UP COPIED FROM 2017 - REPLACE!!      
                 case '2018'
@@ -1059,7 +1059,7 @@ switch site
                 % Final Flux Calculation (OPEC_Fluxes)
                 GEPcutstart = 151; GEPcutend = 273; corr_1 = 1; corr_2 = 0;
                 % Footprint Information (measurement and tree height)
-                z_meas = 10; z_tree = 5.7; % COPIED FROM 2017 - REPLACE!!!
+                z_meas = 10; z_tree = 7.28; % COPIED FROM 2017 - REPLACE!!!
         end
                 
         % #################################################################
