@@ -2,7 +2,8 @@ function [] = mcm_fluxnet_output(year, site, data_type, process_flag)
 %%% mcm_fluxnet_output.m
 % The purpose of this function is to create standardized outputs for each
 % year and each site, which are formatted according to the ORNL and Global
-% FLUXNET standard format.
+% Ameriflux standard format.
+% See: https://ameriflux.lbl.gov/data/how-to-uploaddownload-data/
 %%% What this function does:
 % 1. open master files
 % 2. go through a pre-established list of desired variables (with orders inserted)
@@ -59,9 +60,9 @@ end
 
 % Declare paths:
 ls_dir = addpath_loadstart;
-out_dir =       [ls_dir 'Matlab/Data/Fluxnet/'];
+out_dir =       [ls_dir 'Matlab/Data/Ameriflux_ToSubmit/'];
 master_dir =    [ls_dir 'Matlab/Data/Master_Files/'];
-gdrive_dir = '/home/arainlab/Google Drive/TPFS Data/Fluxnet/';
+gdrive_dir = '/home/arainlab/Google Drive/TPFS Data/Ameriflux - To Submit/';
 
 % Check to make sure the target directory exists. Make one if it doesn't.
 if ispc~=1
