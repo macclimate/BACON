@@ -1,0 +1,4 @@
+function pthDatabase = biomet_database_default()
+ls = addpath_loadstart;
+
+     pthDatabase = [ls 'SiteData\met-data\Database';

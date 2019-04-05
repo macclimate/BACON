@@ -1,0 +1,9 @@
+Each row represents a different run:
+Columns in file:
+1. start year
+2. end year
+3. u* threshold
+4. max_SM - resp
+5. max Ts
+6. max VPD
+7. max_SM - photosynth

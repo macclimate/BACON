@@ -1,0 +1,97 @@
+Final Storage Label File for:  M1A0404.CSI
+Date:  8/5/2004
+Time:  13:25:30
+
+5 Output_Table   5.00 Min
+1 5 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 PAR_up5_AVG  L
+6 PAR_dwn5_AVG  L
+
+31 Output_Table  30.00 Min
+1 31 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 AirTC_gnd_AVG  L
+6 AirTC_top_AVG  L
+7 AirTC_cpy_AVG  L
+8 RH_gnd_AVG  L
+9 RH_top_AVG  L
+10 RH_cpy_AVG  L
+11 WS_ms_S_WVT  L
+12 WindDir_D1_WVT  L
+13 PAR_up_AVG  L
+14 PAR_down_AVG  L
+15 Rain_TOT  L
+16 NR_Wm2_AVG  L
+17 TcPanel_AVG  L
+18 Kdown_AVG  L
+19 Kup_AVG  L
+20 Ldown_AVG  L
+21 Lup_AVG  L
+22 CorrLdown_AVG  L
+23 CorrLup_AVG  L
+24 CRNtempC_AVG  L
+25 Knet_AVG  L
+26 Lnet_AVG  L
+27 NetLCorr_AVG  L
+28 NetRad_AVG  L
+29 Albedo_AVG  L
+30 Lcorr4_AVG  L
+31 Dis2Sraw_AVG  L
+32 Dis2Surf_AVG  L
+33 aTCgnd_K_AVG  L
+34 mul_snwT_AVG  L
+35 SnowDepth_AVG  L
+
+24 Output_Table 1440.00 Min
+1 24 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 Batt_Volt_MIN  L
+6 Prog_Sig  L
+
+22 Output_Table  30.00 Min
+1 22 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 Tree_1_AVG  L
+6 Tree_2_AVG  L
+7 Tree_3_AVG  L
+8 Tree_4_AVG  L
+9 Tree_5_AVG  L
+10 Tree_6_AVG  L
+11 Tree_7_AVG  L
+12 Tree_8_AVG  L
+13 Tree_9_AVG  L
+14 Tree_10_AVG  L
+15 Tree_11_AVG  L
+16 Tree_12_AVG  L
+17 Tree_13_AVG  L
+18 Tree_14_AVG  L
+19 Tree_15_AVG  L
+20 Tree_16_AVG  L
+21 Tree_17_AVG  L
+22 Tree_18_AVG  L
+23 Tree_19_AVG  L
+24 Tree_20_AVG  L
+25 Tree_21_AVG  L
+26 Tree_22_AVG  L
+27 SnwFW_1_AVG  L
+28 SnwFW_2_AVG  L
+29 SnwFW_3_AVG  L
+30 SnwFW_4_AVG  L
+31 SnwFW_5_AVG  L
+32 SnwFW_6_AVG  L
+33 SnwFW_7_AVG  L
+34 SnwFW_8_AVG  L
+35 SnwFW_9_AVG  L
+36 SnwFW_10_AVG  L
+
+
+Estimated Total Final Storage Locations used per day 5142.0

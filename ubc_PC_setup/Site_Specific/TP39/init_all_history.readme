@@ -1,0 +1,3 @@
+June 20, 2011:
+1. Made backup of init_all file: MCM1_init_all_backup20110620.m
+2. The listed column locations for P_irga and T_irga were switched for all dates after 20030414. Fixed these.

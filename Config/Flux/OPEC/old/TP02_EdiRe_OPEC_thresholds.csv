@@ -1,0 +1,47 @@
+1,TimeVector,  0.00,  0.00
+2,Year,  0.00,  0.00
+3,JD,  0.00,  0.00
+4,HHMM,  0.00,  0.00
+5,SampleFreq_Hz,  8.00, 22.00
+6,Height_m,  0.00, 30.00
+7,ZeroPlane_m,  0.00, 25.00
+8,v_mean_ms-1,-10.00, 10.00
+9,v_std,  0.00,  5.00
+10,w_mean_ms-1, -0.60,  0.60
+11,w_std,  0.00,  5.00
+12,H2O_mean_gm-3,  0.00, 40.00
+13,Press_mean_kPa, 95.00,103.00
+14,CO2_mean_mgm-3,300.00,1400.00
+15,CO2_std_mgm-3,  0.00,1000.00
+16,Tv_mean_C,-40.00, 50.00
+17,e_kPa,  0.00,  5.00
+18,H2O_mean_mmolmol-1,  0.00, 40.00
+19,CO2_mean_umolmol-1,200.00,1000.00
+20,Fc_raw_umolm-2s-1,-35.00, 20.00
+21,u_mean_ms-1,  0.00, 12.00
+22,u_std,  0.00,  4.00
+23,rho_Cp_gm-3,1000.00,1500.00
+24,L,2300.00,2600.00
+25,ustar_ms-1,  0.00,  8.00
+26,rho_moist_gm-3,1000.00,1500.00
+27,Hs_rot_Wm-2,-300.00,1000.00
+28,Ht_rot_Wm-2,-300.00,1000.00
+29,uw_rot, -1.00,  0.50
+30,momentum_rot,-1000.00,500.00
+31,LE_rot_Wm-2,-300.00,800.00
+32,Fc_rot_umolm-2s-1,-35.00, 20.00
+33,Z_L,-500.00,500.00
+34,uw_f_corr_factor,  0.00,  2.00
+35,Hs_f_corr_factor,  0.00,  2.00
+36,Ht_f_corr_factor,  0.00,  3.00
+37,Fc_LE_f_corr_factor,  0.00,  2.00
+38,uw_rot_freq, -2.00,  1.00
+39,momentum_rot_freq,-1000.00,500.00
+40,Hs_rot_freq_Wm-2,-100.00,500.00
+41,Ht_rot_freq_Wm-2,-100.00,500.00
+42,LE_rot_freq_Wm-2,-300.00,800.00
+43,Fc_rot_freq_umolm-2s-1,-45.00, 20.00
+44,LE_WPL_corr_factor,-1000.00,1000.00
+45,LE_rot_freq_wpl_Wm-2,-100.00,650.00
+46,Fc_WPL_corr_factor,-1000.00,1000.00
+47,Fc_rot_freq_wpl_umolm-2s-1,-35.00, 20.00

@@ -1,0 +1,73 @@
+Considerations
+- Build TIMESTAMP_START and TIMESTAMP_END from existing time fields (first two cols)
+- Use Local Standard Time (not UTC)
+- missing values = -9999
+- comma-separated
+- Single header row (variable names only)
+- UTF-8 encoding
+- Filename convention: <SITE_ID>_<RESOLUTION>_<TS-START>_<TS-END>_<OPTIONAL>.csv 
+	- SITE_ID: (CA-TP1,TP2,TP3,TP4), where CA-TP4 is TP39
+	- RESOLUTION: HH
+	- TS-START: YYYYMMDDHHMM
+	- TS-END: YYYYMMDDHHMM
+	- example: CA-TP4_HH_200301010000_201712312400
+
+Gap-filled data must be identified using the _F variable qualifier
+
+For gas and heat storage fluxes, a positive value indicates net increase of matter or energy storage within the ecosystem.
+
+See http://ameriflux.lbl.gov/data/aboutdata/data-variables/#base
+
+
+_H_V_R (Three-index positional qualifier)
+Horizontal position (H): Use of the same H index indicates the same position within the horizontal plane among variables with the same base name. For example, observations that have the same variable base name and are arranged in a vertical profile would have the same H index. Note: variables with different base names could have different H indices even if located in the same physical location.
+
+Vertical position (V): Use of the same V index indicates the same position along the vertical axis among variables with the same base name. Indices must be in order, starting with the highest. For example, V = 1 for the highest air temperature or most shallow soil temperature sensor in a profile. The indices are assigned on the basis of the relative position for each vertical profile separately.
+
+Replicate (R): The R index indicates that the variable is measured in the same position (both H and V) as another sensor. Two co-located sensors are considered “replicates” if the difference in observations is due to separate instrumentation or different measurement technique. Spatial variability is never represented with different R indices. Defining spatial variability versus replication is variable dependent. For example, two radiometers measuring incoming radiation that are spaced 1 meter apart horizontally could be considered replicates, while two soil water content sensors at 1 meter horizontally spacing may have different spatial positions (different H indices).
+
+%%Conversions required:
+- Convert SnowDepth_BlwCnpy from m to cm (x100) [done]
+- Convert NaNs to -9999 [done]
+- export as local time (not UTC) [done]
+
+%%Calculations required:
+- TIMESTAMP_END and TIMESTAMP_START [done]
+- Calculate VPD in the mcm_metfill process and export it into each master file [Should be done -- just need to rerun all]
+
+%% Sapflow actions:
+- need to output sapflow in units of mmolH2O m-2 s-1 (new variable should be named F_mmol_final#) [done]
+- Add in dT_finalxx variables to master file. [Should be done -- just need to recompile (I think)]
+- Recompile all master files
+
+%% Questions: 
+- We are exporting GEONOR for each site--should we do this, or just export a separate file for the PPT station?
+
+To do:
+- Rerun mcm_sapflow_calc for all years (TP39+TP74) [worked!]
+- recompile sapflow master files from scratch [worked!]
+- rerun mcm_metfill for all years
+- recompile all master files (do it from scratch?)
+- finalize flux calculation configurations with Zoran
+- rerun all flux calculations
+- recompile all master files
+- export to Ameriflux format [Working.]
+- develop metadata
+
+%%% Record of updates:
+- Identified that there are versioning issues between config files and scripts on our data PC and the field PCs. 
+-- Jay and Zoran need to meet and discuss this.
+- reconfigured master lists and redeveloped scripts so to export in Ameriflux format. 
+-- requred development of new set of scripts to enable their format. 
+-- resulted in additional variables being included in the exported variables (including H20 concentration, filled met variables, VPD)
+-- configured sapflow files so that they can be uploaded to Ameriflux (previously not exported in any format)--required reconfiguration of calculation scripts
+- reran all met data filling to generate VPD
+- recompiled all master files from scratch
+%%% Need to do:
+- finalize flux calculation configurations with Zoran
+- rerun all flux calculations
+- recompile all master files
+- export to Ameriflux format [Working. Needs check.]
+- check data
+- develop metadata
+

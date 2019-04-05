@@ -1,0 +1,73 @@
+Final Storage Label File for:  M2A0709.CSI
+Date:  9/21/2007
+Time:  12:24:46
+
+5 Output_Table   5.00 Min
+1 5 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 PAR_Up5_AVG  L
+6 PAR_Dwn5_AVG  L
+
+10 Output_Table  30.00 Min
+1 10 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 AirTC_AVG  L
+6 RH_AVG  L
+7 WS_ms_S_WVT  L
+8 WindDir_D1_WVT  L
+9 Pres_atm_AVG  L
+
+24 Output_Table 1440.00 Min
+1 24 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 Batt_Volt_MIN  L
+6 Prog_Sig  L
+
+210 Output_Table  30.00 Min
+1 210 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 Tsoil100a_AVG  L
+6 Tsoil_50a_AVG  L
+7 Tsoil_20a_AVG  L
+8 Tsoil_10a_AVG  L
+9 Tsoil_5a_AVG  L
+10 Tsoil_2a_AVG  L
+11 Tsoil_100_AVG  L
+12 Tsoil_50b_AVG  L
+13 Tsoil_20b_AVG  L
+14 Tsoil10b_AVG  L
+15 Tsoil_5b_AVG  L
+16 Tsoil_2b_AVG  L
+17 Moist_50a_AVG  L
+18 Moist_20a_AVG  L
+19 Moist_10a_AVG  L
+20 Moist_5a_AVG  L
+21 Moist_50b_AVG  L
+22 Moist_20b_AVG  L
+23 Moist_10b_AVG  L
+24 Moist_5b_AVG  L
+25 TreeT_1_AVG  L
+26 TreeT_2_AVG  L
+27 TreeT_3_AVG  L
+28 TreeT_4_AVG  L
+29 TreeT_5_AVG  L
+30 TreeT_6_AVG  L
+31 TreeT_7_AVG  L
+32 TreeT_8_AVG  L
+33 TreeT_9_AVG  L
+34 TreeT_10_AVG  L
+35 TreeT_11_AVG  L
+36 Moist_80a_AVG  L
+37 H_Flux_1_AVG  L
+38 H_Flux_2_AVG  L
+
+
+Estimated Total Final Storage Locations used per day 3990.0

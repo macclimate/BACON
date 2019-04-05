@@ -1,0 +1,86 @@
+Year,Year,,,,Year,Year
+Month,Month,,,,Month,Month
+Day,Day,,,,Day,Day
+Hour,Hour,,,,Hour,Hour
+Minute,Minute,,,,Minute,Minute
+DTIME,DTIME,,,,dt,dt
+NEE,umol.m-2.s-1,.NEE_raw,cpec,Final_Calculated,NEE,NEE
+GEP_filled,umol.m-2.s-1,GEP_filled,cpec,Final_Calculated,,GEP_filled
+R_filled,umol.m-2.s-1,RE_filled,cpec,Final_Calculated,,RE_filled
+NEE_filled,umol.m-2.s-1,NEE_filled,cpec,Final_Calculated,,NEE_filled
+FC,umol.m-2.s-1,Fc,cpec,Final_Cleaned,,
+CO2_15m,ppm,CO2_irga,cpec,Final_Cleaned,,
+CO2_9.2m,ppm,CO2_Cnpy,met,Final_Cleaned,,
+SFC,umol.m-2.s-1,.dcdt,cpec,Final_Calculated,,
+LE,W.m-2,LE_L,cpec,Final_Cleaned,LE,LE
+H,W.m-2,Hs,cpec,Final_Cleaned,H,H
+LE_filled,W.m-2,LE_filled,cpec,Final_Calculated,,LE_filled
+H_filled,W.m-2,H_filled,cpec,Final_Calculated,,H_filled
+Ustar,m.s-1,Ustar,cpec,Final_Cleaned,Ustar,Ustar
+H2O,mmol mol-1,H2O_irga,cpec,Final_Cleaned,,
+Heat Storage,W.m-2,.Jt,cpec,Final_Calculated,Jt,
+G,W.m-2,.SHF,met,Calculated4,SHF,
+APAR,umol.m-2.s-1,,,,,
+FPAR,%,,,,,
+ZL,NaN,,,,,
+Rn,W.m-2,NetRad_AbvCnpy,met,Final_Cleaned,Rn,Rn
+PARdown_15m,umol.m-2.s-1,DownPAR_AbvCnpy,met,Final_Cleaned,,
+PARreflected_15m,umol.m-2.s-2,UpPAR_AbvCnpy,met,Final_Cleaned,,
+PARdown_9.2m,umol.m-2.s-2,DownPAR_BlwCnpy,met,Final_Cleaned,,
+Tair_15m,C,AirTemp_AbvCnpy,met,Final_Cleaned,,
+RH_15m,%,RelHum_AbvCnpy,met,Final_Cleaned,,
+WS,m.s-1,WindSpd,met,Final_Cleaned,,
+W_DIR,degree,WindDir,met,Final_Cleaned,W_Dir,W_Dir
+APR,kPa,,met,Final_Cleaned,,APR
+PPT,mm,,met,Final_Cleaned,PPT,PPT
+Ts2cmA,C,SoilTemp_A_2cm,met,Final_Cleaned,,Ts2cmA
+Ts5cmA,C,SoilTemp_A_5cm,met,Final_Cleaned,,Ts5cmA
+Ts10cmA,C,SoilTemp_A_10cm,met,Final_Cleaned,,Ts10cmA
+Ts20cmA,C,SoilTemp_A_20cm,met,Final_Cleaned,,Ts20cmA
+Ts50cmA,C,SoilTemp_A_50cm,met,Final_Cleaned,,Ts50cmA
+Ts100cmA,C,SoilTemp_A_100cm,met,Final_Cleaned,,Ts100cmA
+Ts2cmB,C,SoilTemp_B_2cm,met,Final_Cleaned,,Ts2cmB
+Ts5cmB,C,SoilTemp_B_5cm,met,Final_Cleaned,,Ts5cmB
+Ts10cmB,C,SoilTemp_B_10cm,met,Final_Cleaned,,Ts10cmB
+Ts20cmB,C,SoilTemp_B_20cm,met,Final_Cleaned,,Ts20cmB
+Ts50cmB,C,SoilTemp_B_50cm,met,Final_Cleaned,,Ts50cmB
+Ts100cmB,C,SoilTemp_B_100cm,met,Final_Cleaned,,Ts100cmB
+SM5cmA,% volume,SM_A_5cm,met,Final_Cleaned,,SM5cmA
+SM10cmA,% volume,SM_A_10cm,met,Final_Cleaned,,SM10cmA
+SM20cmA,% volume,SM_A_20cm,met,Final_Cleaned,,SM20cmA
+SM50cmA,% volume,SM_A_50cm,met,Final_Cleaned,,SM50cmA
+SM100cmA,% volume,SM_A_100cm,met,Final_Cleaned,,SM100cmA
+SM5cmB,% volume,SM_B_5cm,met,Final_Cleaned,,SM5cmB
+SM10cmB,% volume,SM_B_10cm,met,Final_Cleaned,,SM10cmB
+SM20cmB,% volume,SM_B_20cm,met,Final_Cleaned,,SM20cmB
+SM50cmB,% volume,SM_B_50cm,met,Final_Cleaned,,SM50cmB
+SM100cmB,% volume,SM_B_100cm,met,Final_Cleaned,,SM100cmB
+G_Plate1,W.m-2,SoilHeatFlux_1,met,Final_Cleaned,,
+G_Plate2,W.m-2,SoilHeatFlux_2,met,Final_Cleaned,,
+Tair_2m_filled,C,AirTemp_AbvCnpy,met,Final_Filled,Ta,Ta
+RH_2m_filled,%,RelHum_AbvCnpy,met,Final_Filled,RH,RH
+PARdown_2m_filled,umol.m-2.s-1,DownPAR_AbvCnpy,met,Final_Filled,PAR,PAR
+WS_filled,m.s-1,WindSpd,met,Final_Filled,WS,WS
+APR_filled,kPa,Pressure,met,Final_Filled,APR,APR
+Ts_2cm_avg,C,SoilTemp_2cm,met,Final_Filled,Ts2,Ts2
+Ts_5cm_avg,C,SoilTemp_5cm,met,Final_Filled,Ts5,Ts5
+Ts_10cm_avg,C,SoilTemp_10cm,met,Final_Filled,Ts10,Ts10
+Ts_20cm_avg,C,SoilTemp_20cm,met,Final_Filled,Ts20,Ts20
+Ts_50cm_avg,C,SoilTemp_50cm,met,Final_Filled,Ts50,Ts50
+Ts_100cm_avg,C,SoilTemp_100cm,met,Final_Filled,Ts100,Ts100
+SM_A_avg,% volume,SM_A_30_avg,met,Final_Filled,SM_a,SM_a
+SM_B_avg,% volume,SM_B_30_avg,met,Final_Filled,SM_b,SM_b
+GEONOR_PPT,mm,.GEO_PPT,ppt,Final_Filled,GEO_PPT,GEO_PPT
+NEE_OPEC,,.NEE_raw,opec,,NEE_OPEC,
+GEP_filled_OPEC,,,opec,,,
+R_filled_OPEC,,,opec,,,
+NEE_filled_OPEC,,,opec,,,
+FC_OPEC,,Fc,opec,,,
+CO2_OPEC,,CO2_irga,opec,,,
+SFC_OPEC,,.dcdt,opec,,,
+LE_OPEC,,,opec,,LE_OPEC,
+H_OPEC,,,opec,,H_OPEC,
+LE_filled_OPEC,,,opec,,,
+H_filled_OPEC,,,opec,,,
+Ustar_OPEC,,Ustar,opec,,Ustar_OPEC,
+H2O_OPEC,,H2O_irga,opec,,,

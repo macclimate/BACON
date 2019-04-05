@@ -1,0 +1,62 @@
+Final Storage Label File for:  M1S0404.CSI
+Date:  7/23/2004
+Time:  14:41:24
+
+136 Output_Table  30.00 Min
+1 136 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 shf1_AVG  H
+6 shf2_AVG  H
+7 shf_mV1_AVG  H
+8 shf_mV2_AVG  H
+9 cal1  H
+10 cal2  H
+11 CO2ppmCPY_AVG  H
+12 CO2ppmGND_AVG  H
+13 H_Flux1_AVG  H
+14 H_Flux2_AVG  H
+15 PAR_cpy_AVG  H
+16 Pres_atmf_AVG  H
+17 Pres_tank_AVG  H
+18 TcPanel_AVG  H
+
+210 Output_Table  30.00 Min
+1 210 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 Tsoil_2a_AVG  L
+6 Tsoil_50a_AVG  L
+7 Tsoil_10a_AVG  L
+8 Tsoil_20a_AVG  L
+9 Tsoil_5a_AVG  L
+10 Tsoil100a_AVG  L
+11 Tsoil100b_AVG  L
+12 Tsoil_50b_AVG  L
+13 Tsoil_20b_AVG  L
+14 Tsoil_10b_AVG  L
+15 Tsoil_5b_AVG  L
+16 Tsoil_2b_AVG  L
+17 Moist_5a_AVG  L
+18 Moist_10a_AVG  L
+19 Moist_20a_AVG  L
+20 Moist_50a_AVG  L
+21 Moist100a_AVG  L
+22 Moist_5b_AVG  L
+23 Moist_10b_AVG  L
+24 Moist_20b_AVG  L
+25 Moist_50b_AVG  L
+26 Moist100b_AVG  L
+
+24 Output_Table 1440.00 Min
+1 24 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 Batt_Volt_MIN  L
+6 Prog_Sig  L
+
+
+Estimated Total Final Storage Locations used per day 2790.0

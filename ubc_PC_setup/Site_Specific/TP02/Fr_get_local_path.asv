@@ -1,0 +1,16 @@
+function [dataPth,hhourPth,databasePth] = FR_get_local_path
+
+% dataPth  = 'd:\met-data\data\';
+% hhourPth  = 'd:\met-data\hhour\';
+% databasePth  = '';
+
+dataPth  = 'D:\SiteData\TP02\met-data\data\';
+hhourPth  = 'D:\SiteData\TP02\met-data\hhour\';
+databasePth  = 'D:\SiteData\TP02\met-data\Database\';
+csi_netPth = '[]';
+
+%Paths for using portable LACIE at home
+dataPth  = 'G:\SiteData\TP02\met-data\data\';
+hhourPth  = 'G:\SiteData\TP02\met-data\hhour\';
+databasePth  = 'G:\SiteData\TP02\met-data\Database\';
+csi_netPth = '[]';

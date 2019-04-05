@@ -1,0 +1,17 @@
+111,1,30,FieldID
+111,2,30,Year
+111,3,30,JD
+111,4,30,HHMM
+111,5,30,Offset
+111,6,30,Water_Height
+111,7,30,Water_Temp
+111,8,30,Batt_Volt_MIN
+111,9,30,Panel_Temp
+62,1,1440,FieldID
+62,2,1440,Year
+62,3,1440,JD
+62,4,1440,HHMM
+64,1,1440,FieldID
+64,2,1440,Year
+64,3,1440,JD
+64,4,1440,HHMM

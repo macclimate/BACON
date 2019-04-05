@@ -1,0 +1,17 @@
+site,years,ustar_th,model,footprint,tag
+TP39,2002:1:2015,mcm_Ustar_th_JJB,SiteSpec,Schuepp70,New_SiteSpec
+TP39,2002:1:2015,mcm_Ustar_th_JJB,FCRN,Schuepp70,New_FCRN
+TP39,2002:1:2015,mcm_Ustar_th_JJB,ANN_JJB1,Schuepp70,New_ANN
+TP39,2002:1:2015,0.325,SiteSpec,off,Old
+TP74,2002:1:2015,mcm_Ustar_th_JJB,SiteSpec,Schuepp70,New_SiteSpec
+TP74,2002:1:2015,mcm_Ustar_th_JJB,FCRN,Schuepp70,New_FCRN
+TP74,2002:1:2015,mcm_Ustar_th_JJB,ANN_JJB1,Schuepp70,New_ANN
+TP74,2002:1:2015,0.25,SiteSpec,off,Old
+TP89,2002:1:2007,mcm_Ustar_th_JJB,SiteSpec,Schuepp70,New_SiteSpec
+TP89,2002:1:2007,mcm_Ustar_th_JJB,FCRN,Schuepp70,New_FCRN
+TP89,2002:1:2007,mcm_Ustar_th_JJB,ANN_JJB1,Schuepp70,New_ANN
+TP89,2002:1:2007,0.3,SiteSpec,off,Old
+TP02,2002:1:2015,mcm_Ustar_th_JJB,SiteSpec,Schuepp70,New_SiteSpec
+TP02,2002:1:2015,mcm_Ustar_th_JJB,FCRN,Schuepp70,New_FCRN
+TP02,2002:1:2015,mcm_Ustar_th_JJB,ANN_JJB1,Schuepp70,New_ANN
+TP02,2002:1:2015,0.15,SiteSpec,off,Old

@@ -1,0 +1,99 @@
+1,TimeVec,NaN,       NaN,       NaN
+2,Year,NaN,       NaN,       NaN
+3,Month,NaN,       NaN,       NaN
+4,Day,NaN,       NaN,       NaN
+5,Hour,NaN,       NaN,       NaN
+6,Minute,NaN,       NaN,       NaN
+7,Fc_wpl,mg/(m^2 s),        -1,       0.7
+8,LE_wpl,W/m^2,      -300,       800
+9,Fc_irga,mg/(m^2 s),        -5,         5
+10,LE_irga,W/m^2,      -300,       800
+11,LE_kh,W/m^2,      -300,       800
+12,Hs,W/m^2,      -600,      1000
+13,H,W/m^2,      -200,       700
+14,tau,kg/(m s^2),         0,        10
+15,u_star,m/s,         0,        15
+16,cov_Uz_Uz(1),N/A,       -50,        50
+17,cov_Uz_Ux(1),N/A,       -50,        50
+18,cov_Uz_Uy(1),N/A,       -50,        50
+19,cov_Uz_co2(1),N/A,        -2,       1.5
+20,cov_Uz_h2o(1),N/A,     -0.05,      0.25
+21,Uz_ln_kh(1),N/A,       -50,        50
+22,cov_Uz_Ts(1),N/A,      -0.5,         1
+23,cov_Uz_fw(1),N/A,      -0.5,         1
+24,cov_Ux_Ux(1),N/A,       -50,        50
+25,cov_Ux_Uy(1),N/A,       -50,        50
+26,cov_Ux_co2(1),N/A,       -10,        10
+27,cov_Ux_h2o(1),N/A,        -3,         3
+28,Ux_ln_kh(1),N/A,       -50,        50
+29,cov_Ux_Ts(1),N/A,        -2,         2
+30,cov_Ux_fw(1),N/A,        -2,         2
+31,cov_Uy_Uy(1),N/A,       -50,        50
+32,cov_Uy_co2(1),N/A,       -20,        20
+33,cov_Uy_h2o(1),N/A,        -2,         2
+34,Uy_ln_kh(1),N/A,       -50,        50
+35,cov_Uy_Ts(1),N/A,        -2,         2
+36,cov_Uy_fw(1),N/A,        -2,         2
+37,cov_co2_co2(1),N/A,         0,   6.6e+04
+38,cov_h2o_h2o(1),N/A,         0,   6.6e+04
+39,ln_kh_ln_kh(1),N/A,       -50,        50
+40,ln_kh_Ts(1),N/A,       -50,        50
+41,ln_kh_fw(1),N/A,       -50,        50
+42,cov_Ts_Ts(1),N/A,       -50,        50
+43,cov_fw_fw(1),N/A,       -50,        50
+44,Ux_Avg(1),m/s,       -20,        20
+45,Uy_Avg(1),m/s,       -20,        20
+46,Uz_Avg(1),m/s,        -6,         6
+47,co2_Avg(1),mg/m^3,       300,      1500
+48,h2o_Avg(1),g/m^3,        -5,        40
+49,kh_Avg,N/A,       -20,        20
+50,fw_Avg,C,       -30,        40
+51,Ts_Avg(1),C,       -30,        45
+52,rho_a_Avg,kg/m^3,         0,         2
+53,h2o_hmp_Avg(1),g/m^3,         0,        45
+54,t_hmp_Avg(1),C,       -30,        40
+55,press_Avg(1),kPa,        95,       105
+56,panel_temp_Avg,C,       -30,        55
+57,wnd_dir_compass(1),degrees,         0,       360
+58,wnd_dir_csat3(1),degrees,      -180,       180
+59,wnd_spd(1),m/s,         0,        20
+60,rslt_wnd_spd(1),m/s,         0,        20
+61,batt_volt_Avg,C,         0,        20
+62,rho_a_Std,N/A,         0,        20
+63,h2o_hmp_Std(1),N/A,         0,        20
+64,t_hmp_Std(1),N/A,         0,        20
+65,std_wnd_dir(1),N/A,         0,       100
+66,n_Tot,N/A,         0,     3e+04
+67,csat_warnings,N/A,         0,  1.25e+04
+68,irga_warnings,N/A,         0,  1.25e+04
+69,del_T_f_Tot(1),samples,    -1e+04,  1.25e+04
+70,track_f_Tot(1),samples,    -1e+04,  1.25e+04
+71,amp_h_f_Tot(1),samples,    -1e+04,  1.25e+04
+72,amp_l_f_Tot(1),samples,    -1e+04,  1.25e+04
+73,chopper_f_Tot(1),samples,    -1e+04,  1.25e+04
+74,detector_f_Tot(1),samples,    -1e+04,  1.25e+04
+75,pll_f_Tot(1),samples,    -1e+04,  1.25e+04
+76,sync_f_Tot(1),samples,    -1e+04,  1.25e+04
+77,agc_Avg(1),N/A,       -10,        10
+78,hfp01sc_1_Avg(1),W/m^2,       -10,        10
+79,hfp01sc_2_Avg(1),W/m^2,       -10,        10
+80,hfp01sc_3_Avg(1),W/m^2,       -10,        10
+81,hfp01sc_4_Avg(1),W/m^2,       -10,        10
+82,del_Tsoil(1),C,       -10,        10
+83,del_Tsoil(2),C,       -10,        10
+84,soil_water_T_Avg(1),%,       -10,        10
+85,soil_water_T_Avg(2),%,       -10,        10
+86,Tsoil_avg(1),C,       -10,        10
+87,Tsoil_avg(2),C,       -10,        10
+88,shf_cal(1),W/(m^2 mV),       -10,        10
+89,shf_cal(2),W/(m^2 mV),       -10,        10
+90,shf_cal(3),W/(m^2 mV),       -10,        10
+91,shf_cal(4),W/(m^2 mV),       -10,        10
+92,cs616_Avg(1),%,       -10,        10
+93,cs616_Avg(2),%,       -10,        10
+94,co2stor_Avg,ppm,       300,       700
+95,co2_wpl_LE,mg/(m^2 s),        -5,         5
+96,co2_wpl_H,mg/(m^2 s),        -5,         5
+97,h2o_wpl_LE,W/m^2,      -100,       100
+98,h2o_wpl_H,W/m^2,      -100,       100
+99,Rn_Avg,W/m^2,      -200,       200

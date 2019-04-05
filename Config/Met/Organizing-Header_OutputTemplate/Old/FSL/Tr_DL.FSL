@@ -1,0 +1,27 @@
+Final Storage Label File for:  Tr_DL.SCW
+Date:  5/13/2009
+Time:  19:02:37
+
+101 Output_Table  30.00 Min
+1 101 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 T_DR_5cm  L
+6 T_Tr_5cm  L
+7 T_Tr_20cm  L
+8 SM_DR_50cm  L
+9 PA_uS_AVG  L
+10 SM_DR_100cm  L
+11 PA_uS_2_AVG  L
+12 SM_Tr_0_30cm  L
+
+102 Output_Table 1440.00 Min
+1 102 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 Batt_Volt_MIN  L
+6 Prog_Sig  L
+
+Estimated final storage locations used per day:     582

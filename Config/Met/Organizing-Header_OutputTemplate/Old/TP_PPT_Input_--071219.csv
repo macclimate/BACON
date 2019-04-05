@@ -1,0 +1,15 @@
+10,1,30,FieldID
+10,2,30,Year
+10,3,30,JD
+10,4,30,HHMM
+10,5,30,BatteryVoltage
+10,6,30,PanelTemp
+10,7,30,ProgSig
+10,8,30,WindSpd_AVG
+10,9,30,WindDir
+10,10,30,TX_Rain
+210,1,30,FieldID
+210,2,30,Year
+210,3,30,JD
+210,4,30,HHMM
+210,5,30,Precip_GN

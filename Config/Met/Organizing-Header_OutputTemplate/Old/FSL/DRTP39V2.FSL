@@ -1,0 +1,144 @@
+Final Storage Label File for:  DRTP39V2.CSI
+Date:  5/13/2009
+Time:  14:58:23
+
+10 Output_Table  30.00 Min
+1 10 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 H_FluxA_AVG  L
+6 H_FluxB_AVG  L
+
+129 Output_Table  30.00 Min
+1 129 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 Sap_1_AVG  L
+6 Sap_2_AVG  L
+7 Sap_3_AVG  L
+8 Sap_4_AVG  L
+9 Sap_5_AVG  L
+10 Sap_6_AVG  L
+11 Sap_7_AVG  L
+12 Sap_8_AVG  L
+13 Sap_9_AVG  L
+14 Sap_10_AVG  L
+15 Sap_11_AVG  L
+16 Sap_12_AVG  L
+17 Sap_13_AVG  L
+18 Sap_14_AVG  L
+19 Sap_15_AVG  L
+20 Sap_16_AVG  L
+21 Sap_17_AVG  L
+22 Sap_18_AVG  L
+23 Sap_19_AVG  L
+24 Sap_20_AVG  L
+25 Sap_21_AVG  L
+26 Sap_22_AVG  L
+27 Sap_23_AVG  L
+28 Sap_24_AVG  L
+29 Sap_25_AVG  L
+30 Sap_1_MAX  L
+31 Sap_1_Hr_Min_MAX  L
+32 Sap_2_MAX  L
+33 Sap_2_Hr_Min_MAX  L
+34 Sap_3_MAX  L
+35 Sap_3_Hr_Min_MAX  L
+36 Sap_4_MAX  L
+37 Sap_4_Hr_Min_MAX  L
+38 Sap_5_MAX  L
+39 Sap_5_Hr_Min_MAX  L
+40 Sap_6_MAX  L
+41 Sap_6_Hr_Min_MAX  L
+42 Sap_7_MAX  L
+43 Sap_7_Hr_Min_MAX  L
+44 Sap_8_MAX  L
+45 Sap_8_Hr_Min_MAX  L
+46 Sap_9_MAX  L
+47 Sap_9_Hr_Min_MAX  L
+48 Sap_10_MAX  L
+49 Sap_10_Hr_Min_MAX  L
+50 Sap_11_MAX  L
+51 Sap_11_Hr_Min_MAX  L
+52 Sap_12_MAX  L
+53 Sap_12_Hr_Min_MAX  L
+54 Sap_13_MAX  L
+55 Sap_13_Hr_Min_MAX  L
+56 Sap_14_MAX  L
+57 Sap_14_Hr_Min_MAX  L
+58 Sap_15_MAX  L
+59 Sap_15_Hr_Min_MAX  L
+60 Sap_16_MAX  L
+61 Sap_16_Hr_Min_MAX  L
+62 Sap_17_MAX  L
+63 Sap_17_Hr_Min_MAX  L
+64 Sap_18_MAX  L
+65 Sap_18_Hr_Min_MAX  L
+66 Sap_19_MAX  L
+67 Sap_19_Hr_Min_MAX  L
+68 Sap_20_MAX  L
+69 Sap_20_Hr_Min_MAX  L
+70 Sap_21_MAX  L
+71 Sap_21_Hr_Min_MAX  L
+72 Sap_22_MAX  L
+73 Sap_22_Hr_Min_MAX  L
+74 Sap_23_MAX  L
+75 Sap_23_Hr_Min_MAX  L
+76 Sap_24_MAX  L
+77 Sap_24_Hr_Min_MAX  L
+78 Sap_25_MAX  L
+79 Sap_25_Hr_Min_MAX  L
+80 Batt_Volt_AVG  L
+81 Prog_Sig_AVG  L
+
+212 Output_Table  30.00 Min
+1 212 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 Leaf_Wet1_AVG  L
+6 Leaf_Wet2_AVG  L
+7 Leaf_Wet3_AVG  L
+
+24 Output_Table 1440.00 Min
+1 24 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 Batt_Volt_MIN  L
+6 Prog_Sig  L
+
+211 Output_Table  30.00 Min
+1 211 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 Ts_1_AVG  L
+6 Ts_2_AVG  L
+7 Ts_3_AVG  L
+8 Ts_4_AVG  L
+9 Ts_5_AVG  L
+10 Ts_6_AVG  L
+11 Ts_7_AVG  L
+12 Ts_8_AVG  L
+13 Ts_9_AVG  L
+14 Ts_10_AVG  L
+15 Ts_11_AVG  L
+16 Ts_12_AVG  L
+17 SM_1_AVG  L
+18 SM_2_AVG  L
+19 SM_3_AVG  L
+20 SM_4_AVG  L
+21 SM_5_AVG  L
+22 SM_6_AVG  L
+23 SM_7_AVG  L
+24 SM_8_AVG  L
+25 SM_9_AVG  L
+26 SM_10_AVG  L
+27 SM_11_AVG  L
+28 SM_12_AVG  L
+
+
+Estimated Total Final Storage Locations used per day 5862.0

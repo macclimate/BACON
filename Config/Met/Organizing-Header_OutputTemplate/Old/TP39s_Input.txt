@@ -1,0 +1,50 @@
+136	1	30	Field ID
+136	2	30	Year
+136	3	30	Julian Day
+136	4	30	HHMM
+136	5	30	SHF 1 Avg
+136	6	30	SHF 2 Avg
+136	7	30	SHF mV1 Avg
+136	8	30	SHF mV2 Avg
+136	9	30	cal 1
+136	10	30	cal 2
+136	11	30	CO2ppm CPY
+136	12	30	CO2ppm GND
+136	13	30	H Flux 1
+136	14	30	H Flux 2
+136	15	30	PAR Cpy
+136	16	30	Pres Atm Avg
+136	17	30	Pres Tank Avg
+136	18	30	Tc Panel (Soil DL)
+210	1	30	Field ID
+210	2	30	Year
+210	3	30	Julian Day
+210	4	30	HHMM
+210	5	30	Tsoil 2a AVG
+210	6	30	Tsoil 50a AVG
+210	7	30	Tsoil 10a AVG
+210	8	30	Tsoil 20a AVG
+210	9	30	Tsoil 5a AVG
+210	10	30	Tsoil 100a AVG
+210	11	30	Tsoil 100b AVG
+210	12	30	Tsoil 50b AVG
+210	13	30	Tsoil 20b AVG
+210	14	30	Tsoil 10b AVG
+210	15	30	Tsoil 5b AVG
+210	16	30	Tsoil 2b AVG
+210	17	30	Moist 5a AVG
+210	18	30	Moist 10a AVG
+210	19	30	Moist 20a AVG
+210	20	30	Moist 50a AVG
+210	21	30	Moist 100a AVG
+210	22	30	Moist 5b AVG
+210	23	30	Moist 10b AVG
+210	24	30	Moist 20b AVG
+210	25	30	Moist 50b AVG
+210	26	30	Moist 100b AVG
+24	1	1440	Field ID
+24	2	1440	Year
+24	3	1440	Julian Day
+24	4	1440	HHMM
+24	5	1440	Batt Voltage (Soil DL)
+24	6	1440	Prog Sig (Soil DL)

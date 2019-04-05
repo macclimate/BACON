@@ -1,0 +1,34 @@
+% Column description for Master File header file
+%% Update this file as more columns are added to header:
+
+
+%% Revision History
+% Jan 22, 2011 by JJB:
+%% Inserted a new column @ column 6 to use for output to CCP
+% 31-Jan-2016 (JJB):
+%% Added a 14th column to produce Fluxnet outputs (levels 1 and 2)
+
+Column 1 (A) - CCP name for all variables
+Column 2 (B) - Units for CCP output
+Column 3 (C) - Name of variable in applicable master file or its extension in appropriate folder
+Column 4 (D) - Data type tag (cpec, opec, met, ppt, etc)
+Column 5 (E) - Data level tag (e.g. Final_Cleaned, Final_Filled, etc.)
+Column 6 (F) - Identifier of which CCP file data goes into (e.g. Met, Flux, SM) - Blank means it won't be processed into any of the files.
+Column 7 (G) - Format for values when outputted to CCP file (e.g. %5.3f means fixed-point, with a field width of 5 and a precision of 3 decimal places)
+Column 8 (H) - Names for outputting into gapfilling file (if left blank then not processed into gapfilling file)
+Column 9 (I) - Names for outputting into Jay's SM analysis work (if left blank then not processed into file)
+Column 10 (J) - Names for outputting into Altaf's, work (if left blank then not processed into file)
+Column 11 (K) - Names for outputting into Jay's factorial project files (if left blank then not processed into file)
+Column 12 (L) - Names for outputting Janelle's data  (if left blank (or NaN), then not processed into file)
+COlumn 13 (M) - Names for outputting Fluxnet Level 2 files  (if left blank or NaN, then not processed into file)
+Column 14 (N) - Names for new Ameriflux files (if cells are left blank or NaN, then not processed into file)
+
+%%%%%%%% Old: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Column 1 - CCP name for all variables
+%Column 2 - Units for CCP output
+%Column 3 - Name of variable in applicable master file or its extension in appropriate folder
+%Column 4 - Data type tag (cpec, opec, met, ppt, etc)
+%Column 5 - Data level tag (e.g. Final_Cleaned, Final_Filled, etc.)
+%Column 6 - Names for outputting into gapfilling file (if left blank then not processed into gapfilling file)
+%Column 7 - Names for outputting into Jay's SM analysis work (if left blank then not processed into file)
+%Column 8 - Names for outputting into Altaf's, work (if left blank then not processed into file)

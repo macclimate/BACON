@@ -1,0 +1,3 @@
+Previously, the full equation for upscaling of sapflow velocity to tree-level transpiration was not used; instead of As/Aw, only As was employed as a multiplier.
+
+Modifying the script to include this new "As/Aw" column was not successful, so I just renamed As/Aw to sw_m2, and changed the old sw_m2 to SW_m2 so the script would use the correct metric (as per the literature)

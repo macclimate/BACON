@@ -1,0 +1,53 @@
+5	1	5	Field ID
+5	2	5	Year
+5	3	5	Day
+5	4	5	HHMM
+5	5	5	Par Up Avg
+5	6	5	Par Down Avg
+10	1	30	Field ID
+10	2	30	Year
+10	3	30	Day
+10	4	30	HHMM
+10	5	30	Air TC Avg
+10	6	30	RH Avg
+10	7	30	WS ms S WVT
+10	8	30	Wind Dir D1 WVT
+10	9	30	PAR Up Avg
+10	10	30	Par Down Avg
+10	11	30	NR Wm2 AVG
+10	12	30	H Flux50 AVG
+10	13	30	H Flux100 AVG
+10	14	30	PAR_cpy_AVG
+24	1	1440	Field ID
+24	2	1440	Year
+24	3	1440	Day
+24	4	1440	HHMM
+24	5	1440	Battery Voltage MIN
+24	6	1440	Prog Sig
+210	1	30	Field ID
+210	2	30	Year
+210	3	30	Day
+210	4	30	HHMM
+210	5	30	Tsoil 100a AVG
+210	6	30	Tsoil 50a AVG
+210	7	30	Tsoil 20a AVG
+210	8	30	Tsoil 10a AVG
+210	9	30	Tsoil 5a AVG
+210	10	30	Tsoil 2a AVG
+210	11	30	Tsoil 10b AVG
+210	12	30	Tsoil 20b AVG
+210	13	30	Tsoil 50b AVG
+210	14	30	Tsoil 100b AVG
+210	15	30	Tsoil 5b AVG
+210	16	30	Tsoil 2b AVG
+210	17	30	Moist 100a AVG
+210	18	30	Moist 100a AVG
+210	19	30	Moist 50a AVG
+210	20	30	Moist 20a AVG
+210	21	30	Moist 10a AVG
+210	22	30	Moist 5a AVG
+210	23	30	Moist 100b AVG
+210	24	30	Moist 50b AVG
+210	25	30	Moist 5b AVG
+210	26	30	Moist 10b AVG
+210	27	30	Moist 20b AVG

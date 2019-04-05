@@ -1,0 +1,12 @@
+Year,Year,Year,Year,Year,NaN,NaN,Year,Year,Year,Year,Year
+Month,Month,Month,Month,Month,NaN,NaN,Month,Month,Month,Month,Month
+Day,Day,Day,Day,Day,NaN,NaN,Day,Day,Day,Day,Day
+Hour,Hour,Hour,Hour,Hour,NaN,NaN,Hour,Hour,Hour,Hour,Hour
+Minute,Minute,Minute,Minute,Minute,NaN,NaN,Minute,Minute,Minute,Minute,Minute
+DTIME,DTIME,dt,dt,dt,NaN,NaN,dt,dt,dt,dt,dt
+WindSpd_GEONOR_2m,m/s,WindSpd_AVG,met,Final_Cleaned,Met2,%5.3f,NaN,NaN,NaN,NaN,NaN
+WindDir_GEONOR_2m,m/s,WindDir,met,Final_Cleaned,Met2,%6.3f,NaN,NaN,NaN,NaN,NaN
+TBRG_Rain_Clearing_2m,mm,TX_Rain,met,Final_Cleaned,Met2,%5.3f,NaN,NaN,NaN,NaN,NaN
+Geonor_Accum_Output_Clearing_2m,mm,GN_Precip,met,Final_Cleaned,Met2,%7.3f,NaN,NaN,NaN,NaN,NaN
+Geonor_Precip_Clearing_2m,mm,GEO_PPT,ppt,Final_Filled,Met3,%5.3f,GEO_PPT,GEO_PPT,GEO_PPT,GEO_PPT,GEO_PPT
+Geonor_CumPrecip_Clearing_2m,mm,GEO_PPT_cum,ppt,Final_Filled,Met3,%7.3f,NaN,NaN,NaN,NaN,NaN

@@ -1,0 +1,8 @@
+Calculating stand transpiration
+
+The sapflow calculations run on BACON use the formulas in MacKay et al (2012) from our lab, which was based on Granier et al (1987).
+*The "F" output is the transpiration per tree, or Eti.
+
+To get to Et, total stand transpiration, you simply take the mean of all Eti's and multiply this by the stand basal area for that year, giving you an output in mm/ha.
+
+[Whenever you are producing a new parameter file, be sure to have a column with the sapwood area per total wood area, or As/Aw (AsAw in the file and program), to calculate this Eti as per the established equations.]

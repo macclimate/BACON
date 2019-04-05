@@ -1,0 +1,67 @@
+Final Storage Label File for:  M3A0704.CSI
+Date:  7/23/2004
+Time:  15:18:22
+
+5 Output_Table   5.00 Min
+1 5 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 PAR_Up5_AVG  L
+6 PAR_Dwn5_AVG  L
+
+10 Output_Table  30.00 Min
+1 10 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 AirTC_AVG  L
+6 RH_AVG  L
+7 WS_ms_S_WVT  L
+8 WindDir_D1_WVT  L
+9 PAR_Up_AVG  L
+10 PAR_Down_AVG  L
+11 NR_Wm2_AVG  L
+12 H_Flux50_AVG  L
+13 H_Flux100_AVG  L
+14 PAR_cpy_AVG  L
+
+24 Output_Table 1440.00 Min
+1 24 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 Batt_Volt_MIN  L
+6 Prog_Sig  L
+
+210 Output_Table  30.00 Min
+1 210 L
+2 Year_RTM  L
+3 Day_RTM  L
+4 Hour_Minute_RTM  L
+5 Tsoil100a_AVG  L
+6 Tsoil_50a_AVG  L
+7 Tsoil_20a_AVG  L
+8 Tsoil_10a_AVG  L
+9 Tsoil_5a_AVG  L
+10 Tsoil_2a_AVG  L
+11 Tsoil_10b_AVG  L
+12 Tsoil100b_AVG  L
+13 Tsoil_50b_AVG  L
+14 Tsoil_20b_AVG  L
+15 Tsoil_5b_AVG  L
+16 Tsoil_2b_AVG  L
+17 Moist100a_AVG  L
+18 Moist100a_AVG  L
+19 Moist_50a_AVG  L
+20 Moist_20a_AVG  L
+21 Moist_10a_AVG  L
+22 Moist_5a_AVG  L
+23 Moist100b_AVG  L
+24 Moist_50b_AVG  L
+25 Moist_5b_AVG  L
+26 Moist_10b_AVG  L
+27 Moist_20b_AVG  L
+
+
+Estimated Total Final Storage Locations used per day 3702.0

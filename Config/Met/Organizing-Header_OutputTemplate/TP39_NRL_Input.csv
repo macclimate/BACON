@@ -1,0 +1,8 @@
+101,1,30,FieldID
+101,2,30,Year
+101,3,30,JD
+101,4,30,HHMM
+101,5,30,BatteryVoltage
+101,6,30,ProgSig
+101,7,30,NetRad_Std
+101,8,30,NetRad_AbvCnpy

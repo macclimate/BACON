@@ -1,0 +1,21 @@
+Site,Data Type,NEE extension,ustar extension,max_SM_R,max_Ts,max_VPD,max_SM_P
+TP74,Original 30-min,NEEraw,ustar,0.08,18,3,0.08
+TP74,Master 30-min,NEEmaster,ustarmaster,0.08,18,3,0.08
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+TP89,Original 30-min,NEEraw,ustar,,,,
+TP89,Master 30-min,NEEmaster,ustarmaster,0.08,17,3,0.08
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+TP02,Original 30-min,NEEraw,ustar,,,,
+TP02,Master 30-min,NEEmaster,ustarmaster,0.08,22,3,0.09
