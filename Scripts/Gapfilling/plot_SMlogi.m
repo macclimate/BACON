@@ -13,8 +13,8 @@ elseif nargin == 2
     labels_in = {};    
 end
 
-xneg = (-0.3:0.01:0)';
-x = (0:0.001:0.5)';
+xneg = (-20:0.01:0)';
+x = (0:0.001:40)';
 num_reps = size(coeff_in,1);
 % S = (lines(num_reps) + gray(num_reps))/2;
 clrs = jjb_get_plot_colors;

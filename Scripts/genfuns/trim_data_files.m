@@ -22,15 +22,34 @@ yr_list = find(data_in.Year >= year_start & data_in.Year <= year_end);
 
 for i = 1:1:length(var_names)
     error_flag = 0;
-    try
+    
+    %%% Added 20190619 by JJB - attempting to auto-include any non-numerical fields
+
+    tmp = data_in.(var_names{i});
+    if ischar(tmp)==1
+        data_out.(var_names{i}) = data_in.(var_names{i});
+    else
+       try
         eval(['data_out.' char(var_names(i)) ' = data_in.' char(var_names(i)) '(yr_list,:);']);
     catch
         error_flag = 1;
+       end 
     end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% End of added 20190619
     
-    if error_flag == 1 && strcmp(char(var_names(i)),'site')==1
-        data_out.site = data_in.site;
-    end
+%     try
+%         eval(['data_out.' char(var_names(i)) ' = data_in.' char(var_names(i)) '(yr_list,:);']);
+%     catch
+%         error_flag = 1;
+%     end
+%     
+%     if error_flag == 1 && strcmp(char(var_names(i)),'site')==1
+%         data_out.site = data_in.site;
+%     end
+    
+
+    
+    
 end
 
 %%%% Extra variables (if extra_flag == 1):
