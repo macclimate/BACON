@@ -242,7 +242,7 @@ c.Instrument(nTair).Fs         = 1;           % Frequency of sampling
 c.Instrument(nTair).Oversample = 0;   % 
 c.Instrument(nTair).ChanNumbers = [1];  
 c.Instrument(nTair).NumOfChans = 1;  
-c.Instrument(nTair).ChanNames  = {'Ta_28m'};
+c.Instrument(nTair).ChanNames  = {'AirTemp_AbvCnpy'}; %modified from 'Ta_28m' by JJB on 20200217 - I think this has been wrong for a while.
 c.Instrument(nTair).ChanUnits  = {'degC'};
 c.Instrument(nTair).Delays.Samples = [0];
 c.Instrument(nTair).ProcessData = {['nTair = ' num2str(nTair) ';'],...

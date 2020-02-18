@@ -194,7 +194,7 @@ c.Instrument(nTair_site).SerNum     = 0;
 	c.Instrument(nTair_site).Oversample = 0;   % 
 	c.Instrument(nTair_site).ChanNumbers = [1];  
 	c.Instrument(nTair_site).NumOfChans = 1;  
-	c.Instrument(nTair_site).ChanNames  = {'Ta_28m'};
+    c.Instrument(nTair_site).ChanNames  = {'AirTemp_AbvCnpy'}; %modified from 'Ta_28m' by JJB on 20200217 - I think this has been wrong for a while.
 	c.Instrument(nTair_site).ChanUnits  = {'degC'};
 	c.Instrument(nTair_site).Delays.Samples = [0];
 	c.Instrument(nTair_site).ProcessData = {['nTair_site = ' num2str(nTair_site) ';'],...

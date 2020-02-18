@@ -1,6 +1,6 @@
 function [Stats_single,miscVariables] = do_eddy_calc(EngUnits,miscVariables,configIn,SystemNum,currentDate)
 
-%Revisions: 
+%Revisions:
 %
 % Nov 14, 2017 (Zoran)
 %   - Added configIn as an input parameter to the fr_calc_eddy. The idea is
@@ -30,13 +30,13 @@ Krypton     = fr_get_Krypton_chan(configIn);
 Eddy_HF_data = EngUnits;                                                   % this one on Oct 24, 2002
 
 % STEP - Calculate spikes, despike if selected
-if configIn.System(SystemNum).Spikes.ON == 1 
+if configIn.System(SystemNum).Spikes.ON == 1
     configIn.Spikes.Fs = configIn.System(SystemNum).Fs; %set spectra calc frequency to that of system
-    [Spikes, Eddy_HF_data]  = fr_calc_spikes(Eddy_HF_data,configIn);    
+    [Spikes, Eddy_HF_data]  = fr_calc_spikes(Eddy_HF_data,configIn);
 end
 
 % !!! DELAYS ARE ALL REMOVED AT THIS POINT !!!
-% These two steps have been moved to fr_create_system_data 
+% These two steps have been moved to fr_create_system_data
 % STEP - Calculate Delay times
 % STEP - Overide delays to those just calculated
 % Therefore delays are set empty, i.e. no shift is done in fr_calc_eddy.
@@ -54,28 +54,28 @@ end
 %Stats_single = setfield(Stats_single,{1},'EddyStats',EddyStats);
 
 % STEP - Add spikes, delays field to Eddy_results
-if configIn.System(SystemNum).Spikes.ON == 1 
+if configIn.System(SystemNum).Spikes.ON == 1
     Stats_single = setfield(Stats_single,{1},'Spikes',Spikes);
 end
 
 % STEP - Delay and Rotate the high frequency data before calculation of spectra and stationarity
 if configIn.System(SystemNum).Spectra.ON == 1 || configIn.System(SystemNum).Stationarity.ON == 1
     [Eddy_HF_data] = fr_rotatn_hf(Eddy_HF_data,[Stats_single.Three_Rotations.Angles.Eta ...
-            Stats_single.Three_Rotations.Angles.Theta Stats_single.Three_Rotations.Angles.Beta]);      
+        Stats_single.Three_Rotations.Angles.Theta Stats_single.Three_Rotations.Angles.Beta]);
 end
 
 
 % STEP - Calculate stationarity
 if configIn.System(SystemNum).Stationarity.ON == 1
     configIn.Stationarity.Fs = configIn.System(SystemNum).Fs; %set spectra calc frequency to that of system
-    Stationarity_single   = fr_calc_stationarity(Eddy_HF_data, Eddy_HF_delay, configIn); 
+    Stationarity_single   = fr_calc_stationarity(Eddy_HF_data, Eddy_HF_delay, configIn);
     Stats_single = setfield(Stats_single,{1},'Stationarity',Stationarity_single);
 end
 
 % STEP - Calculate spectra
-if configIn.System(SystemNum).Spectra.ON == 1 
+if configIn.System(SystemNum).Spectra.ON == 1
     configIn.Spectra.Fs     = configIn.System(SystemNum).Fs; %set spectra calc frequency to that of system
-    Spectra_single  = fr_calc_spectra(Eddy_HF_data, Eddy_HF_delay,configIn,[]); 
+    Spectra_single  = fr_calc_spectra(Eddy_HF_data, Eddy_HF_delay,configIn,[]);
     Stats_single = setfield(Stats_single,{1},'Spectra',Spectra_single);
 end
 
@@ -86,17 +86,17 @@ Stats_single = setfield(Stats_single,{1},'SourceInstrumentNumber',...
     getfield(configIn.System(SystemNum),'Instrument'));
 
 Stats_single = setfield(Stats_single,{1},'SourceInstrumentChannel',...
-    getfield(configIn.System(SystemNum),'CovVector'));                                
+    getfield(configIn.System(SystemNum),'CovVector'));
 return
 
 
 
 
 % STEP - Calculate correction factors
-%Cfdeg_single   = fr_calc_cfdeg(Eddy_HF_data, Stats_all, c, currentDate);    
+%Cfdeg_single   = fr_calc_cfdeg(Eddy_HF_data, Stats_all, c, currentDate);
 
 % STEP - Store results
-%Stats_all = fr_cfdeg_add(currentDate,Cfdeg_single,c,Stats_all,c);   
+%Stats_all = fr_cfdeg_add(currentDate,Cfdeg_single,c,Stats_all,c);
 
 
 %-----------------------------------------------------------------
@@ -113,9 +113,11 @@ Stats_Out.Zero_Rotations.Std = Stats_In.BeforeRot.AvgMinMax(4,:);
 function BarometricP = fr_get_BarometricP(miscVariables)
 if isfield(miscVariables,'BarometricP')
     BarometricP = miscVariables.BarometricP;
-    if isnan(BarometricP) || abs(BarometricP) > 110 || abs(BarometricP) < 80;
-        BarometricP = [];
-    end
+    if ~isempty(BarometricP) % Added 20200217 by JJB - trying to fix an error arising when an empty value appears (instead of NaN)
+        if isnan(BarometricP) || abs(BarometricP) > 110 || abs(BarometricP) < 80;
+            BarometricP = [];
+        end
+    end % Added 20200217 by JJB - trying to fix an error arising when an empty value appears (instead of NaN)
 else
     BarometricP = [];
 end
@@ -124,9 +126,11 @@ end
 function Tair        = fr_get_mean_Tair(miscVariables)
 if isfield(miscVariables,'Tair')
     Tair = miscVariables.Tair;
-    if isnan(Tair) | abs(Tair) == 0 ;
-        Tair = [];
-    end
+    if ~isempty(Tair) % Added 20200217 by JJB - trying to fix an error arising when an empty value appears (instead of NaN)
+        if isnan(Tair) | abs(Tair) == 0 ;
+            Tair = [];
+        end
+    end % Added 20200217 by JJB - trying to fix an error arising when an empty value appears (instead of NaN)
 else
     Tair = [];
 end

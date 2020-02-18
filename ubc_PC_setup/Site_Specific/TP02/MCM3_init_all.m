@@ -260,7 +260,7 @@ c.Instrument(nTair_site).FileType   = 'TurkeyPointClim';    % "Instrument" type 
 	c.Instrument(nTair_site).Oversample = 0;   % 
 	c.Instrument(nTair_site).ChanNumbers = [1];  
 	c.Instrument(nTair_site).NumOfChans = 1;  
-	c.Instrument(nTair_site).ChanNames  = {'Ta'};
+    c.Instrument(nTair_site).ChanNames  = {'AirTemp_AbvCnpy'}; %modified from 'Ta' by JJB on 20200217 - I think this has been wrong for a while.
 	c.Instrument(nTair_site).ChanUnits  = {'degC'};
 	c.Instrument(nTair_site).Delays.Samples = [0];
 	c.Instrument(nTair_site).ProcessData = {['nTair_site = ' num2str(nTair_site) ';'],...
