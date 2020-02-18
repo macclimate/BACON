@@ -3,8 +3,9 @@
 % site = 'TP02';
 site = 'TPD';
 load_path = '\\130.113.210.243\fielddata\Matlab\Data\';
+% load_path = '/1/fielddata/Matlab/Data/'; On data PC
 begin_year = 2012;
-end_year = 2016;
+end_year = 2017;
 
 %% Extract the ustar thresholds for the site by year:
 gf = load([load_path 'Flux\Gapfilling\' site '\NEE_GEP_RE\Default\' site '_Gapfill_NEE_default.mat']); %% Load gapfilling model outputs

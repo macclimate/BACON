@@ -451,7 +451,11 @@ for year_ctr = year_start:1:year_end
                     output([1011:1015 1027:1032 4128],21) = NaN;
                     % T-IRGA spikes
                     output([13778 14876],27) = NaN;
-
+                    
+                case '2019'
+                    % Spikes in Fc
+                     output([916 1030 1363 9450 10589 12910 13391 15262],1) = NaN;
+                    
             end
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TP74 %%%%%%%%%%%%%%%%%%%%%%%%%
         case 'TP74'

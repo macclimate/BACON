@@ -20,6 +20,9 @@ TP02,2008:1:2018,mcm_Ustar_th_Reich,FCRN,Kljun75,FCRN_inbnds,NaN,NaN
 TP02,2008:1:2018,mcm_Ustar_th_Reich,SiteSpec,Kljun_all90,SiteSpec_region,NaN,NaN
 TP02,2008:1:2018,mcm_Ustar_th_Reich,ANN_JJB1,Kljun_all90,ANN_region,NaN,NaN
 TP02,2008:1:2018,mcm_Ustar_th_Reich,FCRN,Kljun_all90,FCRN_region,NaN,NaN
+TP02,2008:1:2018,mcm_Ustar_th_Reich,SiteSpec,off,SiteSpec_nofp,NaN,NaN
+TP02,2008:1:2018,mcm_Ustar_th_Reich,ANN_JJB1,off,ANN_nofp,NaN,NaN
+TP02,2008:1:2018,mcm_Ustar_th_Reich,FCRN,off,FCRN_nofp,NaN,NaN
 TPD,2012:1:2018,mcm_Ustar_th_Reich,SiteSpec,Kljun75,SiteSpec_inbnds,NaN,NaN
 TPD,2012:1:2018,mcm_Ustar_th_Reich,ANN_JJB1,Kljun75,ANN_inbnds,NaN,NaN
 TPD,2012:1:2018,mcm_Ustar_th_Reich,FCRN,Kljun75,FCRN_inbnds,NaN,NaN

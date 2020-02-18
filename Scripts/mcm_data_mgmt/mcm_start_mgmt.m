@@ -23,9 +23,17 @@ imshow([ls 'Matlab/Figs/GUI/Bacon_GUI_background_v2.png']);
 
 %%% %%%%%%%% Turn on Diary %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 log_filename = [ls 'Documentation/Logs/tmp_BACONlog.txt'];  
+if ispc==1
+    log_filename = strrep(log_filename,'/','\');
+end
+
 assignin('base','log_filename',log_filename);
 if exist(log_filename,'file')==2
-unix(['rm ' log_filename]);
+    if ispc==1
+        dos(['del /f ' log_filename]);
+    else
+        unix(['rm ' log_filename]);
+    end
 end
 diary(log_filename)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

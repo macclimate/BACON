@@ -62,13 +62,20 @@ end
 ls_dir = addpath_loadstart;
 out_dir =       [ls_dir 'Matlab/Data/Ameriflux_ToSubmit/'];
 master_dir =    [ls_dir 'Matlab/Data/Master_Files/'];
-gdrive_dir = '/home/arainlab/Google Drive/TPFS Data/Ameriflux - To Submit/';
-
-% Check to make sure the target directory exists. Make one if it doesn't.
 if ispc~=1
+gdrive_dir = '/home/arainlab/Google Drive/TPFS Data/Ameriflux - To Submit/';
+else
+gdrive_dir = [ls_dir 'Google Drive/TPFS Data/Ameriflux - To Submit/'];
+end
+    
+    
+% Check to make sure the target directory exists. Make one if it doesn't.
+% if ispc~=1
     jjb_check_dirs([out_dir site],1);
     jjb_check_dirs([gdrive_dir site],1);
-end
+% else
+%     jjb_check_dirs([out_dir site],1);
+% end
 site_info  = ...
     {'TP39', 'CA-TP4','1939 Plantation White Pine','Evergreen Needleleaf Forest (ENF)'; ...
     'TP74', 'CA-TP3', '1974 Plantation White Pine','Evergreen Needleleaf Forest (ENF)'; ...
@@ -130,13 +137,14 @@ tmp_data(:,7:size(master.data,2)) = [master.data(11:end,7:end) ;NaN.*ones(10,siz
 % 4. Replace NaNs with -9999
 % tmp_data(isnan(tmp_data)==1)=-9999;
 
+    Ta_col = find(strncmp(var_list,'TA_',3)==1);
+    beg_yr = tmp_data(find(~isnan(tmp_data(:,Ta_col(1))),1,'first'),1);
+    end_yr = tmp_data(find(~isnan(tmp_data(:,Ta_col(1))),1,'last'),1); end_yr = min(end_yr,str2double(datestr(now,'yyyy'))-1);
+
 if process_flag >=2
     %% Added 26-April, 2018 (JJB): Export a single file containing all years requested in the call
     %%% Find first and last year with data:
     % time_int = 30; % At this point, all output files are thirty minute interval
-    Ta_col = find(strncmp(var_list,'TA_',3)==1);
-    beg_yr = tmp_data(find(~isnan(tmp_data(:,Ta_col(1))),1,'first'),1);
-    end_yr = tmp_data(find(~isnan(tmp_data(:,Ta_col(1))),1,'last'),1); end_yr = min(end_yr,str2double(datestr(now,'yyyy'))-1);
     
     %%% Trim the master file to the beginning and ending years
     ind_ts = find(tmp_data(:,1)>=beg_yr & tmp_data(:,1)<=end_yr);
@@ -188,7 +196,7 @@ end
 if process_flag ~=2
     clear ind_ts;
     
-    for j = year_start:1:year_end
+    for j = beg_yr:1:end_yr
         clear YYYY_label array_out;
         YYYY_label = num2str(j);
         disp(['Now Working on Site: ' site ', Year: ' YYYY_label '.'])
@@ -251,9 +259,17 @@ if process_flag ~=2
     end
 end
 % Copy directory to Google Drive
-stat = unix(['cp -vr ' out_dir site '/ "' gdrive_dir '"']);
-if stat ~=0
+copy_status = copyfile([out_dir site '/*'],[gdrive_dir site],'f');
+
+if copy_status ==0
     disp('Could not copy files to Google Drive-synced folder. Check for problems');
 else
     disp(['Uploaded Master files to Google Drive-synced folder: ' gdrive_dir site]);
 end
+% 
+% stat = unix(['cp -vr ' out_dir site '/ "' gdrive_dir '"']);
+% if stat ~=0
+%     disp('Could not copy files to Google Drive-synced folder. Check for problems');
+% else
+%     disp(['Uploaded Master files to Google Drive-synced folder: ' gdrive_dir site]);
+% end

@@ -355,9 +355,13 @@ disp(['Done!  You can find the log file at: ' log_path]);
 jjb_play_sounds('done');
 if display_flag == 1
     try
-        unix(['gnumeric ' log_path site '_hhour_complete_check_' num2str(yr_ctr) '_' timestamp '.dat' ])
-        unix(['gnumeric ' log_path site '_HFdata_complete_check_' num2str(yr_ctr) '_' timestamp '.dat' ])
-        
+        if ispc~=1
+            unix(['gnumeric ' log_path site '_hhour_complete_check_' num2str(yr_ctr) '_' timestamp '.dat' ])
+            unix(['gnumeric ' log_path site '_HFdata_complete_check_' num2str(yr_ctr) '_' timestamp '.dat' ])
+        else
+            dos(['"C:\Program Files\Notepad++\notepad++.exe" "' log_path site '_hhour_complete_check_' num2str(yr_ctr) '_' timestamp '.dat"' ]);
+            dos(['"C:\Program Files\Notepad++\notepad++.exe" "' log_path site '_HFdata_complete_check_' num2str(yr_ctr) '_' timestamp '.dat"' ]);
+        end
     catch
     end
 end

@@ -37,6 +37,13 @@ switch datatype
                 vars(28).path = 'Instrument(1,3).Avg(4)';   vars(28).name = 'P_irga';vars(28).ylabel = 'kPa';
                 vars(29).path = 'Instrument(1,3).Std(1)';   vars(29).name = 'CO2_std';vars(29).ylabel = '\mumol';
                 vars(30).path = 'Instrument(1,3).Std(2)';   vars(30).name = 'H2O_std';vars(30).ylabel = 'mmol';
+				%%% Added these on July 30, 2019 (JJB) - rotated u, v, w and their std deviations:
+                vars(31).path = 'MainEddy.Three_Rotations.Avg(1)';   vars(31).name = 'u_rot';vars(31).ylabel = 'm s^{-1}';
+                vars(32).path = 'MainEddy.Three_Rotations.Avg(2)';    vars(32).name = 'v_rot';vars(32).ylabel = 'm s^{-1}';
+                vars(33).path = 'MainEddy.Three_Rotations.Avg(3)';   vars(33).name = 'w_rot';vars(33).ylabel = 'm s^{-1}';
+                vars(34).path = 'MainEddy.Three_Rotations.Std(1)';    vars(34).name = 'u_rot_std';vars(34).ylabel = 'm s^{-1}';
+                vars(35).path = 'MainEddy.Three_Rotations.Std(2)';    vars(35).name = 'v_rot_std';vars(35).ylabel = 'm s^{-1}';
+                vars(36).path = 'MainEddy.Three_Rotations.Std(3)';    vars(36).name = 'w_rot_std';vars(36).ylabel = 'm s^{-1}';				
                 
             case 'TPD'
                 vars(1).path = 'MainEddy.Three_Rotations.LinDtr.Fluxes.Fc';             vars(1).name = 'Fc';            vars(1).ylabel = '\mumol m^{-2} s^{-1}';
@@ -69,6 +76,13 @@ switch datatype
                 vars(28).path = 'Instrument(1,1).Avg(5)';   vars(28).name = 'P_irga';vars(28).ylabel = 'kPa';
                 vars(29).path = 'Instrument(1,1).Std(1)';   vars(29).name = 'CO2_std';vars(29).ylabel = '\mumol';
                 vars(30).path = 'Instrument(1,1).Std(2)';   vars(30).name = 'H2O_std';vars(30).ylabel = 'mmol';
+				%%% Added these on July 30, 2019 (JJB) - rotated u, v, w and their std deviations:
+                vars(31).path = 'MainEddy.Three_Rotations.Avg(1)';   vars(31).name = 'u_rot';vars(31).ylabel = 'm s^{-1}';
+                vars(32).path = 'MainEddy.Three_Rotations.Avg(2)';    vars(32).name = 'v_rot';vars(32).ylabel = 'm s^{-1}';
+                vars(33).path = 'MainEddy.Three_Rotations.Avg(3)';   vars(33).name = 'w_rot';vars(33).ylabel = 'm s^{-1}';
+                vars(34).path = 'MainEddy.Three_Rotations.Std(1)';    vars(34).name = 'u_rot_std';vars(34).ylabel = 'm s^{-1}';
+                vars(35).path = 'MainEddy.Three_Rotations.Std(2)';    vars(35).name = 'v_rot_std';vars(35).ylabel = 'm s^{-1}';
+                vars(36).path = 'MainEddy.Three_Rotations.Std(3)';    vars(36).name = 'w_rot_std';vars(36).ylabel = 'm s^{-1}';				
                                 
                 
                 % elseif strcmp(site, 'TP39') == 1
@@ -104,6 +118,13 @@ switch datatype
                 vars(28).path = 'Instrument(1,1).Avg(4)';   vars(28).name = 'P_irga';vars(28).ylabel = 'kPa';
                 vars(29).path = 'Instrument(1,1).Std(1)';   vars(29).name = 'CO2_std';vars(29).ylabel = '\mumol';
                 vars(30).path = 'Instrument(1,1).Std(2)';   vars(30).name = 'H2O_std';vars(30).ylabel = 'mmol';
+				%%% Added these on July 30, 2019 (JJB) - rotated u, v, w and their std deviations:
+                vars(31).path = 'MainEddy.Three_Rotations.Avg(1)';   vars(31).name = 'u_rot';vars(31).ylabel = 'm s^{-1}';
+                vars(32).path = 'MainEddy.Three_Rotations.Avg(2)';    vars(32).name = 'v_rot';vars(32).ylabel = 'm s^{-1}';
+                vars(33).path = 'MainEddy.Three_Rotations.Avg(3)';   vars(33).name = 'w_rot';vars(33).ylabel = 'm s^{-1}';
+                vars(34).path = 'MainEddy.Three_Rotations.Std(1)';    vars(34).name = 'u_rot_std';vars(34).ylabel = 'm s^{-1}';
+                vars(35).path = 'MainEddy.Three_Rotations.Std(2)';    vars(35).name = 'v_rot_std';vars(35).ylabel = 'm s^{-1}';
+                vars(36).path = 'MainEddy.Three_Rotations.Std(3)';    vars(36).name = 'w_rot_std';vars(36).ylabel = 'm s^{-1}';				
                 
                 
                 % elseif strcmp(site, 'TP39_chamber') == 1

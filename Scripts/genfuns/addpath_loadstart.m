@@ -9,8 +9,10 @@ if ispc ~= 1
         loadstart = '/1/fielddata/';
     end
 else
-     if exist('\\130.113.210.243\fielddata\Matlab\','dir') ==7
-        loadstart = '\\130.113.210.243\fielddata\';
+     if exist('Y:\Matlab\','dir') ==7
+        loadstart = 'Y:\';
+     elseif exist('D:\Matlab','dir') == 7
+         loadstart = 'D:\';
      else
         disp('This function is not currently setup for operation on this machine');
      end

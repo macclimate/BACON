@@ -20,19 +20,18 @@ if nargin < 3
 automove_flag = 0;
 end
     
-if ispc == 1;
-%     if exist('G:/')==7;
-%         start_path = 'G:/';
-%         disp('loading from portable hard drive.')
-%     else
-%         start_path = 'D:/';
-%         disp('loading from fixed hard disk.');
-%     end
-else
-   
-        start_path = addpath_loadstart;
-        
-end
+% if ispc == 1;
+% %     if exist('G:/')==7;
+% %         start_path = 'G:/';
+% %         disp('loading from portable hard drive.')
+% %     else
+% %         start_path = 'D:/';
+% %         disp('loading from fixed hard disk.');
+% %     end
+% else
+%         start_path = addpath_loadstart;
+% end
+start_path = addpath_loadstart;
 
 disp(['running mcm_extract_cpec -- start_path = ' start_path]);
 
@@ -134,7 +133,7 @@ if exist([burn_path '/' tag])==7
     if automove_flag == 0
         resp = input('Enter <e> to exit or enter to continue: ','s');
         if strcmp(resp,'e')==1
-            finish
+            return
         else
         end
     end
