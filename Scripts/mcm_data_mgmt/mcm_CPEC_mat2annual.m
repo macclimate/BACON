@@ -175,7 +175,7 @@ for j = 1:1:num_days
 end
 
 ctr = 1;
-for k = 1:48:length(hhour_output);
+for k = 1:48:length(hhour_output)
     x_tick(ctr,1) = k;
 x_tick_label(ctr,:) = datastr(ctr,:);
 ctr = ctr+1;
@@ -188,7 +188,7 @@ elseif quickflag == -1
 else
 figure(99);clf;
 plot(hhour_field_output(:,1),'r'); hold on;
-plot(hhour_output(:,1)); hold on;
+plot(hhour_output(:,1),'b'); hold on;
 legend ('hhour-field','hhour-lab');
 disp('Please look at figure 99')
 disp('Fill in gaps in ''hhour-lab'' data with ''hhour-field'' data?');
