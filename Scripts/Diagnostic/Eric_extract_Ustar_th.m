@@ -1,4 +1,5 @@
-load('/1/fielddata/Matlab/Data/Flux/Gapfilling/TPD/NEE_GEP_RE/Default/TPD_Gapfill_NEE_default.mat')
+load('D:/Matlab/Data/Flux/Gapfilling/TPD/NEE_GEP_RE/Default/TPD_Gapfill_NEE_default.mat');
+% load('/1/fielddata/Matlab/Data/Flux/Gapfilling/TPD/NEE_GEP_RE/Default/TPD_Gapfill_NEE_default.mat')
 % load('\\130.113.210.243\fielddata\Matlab\Data\Flux\Gapfilling\TPD\NEE_GEP_RE\Default\TPD_Gapfill_NEE_default.mat')
 
 %%% If we wanted to extract Ustar_th for the 'SiteSpec_region' estimation, then we'd want the third branch in the master data

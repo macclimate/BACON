@@ -154,11 +154,12 @@ for year_ctr = year_start:1:year_end
             if auto_flag == 1
                 thresh_resp = 1;
             else
-            thresh_resp = input('Enter <1> to use previous year''s, or <0> to use blank thresholds');
+            thresh_resp = input('Enter <1> to use previous year''s, or <0> to use blank thresholds: > ');
             end
             if thresh_resp == 1;
                 try
-                    unix(['cp ' thresh_path site '_thresh_' num2str(year_ctr-1) '.dat ' thresh_path site '_thresh_' yr_str '.dat'])
+%                     unix(['cp ' thresh_path site '_thresh_' num2str(year_ctr-1) '.dat ' thresh_path site '_thresh_' yr_str '.dat'])
+                    copyfile([thresh_path site '_thresh_' num2str(year_ctr-1) '.dat '], [thresh_path site '_thresh_' yr_str '.dat']);
                     disp('Using Previous Year''s Thresholds');
                     thresh = load([thresh_path site '_thresh_' yr_str '.dat']);
                     threshflag = 1;

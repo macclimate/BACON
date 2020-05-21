@@ -3530,15 +3530,19 @@ for year_ctr = year_start:1:year_end
                     output(5020,35) = NaN;
                     RH_max = 100;
                 case '2019'
+                    % Air Temp Battery Issues
+                    output([7526],3) = NaN;
+                    output([7525],6) = NaN;
+                    output(7248:7524,5) = output(7248:7524,5)-(nanmean(output(7248:7524,5))-nanmean(output(1:7247,5)));
                     % This may be needed.
-%                     %%% Swap reversed SW and LW data (up & down are reversed) %%%%%%%
-%                      tmp = output(:,10);
-%                      output(:,10)=output(:,11);
-%                      output(:,11)=tmp;
-%                      
-%                      tmp = output(:,12);
-%                      output(:,12)=output(:,13);
-%                      output(:,13)=tmp;
+                    %%% Swap reversed SW and LW data (up & down are reversed) %%%%%%%
+                     tmp = output(:,10);
+                     output(:,10)=output(:,11);
+                     output(:,11)=tmp;
+                     
+                     tmp = output(:,12);
+                     output(:,12)=output(:,13);
+                     output(:,13)=tmp;
 %                      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             end
             %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

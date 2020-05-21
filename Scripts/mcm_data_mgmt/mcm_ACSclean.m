@@ -152,7 +152,9 @@ for year_ctr = year_start:1:year_end
             end
             if thresh_resp == 1;
                 try
-                    unix(['cp ' thresh_path site '_thresh_' num2str(year_ctr-1) '.csv ' thresh_path site '_thresh_' yr_str '.csv'])
+%                     unix(['cp ' thresh_path site '_thresh_' num2str(year_ctr-1) '.csv ' thresh_path site '_thresh_' yr_str '.csv'])
+                    copyfile([thresh_path site '_thresh_' num2str(year_ctr-1) '.csv '], [thresh_path site '_thresh_' yr_str '.csv']);
+                    
                     disp('Using Previous Year''s Thresholds');
                     thresh = load([thresh_path site '_thresh_' yr_str '.csv']);
                     threshflag = 1;
