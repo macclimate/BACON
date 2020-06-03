@@ -685,7 +685,7 @@ try
         jjb_check_dirs([dir_data(1:isDUMP-1) 'To_Burn/' site '/'],0);
         % Copy the file to the To_Burn Folder:
         if skip_flag==1
-            rt_spot = findstr('/',pth_data);
+            rt_spot = findstr('\',pth_data);
             copyfile(pth_data,[dir_data(1:isDUMP-1) 'To_Burn/' site '/' pth_data(rt_spot(end)+1:end)]);
         else
             copyfile(pth_data,[dir_data(1:isDUMP-1) 'To_Burn/' site '/' datestr(now,10) datestr(now,3) datestr(now,7) '_' file_data]);

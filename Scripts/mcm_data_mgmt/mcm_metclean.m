@@ -234,7 +234,7 @@ for year_ctr = year_start:1:year_end
             else
                 thresh_resp = input('Enter <1> to use previous year''s, or <0> to use blank thresholds: > ');
             end
-            if thresh_resp == 1;
+            if thresh_resp == 1
                 try
 %                     unix(['cp ' thresh_path site '_thresh_' num2str(year_ctr-1) '.dat ' thresh_path site '_thresh_' yr_str '.dat'])
                     copyfile([thresh_path site '_thresh_' num2str(year_ctr-1) '.dat '], [thresh_path site '_thresh_' yr_str '.dat']);
@@ -358,7 +358,7 @@ for year_ctr = year_start:1:year_end
             
             while accept == 0;
                 %%% New lower limit
-                low_lim_new = input('enter new lower limit: ','s');
+                low_lim_new = input(['enter new lower limit (current: ' num2str(low_lim) '): '],'s');
                 if isempty(low_lim_new)
                 else
                     low_lim = str2double(low_lim_new);
@@ -368,7 +368,7 @@ for year_ctr = year_start:1:year_end
                 thresh(thresh_row,2) = low_lim;
                 
                 %%% New upper limit
-                up_lim_new = input('enter new upper limit: ','s');
+                up_lim_new = input(['enter new upper limit (current: ' num2str(up_lim) '): '],'s');
                 if isempty(up_lim_new)
                 else
                     up_lim = str2double(up_lim_new);

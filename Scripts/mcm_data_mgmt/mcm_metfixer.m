@@ -788,7 +788,8 @@ for year_ctr = year_start:1:year_end
                 case '2018'
                     output(16317:16501,[10:15]) = NaN;
                 case '2019' 
-                    
+                   output(7330,[10:15]) = NaN; 
+                   output(4872,[14:15]) = NaN; 
             end
             %%% Call mcm_PPTfixer to Calculate event-based precipitation at
             %%% TP_PPT:
@@ -1731,8 +1732,84 @@ for year_ctr = year_start:1:year_end
                     % Invert sign for LW BC Up- and Down-welling
                     output(:,[16,17]) = output(:,[16,17]).*-1;
                 case '2019'
+                    %%%% PAR DOWN corrections, related to the intercomparison
+                    %%%% project that was run at the site from 20190829 to
+                    %%%% 20191024. 
+                    % Data should be inserted at 20190829 19:30 UTC
+                     [PAR_comp_H, PAR_comp_C] = read_textfile_with_headers([loadstart 'Matlab/Data/Met/Raw1/TP39/2019/TP39_PAR_Comparison_20190829-20191024.csv'],',',4);
+                    rt_col = find(strcmp(PAR_comp_H(:,2),'TP39_DN_umol_Avg')==1);
+                    PAR_to_fill = str2double(PAR_comp_C(:,rt_col));
+                    % Correct using the scaling function that Keegan
+                    % supplied. Note that this is not perfect--the
+                    % datalogger calculation is non-linear, meaning that the parameters need to be changed in the system!!!! 
+                    output(11559:11559+size(PAR_to_fill,1)-1,9) = PAR_to_fill./1.127 + (4.585/1.127);
+                    clear PAR_comp* PAR_to_fill rt_col
+%                     % There's a difference between the value that was
+%                     % collected in the CR23x vs the CR1000 when the sensor
+%                     % was spliced. 
+%                     figure(30);clf;
+%                     plot(input_data(11850:12170,9),'b');
+%                     hold on;
+%                     plot(output(11850:12170,9),'r');
+%                     p_PAR1 = polyfit(input_data(11850:12170,9),output(11850:12170,9),1); % Gives us: 0.9804, -0.6064
+%                     PAR_corr = output(11850:12170,9)./1.127 + (4.585/1.127);
+%                     plot(PAR_corr,'g');
+%                     %%%%%%%%%%%%%%%%%%%%%%%
+%                     
+%                     %%%% Figure out how to correct magnitude of new sensor
+%                     %%%% at TP39. It's way too high. Must be a multiplier
+%                     %%%% issue.
+%                     % Plot original PAR_DN sensor (from intercomp
+%                     % experiment) vs new refurbished sensor
+%                     PAR_refurb1 = str2double(PAR_comp_C(:,8)); 
+%                     
+%                     figure(31);clf;
+%                     plot(PAR_to_fill,PAR_refurb1,'k.');
+%                     p_PAR = polyfit(PAR_to_fill,PAR_refurb1,1); % Gives us: 0.9804, -0.6064
+%                     % new sensor corrected by regression shared by Keegan:                    
+%                     tmp_PAR = output(14242:end,9)./1.127 + (4.585/1.127);
+%                     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                    
+                    
+                    
+                    %%%%%%%%%%%%%%%%%%%%%
+                    
+                    % Remove PAR_UP during intercomparison period
+                    output(11559:14242,10)= NaN;
+                    output(10022,11) = NaN;
+                    
+                    
                     % Invert sign for LW BC Up- and Down-welling
                     output(:,[16,17]) = output(:,[16,17]).*-1;
+                    % bad wind data
+                    output([1757:1824 16065:16197],[7,8]) = NaN;
+                    
+                    % Bad NetRad BlwCnpy
+                    output(:,12) = NaN;
+                    
+                    % Remove bad Net LW AbvCnpy
+                    output(11844:14859,[22,23]) = NaN;
+                    
+                    output([14860],24) = NaN;
+                    output([6843 8595 8673 9591 9663 14861],29) = NaN;
+                    output([6843 8673 9591 9663 14861],30) = NaN;
+                    
+                    % Bad snow depth data
+                    tmp_snow = output(:,31);
+                    ind_snow = find(tmp_snow(4000:16000) > 0.025);
+                    output(ind_snow+3999,31) = NaN;
+                    clear tmp_snow ind_snow;
+                    
+                    output([3115 4880 11510 14598],71) = NaN;
+                    
+                    % bad soil data
+                    output(10539:10546,79) = NaN;
+                    output(:,93) = NaN;
+                    
+                    output([7376],99) = NaN;
+                    RH_max = 100; 
+                    
+                    
             end
             %%% Corrections applied to all years of data:
             % 1: Set any negative PAR and nighttime PAR to zero:
@@ -2240,8 +2317,15 @@ for year_ctr = year_start:1:year_end
                     % SM DR 100 cm
                     output([4484],[48 49]) = NaN;
                     RH_max = 100;
-                  case '2019'   
                     
+                  case '2019'   
+                     % Random Spike in all soil data
+                    output([11517 14866 14867],[12:32 48:51]) = NaN;
+                    output([10009 10010 10011],19) = NaN;
+                    % CO2 Canopy Dips
+                    output([1091 1196 1197 1198 1367 1368 2194 2195 4876 6419 8595 8668 10020 11562 11602 11757 16090],47) = NaN;
+                    
+                    RH_max = 100;
             end
             %% Corrections applied to all years of data:
             % 1: Set any negative PAR and nighttime PAR to zero:
@@ -2981,34 +3065,86 @@ for year_ctr = year_start:1:year_end
 %                     tmp = output(:,)
                     
                     RH_max = 100;
-                case '2009'
-                    % Perform a scaling correction for PAR (use correction
-                    % factor that was derived by inter-year comparison at
-                    % the site).
-                    output(:,5) = output(:,5).*par_correction_factor;
                     
                      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                    % Fix data shift that occurs ~ half hour 14600 (Nov 2). At this time, the datalogger was switched back to EDT (GMT - 4 hours). 
-                    % Need to shift data back by 8 data points. Also need to load first 8 points from 2019 and add to the end.
-                    % need to load first 8 datapoint from 2007
-                    for i = 1:1:length(vars30)
-                        try
-                            temp_var = load([load_path site '_2019.' vars30_ext(i,:)]);
-                        catch
-                            temp_var = NaN.*ones(17520,1);
-                        end
-                        fill_data(1:8,i) = temp_var(1:8);
-                        clear temp_var;
-                    end
-                    output_test = [output(1:14600,:); NaN.*ones(8,length(vars30)); output(14601:end-8,:)];
+                    % Fix data shift that occurs ~ half hour 14670 (Nov 2). At this time, the datalogger was switched to EDT (GMT - 4 hours). 
+                    % Need to shift data up by 8 data points from this time to the end of the year. 
+                    output_test = [output(1:14669,:); NaN.*ones(8,length(vars30)); output(14670:end-8,:)];
                     clear fill_data;
-                    clear output;
+                    %%% Save the last 8 half-hours fromt output (which are
+                    %%% going to get removed here). We'll need these for
+                    %%% 2019
+                    end_2018 = output(end-7:end,:);
+                    save([output_path site '_end_2018.mat'], 'end_2018');
+                    clear output end_2018;
                     output = output_test;
                     clear output_test;
                     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                     
                  case '2019' 
-                    %%% CR1000 was returned to site on Feb 11. Need to shift forward all data from this time, and load in end of 2018 data.               
+                    %%% CR1000 was returned to site on Feb 11. Need to shift forward all data from this time, and load in end of 2018 data.
+%                     Also need to load last 8 data points from 2018 and add to the start.
+% We can't take it from the fixed data, though, because the last 8 have
+% been trimmed off. Have to take it from cleaned 2018 data. ugh.
+
+%                     for i = 1:1:length(vars30)
+%                         try
+%                             temp_var = load([load_path site '_2019.' vars30_ext(i,:)]);
+%                         catch
+%                             temp_var = NaN.*ones(17520,1);
+%                         end
+%                         fill_data(1:8,i) = temp_var(1:8);
+%                         clear temp_var;
+%                     end
+                  
+                    
+                    
+                    % bad par down
+                    output(8595:8611,5) = 0;
+                    % soil heat flux spikes
+                    output([8588:8633 8809 10053],8) = NaN;
+                    output(output(:,9)==0,9) = NaN;
+                    
+                    %soil temp and moisture sensors 
+                        % we saw a large portion of the growing season
+                        % affected by faulty sensors
+                    output([7046 10075 11220],11) = NaN;
+                    output([6538 6547 6551 6554 6555 6658 7046 7568:11220 11859],[12 14 16 18 22] ) = NaN; % this deletes a large portion of crappy data. PLZ CHECK
+                    output([6567],12) = NaN;
+                    output([7046 10075],13) = NaN;
+                    output([6556 6567],[14 22]) = NaN;
+                    
+                    
+                    output([9109 7046],15) = NaN; 
+                    output([7046 1122 11859],17) = NaN;
+                    output([6567],18) = NaN;
+                    
+                    output([9650:10001 10075 10123],24) = NaN;
+                    output([11770:11856],25) = NaN;
+                    output(11220,28) = NaN;
+                    output([7046],[19 21 23 24 25 31]) = NaN;
+                    output(7046:11210,27) = NaN; % this deletes a large portion of crappy data. PLZ CHECK
+                    output([8776:8794 8807:8921 8939 8999 9000],8) = NaN;
+                    
+                    output([7046 7730:7732 8409:8412 8464 8465 8494:8499 8504:8506 10134:10189 10209 10270:10281 10325],24) = NaN;
+                    output([6538 6547 6551 6556 6567 6658 7568:7569 7046 7591 7595 7609 7614 7695 7713 7716 7718 7732 7736 7738 7741 7799 7805 7809 7816 7846 7867 7876 7881 7882 7886 7926 7933 7937 7940 7944 7951 7958 8057:10189 10209 10271 10281 10327 10328 10394 10399:10492],16) = NaN;
+                    output([7046 7502:7509 7515 7566 7791:7987 8054:8221 8405:8413 10101:10109 10075 14854 10396:10500],26) = NaN;
+                    output([7046 7502:7509 7515 7566 7731 7797:7987 8056:8508 9687 9709 9712 9723 9725 10075 10492 10135:10188 10209 10269:10280],29) = NaN;
+                    
+                    % Perform a scaling correction for PAR (use correction
+                    % factor that was derived by inter-year comparison at
+                    % the site).
+                    output(:,5) = output(:,5).*par_correction_factor;
+                    RH_max = 100;
+                    %%% Holy moly -- what a mess this is. Need to: 
+                    % - add last 8 data points from 2018 and put them in
+                    % the front of the dataset
+                    % - Move points 1 to 316 ahead by 8 half hours
+                    % - 
+                    load([output_path site '_end_2018.mat']); %loads as 'end_2018'
+                    output_tmp = [end_2018; output(1:1990,:); NaN.*ones(6,length(vars30)); output(1991:2809,:); output(2824:end,:)]; 
+                    output = output_tmp; 
+                    clear output_tmp end_2018;
             end
             %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3534,6 +3670,9 @@ for year_ctr = year_start:1:year_end
                     output([7526],3) = NaN;
                     output([7525],6) = NaN;
                     output(7248:7524,5) = output(7248:7524,5)-(nanmean(output(7248:7524,5))-nanmean(output(1:7247,5)));
+                    
+                    output([1675 2009 2198 2726 3112 3879 4372 8873 8996 11848 16072],86) = NaN;
+                    
                     % This may be needed.
                     %%% Swap reversed SW and LW data (up & down are reversed) %%%%%%%
                      tmp = output(:,10);
@@ -3543,6 +3682,7 @@ for year_ctr = year_start:1:year_end
                      tmp = output(:,12);
                      output(:,12)=output(:,13);
                      output(:,13)=tmp;
+                     RH_max = 100;
 %                      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             end
             %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

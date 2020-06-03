@@ -40,8 +40,19 @@ pth_hdr_start = ([ loadstart 'Matlab/Config/Met/Organizing-Header_OutputTemplate
 pth_tmpt = [pth_hdr_start site '_OutputTemplate.csv']; % changed this to be automatic.
 
 % pth_names = [loadstart 'Matlab/Data/Met/Raw1/Docs/' site '_CR1000_Namefile.csv']; % Changed 01-May-2012
-pth_names = [pth_hdr_start site '_CR_Namefile.csv']; % Changed 01-May-2012
-
+%%%%%%%%%%%%%%% Added 2020-05-28 by JJB %%%%%%%%%%%%%%%%%%%
+% Need to accommodate multiple namefiles in order to process TP02 data in
+% 2019, which has changes related to soil variable mappings. 
+% Original: 
+% pth_names = [pth_hdr_start site '_CR_Namefile.csv']; % Changed 01-May-2012
+if exist([pth_hdr_start site '_CR_Namefile.csv'],'file')==2
+    % If just the Namefile exists (no date), then load it: 
+    pth_names = [pth_hdr_start site '_CR_Namefile.csv'];
+else    
+        [file_hdr, dir_hdr] = uigetfile('*.csv',['Select Proper ' site ' Namefile'],pth_hdr_start);
+         pth_names = [dir_hdr file_hdr];
+end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% OPEN HEADER FILES %%%%%%%%%%%%%%%%%%%%%%%
 %%% Open the output template file
 [hdr_cell_tmpt] = jjb_hdr_read(pth_tmpt ,',',3);

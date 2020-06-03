@@ -454,8 +454,15 @@ for year_ctr = year_start:1:year_end
                     
                 case '2019'
                     % Spikes in Fc
-                     output([916 1030 1363 9450 10589 12910 13391 15262],1) = NaN;
-                    
+%                      output([916 1030 1363 9450 10589 12910 13391 15262],1) = NaN;
+                    % Bad CO2 data
+                    output([4208:4399 10365:10589 12658:13133],17) = NaN;
+                    % Bad CO2 - where CO2 is flatlined around 450
+                    bad_co2 = find(output(:,17) > 449.9999 & output(:,17) < 450.0001);
+                    output(bad_co2,[1 17]); % remove for Fc and CO2 concentration
+                    % Bad H2O
+                    output([4265:4400 10365:10589 12658:13133 17077:17083 14243 14863],18) = NaN;
+                    output([8669 16059:16202],22) = NaN;
             end
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TP74 %%%%%%%%%%%%%%%%%%%%%%%%%
         case 'TP74'
@@ -673,6 +680,18 @@ for year_ctr = year_start:1:year_end
                     % P-IRGA Spikes
                     output([468:473 2474:2479 2881 2882 4484 4485 4503 4504 4992 4993 5024:5026 ...
                         6021:6058 7135:7137 7476 13778 14876:14878],28) = NaN;
+                case '2019'
+                    % Bad Ustar
+                    output([17432:17520],2) = NaN;
+                    % Bad Ts - where Ts is flatlined around 5
+                    bad_Ts = find(output(:,22) > 4.999 & output(:,22) < 5.001);
+                    output(bad_Ts,[22]) = NaN; % remove for Ts
+                    % Bad CO2 - where CO2 is flatlined around 450
+                    bad_co2 = find(output(:,17) > 449.9999 & output(:,17) < 450.0001);
+                    output(bad_co2,[1 17]) = NaN; % remove for Fc and CO2 concentration
+                    % bad H2O
+                    bad_h2o = find(output(:,18) > 18.9999 & output(:,18) < 19.0001);
+                    output(bad_h2o,[5 18]) = NaN;
                  end
             
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TP89
@@ -896,7 +915,18 @@ for year_ctr = year_start:1:year_end
                     output([5016:5039 5078 5079 5954 5955 7166 7583 7874 14861],27) = NaN;
                     % P-irga Spikes
                     output([4998:5015 5021:5028 5679:5746 14861],28) = NaN;
-            
+                case '2019'
+                    output([7750:8070],1:14) = NaN;
+                    output([4213 4216 4402 4405 11217 13477 15861:15971 16258],17) = NaN;
+                    bad_co2 = find(output(:,17) > 449.9999 & output(:,17) < 450.0001);
+                    bad_h2o = find(output(:,18) > 18.9999 & output(:,18) < 19.0001);
+                    bad_CSAT = find(output(:,19)==-1.5646218e-6);
+                    output(bad_CSAT,19:26)= NaN;
+                    % Bad CO2 irga (flatlines @ 400)
+                    output(bad_co2,[17 1]) = NaN;
+                    % Bad H2O irga (flatlines)
+                    output(bad_h2o,[18 5]) = NaN;
+
             end
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TPD %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -959,7 +989,7 @@ for year_ctr = year_start:1:year_end
                     %                 end
                     
                 case '2013'
-                    bad_co2 = find(output(:,17) > 399.9999 & output(:,17) < 400);
+                    bad_co2 = find(output(:,17) > 399.9999 & output(:,17) < 400.001);
                     bad_h2o = find(output(:,18) > 22.4999 & output(:,18) < 22.5001);
                     bad_CSAT = find(output(:,19)==-1.5646218e-6);
                     output(bad_CSAT,19:26)= NaN;
@@ -1072,6 +1102,14 @@ for year_ctr = year_start:1:year_end
                         12823:12843 13597:13615 15000:15043 15301:15355 17052:17314],[17 18 27]) = NaN;
                     % Bad Barometric Pressure
                     output(4552:end,15) = NaN;
+                case '2019'
+                    output([1678 2622:2623 7238 ],5) = NaN;
+                    bad_co2 = find(output(:,17) > 399.9999 & output(:,17) < 400.001);
+                    bad_h2o = find(output(:,18) > 22.4999 & output(:,18) < 22.5001);
+                    output(bad_co2,[1 17]) = NaN;
+                    output(bad_h2o,[5 18]) = NaN;
+                    bad_csat = find(output(:,19) > -0.001 & output(:,19) < 0.001);
+                    output(bad_csat,[19:26]) = NaN;
                end            
     end
         
