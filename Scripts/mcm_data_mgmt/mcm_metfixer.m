@@ -807,7 +807,7 @@ for year_ctr = year_start:1:year_end
             %%%%%%%%%%%%%%%%%%%%%%%% TP39  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             switch yr_str
-                case '2002'
+                case '2002' % TP39 2002
                     % Set whether RH > 100 should be set to 100 or NaN:
                     RH_max = 100;
                     % Swap some mixed up Ts sensors:
@@ -878,7 +878,7 @@ for year_ctr = year_start:1:year_end
                     % Fix a data offset issue, by moving data back by 1
                     % halfhour KEEP THIS AT THE END
                     output = [output(2:9638,:);NaN.*ones(1,size(output,2));output(9639:17520,:)];
-                case '2003'
+                case '2003' % TP39 2003
                     for i = 1:1:length(vars30)
                         try
                             temp_var = load([load_path site '_2002.' vars30_ext(i,:)]);
@@ -927,7 +927,7 @@ for year_ctr = year_start:1:year_end
                     % halfhour KEEP THIS AT THE END
                     output = [output(1:17468,:);output(17470:end,:);NaN.*ones(1,size(output,2))];
                     
-                case '2004'
+                case '2004' % TP39 2004
                     % Add PPT data from the /Final_Cleaned/TP39_PPT_2003-2007 directory
                     load([output_path(1:end-1) '_PPT_2003-2007/TP39_PPT_met_cleaned_' yr_str '.mat']);
                     output(:,output_cols(strcmp(output_names,'CS_Rain')==1)) = ppt;
@@ -945,7 +945,7 @@ for year_ctr = year_start:1:year_end
                     RH_max = 100;
                     % Invert sign for LW BC Up- and Down-welling
                     output(:,[16,17]) = output(:,[16,17]).*-1;
-                case '2005'
+                case '2005' % TP39 2005
                     % Add PPT data from the /Final_Cleaned/TP39_PPT_2003-2007 directory
                     load([output_path(1:end-1) '_PPT_2003-2007/TP39_PPT_met_cleaned_' yr_str '.mat']);
                     output(:,output_cols(strcmp(output_names,'CS_Rain')==1)) = ppt;
@@ -967,7 +967,7 @@ for year_ctr = year_start:1:year_end
                     RH_max = 100;
                     % Invert sign for LW BC Up- and Down-welling
                     output(:,[16,17]) = output(:,[16,17]).*-1;
-                case '2006'
+                case '2006' % TP39 2006
                     % Remove obvious bad data in PAR down abv cnpy
                     bad_data = [4341 4438 4725 4773 4821 5301 5684 5732 6500 ...
                         7075 7123 7171 7459 7507 7555 7603 7651 7699 7747 7843 ...
@@ -996,7 +996,7 @@ for year_ctr = year_start:1:year_end
                     RH_max = 100;
                     % Invert sign for LW BC Up- and Down-welling
                     output(:,[16,17]) = output(:,[16,17]).*-1;
-                case '2007'
+                case '2007' % TP39 2007
                     
                     %                 %% Corrects for inverted Net Radiation for a period of time
                     %                 %% in the data -- due to backwards wiring of sensor into
@@ -1077,7 +1077,7 @@ for year_ctr = year_start:1:year_end
                     RH_max = NaN;
                     % Invert sign for LW BC Up- and Down-welling
                     output(:,[16,17]) = output(:,[16,17]).*-1;
-                case '2008'
+                case '2008' % TP39 2008
                     % Fix CO2_cpy offset during late 2008 (if hasn't already been done)
                     right_col = quick_find_col( names30, 'CO2_BlwCnpy');
                     if output(15821,right_col) - output(15822,right_col) > 20
@@ -1126,7 +1126,7 @@ for year_ctr = year_start:1:year_end
                     RH_max = NaN;
                     % Invert sign for LW BC Up- and Down-welling
                     output(:,[16,17]) = output(:,[16,17]).*-1;
-                case '2009'
+                case '2009' % TP39 2009
                     
                     % Bad CO2_cnpy data:
                     output(8940:12240,71) = NaN; % broken
@@ -1184,7 +1184,7 @@ for year_ctr = year_start:1:year_end
                     RH_max = NaN;
                     % Invert sign for LW BC Up- and Down-welling
                     output(:,[16,17]) = output(:,[16,17]).*-1;
-                case '2010'
+                case '2010' % TP39 2010
                     %%% Bad CO2 cpy data:
                     output([1625 4598 5611 6004 6005 6014 8027 15375 16607], 71) = NaN;
                     output([1196 1197 4598 5611 6004 6005 6014 6241 7910], 72) = NaN;
@@ -1212,7 +1212,7 @@ for year_ctr = year_start:1:year_end
                     RH_max = NaN;
                     % Invert sign for LW BC Up- and Down-welling
                     output(:,[16,17]) = output(:,[16,17]).*-1;
-                case '2011'
+                case '2011' % TP39 2011
                     % Missing data in all fields
                     output([3905:3910 5109:5116 5661 7078:7083], 1:32) = NaN;
                     % Bad data in some fields
@@ -1316,7 +1316,7 @@ for year_ctr = year_start:1:year_end
                     RH_max = NaN;
                     % Invert sign for LW BC Up- and Down-welling
                     output(:,[16,17]) = output(:,[16,17]).*-1;
-                case '2012'
+                case '2012' % TP39 2012
                     % Bad SMB100 data
                     output([1:221 7806:7809 10415:12894 17317],100) = NaN;
                     % Bad SMB50 data
@@ -1387,7 +1387,7 @@ for year_ctr = year_start:1:year_end
                     RH_max = 100;
                     % Invert sign for LW BC Up- and Down-welling
                     output(:,[16,17]) = output(:,[16,17]).*-1;
-                case '2013'
+                case '2013' % TP39 2013
                     %%% Important Note: all of these data point values refer
                     %%% to those plotted during the first check of the data.
                     %%% The data is time shifted after tehse corrections are
@@ -1466,7 +1466,7 @@ for year_ctr = year_start:1:year_end
                     RH_max = 100;
                     % Invert sign for LW BC Up- and Down-welling
                     output(:,[16,17]) = output(:,[16,17]).*-1;
-                case '2014'
+                case '2014' % TP39 2014
                     % Wind sensor not working
                     output(14525:16159,7:8) = NaN;
                     % Up Par in mid-summer not working
@@ -1532,7 +1532,7 @@ for year_ctr = year_start:1:year_end
                     RH_max = 100;
                     % Invert sign for LW BC Up- and Down-welling
                     output(:,[16,17]) = output(:,[16,17]).*-1;
-                case '2015'
+                case '2015' % TP39 2015
                     % Bad Ta points
                     output([6906 8615:8623 11508:11509 12365],1) = NaN;
                     output([8691:8787],2) = NaN;
@@ -1613,7 +1613,7 @@ for year_ctr = year_start:1:year_end
                     RH_max = 100;
                     % Invert sign for LW BC Up- and Down-welling
                     output(:,[16,17]) = output(:,[16,17]).*-1;
-                case '2016'
+                case '2016' % TP39 2016
                     % Remove bad RH_cpy 
                     output(6095:8089,5) = NaN;
                     % Air Temp below canopy
@@ -1666,7 +1666,7 @@ for year_ctr = year_start:1:year_end
                     RH_max = 100;
                     % Invert sign for LW BC Up- and Down-welling
                     output(:,[16,17]) = output(:,[16,17]).*-1;
-                case '2017'
+                case '2017' % TP39 2017
                     % Panel Temp Dips
                     output([1568 2096:2099 3104 3250:3255 15632:15635 16214:16218 16276:16279],13) = NaN;
                     % Up Longwave Below Canopy
@@ -1705,7 +1705,7 @@ for year_ctr = year_start:1:year_end
                     RH_max = 100;
                     % Invert sign for LW BC Up- and Down-welling
                     output(:,[16,17]) = output(:,[16,17]).*-1;
-                case '2018'
+                case '2018' % TP39 2018
                     % Panel Temp Dips     
                     output([225:233 463:471 896 897 2144:2150 2889:2899 3200:3208 4493:4524 4995:5003 5029:5038 ...
                         13779 13949:13955 14881:14884 15160:15164 15923:15929 16495:16499],13) = NaN;
@@ -1731,7 +1731,7 @@ for year_ctr = year_start:1:year_end
                     RH_max = 100;
                     % Invert sign for LW BC Up- and Down-welling
                     output(:,[16,17]) = output(:,[16,17]).*-1;
-                case '2019'
+                case '2019' % TP39 2019
                     %%%% PAR DOWN corrections, related to the intercomparison
                     %%%% project that was run at the site from 20190829 to
                     %%%% 20191024. 
@@ -1769,9 +1769,26 @@ for year_ctr = year_start:1:year_end
 %                     % new sensor corrected by regression shared by Keegan:                    
 %                     tmp_PAR = output(14242:end,9)./1.127 + (4.585/1.127);
 %                     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+					%%% Correct the PAR down values by comparing the regression equations between SW and PAR for the pre- and post- rewiring periods
+					% The following coefficients are calculated in /Diagnostic/TP39_par_correction_factor.m
+                    p_SW_PAR = [2.02204246046177	-1.26137100579115]; % slope and intercept of SWdown - PARdown relationship for 2017 and 2018.
+					PARdn = output(:,9);
+					SWdn = output(:,14);
                     
-                    
-                    
+                    SWdn_b = SWdn(1:14242); PARdn_b = PARdn(1:14242); 
+					p1 = polyfit(SWdn_b(~isnan(SWdn_b.*PARdn_b),1),PARdn_b(~isnan(SWdn_b.*PARdn_b),1),1);
+                    SWdn_a = SWdn(14250:end); PARdn_a = PARdn(14250:end); 
+					p2 = polyfit(SWdn_a(~isnan(SWdn_a.*PARdn_a),1),PARdn_a(~isnan(SWdn_a.*PARdn_a),1),1);
+					% According to this test, p1 (before re-wiring the PARdn sensor) coefficients are [1.960128445238033,1.224844308758671]
+					%						p2 (after re-wiring the sensor) coefficients are [3.687950947587812,6.966335856351974];
+					PAR_corr = PARdn; 
+					PAR_corr(14242:end) = (p1(1).*PARdn(14242:end))./p2(1) - (p1(1).*p1(2))./p2(1) + p1(2);
+					% PAR_corr(14242:end) = (p2(1).*PARdn(14242:end))./p1(1) - (p2(1).*p2(2))./p2(2) + p1(2);
+					%figure(14); clf;
+					%plot(PARdn,'b'); hold on; 
+					%plot(PAR_corr,'r'); 
+					output(:,9) = PAR_corr; 
+					clear p_SW_PAR p1 p2 SWd* PARd* PAR_corr; 
                     %%%%%%%%%%%%%%%%%%%%%
                     
                     % Remove PAR_UP during intercomparison period
@@ -1808,7 +1825,17 @@ for year_ctr = year_start:1:year_end
                     
                     output([7376],99) = NaN;
                     RH_max = 100; 
-                    
+				
+				case '2020' % TP39 2020
+				%%% Proactively correct PAR down data that is not scaled properly -- THIS WILL NEED TO BE ADJUSTED when corrections are made to the dataloggers
+					% According to this test, p1 (before re-wiring the PARdn sensor) coefficients are [1.960128445238033,1.224844308758671]
+					%						p2 (after re-wiring the sensor) coefficients are [3.687950947587812,6.966335856351974];
+				p1 = [1.960128445238033,1.224844308758671]; p2 = [3.687950947587812,6.966335856351974];
+					PAR_corr = output(:,9); 
+					PAR_corr(1:end) = (p1(1).*PAR_corr(1:end))./p2(1) - (p1(1).*p1(2))./p2(1) + p1(2);
+					output(:,9) = PAR_corr; 
+					clear p1 p2 PAR_corr; 
+
                     
             end
             %%% Corrections applied to all years of data:
@@ -1892,7 +1919,7 @@ for year_ctr = year_start:1:year_end
             %%%%%%%%%%%%%%%%%%%%%%%% TP74  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             switch yr_str
-                case '2002'
+                case '2002' % TP74 2002
                     [r c] = size(output);
                     % there's a 1/2 hour offset in data from first half of 2002
                     output_tmp(:,:) = [output(2:9070,1:c); NaN.*ones(1,c); output(9071:end,1:c)];
@@ -1925,7 +1952,7 @@ for year_ctr = year_start:1:year_end
                     clear output_test;
                     %%%%%%%%%%%%%%%%%%%%% END SHIFTING %%%%%%%%%%%%%%%%%%
                     
-                case '2003'
+                case '2003' % TP74 2003
                     for i = 1:1:length(vars30)
                         try
                             temp_var = load([load_path site '_2002.' vars30_ext(i,:)]);
@@ -1948,7 +1975,7 @@ for year_ctr = year_start:1:year_end
                     output = output_tmp;
                     clear r c output_tmp;
                     
-                case '2005'
+                case '2005' % TP74 2005
                     
                     %%%%%%%%%%%%%%%%%%%%% START SHIFTING %%%%%%%%%%%%%%%%%%
                     % Shift data so that it's all in UTC: %%%%%%%%%%%%%%%%%%%%
@@ -1975,9 +2002,9 @@ for year_ctr = year_start:1:year_end
                     %%%%%%%%%%%%%%%%%%%%% END SHIFTING %%%%%%%%%%%%%%%%%%
                     output(608,22) = NaN; % Bad Ts data (Pit B, 5cm)
                     
-                case '2007'
+                case '2007' % TP74 2007
                     
-                case '2008'
+                case '2008' % TP74 2008
                     
                     
                     % Remove Spike from SM data:
@@ -2085,7 +2112,7 @@ for year_ctr = year_start:1:year_end
                     %                     [spike_tracker] = jjb_find_spike(output(:,i), 2);
                     %                 end
                     
-                case '2009'
+                case '2009' % TP74 2009
                     % Remove spikes in soil data:
                     output(6128:8494,1:2) = NaN;
                     output(2004,12) = NaN;
@@ -2093,14 +2120,14 @@ for year_ctr = year_start:1:year_end
                     output(bad_data,12:32) = NaN;
                     output([10134;10135; 10217],29) = NaN;
                     
-                case '2010'
+                case '2010' % TP74 2010
                     output(6316, [12:32]) = NaN;
                     % Bad Soil Temperature data at Pit A, 100cm:
                     bad_data = [11794 12410 12411 13215:13229 13748:13752 15362:15366 15627 16008:16011];
                     % Bad Point in all Soil Data:
                     output(bad_data, 12) = NaN;
                     output(6316,12:32) = NaN;
-                case '2011'
+                case '2011' % TP74 2011
                     % Missing Data in all fields
                     output(6476:6708, 1:51) = NaN;
                     % Remove bad spikes in soil data at Pits A and B, all depths:
@@ -2149,7 +2176,7 @@ for year_ctr = year_start:1:year_end
                         %                    ctr2 = ctr2+1;
                     end
                     
-                case '2012'
+                case '2012' % TP74 2012
                     % Bad CO2 canopy data
                     output([601 7805 10417 16632],47) = NaN;
                     % Bad tree temp sensors
@@ -2157,7 +2184,7 @@ for year_ctr = year_start:1:year_end
                     % Bad Ts 100cm Pit A
                     output([5345:5349 5465:5468],12) = NaN;
                     
-                case '2013'
+                case '2013' % TP74 2013
                     % Bad windspeed data (broken instrument)
                     output(10303:12087,4) = NaN;
                     % Bad wind direction data (broken instrument)
@@ -2221,7 +2248,7 @@ for year_ctr = year_start:1:year_end
                     % Bad SM DR5cm data
                     output([6806 8031],51) = NaN;
                     
-                case '2014'
+                case '2014' % TP74 2014
                     % Bad UpPAR Above Canopy data
                     output(3433:3452,6) = NaN;
                     % Questionable Rn
@@ -2241,7 +2268,7 @@ for year_ctr = year_start:1:year_end
                     output([12743 12781 12791 12977],48) = NaN;
                     
                     
-                case '2015'
+                case '2015' % TP74 2015
                     % Bad Ta data
                     output(9149,1) = NaN;
                     % Bad Rn sensor
@@ -2267,7 +2294,7 @@ for year_ctr = year_start:1:year_end
                     %                     std1 = nanstd(tmp1);std2 = nanstd(tmp2);
                     %     mean1 = nanmean(tmp1);mean2 = nanmean(tmp2);
                     
-                case '2016'
+                case '2016' % TP74 2016
                     % Air Temp
                     output([4979],1) = NaN;
                     % Wind Speed
@@ -2292,7 +2319,7 @@ for year_ctr = year_start:1:year_end
                     % Recent Soil dips
                     output([7103 7244 7245],48:49) = NaN;
                     
-                case '2017'
+                case '2017' % TP74 2017
                     % Relative Humidity
                     output([1954 2960 5441 7862 7956 8730 11077 13450 16400],2) = NaN;
                     % Soil Temp A 100cm
@@ -2306,7 +2333,7 @@ for year_ctr = year_start:1:year_end
                     % CO2 Canopy Dips
                     output([491 3205 3249 4209 6132 8916 13822 14208 14209 14725 15555 15556 15635],47) = NaN;
 
-                case '2018'    
+                case '2018'     % TP74 2018
                     % Random Spike in all soil data
                     output([9968 10534 11941],[12:30 48:51]) = NaN;
                     % CO2 Canopy Dips
@@ -2318,7 +2345,7 @@ for year_ctr = year_start:1:year_end
                     output([4484],[48 49]) = NaN;
                     RH_max = 100;
                     
-                  case '2019'   
+                  case '2019'    % TP74 2019
                      % Random Spike in all soil data
                     output([11517 14866 14867],[12:32 48:51]) = NaN;
                     output([10009 10010 10011],19) = NaN;
@@ -2326,6 +2353,14 @@ for year_ctr = year_start:1:year_end
                     output([1091 1196 1197 1198 1367 1368 2194 2195 4876 6419 8595 8668 10020 11562 11602 11757 16090],47) = NaN;
                     
                     RH_max = 100;
+					
+					% PAR down 
+					% Values are missing until November 2019 due to broken sensor. Refurbished unit was installed in Nov 2019
+					% However, magnitude is much too high and it needs to be re-scaled.
+					% Given that there is no SW down at the site to correct with, JJB has decided to remove PARdn data from November onwards 
+					% (when the refurbished unit was installed to replace the broken one). Will allow it to be filled from TP39.
+					% If Keegan comes up with correction factor, we'll apply it. 
+					output(:,7) = NaN; 
             end
             %% Corrections applied to all years of data:
             % 1: Set any negative PAR and nighttime PAR to zero:
@@ -2590,7 +2625,8 @@ for year_ctr = year_start:1:year_end
             %%%%%%%%%%%%%%%%%%%%%%%% TP02  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%% PAR Correction factors for 2002, 2013--2017 % Determined from TP02_par_correction_factor.m
-            par_correction_factor = [2002, 1.23; 2013, 1.38199647061725; 2014, 1.26172364359607; 2015,1.03313933608525; 2016,0.874165785537350; 2017,0.659991285147933; 2018,0.585666951857723; 2019,1];
+            par_correction_factor = [2002, 1.23; 2013, 1.38199647061725; 2014, 1.26172364359607; 2015,1.03313933608525; 2016,0.874165785537350; 2017,0.659991285147933; 2018,0.585666951857723; 2019,1 ...
+									2020, 1; 2021, 1; 2022, 1];
             par_correction_factor = par_correction_factor(par_correction_factor(:,1)==year_ctr,2);
             switch yr_str
                 case '2002'

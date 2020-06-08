@@ -17,6 +17,12 @@ catch
     PAR_crit(1:length(PAR),1) = 0;
 end
 
+% Check for empty vector of PAR values. Return if empty
+if sum(isnan(PAR))==size(PAR,1)
+    disp('No PAR down data found. Datalogger timing checks not run');
+    return;
+end
+
 %%% Move the critical values for PAR down for TP02 for selected years
 if strcmp(site, 'TP02') == 1 && year == 2002
 PAR_crit = PAR_crit*0.9;

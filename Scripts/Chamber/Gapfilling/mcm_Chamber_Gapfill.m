@@ -3,11 +3,11 @@ clearvars;
 close all;
 year = 2008:1:2014;
 
-ls = addpath_loadstart;
-master_path = [ls 'Matlab/Data/Master_Files/'];
-trenched_path = [ls 'Matlab/Data/Met/Final_Cleaned/TP39_trenched/'];
-chamber_path = [ls 'Matlab/Data/Flux/ACS/TP39_chamber/Final_Cleaned/'];
-output_path = [ls 'Matlab/Data/Flux/Gapfilling/TP39_chamber/'];
+[loadstart, gdrive_loc] = addpath_loadstart;
+master_path = [loadstart 'Matlab/Data/Master_Files/'];
+trenched_path = [loadstart 'Matlab/Data/Met/Final_Cleaned/TP39_trenched/'];
+chamber_path = [loadstart 'Matlab/Data/Flux/ACS/TP39_chamber/Final_Cleaned/'];
+output_path = [loadstart 'Matlab/Data/Flux/Gapfilling/TP39_chamber/'];
 clrs = jjb_get_plot_colors;
 
 % Load met data:
@@ -150,6 +150,6 @@ save([output_path 'TP39_chamber_filled2B.mat'],'Yfill2B');
 save([output_path 'TP39_chamber_filled3B_stats.mat'],'stats_3B');
 save([output_path 'TP39_chamber_filled2B_stats.mat'],'stats_2B');
 
-s = dos(['cp -R "' output_path ' /home/arainlab/Google Drive/TPFS Data/"']);
+s = dos(['cp -R "' output_path ' ' gdrive_loc 'TPFS Data/"']);
 
 

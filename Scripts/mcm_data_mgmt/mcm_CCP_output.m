@@ -44,15 +44,15 @@ elseif nargin >2 && nargin <5
     ftypes_torun = 'all';
 end
 
-ls = addpath_loadstart;
-master_out_path =           [ls 'Matlab/Data/Master_Files/'];
-gdrive_path = '/home/arainlab/Google Drive/TPFS Data/CCP_Annual_Files/';
+[loadstart, gdrive_loc] = addpath_loadstart;
+master_out_path =           [loadstart 'Matlab/Data/Master_Files/'];
+gdrive_path = [gdrive_loc '03 - TPFS Data/CCP_Annual_Files/'];
 % jjb_check_dirs([gdrive_path site],1);
 
 if isempty(CCP_out_path)==1 || isempty(master)==1
     % Declare Paths:
-    CCP_annual_out_path = [ls 'Matlab/Data/CCP/CCP_output/CCP_Annual_Files/' sitename_out '/'];
-    CCP_out_path =              [ls 'Matlab/Data/CCP/CCP_output/' sitename_out '/'];
+    CCP_annual_out_path = [loadstart 'Matlab/Data/CCP/CCP_output/CCP_Annual_Files/' sitename_out '/'];
+    CCP_out_path =              [loadstart 'Matlab/Data/CCP/CCP_output/' sitename_out '/'];
     jjb_check_dirs(CCP_out_path,0);
     jjb_check_dirs(CCP_annual_out_path,0);
     
@@ -395,7 +395,7 @@ end
     %{
 disp(['Trying to zip the monthly files for the site: ' sitename_out]);
 try
-    eval(['cd ' ls 'Matlab/Data/CCP/CCP_output/']);
+    eval(['cd ' loadstart 'Matlab/Data/CCP/CCP_output/']);
     unix(['rm ' sitename_out '.zip']);
     disp('Old zip-file removed');
     unix(['zip -r ' sitename_out '.zip ' sitename_out]);
@@ -403,19 +403,19 @@ try
 catch
     disp(['Zipping monthly files failed for the site: ' sitename_out]);
 end
-% eval(['cd ' ls 'Matlab/Scripts/']);
+% eval(['cd ' loadstart 'Matlab/Scripts/']);
 %}
 %% Try and zip the contents of the annual files:
 disp('Trying to zip the annual files for the site: ');
 try
-    eval(['cd ' ls 'Matlab/Data/CCP/CCP_output/CCP_Annual_Files/']);
+    eval(['cd ' loadstart 'Matlab/Data/CCP/CCP_output/CCP_Annual_Files/']);
     unix(['rm ' sitename_out '_annual.zip']);
     disp('Old zip-file removed');
     unix(['zip -r ' sitename_out '_annual.zip ' sitename_out]);
     disp(['Annual files zipped for ' sitename_out '.']);
     try
     %%% Upload the annual files to Google Drive
-    stat = unix(['cp -avr ' ls 'Matlab/Data/CCP/CCP_output/CCP_Annual_Files/' sitename_out '_annual.zip "' gdrive_path sitename_out '_annual.zip"']);
+    stat = unix(['cp -avr ' loadstart 'Matlab/Data/CCP/CCP_output/CCP_Annual_Files/' sitename_out '_annual.zip "' gdrive_path sitename_out '_annual.zip"']);
      if stat ~=0
     disp('Could not copy files to Google Drive-synced folder. Check for problems');
      else
@@ -427,5 +427,5 @@ try
 catch
     disp(['Zipping annual files failed for the site: ' sitename_out]);
 end
-eval(['cd ' ls 'Matlab/Scripts/']);
+eval(['cd ' loadstart 'Matlab/Scripts/']);
 end

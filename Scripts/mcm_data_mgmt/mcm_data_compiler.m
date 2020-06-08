@@ -88,7 +88,7 @@ CCP_site = sitename_converter{find(strcmp(site,sitename_converter(:,1))==1),2};
 end
 %% &&&&&&&&&&&&&&& Declare Paths: &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 % %%%% Input Paths:
-ls = addpath_loadstart;
+[ls, gdrive_loc] = addpath_loadstart;
 met_final_cleaned_path =    [ls 'Matlab/Data/Met/Final_Cleaned/' site '/'];
 met_final_filled_path =     [ls 'Matlab/Data/Met/Final_Filled/' site '/'];
 met_calc_path =             [ls 'Matlab/Data/Met/Calculated4/' site '/'];
@@ -109,11 +109,11 @@ footprint_path = [ls 'Matlab/Data/Flux/Footprint/'];
 %%%% Output Paths:
 master_out_path =           [ls 'Matlab/Data/Master_Files/'];
 
-if strcmp(ls,'\\130.113.210.243\fielddata\')==1
-    gdrive_path = '\\130.113.210.243\arainlab\Google Drive/TPFS Data/Master_Files/';
-else
-gdrive_path = '/home/arainlab/Google Drive/TPFS Data/Master_Files/';
-end
+% if strcmp(ls,'\\130.113.210.243\fielddata\')==1
+%     gdrive_path = '\\130.113.210.243\arainlab\Google Drive/TPFS Data/Master_Files/';
+% else
+gdrive_path = [gdrive_loc '03 - TPFS Data/Master_Files/'];
+% end
 
 %%%% Master Header Path:
 master_header_path = [ls 'Matlab/Config/Master_Files/']; % Added 01-May-2012
@@ -1076,11 +1076,12 @@ else
     %% 7. Copy the /Master_Files/<site> directory to /home/arainlab/Google Drive/TPFS Data: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     if abs(quickflag)>1
-        stat = unix(['cp -vr ' master_out_path site '/ "/home/arainlab/Google Drive/TPFS Data/Master_Files/"']);
+        stat = copyfile([master_out_path site],[gdrive_path]);
+%         stat = unix(['cp -vr ' master_out_path site '/ "/home/arainlab/Google Drive/TPFS Data/Master_Files/"']);
         if stat ~=0
             disp('Could not copy files to Google Drive-synced folder. Check for problems');
         else
-            disp('Uploaded Master files to Google Drive-synced folder (/home/arainlab/Google Drive/TPFS Data/Master_Files).');
+            disp(['Uploaded Master files to Google Drive-synced folder: ' gdrive_path ]);
         end
     end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

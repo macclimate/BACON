@@ -59,13 +59,13 @@ end
 
 
 % Declare paths:
-ls_dir = addpath_loadstart;
+[ls_dir, gdrive_loc] = addpath_loadstart;
 out_dir =       [ls_dir 'Matlab/Data/Ameriflux_ToSubmit/'];
 master_dir =    [ls_dir 'Matlab/Data/Master_Files/'];
 if ispc~=1
-gdrive_dir = '/home/arainlab/Google Drive/TPFS Data/Ameriflux - To Submit/';
+% gdrive_dir = '/home/arainlab/Google Drive/TPFS Data/Ameriflux - To Submit/';
 else
-gdrive_dir = [ls_dir 'Google Drive/TPFS Data/Ameriflux - To Submit/'];
+gdrive_dir = [gdrive_loc '03 - TPFS Data/Ameriflux - To Submit/'];
 end
     
     

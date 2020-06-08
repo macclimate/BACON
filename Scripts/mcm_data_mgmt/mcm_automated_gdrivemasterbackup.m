@@ -8,9 +8,10 @@ function [] = mcm_automated_gdrivemasterbackup()
 tstamp = (datestr(now-30,'yyyymmdd'));
 
 %%% Set Paths:
-ls = addpath_loadstart;
-source_dir = [ls 'GDrive/Site_Data/Master_Files/Most_Recent_Data/'];
-target_dir = [ls 'GDrive/Site_Data/Master_Files/Previous_Collections/master_files_' tstamp '/'];
+[loadstart, gdrive_loc] = addpath_loadstart;
+
+source_dir = [loadstart 'GDrive/Site_Data/Master_Files/Most_Recent_Data/'];
+target_dir = [loadstart 'GDrive/Site_Data/Master_Files/Previous_Collections/master_files_' tstamp '/'];
 
 %%% If targer dir exists, remove it and recreate empty one:
 if exist(target_dir,'dir')==7
@@ -30,9 +31,9 @@ for i = 1:1:length(d)
 end
     
 % Zip the target directory and then remove it:
-cd([ls 'GDrive/Site_Data/Master_Files/Previous_Collections/']);
-if exist([ls 'GDrive/Site_Data/Master_Files/Previous_Collections/master_files_' tstamp '.zip'],'file')==2
-    unix(['rm ' ls 'GDrive/Site_Data/Master_Files/Previous_Collections/master_files_' tstamp '.zip'])
+cd([loadstart 'GDrive/Site_Data/Master_Files/Previous_Collections/']);
+if exist([loadstart 'GDrive/Site_Data/Master_Files/Previous_Collections/master_files_' tstamp '.zip'],'file')==2
+    unix(['rm ' loadstart 'GDrive/Site_Data/Master_Files/Previous_Collections/master_files_' tstamp '.zip'])
 end
 s2 = unix(['zip -r -q ' 'master_files_' tstamp '.zip ' 'master_files_' tstamp ]);
 
