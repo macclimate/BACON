@@ -4,7 +4,9 @@ loadstart = addpath_loadstart;
 dstr = datestr(now, 30);
 fig_path = [loadstart 'Matlab/Figs/Quickplot/' site '/CPEC/' site '_CPEC_figs_' dstr(1:8) '/'];
 jjb_check_dirs([loadstart 'Matlab/Figs/Quickplot/' site '/CPEC/']);
-unix(['mkdir ' fig_path]);
+jjb_check_dirs(fig_path,1);
+
+% unix(['mkdir ' fig_path]);
 
 if ischar(year)
 else

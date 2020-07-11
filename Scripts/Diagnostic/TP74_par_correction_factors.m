@@ -1,9 +1,18 @@
-%%% Load TP39 Master file: 
+%%% Load TP39 and TP74 Master files: 
 
 ls = addpath_loadstart; 
 
-load([ls '/Matlab/Data/Master_Files/TP74/TP74_data_master.mat']);
+TP74 = load([ls '/Matlab/Data/Master_Files/TP74/TP74_data_master.mat']);
 TP39 = load([ls '/Matlab/Data/Master_Files/TP39/TP39_data_master.mat']);
+
+% Pull out 2018 PAR data for both
+ind = find(TP74.master.data(:,1)==2018);
+PAR_TP74 = TP74.master.data(ind,39);
+PAR_TP39 = TP39.master.data(ind,47);
+
+ind2 = find(~isnan(PAR_TP39.*PAR_TP74));
+p = polyfit(PAR_TP39(ind2,1),PAR_TP74(ind2,1),1);
+
 % Load PAR Down
 Year = master.data(:,1);
 SWDn = TP39.master.data(:,41);

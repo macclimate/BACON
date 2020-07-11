@@ -48,7 +48,11 @@ if length(d) > 2 % If d is larger than 2, we know there is data in the folder
         clear d2 d_dest junk* file_list;
         clear *_sizes *_fullname;
         
-        if d(i).isdir == 1;  d2 = dir([source_path d(i).name]); end % make sure that we are opening a folder
+        if d(i).isdir == 1
+            d2 = dir([source_path d(i).name]); 
+        else
+        continue;
+        end % make sure that we are opening a folder
         
         if ~isempty(d2) && length(d2) > 2
             

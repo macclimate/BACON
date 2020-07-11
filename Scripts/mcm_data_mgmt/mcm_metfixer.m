@@ -2361,6 +2361,13 @@ for year_ctr = year_start:1:year_end
 					% (when the refurbished unit was installed to replace the broken one). Will allow it to be filled from TP39.
 					% If Keegan comes up with correction factor, we'll apply it. 
 					output(:,7) = NaN; 
+                    tmp = load([loadstart 'Matlab/Data/Met/Final_Cleaned/TP39/TP39_met_cleaned_2019.mat']);
+                    TP39_PAR = tmp.master.data(:,9); % Load TP39 PAR
+                    % Fill TP74 PAR with regression corrected correlation
+                    % with TP39
+                    TP74_PAR_est = polyval([1.057383953687917,-0.667374133564968],TP39_PAR);
+                    output(:,7) = TP74_PAR_est;
+                    clear tmp TP39_PAR TP74_PAR_est
             end
             %% Corrections applied to all years of data:
             % 1: Set any negative PAR and nighttime PAR to zero:
@@ -3824,6 +3831,11 @@ for year_ctr = year_start:1:year_end
                 case '2015'
                     % Poured hot water in to melt ice in the rain gauge
                     output(2821:2824,1:2) = NaN;
+            end
+    
+        case 'TPAg'
+            switch yr_str
+                case '2020'
             end
     end
     

@@ -463,6 +463,10 @@ for year_ctr = year_start:1:year_end
                     % Bad H2O
                     output([4265:4400 10365:10589 12658:13133 17077:17083 14243 14863],18) = NaN;
                     output([8669 16059:16202],22) = NaN;
+                
+                case '2020'
+                   bad_co2 = find(output(:,17) > 449.9999 & output(:,17) < 450.0001);
+                   output(bad_co2,[1 17]); % remove for Fc and CO2 concentration
             end
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TP74 %%%%%%%%%%%%%%%%%%%%%%%%%
         case 'TP74'
@@ -1110,7 +1114,11 @@ for year_ctr = year_start:1:year_end
                     output(bad_h2o,[5 18]) = NaN;
                     bad_csat = find(output(:,19) > -0.001 & output(:,19) < 0.001);
                     output(bad_csat,[19:26]) = NaN;
-               end            
+            end
+    case 'TPAg'
+        switch yr_str
+        case '2020'
+        end
     end
         
     %% Plot corrected/non-corrected data to make sure it looks right:
@@ -1160,6 +1168,7 @@ for year_ctr = year_start:1:year_end
     end
     
     %%% Load the met wind speed data (to be used for comparison):
+    try
     met = load([met_path site '_met_cleaned_' yr_str '.mat']);
     MET_DAT = met.master.data(:,mcm_find_right_col(met.master.labels,'WindSpd'));
     u = output(:,mcm_find_right_col(var_names,'u')); v = output(:,mcm_find_right_col(var_names,'v'));
@@ -1187,7 +1196,9 @@ for year_ctr = year_start:1:year_end
     
     disp('Investigate Data Alignment through attached figure ');
     disp(' and by looking at output of this function.  Fix if needed.');
-    
+    catch
+        disp('Data alignment check failed -- likely because met data hasn''t run through final cleaning');
+    end
     
     %% Output
     % Here is the problem with outputting the data:  Right now, all data in

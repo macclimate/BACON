@@ -78,7 +78,8 @@ sitename_converter = ...
     'TP02' 'ON-WPP02'; ...
     'TP_PPT' 'ON-WPP_PPT'; ...
     'TPD' 'ON-TPD'; ...
-    'MCM_WX' 'MCM_WX'; ...    
+    'MCM_WX' 'MCM_WX'; ...   
+    'TPAg' 'ON-TPAg'; ...
     };
 
 if strcmp(data_type,'sapflow')==1
@@ -181,7 +182,10 @@ switch site
         yr_start = 2008;         
     case 'TPD'
        time_int = 30;
-        yr_start = 2011;    
+        yr_start = 2011;   
+     case 'TPAg'
+       time_int = 30;
+        yr_start = 2020;         
     case 'TP_PPT'
        time_int = 30;
         yr_start = 2008;  
@@ -850,7 +854,7 @@ for k = 1:1:length(year)
     % The following variables will be consolidated at this point:
     % NEE, FC, LE, H, Ustar (more can be added later if required):
     switch site 
-        case {'TP39','TP74','TP89','TP02','TPD'}
+        case {'TP39','TP74','TP89','TP02','TPD'; 'TPAg'}
                
     num_errs = 0;
     %     try
@@ -906,7 +910,7 @@ for k = 1:1:length(year)
     %% Make NEP Field
     %%% Flip the sign of NEE_all and put it into NEP_all:
         switch site 
-        case {'TP39','TP74','TP89','TP02','TPD'}
+        case {'TP39','TP74','TP89','TP02','TPD','TPAg'}
     try
         master_col_in = mcm_find_right_col(header(:,3), 'NEE_all');
         master_col_out = mcm_find_right_col(header(:,3), 'NEP_all');

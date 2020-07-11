@@ -4,7 +4,7 @@ function [out] = mcm_get_fluxsystem_info(site, datatype)
 switch datatype
     case 'varnames'
         switch site
-            case {'TP74', 'TP02'}
+            case {'TP74', 'TP02', 'TPAg'}
                 % if strcmp(site, 'TP74') == 1 || strcmp(site, 'TP02') == 1
                 vars(1).path = 'MainEddy.Three_Rotations.LinDtr.Fluxes.Fc';             vars(1).name = 'Fc';            vars(1).ylabel = '\mumol m^{-2} s^{-1}';
                 vars(2).path = 'MainEddy.Three_Rotations.LinDtr.Fluxes.Ustar';          vars(2).name = 'Ustar';         vars(2).ylabel = 'm s^{-1}';
@@ -44,7 +44,7 @@ switch datatype
                 vars(34).path = 'MainEddy.Three_Rotations.Std(1)';    vars(34).name = 'u_rot_std';vars(34).ylabel = 'm s^{-1}';
                 vars(35).path = 'MainEddy.Three_Rotations.Std(2)';    vars(35).name = 'v_rot_std';vars(35).ylabel = 'm s^{-1}';
                 vars(36).path = 'MainEddy.Three_Rotations.Std(3)';    vars(36).name = 'w_rot_std';vars(36).ylabel = 'm s^{-1}';				
-                
+                vars(37).path = 'MainEddy.MiscVariables.NumOfSamples'; vars(37).name = 'num_samples';vars(37).ylabel = 'count';	
             case 'TPD'
                 vars(1).path = 'MainEddy.Three_Rotations.LinDtr.Fluxes.Fc';             vars(1).name = 'Fc';            vars(1).ylabel = '\mumol m^{-2} s^{-1}';
                 vars(2).path = 'MainEddy.Three_Rotations.LinDtr.Fluxes.Ustar';          vars(2).name = 'Ustar';         vars(2).ylabel = 'm s^{-1}';
@@ -83,7 +83,7 @@ switch datatype
                 vars(34).path = 'MainEddy.Three_Rotations.Std(1)';    vars(34).name = 'u_rot_std';vars(34).ylabel = 'm s^{-1}';
                 vars(35).path = 'MainEddy.Three_Rotations.Std(2)';    vars(35).name = 'v_rot_std';vars(35).ylabel = 'm s^{-1}';
                 vars(36).path = 'MainEddy.Three_Rotations.Std(3)';    vars(36).name = 'w_rot_std';vars(36).ylabel = 'm s^{-1}';				
-                                
+                vars(37).path = 'MainEddy.MiscVariables.NumOfSamples'; vars(37).name = 'num_samples';vars(37).ylabel = 'count';	                                
                 
                 % elseif strcmp(site, 'TP39') == 1
             case 'TP39'
@@ -125,7 +125,7 @@ switch datatype
                 vars(34).path = 'MainEddy.Three_Rotations.Std(1)';    vars(34).name = 'u_rot_std';vars(34).ylabel = 'm s^{-1}';
                 vars(35).path = 'MainEddy.Three_Rotations.Std(2)';    vars(35).name = 'v_rot_std';vars(35).ylabel = 'm s^{-1}';
                 vars(36).path = 'MainEddy.Three_Rotations.Std(3)';    vars(36).name = 'w_rot_std';vars(36).ylabel = 'm s^{-1}';				
-                
+                vars(37).path = 'MainEddy.MiscVariables.NumOfSamples'; vars(37).name = 'num_samples';vars(37).ylabel = 'count';	                
                 
                 % elseif strcmp(site, 'TP39_chamber') == 1
             case 'TP39_chamber'
@@ -155,7 +155,8 @@ switch datatype
             case 'TP74';                tag = {'.DMCM21', '.DMCM22', '.DMCM23'};
             case 'TP02';                tag = {'.DMCM31', '.DMCM32', '.DMCM33'};
             case 'TP39_chamber';        tag = {'.DACS16'};
-            case 'TPD';                tag = {'.DMCM41', '.DMCM42', '.DMCM43'};    
+            case 'TPD';                tag = {'.DMCM41', '.DMCM42', '.DMCM43'};   
+            case 'TPAg';                tag = {'.DMCM51', '.DMCM52', '.DMCM53'};                   
         end
         out = tag;
         
@@ -167,6 +168,8 @@ switch datatype
             case 'TP02';                tag = {'.hMCM3.mat'};
             case 'TP39_chamber';        tag = {'.ACS_Flux_16.mat'};
             case 'TPD';                tag = {'.hMCM4.mat'};
+            case 'TPAg';               tag = {'.hMCM5.mat'};                 
+
         end
         out = tag;
         
@@ -177,7 +180,9 @@ switch datatype
             case 'TP74';                tag = 'hMCM2.mat';
             case 'TP02';                tag = 'hMCM3.mat';
             case 'TP39_chamber';        tag = 'ACS_Flux_16.mat'; 
-            case 'TPD';                tag = 'hMCM4.mat';    
+            case 'TPD';                tag = 'hMCM4.mat';  
+            case 'TPAg';               tag = {'.hMCM5.mat'};
+    
         end
         out = tag;
         % ****************************************************************
