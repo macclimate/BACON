@@ -185,7 +185,7 @@ switch site
         yr_start = 2011;   
      case 'TPAg'
        time_int = 30;
-        yr_start = 2020;         
+        yr_start = 2019;         
     case 'TP_PPT'
        time_int = 30;
         yr_start = 2008;  

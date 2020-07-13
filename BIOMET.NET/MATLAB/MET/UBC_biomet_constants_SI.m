@@ -7,7 +7,7 @@ function UBC_biomet_constants_SI
 %             Wallace and Hobbs(1977) Atmospheric Science - An Introductory Survey,
 %                 Academic Press Inc.
 
-UBC_Biomet_constants;
+UBC_biomet_constants;
 % Loads these variables:
 % ZeroK = 273.15;                         % zero deg. C in deg K.
 % R     = 8.31451;                        % J/mol/K universal gas constant

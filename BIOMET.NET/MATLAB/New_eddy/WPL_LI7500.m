@@ -19,7 +19,7 @@ function [H,Fc,LE] = WPL_LI7500(Ts,rho_c,rho_v,P,cov_hh,Conversion_Flag)
 
 % (c) kai* Nov 11, 2003
 
-UBC_Biomet_constants;
+UBC_biomet_constants;
 
 if ~exist('Conversion_Flag') | isempty(Conversion_Flag) 
     Conversion_Flag = 0;

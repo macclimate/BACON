@@ -99,36 +99,42 @@ for yr_ctr = year_start:1:year_end
     % site_info(2,1) = cellstr('TP74'); site_info(2,2) = cellstr('.DMCM21');  site_info(2,3) = cellstr('.DMCM22');    site_info(2,4) = cellstr('.DMCM23');       site_info(2,5) =  cellstr('.hMCM2.mat');
     % site_info(3,1) = cellstr('TP02'); site_info(3,2) = cellstr('.DMCM31');  site_info(3,3) = cellstr('.DMCM32');    site_info(3,4) = cellstr('.DMCM33');       site_info(3,5) =  cellstr('.hMCM3.mat');
     % site_info(4,1) = cellstr('TP39_chamber'); site_info(4,2) = cellstr('.DACS16');
+    site_info = mcm_get_fluxsystem_info(site,'checkfiles');
+%     %TP39 tags:
+%     % site_info(1).name(1,1) = cellstr('TP39'); site_info(1).hhour_tag(1,1) =  cellstr('.hHJP02.mat'); site_info(1).hhour_tag(2,1) =  cellstr('s.hHJP02.mat'); %site_info(1).hhour_size =
+%     site_info(1).name(1,1) = cellstr('TP39'); site_info(1).hhour_tag(1,1) =  cellstr('.hMCM1.mat'); site_info(1).hhour_tag(2,1) =  cellstr('s.hMCM1.mat'); %site_info(1).hhour_size =
+%     site_info(1).data_tag(1,1) = cellstr('.DMCM4'); site_info(1).data_tag(2,1) = cellstr('.DMCM5');  site_info(1).data_tag(3,1) = cellstr('.bin'); %site_info(1).data_tag(3,1) = cellstr('.DMCM6');
+%     site_info(1).datafilesize(1,1) = 420000; site_info(1).datafilesize(1,2) = 300000;  site_info(1).datafilesize(1,3) = 500000;
+%     
+%     %TP74 tags:
+%     site_info(2).name(1,1) = cellstr('TP74'); site_info(2).hhour_tag(1,1) =  cellstr('.hMCM2.mat'); site_info(2).hhour_tag(2,1) =  cellstr('s.hMCM2.mat');
+%     site_info(2).data_tag(1,1) = cellstr('.DMCM21'); site_info(2).data_tag(2,1) = cellstr('.DMCM22');  site_info(2).data_tag(3,1) = cellstr('.DMCM23');
+%     site_info(2).datafilesize(1,1) = 480000; site_info(2).datafilesize(1,2) = 300000; site_info(2).datafilesize(1,3) = 500000;
+%     
+%     %TP02 tags:
+%     site_info(3).name(1,1) = cellstr('TP02'); site_info(3).hhour_tag(1,1) =  cellstr('.hMCM3.mat'); site_info(3).hhour_tag(2,1) =  cellstr('s.hMCM3.mat');
+%     site_info(3).data_tag(1,1) = cellstr('.DMCM31'); site_info(3).data_tag(2,1) = cellstr('.DMCM32');  site_info(3).data_tag(3,1) = cellstr('.DMCM33');
+%     site_info(3).datafilesize(1,1) = 140000; site_info(3).datafilesize(1,2) = 350000; site_info(3).datafilesize(1,3) = 500000;
+%     
+% 
+%     
+%     %TP39_chamber tags:
+%     site_info(4).name(1,1) = cellstr('TP39_chamber'); site_info(4).hhour_tag(1,1) =  cellstr('.ACS_Flux_16.mat');
+%     site_info(4).data_tag(1,1) = cellstr('.DACS16'); site_info(4).data_tag(2,1) = cellstr('.'); site_info(4).data_tag(3,1) = cellstr('.');
+%     site_info(4).datafilesize(1,1) = 70000; site_info(4).datafilesize(1,2) = 70000; site_info(4).datafilesize(1,3) = 70000;
+%     
+%     
+%     %TPD tags:
+%     site_info(5).name(1,1) = cellstr('TPD'); site_info(5).hhour_tag(1,1) =  cellstr('.hMCM4.mat'); site_info(5).hhour_tag(2,1) =  cellstr('s.hMCM4.mat');
+%     site_info(5).data_tag(1,1) = cellstr('.DMCM41'); site_info(5).data_tag(2,1) = cellstr('.DMCM42');  site_info(5).data_tag(3,1) = cellstr('.DMCM43');
+%     site_info(5).datafilesize(1,1) = 140000; site_info(5).datafilesize(1,2) = 350000; site_info(5).datafilesize(1,3) = 500000;
+%         
+%     %TPAg tags:
+%     site_info(6).name(1,1) = cellstr('TPAg'); site_info(5).hhour_tag(1,1) =  cellstr('.hMCM5.mat'); site_info(5).hhour_tag(2,1) =  cellstr('s.hMCM5.mat');
+%     site_info(6).data_tag(1,1) = cellstr('.DMCM57'); site_info(5).data_tag(2,1) = cellstr('.DMCM52'); 
+%     site_info(6).datafilesize(1,1) = 140000; site_info(5).datafilesize(1,2) = 350000; site_info(5).datafilesize(1,3) = 500000;
     
-    %TP39 tags:
-    % site_info(1).name(1,1) = cellstr('TP39'); site_info(1).hhour_tag(1,1) =  cellstr('.hHJP02.mat'); site_info(1).hhour_tag(2,1) =  cellstr('s.hHJP02.mat'); %site_info(1).hhour_size =
-    site_info(1).name(1,1) = cellstr('TP39'); site_info(1).hhour_tag(1,1) =  cellstr('.hMCM1.mat'); site_info(1).hhour_tag(2,1) =  cellstr('s.hMCM1.mat'); %site_info(1).hhour_size =
-    site_info(1).data_tag(1,1) = cellstr('.DMCM4'); site_info(1).data_tag(2,1) = cellstr('.DMCM5');  site_info(1).data_tag(3,1) = cellstr('.bin'); %site_info(1).data_tag(3,1) = cellstr('.DMCM6');
-    site_info(1).datafilesize(1,1) = 420000; site_info(1).datafilesize(1,2) = 300000;  site_info(1).datafilesize(1,3) = 500000;
     
-    %TP74 tags:
-    site_info(2).name(1,1) = cellstr('TP74'); site_info(2).hhour_tag(1,1) =  cellstr('.hMCM2.mat'); site_info(2).hhour_tag(2,1) =  cellstr('s.hMCM2.mat');
-    site_info(2).data_tag(1,1) = cellstr('.DMCM21'); site_info(2).data_tag(2,1) = cellstr('.DMCM22');  site_info(2).data_tag(3,1) = cellstr('.DMCM23');
-    site_info(2).datafilesize(1,1) = 480000; site_info(2).datafilesize(1,2) = 300000; site_info(2).datafilesize(1,3) = 500000;
-    
-    %TP02 tags:
-    site_info(3).name(1,1) = cellstr('TP02'); site_info(3).hhour_tag(1,1) =  cellstr('.hMCM3.mat'); site_info(3).hhour_tag(2,1) =  cellstr('s.hMCM3.mat');
-    site_info(3).data_tag(1,1) = cellstr('.DMCM31'); site_info(3).data_tag(2,1) = cellstr('.DMCM32');  site_info(3).data_tag(3,1) = cellstr('.DMCM33');
-    site_info(3).datafilesize(1,1) = 140000; site_info(3).datafilesize(1,2) = 350000; site_info(3).datafilesize(1,3) = 500000;
-    
-
-    
-    %TP39_chamber tags:
-    site_info(4).name(1,1) = cellstr('TP39_chamber'); site_info(4).hhour_tag(1,1) =  cellstr('.ACS_Flux_16.mat');
-    site_info(4).data_tag(1,1) = cellstr('.DACS16'); site_info(4).data_tag(2,1) = cellstr('.'); site_info(4).data_tag(3,1) = cellstr('.');
-    site_info(4).datafilesize(1,1) = 70000; site_info(4).datafilesize(1,2) = 70000; site_info(4).datafilesize(1,3) = 70000;
-    
-    
-        %TPD tags:
-    site_info(5).name(1,1) = cellstr('TPD'); site_info(5).hhour_tag(1,1) =  cellstr('.hMCM4.mat'); site_info(5).hhour_tag(2,1) =  cellstr('s.hMCM4.mat');
-    site_info(5).data_tag(1,1) = cellstr('.DMCM41'); site_info(5).data_tag(2,1) = cellstr('.DMCM42');  site_info(5).data_tag(3,1) = cellstr('.DMCM43');
-    site_info(5).datafilesize(1,1) = 140000; site_info(5).datafilesize(1,2) = 350000; site_info(5).datafilesize(1,3) = 500000;
-        
     % % add TP74_chamber tags here (if needed):
     % site_info(5).name(1,1) = cellstr('TP74_chamber'); site_info(5).hhour_tag(1,1) =  cellstr('***enter extension***');
     % site_info(5).data_tag(1,1) = cellstr('***enter extension***');

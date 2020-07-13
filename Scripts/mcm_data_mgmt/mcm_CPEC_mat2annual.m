@@ -30,16 +30,7 @@ end
 
 
 %%%% TO BE REMOVED AFTER OPERATIONAL:
-%  year = 2008;
-% % site = 'TP74';
-% site = 'TP02';
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Paths and Tags:
-% switch site
-%     case 'TP39';        tag = 'hMCM1.mat';
-%     case 'TP74';        tag = 'hMCM2.mat';
-%     case 'TP02';        tag = 'hMCM3.mat';
-% end
+
 tag = mcm_get_fluxsystem_info(site, 'hhour_extensions');
 
 loadstart = addpath_loadstart;
@@ -105,6 +96,10 @@ end
 
 %%% Make the tracker list for both /hhour and /hhour_field:
 for k = 1:1:num_days
+%          if k  == 189
+%          disp('stop. hammer time');
+%          end
+
     MM = create_label(Mon(k,1),2); DD = create_label(Day(k,1),2);
     datastr(k,:) = [YY MM DD];
     hhour_tracker(k,1) = str2double(datastr(k,:));
@@ -119,9 +114,9 @@ disp('Working.... Please wait...(This may take ~5 minutes)')
 %%% start loading in files and placing them in the master:
 for j = 1:1:num_days
 % disp(datastr(j,:));
-         if j  == 144;
-         disp('stop. hammer time');
-         end
+%          if j  == 189
+%          disp('stop. hammer time');
+%          end
     %%%%%%% Loop for Processed hhour files
     if hhour_tracker(j,2) == 1;
         try

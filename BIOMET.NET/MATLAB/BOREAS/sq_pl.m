@@ -789,7 +789,7 @@ y_axis      = [-10 110];
 
 Tair=read_bor(fullfile(pthFl,'Instrument_5.Avg_4'));
 Pbar  = read_bor(fullfile(pthFl,'Instrument_5.Avg_3'));
-UBC_Biomet_constants;
+UBC_biomet_constants;
 Psite = Pbar.*exp(9.8*(0-624)./(Rd.*(Tair+ZeroK))); % calculate absolute pressure from sea level normalized pressure (use dry air correction)
  
 fig_num = fig_num + fig_num_inc;

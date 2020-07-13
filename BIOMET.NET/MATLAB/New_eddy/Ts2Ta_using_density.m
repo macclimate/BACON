@@ -16,7 +16,7 @@ function [Ta,rho_a] = Ts2Ta_using_density(Ts,P,rho_v)
 
 % (c) kai* Nov 11, 2003
 
-UBC_Biomet_constants
+UBC_biomet_constants
 
 % Convert to inputs to base SI units (Pa,K,mol/m^3)
 Ts    = Ts+ZeroK;

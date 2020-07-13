@@ -30,7 +30,7 @@ else
     end
 
     if exist('pth')~=1 | isempty(pth)
-        [junk, pth] = FR_get_local_path;                            % site computer and use the local path
+        [junk, pth] = fr_get_local_path;                            % site computer and use the local path
     end
 
     switch upper(SiteID)
