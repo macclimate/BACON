@@ -1326,7 +1326,7 @@ switch site
         % Updated by EB 9/17
         lat = 42.694670;
         long = 80.348748;
-        elev = 700;
+        elev = 175; % Elevation in masl
         
         switch year
             case '2020'
