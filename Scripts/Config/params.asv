@@ -1332,10 +1332,8 @@ switch site
             case '2020'
                 z_meas = 5; % Height of EC system from ground
                 z_tree = 3; % Mean tree height from ground
-                z = 5; 
-                ztop = 5; % Height of the column that is represented by the top CO2 sensor (ztop = z if only one sensor)
-                zcpy = 0; % Height of the column that is represented by the bottom CO2 sensor (zcpy + ztop = z if two sensors are used)
-                col_flag = 1; % =1 for one-height CO2 storage measurement, =2 for two-height
+                z = 4.5; ztop = 3.5; %(??)
+                zcpy = 4.5; col_flag = 1; %(??)
 
                 % gs_start = 120;
                 % gs_end = 313; 

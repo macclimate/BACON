@@ -237,10 +237,11 @@ for year_ctr = year_start:1:year_end
             subplot(2,1,2)
             hTsB(i) = plot(input_data(:,Ts_cols_B(i)),'Color',clrs(i,:)); hold on;
         end
-        legend(hTsB,TsB_labels(:,12:end))
+        % legend(hTsB,TsB_labels(:,12:end))
+        % Current Error at Line 240 so commented out
         title('Pit B - Temperatures -- uncorrected')
         
-        
+       
         % B. Soil Moisture:
         SM_cols_A = find(strncmpi(names30(:,1),'SM_A',4)==1);
         SM_cols_B = find(strncmpi(names30(:,1),'SM_B',4)==1);
@@ -260,7 +261,8 @@ for year_ctr = year_start:1:year_end
             subplot(2,1,2)
             hSMB(i) = plot(input_data(:,SM_cols_B(i)),'Color',clrs(i,:)); hold on;
         end
-        legend(hSMB,SMB_labels(:,6:end))
+        % legend(hSMB,SMB_labels(:,6:end))
+        % Same as Line 240 - not working
         title('Pit B - Moisture -- uncorrected')
     end
     
@@ -3909,7 +3911,7 @@ for year_ctr = year_start:1:year_end
             subplot(2,1,2)
             hTsB(i) = plot(output(:,Ts_cols_B(i)),'Color',clrs(i,:)); hold on;
         end
-        legend(hTsB,TsB_labels(:,12:end))
+        % legend(hTsB,TsB_labels(:,12:end))
         title('Pit B - Temperatures -- Corrected')
         
         
@@ -3920,14 +3922,17 @@ for year_ctr = year_start:1:year_end
             subplot(2,1,1)
             hSMA(i) = plot(output(:,SM_cols_A(i)),'Color',clrs(i,:)); hold on;
         end
-        legend(hSMA,SMA_labels(:,6:end))
+        
+        try legend(hSMA,SMA_labels(:,6:end));  catch; end
+        
         title('Pit A - Moisture -- Corrected')
         
         for i = 1:1:length(SM_cols_B)
             subplot(2,1,2)
             hSMB(i) = plot(output(:,SM_cols_B(i)),'Color',clrs(i,:)); hold on;
         end
-        legend(hSMB,SMB_labels(:,6:end))
+        try legend(hSMB,SMB_labels(:,6:end)); catch; end
+        
         title('Pit B - Moisture -- Corrected')
     end
     %% Output

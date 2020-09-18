@@ -23,29 +23,31 @@ calc_path = ([loadstart 'Matlab/Data/Met/Calculated4/']);
 
 %% Load needed variables %%%%%%%%%%%%%%%%%%%%%%%%%
 [junk(:,1) junk(:,2) junk(:,3) dt]  = jjb_makedate(str2double(year),30);
-z = 0.03; %% Soil Heat Flux probes at 3 cm
+% z = 0.03; %% Soil Heat Flux probes at 3 cm
 delta_t = 1800; %% Half hour data
 
 % Site Specific Coefficients and Operations %%%%%%%%%%%%%%%%%%%%%%%%%%
 [param]=params(year, site, 'SHF');
-theta_w = param(:,1); theta_m = param(:,2); theta_o = param(:,3);
-
+theta_w = param(:,1); theta_m = param(:,2); theta_o = param(:,3); z = param(:,4); Ts_flag = param(:,5);
 
 %% Load variables:
 cleaned = load([cleaned_path site '/' site '_met_cleaned_' year '.mat']);
 
-if strcmp(site, 'TP39') == 1;
+switch site
+    case 'TP39'
 SHF1 = load_from_master(cleaned.master,'SoilHeatFlux_HFT_1');
 SHF2 = load_from_master(cleaned.master,'SoilHeatFlux_HFT_2');
 SHF3 = NaN.*ones(length(SHF2),1);
 SHF4 = NaN.*ones(length(SHF2),1);
-elseif strcmp(site, 'TPD') == 1;
+    case 'TPD'
   SHF1 = load_from_master(cleaned.master,'SoilHeatFlux_HFT_1');
 SHF2 = load_from_master(cleaned.master,'SoilHeatFlux_HFT_2');
 SHF3 = load_from_master(cleaned.master,'SoilHeatFlux_HFT_3');
 SHF4 = load_from_master(cleaned.master,'SoilHeatFlux_HFT_4');
 
-else
+    case 'TPAg'
+  SHF1 = load_from_master(cleaned.master,'SoilHeatFlux_HFT_1');        
+    otherwise
 SHF1 = load_from_master(cleaned.master,'SoilHeatFlux_1');
 SHF2 = load_from_master(cleaned.master,'SoilHeatFlux_2');    
 SHF3 = NaN.*ones(length(SHF2),1);
@@ -54,8 +56,20 @@ end
 
 filled = load([filled_path site '/' site '_met_filled_' year '.mat']);
 
-Ts2 = load_from_master(filled.master,'SoilTemp_2cm');     
+try 
+Ts2 = load_from_master(filled.master,'SoilTemp_2cm'); 
+catch 
+Ts2 = NaN.*ones(length(SHF1),1);
+disp('Ts_{2cm} did not load');
+end
+
+try 
 Ts5 = load_from_master(filled.master,'SoilTemp_5cm');
+catch 
+Ts5 = NaN.*ones(length(SHF1),1);
+disp('Ts_{5cm} did not load');
+end
+
 
 %% Fill in Gaps for specific years:
 % Modified JJB 28-Mar-2012 - Added new Gavg statement, comment rest:
@@ -80,9 +94,14 @@ Gavg = nanmean([SHF1 SHF2 SHF3 SHF4],2);
 
 
 %% Shift soil temperature to calculate dT/dt..
+switch Ts_flag
+    case 2
 ind_dt(:,1) = 2:length(Ts2);
 dTs = Ts2(ind_dt,1) - Ts2(ind_dt-1,1);
-
+    case 5
+ind_dt(:,1) = 2:length(Ts5);
+dTs = Ts5(ind_dt,1) - Ts5(ind_dt-1,1);        
+end
 %% Calculations
 M(1:1:length(dTs)) = NaN;
 Cs = 2.*theta_m + 2.5.*theta_o + 4.18.*theta_w;
@@ -119,9 +138,11 @@ h1 = plot(dt,G0,'b');
 hold on;
 h2 = plot(dt,Gavg,'g--');
 h3 = plot(dt,Ts2,'r');
+h4 = plot(dt,Ts5,'m');
+
 ylabel('Soil Heat Flux (Wm_2); Soil Temperature (^oC)')
 xlabel('Day of Year')
-legend([h1 h2 h3], 'Corrected SHF', 'original (SHF plate)','Ts2')
+legend([h1 h2 h3 h4], 'Corrected SHF', 'original (SHF plate)','Ts2','Ts5')
 axis ([0 365 min(G0) max(G0)]);
 disp('mcm_SHF done!');
 % print('-dill',[fig_path 'SoilHeatFlux']);
