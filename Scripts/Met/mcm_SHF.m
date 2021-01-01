@@ -91,7 +91,14 @@ Gavg = nanmean([SHF1 SHF2 SHF3 SHF4],2);
 
 % % Gavg(good_shf1,1) = SHF1(good_shf1);  %% put in good numbers for SHF1
 % % Gavg(good_shf2,1) = SHF2(good_shf2);  %% put in good numbers for SHF2
-
+%%% For TPAg in 2020, merge Ts5 and Ts2 [Added 2021-01-01 by JJB]:
+switch site
+    case 'TPAg'
+        switch year
+            case '2020'
+                Ts2(isnan(Ts2),1)= Ts5(isnan(Ts2),1);
+        end
+end
 
 %% Shift soil temperature to calculate dT/dt..
 switch Ts_flag

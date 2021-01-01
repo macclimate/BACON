@@ -1,4 +1,9 @@
 function [angles_out dist_out f1] = fetchdist(angles_in, plot_flag)
+%%% This function converts a set of sector angle and length designations
+%%% with a degree-by-degree output of angle and length designations.  Used
+%%% in footprint work, when site layout information is given as sector
+%%% information.
+%%% For TPFS operation, angles_in comes from values set in Scripts\Config\params.m
 
 if nargin == 1;
     plot_flag = 'off';
@@ -10,10 +15,7 @@ elseif plot_flag == 0;
     plot_flag = 'off';
 end
 
-%%% This function converts a set of sector angle and length designations
-%%% with a degree-by-degree output of angle and length designations.  Used
-%%% in footprint work, when site layout information is given as sector
-%%% information.
+
 
 %%% input is form of [sector start angle|sector end angle|sector start distance|sector end distance]
 

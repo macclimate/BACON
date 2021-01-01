@@ -267,12 +267,19 @@ disp('soil tracker saved');
 
 for  i = 1:1:num_sites
         site = site_labels{i,1};    
-   [SM(i).SM30a SM(i).flag_a]= mcm_SM30cm_avg(SM(i).SM5a, SM(i).SM10a, SM(i).SM20a, SM(i).SM50a);
-   [SM(i).SM30b SM(i).flag_b]= mcm_SM30cm_avg(SM(i).SM5b, SM(i).SM10b, SM(i).SM20b, SM(i).SM50b);
+        switch site 
+            case 'TPAg'
+                SM_ina = [SM(i).SM5a, SM(i).SM10a, SM(i).SM20a, SM(i).SM50a];
+                [SM(i).SM30a SM(i).flag_a]= mcm_SM30cm_avg(SM_ina);
+            otherwise
+                SM_ina = [SM(i).SM5a, SM(i).SM10a, SM(i).SM20a, SM(i).SM50a];
+                SM_inb = [SM(i).SM5b, SM(i).SM10b, SM(i).SM20b, SM(i).SM50b];
+   [SM(i).SM30a SM(i).flag_a]= mcm_SM30cm_avg(SM_ina);
+   [SM(i).SM30b SM(i).flag_b]= mcm_SM30cm_avg(SM_inb);
 
    SM(i).SM30a = mcm_adjust_SM(site, 'A', SM(i).SM30a, SM(i).flag_a);
    SM(i).SM30b = mcm_adjust_SM(site, 'B', SM(i).SM30b, SM(i).flag_b);
-
+        end
 end
 %%% Use SMfill to fill gaps in SM values:
 SMfill = mcm_fill_SM(site_labels, SM);

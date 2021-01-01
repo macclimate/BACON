@@ -1,10 +1,19 @@
-function [SM_avg use_flag] = SM30cm_avg(SM5, SM10, SM20, SM50)
+function [SM_avg use_flag] = mcm_SM30cm_avg(SM_in,calc_flag)
+% function [SM_avg use_flag] = mcm_SM30cm_avg(SM5, SM10, SM20, SM50)
+
 % SM30cm_avg - averages soil moisture inputs from 4 probes at depth in a
 % soil profile, and obtains a 30cm (root zone) average for these.
 % Edited June 1, 2010 by jjb to include 'use_flag' - a vector of 0 or 1 to
 % indicate whether or not both 5 and 10cm SM data was present (1), or if
 % one was missing (0), or if all depths are present (2).
 
+switch cal_flag
+    case 1 % Traditional depth-weighted calc with sensors at 5, 10, 20, 50 cm)
+       SM5 = SM_in(:,1);
+       SM10 = SM_in(:,2);
+       SM20= SM_in(:,3);
+       SM50 = SM_in(:,4);
+       
 SM_avg = NaN.*ones(length(SM5),1);
 use_flag = 1111.*ones(length(SM5),1);
 use_flag(isnan(SM5),1) = use_flag(isnan(SM5),1)     - 1000;
@@ -42,4 +51,17 @@ for i = 1:1:length(SM_avg)
         SM_avg(i,1) = NaN;
     end
 
+end
+
+    case 2 % Used for TPAg, where sensors only exist at 5cm and 10-40 (vertical)
+        SM5 = SM_in(:,1);
+        
+       SM10_40 = SM_in(:,2);
+       SM_avg = NaN.*ones(length(SM5),1);
+
+        SM_avg = SM10_40; % Use the 10-40cm measurement as a default
+        SM_avg(~isnan(SM5),1) = 0.333333.*SM5(~isnan(SM5),1) + 0.666666.*SM10_40(~isnan(SM5),1);
+end
+        
+        
 end

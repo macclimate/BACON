@@ -1170,9 +1170,11 @@ switch site
                 z_meas = 10; z_tree = 7.28; 
         end
                 
-        % #################################################################
-        % TPD
+       
     case 'TPD'
+        %% TPD
+         % #################################################################
+        % TPD
         theta_w = 0.13;
         theta_m = 0.01;
         theta_o = 160/1300;
@@ -1317,16 +1319,81 @@ switch site
         end
                 
     case 'TPAg'
+%% TPAg
+        % Address: 1811, Front Road, Charlottesville, Norfolk County, N0E 1P0
+% Site start Date: 29 June 2020
+% The instruments were installed at the exact same height as before in the forest below canopy setting. The EC system is at:
+% o	4.96 m height to centre of CSAT path
+% o	Centre of LI7500 path is offset 25 cm below centre of CSAT path, and 12cm south
+% 
+% Heights of Ta/RH and Radiations sensors are same as used for VDT below canopy flux measurements. 
+% 
+% 4.20 m  LI190SB ("quantum" PAR sensor, LICOR S/N = 32166)
+% 4.20 m  SN-500 (Net Radiation sensors, Apogee, S/N 1200)
+% 4.30 m  HC2S3 (air temp and humidity probe)
+% 
+% Ts – Soil Temperate CSI, model 107b 
+% 2cm (new, installed on 28 Oct 2020)
+% 5cm (installed)
+% 10cm (installed)
+% 50 cm (new, installed on 28 Oct 2020)
+% 
+% SM – Soil Moisture, CSI, model CS616
+% 5cm (installed)
+% 10-40cm (installed vertically, starting at 10 cm depth)
+% 50 cm (new, in future)
+% 100 cm (new, in future)
+% 
+% G – Soil heat flux – CSI, model HFT3
+% 8 cm (from 29 June to 28 Oct, 2020)
+% 3 cm (move to 3cm on installed on 28 Oct 2020) 
+% 
+% Plant height was 0.3 m on 29 June (Altaf)
+% Plnat height was about 2.5 to 3.0 m by July 2020 (Keegan)
+% Plant height is between 2.5 and 3 m tall on 21 Oct (Shawn)
+% The plants in their rows are about 12 to 15 cm apart
+% The rows are 50 cm apart
+% There are between 12 to 15 plants per square meter in the field 
         theta_w = 0.13;
         theta_m = 0.01;
         theta_o = 160/1300;
-        z_shf = 0.1;
-        Ts_to_use = 5; % Use 5 cm sensor to calculate dT/dt
+        z_shf = 0.03;
+        Ts_to_use = 2; % Use 2 cm sensor to calculate dT/dt
        
-        % Updated by EB 9/17
-        lat = 42.694670;
-        long = 80.348748;
+        % Coordinates updated by JJB 2021-01-01 | original (commented) by EB 9/17
+        % In UTM: 17N 553367 4727120
+        lat = 42.69444; %42.694670;
+        long = 80.34833; %80.348748;
         elev = 175; % Elevation in masl
+       
+                %         %%% 'fetch' defines the dimensions of the measurement site.
+        %         %%% Columns (shown here as rows) 1 and 2 specify the starting and
+        %         %%% ending mathematical direction from the tower for each sector (0 = North,
+        %         %%% increasing counter-clockwise), while Columns 3 and 4 (shown as
+        %         %%% rows 3 & 4 here), specify the distance from the tower at each
+        %         %%% bearing.  This data is structured to create quadrants that may
+        %         %%% be redrawn to represent the dimensions of the field site, and
+        %         %%% for work in footprint filtering.
+        switch options.fetch_type
+            case 'tight'
+                fetch = [   [0 27 45 57 78 113 135 140 145 158 169 198 257 265 283 349]'... % sector start bearing
+                    [27 45 57 78 113 135 140 145 158 169 198 257 265 283 349 360]'...         % sector end bearing
+                    [195 187 192 175 238 181 197 282 289 211 249 136 124 119 139 207]'...  % sector start distance (m)
+                    [187 192 175 221 181 154 209 289 211 249 136 124 119 139 207 195]' ]; % sector end distance (m)
+            case 'all'
+                % For the time being, the fetches have been made
+                % equal--it's uncear whether we would want to define a
+                % broader representative area when the cover type will
+                % change from year to year.
+                fetch = [   [0 27 45 57 78 113 135 140 145 158 169 198 257 265 283 349]'... % sector start bearing
+                    [27 45 57 78 113 135 140 145 158 169 198 257 265 283 349 360]'...         % sector end bearing
+                    [195 187 192 175 238 181 197 282 289 211 249 136 124 119 139 207]'...  % sector start distance (m)
+                    [187 192 175 221 181 154 209 289 211 249 136 124 119 139 207 195]' ]; % sector end distance (m)
+                
+        end
+
+        
+        
         
         switch year
             case '2020'
@@ -1336,7 +1403,8 @@ switch site
                 ztop = 5; % Height of the column that is represented by the top CO2 sensor (ztop = z if only one sensor)
                 zcpy = 0; % Height of the column that is represented by the bottom CO2 sensor (zcpy + ztop = z if two sensors are used)
                 col_flag = 1; % =1 for one-height CO2 storage measurement, =2 for two-height
-
+                z_shf = 0.03.*ones(17568,1); z_shf(1:14429,1) = 0.08 ; % SHF sensor moved from 3 to 10 cm on October 28
+%                 Ts_to_use = 5; % Use 5 cm sensor for 2020, as it was the proper to use until late in the year
                 % gs_start = 120;
                 % gs_end = 313; 
             otherwise    
