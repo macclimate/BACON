@@ -24,7 +24,7 @@ switch var_type
             case 'TPD'
                 top_cut = 25; bot_cut = -45; z = 5; win_size = 30; sdev_mult = 3;
             case 'TPAg'
-                top_cut = 25; bot_cut = -55; z = 5; win_size = 30; sdev_mult = 3;    
+                top_cut = 25; bot_cut = -85; z = 5; win_size = 30; sdev_mult = 3;    
         end
         
     case 'H'
