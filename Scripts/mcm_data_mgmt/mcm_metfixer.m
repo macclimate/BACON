@@ -3852,14 +3852,26 @@ for year_ctr = year_start:1:year_end
                 CPEC_TP74 = load([loadstart 'Matlab\Data\Met\Final_Cleaned\TP74\TP74_met_cleaned_2020.mat']);
                 TP74_WDir = CPEC_TP74.master.data(:,5);
                 dir_diff = output(:,27) - TP74_WDir;
-                xbins = -200:20:200;
-                figure(73);clf;
-                plot(output(:,27),'b'); hold on;
-                plot(TP74_WDir,'r');
-                legend('TPAg','TP74');
+
+                % Plot timeseries of TPAg and TP74 Wind Dir
+%                 figure(73);clf;
+%                 plot(output(:,27),'b'); hold on;
+%                 plot(TP74_WDir,'r');
+%                 legend('TPAg','TP74');
+                % Plot histogram of TPAg - TP74 wind dir
+                dir_diff(dir_diff<-180) = dir_diff(dir_diff<-180)+360; % Transform when TPAg when difference spans 0/360 boundary
+                xbins = -200:10:200;
                 figure(74);
                 hist(dir_diff,xbins);
-
+                axis([-100 100 0 3100]); hold on;
+                h1(1) = plot([nanmean(dir_diff) nanmean(dir_diff)],[0 3100],'r-');
+                h1(2) = plot([nanmedian(dir_diff) nanmedian(dir_diff)],[0 3100],'g--');
+                legend(h1,{['mean = ' num2str(round(nanmean(dir_diff)))],['median = ' num2str(round(nanmedian(dir_diff)))]});
+                xlabel('WDir Offset (TPAg - TP74)');
+                ylabel('count');
+               %%% Correct wind direction offset 
+                output(:,27) = output(:,27) - nanmean(dir_diff);
+                output(output(:,27)<0,27) = output(output(:,27)<0,27)+360;
             end
     end
     
