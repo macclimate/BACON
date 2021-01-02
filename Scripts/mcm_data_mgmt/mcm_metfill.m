@@ -279,13 +279,13 @@ for  i = 1:1:num_sites
         site = site_labels{i,1};    
         switch site 
             case 'TPAg'
-                SM_ina = [SM(i).SM5a, SM(i).SM10];
-                [SM(i).SM30a SM(i).flag_a]= mcm_SM30cm_avg(SM_ina);
+                SM_ina = [SM(i).SM5a, SM(i).SM10_40a];
+                [SM(i).SM30a SM(i).flag_a]= mcm_SM30cm_avg(SM_ina,2);
             otherwise
                 SM_ina = [SM(i).SM5a, SM(i).SM10a, SM(i).SM20a, SM(i).SM50a];
                 SM_inb = [SM(i).SM5b, SM(i).SM10b, SM(i).SM20b, SM(i).SM50b];
-   [SM(i).SM30a SM(i).flag_a]= mcm_SM30cm_avg(SM_ina);
-   [SM(i).SM30b SM(i).flag_b]= mcm_SM30cm_avg(SM_inb);
+   [SM(i).SM30a SM(i).flag_a]= mcm_SM30cm_avg(SM_ina,1);
+   [SM(i).SM30b SM(i).flag_b]= mcm_SM30cm_avg(SM_inb,1);
 
    SM(i).SM30a = mcm_adjust_SM(site, 'A', SM(i).SM30a, SM(i).flag_a);
    SM(i).SM30b = mcm_adjust_SM(site, 'B', SM(i).SM30b, SM(i).flag_b);
@@ -304,7 +304,9 @@ for i = 1:1:num_sites
     ind_ok3 = find(isnan(data(i).APR)==1);
     data(i).APR(ind_ok3,1) = data(3).APR(ind_ok3,1); % fill with TP02 if needed
     ind_ok4 = find(isnan(data(i).APR)==1);
-    data(i).APR(ind_ok4,1) = 99; % fill with 99 if there are still NaNs
+    data(i).APR(ind_ok4,1) = data(4).APR(ind_ok4,1); % fill with TPD if needed
+    ind_ok5 = find(isnan(data(i).APR)==1);
+    data(i).APR(ind_ok5,1) = 101; % fill with 99 if there are still NaNs
 end    
 
 %% Put all variables into their proper site-label matricies:
@@ -471,9 +473,9 @@ for i = 1:1:num_sites
     for j = 1:1:12
         subplot(4,3,j);
         if j < 12
-            eval (['plot(' site '_filled(:,plot_list(j)),''r'')']); hold on;
-            eval (['plot(' site '(:,plot_list(j)),''b'')']);
-            title(char(varnames(plot_list(j),1)));
+            try eval (['plot(' site '_filled(:,plot_list(j)),''r'')']); hold on; catch; end
+            try eval (['plot(' site '(:,plot_list(j)),''b'')']); catch; end
+            try title(char(varnames(plot_list(j),1))); catch; end
         else
             eval (['plot(' site '_filled(:,j),''r'')']); hold on;
             eval (['plot(' site '_filled(:,j+1),''b'')']); hold on;

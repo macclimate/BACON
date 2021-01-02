@@ -854,7 +854,7 @@ for k = 1:1:length(year)
     % The following variables will be consolidated at this point:
     % NEE, FC, LE, H, Ustar (more can be added later if required):
     switch site 
-        case {'TP39','TP74','TP89','TP02','TPD'; 'TPAg'}
+        case {'TP39','TP74','TP89','TP02','TPD', 'TPAg'}
                
     num_errs = 0;
     %     try
@@ -987,7 +987,7 @@ else
     vars_to_output = header(ind,8);
     data = struct;
     % Make a structure variable??
-    for k = 1:1:length(ind);
+    for k = 1:1:length(ind)
         eval(['data.' char(header(ind(k),8)) ' = master_all.data(:,' num2str(ind(k)) ');'])
     end
     data.site = site;

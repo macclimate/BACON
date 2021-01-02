@@ -123,5 +123,31 @@ target = data.Rn;
         nnet_TPD.net =train(nnet_TPD.net,training_inputs',training_target');
         save('/1/fielddata/Matlab/Data/Met/Final_Filled/Rn_nnet/TPD_nnet.mat','nnet_TPD');
 
-%% SAVE:        
+%% TPAg
+
+       clear data;
+       loadstart  = addpath_loadstart;
+       try  
+          load([loadstart 'Matlab/Data/Master_Files/TPAg/TPAg_gapfill_data_in.mat'])
+data = trim_data_files(data,2020,2020,1);
+       catch
+        load([loadstart 'Matlab/Data/Met/Final_Cleaned/TPAg/TPAg_met_cleaned_2020.mat'])
+master.labels = cellstr(master.labels);
+data.Ta = master.data(:,strcmp(master.labels(:,1),'AirTemp_AbvCnpy')==1);
+data.WS = master.data(:,strcmp(master.labels(:,1),'WindSpd')==1);
+data.RH = master.data(:,strcmp(master.labels(:,1),'RelHum_AbvCnpy')==1);
+data.PAR = master.data(:,strcmp(master.labels(:,1),'DownPAR_AbvCnpy')==1);
+data.Rn = master.data(:,strcmp(master.labels(:,1),'NetRad_AbvCnpy')==1);
+       end
+
+inputs = [data.Ta data.WS data.RH data.PAR];
+target = data.Rn;
+
+        ind_use_all = find(~isnan(prod(inputs,2)) & ~isnan(target));
+        training_inputs = inputs(ind_use_all,:);
+        training_target = target(ind_use_all,:);
+        nnet_TPAg.net = newfit(training_inputs',training_target',30);
+%         nnet.net.trainParam.showWindow = false;
+        nnet_TPAg.net =train(nnet_TPAg.net,training_inputs',training_target');
+        save([loadstart 'Matlab/Data/Met/Final_Filled/Rn_nnet/TPAg_nnet.mat'],'nnet_TPAg');
         

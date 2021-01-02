@@ -46,7 +46,10 @@ SHF3 = load_from_master(cleaned.master,'SoilHeatFlux_HFT_3');
 SHF4 = load_from_master(cleaned.master,'SoilHeatFlux_HFT_4');
 
     case 'TPAg'
-  SHF1 = load_from_master(cleaned.master,'SoilHeatFlux_HFT_1');        
+  SHF1 = load_from_master(cleaned.master,'SoilHeatFlux_HFT_1'); 
+  SHF2 = NaN.*ones(length(SHF1),1);
+  SHF3 = NaN.*ones(length(SHF1),1);
+SHF4 = NaN.*ones(length(SHF1),1);
     otherwise
 SHF1 = load_from_master(cleaned.master,'SoilHeatFlux_1');
 SHF2 = load_from_master(cleaned.master,'SoilHeatFlux_2');    
@@ -91,12 +94,14 @@ Gavg = nanmean([SHF1 SHF2 SHF3 SHF4],2);
 
 % % Gavg(good_shf1,1) = SHF1(good_shf1);  %% put in good numbers for SHF1
 % % Gavg(good_shf2,1) = SHF2(good_shf2);  %% put in good numbers for SHF2
-%%% For TPAg in 2020, merge Ts5 and Ts2 [Added 2021-01-01 by JJB]:
+
+%%% For TPAg in 2020, merge Ts5 and Ts2; change z_shf midway through the season [Added 2021-01-01 by JJB]:
 switch site
     case 'TPAg'
         switch year
             case '2020'
                 Ts2(isnan(Ts2),1)= Ts5(isnan(Ts2),1);
+                z = 0.03.*ones(17567,1); z(1:14429,1) = 0.08 ;
         end
 end
 

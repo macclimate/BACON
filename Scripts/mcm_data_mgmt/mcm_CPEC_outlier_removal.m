@@ -23,7 +23,8 @@ switch var_type
                 top_cut = 15; bot_cut = -30; z = 5; win_size = 30; sdev_mult = 3;
             case 'TPD'
                 top_cut = 25; bot_cut = -45; z = 5; win_size = 30; sdev_mult = 3;
-                
+            case 'TPAg'
+                top_cut = 25; bot_cut = -55; z = 5; win_size = 30; sdev_mult = 3;    
         end
         
     case 'H'
@@ -38,6 +39,8 @@ switch var_type
                 top_cut = 500; bot_cut = -100; z = 9; win_size = 30; sdev_mult = 3;
             case 'TPD'
                 top_cut = 800; bot_cut = -200; z = 15; win_size = 30; sdev_mult = 6;
+            case 'TPAg'
+                top_cut = 800; bot_cut = -200; z = 15; win_size = 30; sdev_mult = 6;  
         end
         
     case 'LE'
@@ -52,6 +55,8 @@ switch var_type
                 top_cut = 650; bot_cut = -100; z = 11; win_size = 30; sdev_mult = 5.5;
             case 'TPD'
                 top_cut = 650; bot_cut = -100; z = 15; win_size = 30; sdev_mult = 5.5;
+            case 'TPAg'
+                top_cut = 800; bot_cut = -100; z = 15; win_size = 30; sdev_mult = 5.5;
                 
         end
         
@@ -83,6 +88,9 @@ switch var_type
                 top_cut = 500; bot_cut = -100; %z = 9; win_size = 30; sdev_mult = 3;
             case 'TPD'
                 top_cut = 800; bot_cut = -200; %z = 11; win_size = 30; sdev_mult = 4;
+            case 'TPAg'
+                top_cut = 800; bot_cut = -200; %z = 11; win_size = 30; sdev_mult = 4;
+                
         end
         array_out = array_in;
         array_out(array_out<bot_cut | array_out > top_cut) = NaN;

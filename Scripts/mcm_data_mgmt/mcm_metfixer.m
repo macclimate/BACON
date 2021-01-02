@@ -2634,7 +2634,7 @@ for year_ctr = year_start:1:year_end
             %%%%%%%%%%%%%%%%%%%%%%%% TP02  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%% PAR Correction factors for 2002, 2013--2017 % Determined from TP02_par_correction_factor.m
-            par_correction_factor = [2002, 1.23; 2013, 1.38199647061725; 2014, 1.26172364359607; 2015,1.03313933608525; 2016,0.874165785537350; 2017,0.659991285147933; 2018,0.585666951857723; 2019,1 ...
+            par_correction_factor = [2002, 1.23; 2013, 1.38199647061725; 2014, 1.26172364359607; 2015,1.03313933608525; 2016,0.874165785537350; 2017,0.659991285147933; 2018,0.585666951857723; 2019,1; ...
 									2020, 1; 2021, 1; 2022, 1];
             par_correction_factor = par_correction_factor(par_correction_factor(:,1)==year_ctr,2);
             switch yr_str
@@ -3843,9 +3843,10 @@ for year_ctr = year_start:1:year_end
                 case '2020'
                 % Load WS and WDir from Flux (CSAT data): 
                 CPEC_tmp = load([loadstart 'Matlab\Data\Flux\CPEC\TPAg\Final_Cleaned\TPAg_CPEC_cleaned_2020.mat']);
-                output(:,26) = CPEC_tmp.master.data(:,38); % wind speed
+                output(:,26) = CPEC_tmp.master.data(:,38); output(12311,26) = NaN;% wind speed
                 output(:,27) = CPEC_tmp.master.data(:,39); % wind direction
-                output(12311,26) = NaN;
+                output(:,28) = CPEC_tmp.master.data(:,15); output(11531:11543,28) = NaN; % Pressure
+               
                 % "D:\Matlab\Data\Flux\CPEC\TPAg\Final_Cleaned\TPAg_CPEC_cleaned_2020.mat"
                 clear CPEC_tmp
                %%% Investigate wind direction offset between TPAg and TP74
@@ -4006,7 +4007,9 @@ for year_ctr = year_start:1:year_end
         otherwise
     end
 end
-mcm_start_mgmt;
+if auto_flag==0
+    mcm_start_mgmt;
+end
 end
 
 %subfunction

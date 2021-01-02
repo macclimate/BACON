@@ -1403,7 +1403,7 @@ switch site
                 ztop = 5; % Height of the column that is represented by the top CO2 sensor (ztop = z if only one sensor)
                 zcpy = 0; % Height of the column that is represented by the bottom CO2 sensor (zcpy + ztop = z if two sensors are used)
                 col_flag = 1; % =1 for one-height CO2 storage measurement, =2 for two-height
-                z_shf = 0.03.*ones(17568,1); z_shf(1:14429,1) = 0.08 ; % SHF sensor moved from 3 to 10 cm on October 28
+%                 z_shf = 0.03.*ones(17568,1); z_shf(1:14429,1) = 0.08 ; % SHF sensor moved from 3 to 10 cm on October 28
 %                 Ts_to_use = 5; % Use 5 cm sensor for 2020, as it was the proper to use until late in the year
                 % gs_start = 120;
                 % gs_end = 313; 

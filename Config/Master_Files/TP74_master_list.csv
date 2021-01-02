@@ -43,7 +43,7 @@ HMP45C_AirTemp_AbvCnpy,degC,AirTemp_AbvCnpy,met,Final_Cleaned,Met2,%6.3f,NaN,NaN
 HMP45C_RelHum_AbvCnpy,%,RelHum_AbvCnpy,met,Final_Cleaned,Met2,%7.3f,NaN,NaN,NaN,NaN,NaN,,RH
 WindSpd_AbvCnpy,m/s,WindSpd,met,Final_Cleaned,Met2,%6.3f,NaN,NaN,NaN,NaN,NaN,,WS
 WindDir_AbvCnpy,deg,WindDir,met,Final_Cleaned,Met2,%7.3f,W_Dir,W_Dir,W_Dir,W_Dir,W_Dir,WD,WD
-SurfPress,kPa,Pressure,met,Final_Cleaned,Met2,%7.3f,APR,APR,NaN,NaN,NaN,,PA
+SurfPress,kPa,Pressure,met,Final_Cleaned,Met2,%7.3f,NaN,NaN,NaN,NaN,NaN,,PA
 SoilTemp_A_2cm,degC,SoilTemp_A_2cm,met,Final_Cleaned,Met2,%6.3f,Ts2cmA,Ts2cmA,NaN,NaN,Ts2cmA,,TS_1_1_1
 SoilTemp_A_5cm,degC,SoilTemp_A_5cm,met,Final_Cleaned,Met2,%6.3f,Ts5cmA,Ts5cmA,NaN,NaN,Ts5cmA,,TS_1_2_1
 SoilTemp_A_10cm,degC,SoilTemp_A_10cm,met,Final_Cleaned,Met2,%6.3f,Ts10cmA,Ts10cmA,NaN,NaN,Ts10cmA,,TS_1_3_1

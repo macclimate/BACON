@@ -7,7 +7,7 @@ function [SM_avg use_flag] = mcm_SM30cm_avg(SM_in,calc_flag)
 % indicate whether or not both 5 and 10cm SM data was present (1), or if
 % one was missing (0), or if all depths are present (2).
 
-switch cal_flag
+switch calc_flag
     case 1 % Traditional depth-weighted calc with sensors at 5, 10, 20, 50 cm)
        SM5 = SM_in(:,1);
        SM10 = SM_in(:,2);
@@ -61,6 +61,7 @@ end
 
         SM_avg = SM10_40; % Use the 10-40cm measurement as a default
         SM_avg(~isnan(SM5),1) = 0.333333.*SM5(~isnan(SM5),1) + 0.666666.*SM10_40(~isnan(SM5),1);
+        use_flag = ones(length(SM5),1);
 end
         
         

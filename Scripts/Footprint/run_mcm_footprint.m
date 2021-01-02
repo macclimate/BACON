@@ -75,6 +75,9 @@ switch site
         Ustar_th = 0.15;
     case 'TPD'
         Ustar_th = 0.3;        
+    case 'TPAg'
+        Ustar_th = 0.10;
+       
 end
 % Give the user option to change from the default value:
 

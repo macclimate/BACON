@@ -1,6 +1,7 @@
 site,years,ustar_th,model,footprint,tag
-TP39,2002:1:2019,mcm_Ustar_th_JJB,LE_H,Kljun_all90,New_SiteSpec
-TP74,2008:1:2019,mcm_Ustar_th_JJB,LE_H,Kljun_all90,New_SiteSpec
+TP39,2002:1:2020,mcm_Ustar_th_JJB,LE_H,Kljun_all90,New_SiteSpec
+TP74,2008:1:2020,mcm_Ustar_th_JJB,LE_H,Kljun_all90,New_SiteSpec
 TP89,2008:1:2016,mcm_Ustar_th_JJB,LE_H,Kljun_all90,New_SiteSpec
-TP02,2008:1:2019,mcm_Ustar_th_JJB,LE_H,Kljun_all90,New_SiteSpec
-TPD,2012:1:2019,mcm_Ustar_th_JJB,LE_H,Kljun_all90,New_SiteSpec
+TP02,2008:1:2020,mcm_Ustar_th_JJB,LE_H,Kljun_all90,New_SiteSpec
+TPD,2012:1:2020,mcm_Ustar_th_JJB,LE_H,Kljun_all90,New_SiteSpec
+TPAg,2020:1:2020,mcm_Ustar_th_JJB,LE_H,Kljun_all90,New_SiteSpec
