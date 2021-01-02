@@ -44,6 +44,8 @@ switch datatype
                 vars(35).path = 'MainEddy.Three_Rotations.Std(2)';    vars(35).name = 'v_rot_std';vars(35).ylabel = 'm s^{-1}';
                 vars(36).path = 'MainEddy.Three_Rotations.Std(3)';    vars(36).name = 'w_rot_std';vars(36).ylabel = 'm s^{-1}';				
                 vars(37).path = 'MainEddy.MiscVariables.NumOfSamples'; vars(37).name = 'num_samples';vars(37).ylabel = 'count';	
+                vars(38).path = 'Instrument(1,1).MiscVariables.CupWindSpeed';   vars(38).name = 'WindSpd';vars(38).ylabel = 'm s^{-1}';
+                vars(39).path = 'Instrument(1,1).MiscVariables.WindDirection';   vars(39).name = 'WindDir';vars(39).ylabel = 'deg';
             case {'TP74', 'TP02'}
                 % if strcmp(site, 'TP74') == 1 || strcmp(site, 'TP02') == 1
                 vars(1).path = 'MainEddy.Three_Rotations.LinDtr.Fluxes.Fc';             vars(1).name = 'Fc';            vars(1).ylabel = '\mumol m^{-2} s^{-1}';

@@ -148,6 +148,7 @@ for year_ctr = year_start:1:year_end
     %%% Step 2: Specific Cleans to the Data
     
     switch site
+    %% ********************** TP39 *********************************    
         case 'TP39'
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%%% % Added 19-Oct-2010 by JJB
@@ -468,8 +469,8 @@ for year_ctr = year_start:1:year_end
                    bad_co2 = find(output(:,17) > 449.9999 & output(:,17) < 450.0001);
                    output(bad_co2,[1 17]); % remove for Fc and CO2 concentration
             end
-            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TP74 %%%%%%%%%%%%%%%%%%%%%%%%%
         case 'TP74'
+            %% ********************** TP74 *********************************
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%%% % Added 19-Oct-2010 by JJB
             %%%% Clean CSAT and flux data using value of std for Ts or w
@@ -698,8 +699,8 @@ for year_ctr = year_start:1:year_end
                     output(bad_h2o,[5 18]) = NaN;
                  end
             
-            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TP89
             %     case 'TP89'
+            %% ********************** TP89 *********************************
             %         switch year
             %             case '2008'
             %             % Adjust nighttime PAR to fix offset:
@@ -708,8 +709,9 @@ for year_ctr = year_start:1:year_end
             %              output(output(:,2) > 100,2) = 100;
             %         end
             
-            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TP02
+            
         case 'TP02'
+            %% ********************** TP02 *********************************
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%%% % Added 19-Oct-2010 by JJB
             %%%% Clean CSAT and flux data using value of std for Ts or w
@@ -937,6 +939,7 @@ for year_ctr = year_start:1:year_end
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             
         case 'TPD'
+            %% ********************** TPD *********************************
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%%% % Added 19-Oct-2010 by JJB
             %%%% Clean CSAT and flux data using value of std for Ts or w
@@ -1116,8 +1119,23 @@ for year_ctr = year_start:1:year_end
                     output(bad_csat,[19:26]) = NaN;
             end
     case 'TPAg'
+        %% ********************** TPAg *********************************
+
         switch yr_str
         case '2020'
+        bad_co2 = find(output(:,17) > 32.9995 & output(:,17) < 33.0005);
+        bad_h2o = find(output(:,18) > 747.498 & output(:,18) < 747.502);
+        output(bad_co2,[1 17]) = NaN;
+        output(bad_h2o,[5 18]) = NaN;
+        bad_csat = find(output(:,19) > -0.001 & output(:,19) < 0.001);
+        output(bad_csat,[19:26 38:39]) = NaN;
+        bad_Tirga = find(output(:,27) > 4.9995 & output(:,27) < 5.0005);
+        output(bad_Tirga,[27]) = NaN;
+        
+        % Try to clean out some spikes in Wind Speed and Direction
+        bad_u_std = find(output(:,23) > 3);
+        output(bad_u_std,[38:39]) = NaN;
+            
         end
     end
         

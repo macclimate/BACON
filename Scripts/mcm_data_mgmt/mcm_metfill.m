@@ -47,10 +47,15 @@ elseif year_ctr >=2009 && year_ctr <=2011
 site_labels = {'TP39'; 'TP74'; 'TP02'};
 site_refs = [1;2;4];
 TP39 = []; TP74 = []; TP02 = [];
-else
+elseif year_ctr >=2012 && year_ctr <=2019
 site_labels = {'TP39'; 'TP74'; 'TP02';'TPD'};
 site_refs = [1;2;4;5];
 TP39 = []; TP74 = []; TP02 = []; TPD = [];
+
+else
+site_labels = {'TP39'; 'TP74'; 'TP02';'TPD';'TPAg'};
+site_refs = [1;2;4;5;6];
+TP39 = []; TP74 = []; TP02 = []; TPD = []; TPAg = [];
 
 end
 num_sites = size(site_labels,1);
@@ -152,27 +157,32 @@ for i = 1:1:num_sites
     temp(1).WS = master.data(:,mcm_find_right_col(master.labels,'WindSpd'));
     temp(1).Wdir = master.data(:,mcm_find_right_col(master.labels,'WindDir'));
     
-    Ts(i).Ts2a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_2cm'));
-    Ts(i).Ts2b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_2cm'));
-    Ts(i).Ts5a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_5cm'));
-    Ts(i).Ts5b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_5cm'));
-    Ts(i).Ts10a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_10cm'));
-    Ts(i).Ts10b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_10cm'));
-    Ts(i).Ts20a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_20cm'));
-    Ts(i).Ts20b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_20cm'));
-    Ts(i).Ts50a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_50cm'));
-    Ts(i).Ts50b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_50cm'));
-    Ts(i).Ts100a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_100cm'));
-    Ts(i).Ts100b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_100cm'));
+    try Ts(i).Ts2a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_2cm')); catch Ts(i).Ts2a = NaN.*ones(length(temp(1).Ta),1);end
+    try Ts(i).Ts2b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_2cm')); catch Ts(i).Ts2b = NaN.*ones(length(temp(1).Ta),1);end
+    try Ts(i).Ts5a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_5cm')); catch Ts(i).Ts5a = NaN.*ones(length(temp(1).Ta),1);end
+    try Ts(i).Ts5b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_5cm')); catch Ts(i).Ts5b = NaN.*ones(length(temp(1).Ta),1);end
+    try Ts(i).Ts10a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_10cm')); catch Ts(i).Ts10a = NaN.*ones(length(temp(1).Ta),1);end
+    try Ts(i).Ts10b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_10cm')); catch Ts(i).Ts10b = NaN.*ones(length(temp(1).Ta),1);end
+    try Ts(i).Ts20a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_20cm')); catch Ts(i).Ts20a = NaN.*ones(length(temp(1).Ta),1);end
+    try Ts(i).Ts20b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_20cm')); catch Ts(i).Ts20b = NaN.*ones(length(temp(1).Ta),1);end
+    try Ts(i).Ts50a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_50cm')); catch Ts(i).Ts50a = NaN.*ones(length(temp(1).Ta),1);end
+    try Ts(i).Ts50b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_50cm')); catch Ts(i).Ts50b = NaN.*ones(length(temp(1).Ta),1);end
+    try Ts(i).Ts100a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_100cm')); catch Ts(i).Ts100a = NaN.*ones(length(temp(1).Ta),1);end
+    try Ts(i).Ts100b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_100cm')); catch Ts(i).Ts100b = NaN.*ones(length(temp(1).Ta),1);end
     
-    SM(i).SM5a = master.data(:,mcm_find_right_col(master.labels,'SM_A_5cm'));
-    SM(i).SM5b = master.data(:,mcm_find_right_col(master.labels,'SM_B_5cm'));
-    SM(i).SM10a = master.data(:,mcm_find_right_col(master.labels,'SM_A_10cm'));
-    SM(i).SM10b = master.data(:,mcm_find_right_col(master.labels,'SM_B_10cm'));
-    SM(i).SM20a = master.data(:,mcm_find_right_col(master.labels,'SM_A_20cm'));
-    SM(i).SM20b = master.data(:,mcm_find_right_col(master.labels,'SM_B_20cm'));
-    SM(i).SM50a = master.data(:,mcm_find_right_col(master.labels,'SM_A_50cm'));
-    SM(i).SM50b = master.data(:,mcm_find_right_col(master.labels,'SM_B_50cm'));
+    try SM(i).SM5a = master.data(:,mcm_find_right_col(master.labels,'SM_A_5cm')); catch SM(i).SM5a = NaN.*ones(length(temp(1).Ta),1);end
+    try SM(i).SM5b = master.data(:,mcm_find_right_col(master.labels,'SM_B_5cm')); catch SM(i).SM5b = NaN.*ones(length(temp(1).Ta),1);end
+    try SM(i).SM10a = master.data(:,mcm_find_right_col(master.labels,'SM_A_10cm')); catch SM(i).SM10a = NaN.*ones(length(temp(1).Ta),1);end
+    try SM(i).SM10b = master.data(:,mcm_find_right_col(master.labels,'SM_B_10cm')); catch SM(i).SM10b = NaN.*ones(length(temp(1).Ta),1);end
+    try SM(i).SM20a = master.data(:,mcm_find_right_col(master.labels,'SM_A_20cm')); catch SM(i).SM20a = NaN.*ones(length(temp(1).Ta),1);end
+    try SM(i).SM20b = master.data(:,mcm_find_right_col(master.labels,'SM_B_20cm')); catch SM(i).SM20b = NaN.*ones(length(temp(1).Ta),1);end
+    try SM(i).SM50a = master.data(:,mcm_find_right_col(master.labels,'SM_A_50cm')); catch SM(i).SM50a = NaN.*ones(length(temp(1).Ta),1);end
+    try SM(i).SM50b = master.data(:,mcm_find_right_col(master.labels,'SM_B_50cm')); catch SM(i).SM50b = NaN.*ones(length(temp(1).Ta),1);end
+    
+    %%% Added 2021-01-01 by JJB - Loading SM data for TPAg
+    if strcmp(site,'TPAg')==1
+    SM(i).SM10_40a = master.data(:,mcm_find_right_col(master.labels,'SM_A_10-40cm'));
+    end
     
      %%%%% APR might not exist, so if it doesn't, we don't load it.
         try data(i).APR = master.data(:,mcm_find_right_col(master.labels,'Pressure')); 
@@ -221,7 +231,7 @@ for i = 1:1:num_sites
         subplot(3,2,5); plot(Ts(i).Ts50a,'b'); hold on; plot(Ts(i).Ts50b,'c');title('50cm')
         subplot(3,2,6); plot(Ts(i).Ts100a,'b'); hold on; plot(Ts(i).Ts100b,'c');title('100cm')
   
-        if prompt_flag == 1; 
+        if prompt_flag == 1
             resp2 = soil_tracker(1,right_col); resp5 = soil_tracker(2,right_col); resp10 = soil_tracker(3,right_col); 
             resp20 = soil_tracker(4,right_col); resp50 = soil_tracker(5,right_col); resp100 = soil_tracker(6,right_col); 
         else
@@ -269,7 +279,7 @@ for  i = 1:1:num_sites
         site = site_labels{i,1};    
         switch site 
             case 'TPAg'
-                SM_ina = [SM(i).SM5a, SM(i).SM10a, SM(i).SM20a, SM(i).SM50a];
+                SM_ina = [SM(i).SM5a, SM(i).SM10];
                 [SM(i).SM30a SM(i).flag_a]= mcm_SM30cm_avg(SM_ina);
             otherwise
                 SM_ina = [SM(i).SM5a, SM(i).SM10a, SM(i).SM20a, SM(i).SM50a];

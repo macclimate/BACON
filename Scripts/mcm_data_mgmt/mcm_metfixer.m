@@ -3834,10 +3834,32 @@ for year_ctr = year_start:1:year_end
                     % Poured hot water in to melt ice in the rain gauge
                     output(2821:2824,1:2) = NaN;
             end
-    
+
+            %% %%%%%%%%%%%%%%%%% TPAg %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
         case 'TPAg'
             switch yr_str
                 case '2020'
+                % Load WS and WDir from Flux (CSAT data): 
+                CPEC_tmp = load([loadstart 'Matlab\Data\Flux\CPEC\TPAg\Final_Cleaned\TPAg_CPEC_cleaned_2020.mat']);
+                output(:,26) = CPEC_tmp.master.data(:,38); % wind speed
+                output(:,27) = CPEC_tmp.master.data(:,39); % wind direction
+                output(12311,26) = NaN;
+                % "D:\Matlab\Data\Flux\CPEC\TPAg\Final_Cleaned\TPAg_CPEC_cleaned_2020.mat"
+                clear CPEC_tmp
+               %%% Investigate wind direction offset between TPAg and TP74
+                CPEC_TP74 = load([loadstart 'Matlab\Data\Met\Final_Cleaned\TP74\TP74_met_cleaned_2020.mat']);
+                TP74_WDir = CPEC_TP74.master.data(:,5);
+                dir_diff = output(:,27) - TP74_WDir;
+                xbins = -200:20:200;
+                figure(73);clf;
+                plot(output(:,27),'b'); hold on;
+                plot(TP74_WDir,'r');
+                legend('TPAg','TP74');
+                figure(74);
+                hist(dir_diff,xbins);
+
             end
     end
     
