@@ -21,8 +21,10 @@ switch datatype
                 vars(14).path = 'MainEddy.Three_Rotations.Angles.Beta';     vars(14).name = 'Beta';vars(14).ylabel = 'degrees';
                 vars(15).path = 'MiscVariables.BarometricP';                vars(15).name = 'BarometricP';vars(15).ylabel = 'kPa';
                 vars(16).path = 'MiscVariables.Tair';                       vars(16).name = 'Tair';vars(16).ylabel = '^oC';
-                vars(17).path = 'Instrument(1,2).Avg(1)';   vars(17).name = 'CO2_irga';     vars(17).ylabel = 'mmol m^{-3}';
-                vars(18).path = 'Instrument(1,2).Avg(2)';   vars(18).name = 'H2O_irga';vars(18).ylabel = 'mmol m^{-3}';
+                vars(17).path = 'MainEddy.Zero_Rotations.Avg(5)';   vars(17).name = 'CO2_irga';     vars(17).ylabel = '\mumol mol^{-1}';
+                vars(18).path = 'MainEddy.Zero_Rotations.Avg(6)';   vars(18).name = 'H2O_irga'; vars(18).ylabel = 'mmol mol^{-1}';
+%                 vars(17).path = 'Instrument(1,2).Avg(1)';   vars(17).name = 'CO2_irga';     vars(17).ylabel = 'mmol m^{-3}';
+%                 vars(18).path = 'Instrument(1,2).Avg(2)';   vars(18).name = 'H2O_irga';vars(18).ylabel = 'mmol m^{-3}';
                 vars(19).path = 'Instrument(1,1).Avg(1)';   vars(19).name = 'u'; vars(19).ylabel = 'm s^{-1}';
                 vars(20).path = 'Instrument(1,1).Avg(2)';   vars(20).name = 'v'; vars(20).ylabel = 'm s^{-1}';
                 vars(21).path = 'Instrument(1,1).Avg(3)';   vars(21).name = 'w'; vars(21).ylabel = 'm s^{-1}';
@@ -34,8 +36,10 @@ switch datatype
                 %%% Added these on June 20, 2011 (JJB):
                 vars(27).path = 'Instrument(1,2).Avg(4)';   vars(27).name = 'T_irga';vars(27).ylabel = '^oC';
                 vars(28).path = 'Instrument(1,3).Avg(5)';   vars(28).name = 'P_irga';vars(28).ylabel = 'kPa';
-                vars(29).path = 'Instrument(1,2).Std(1)';   vars(29).name = 'CO2_std';vars(29).ylabel = 'mmol m^{-3}';
-                vars(30).path = 'Instrument(1,2).Std(2)';   vars(30).name = 'H2O_std';vars(30).ylabel = 'mmol m^{-3}';
+                vars(29).path = 'MainEddy.Zero_Rotations.Std(5)';   vars(29).name = 'CO2_std';vars(29).ylabel = '\mumol mol^{-1}';
+                vars(30).path = 'MainEddy.Zero_Rotations.Std(6)';   vars(30).name = 'H2O_std';vars(30).ylabel = 'mmol mol^{-1}';
+%               vars(29).path = 'Instrument(1,2).Std(1)';   vars(29).name = 'CO2_std';vars(29).ylabel = 'mmol m^{-3}';
+%               vars(30).path = 'Instrument(1,2).Std(2)';   vars(30).name = 'H2O_std';vars(30).ylabel = 'mmol m^{-3}';
 				%%% Added these on July 30, 2019 (JJB) - rotated u, v, w and their std deviations:
                 vars(31).path = 'MainEddy.Three_Rotations.Avg(1)';   vars(31).name = 'u_rot';vars(31).ylabel = 'm s^{-1}';
                 vars(32).path = 'MainEddy.Three_Rotations.Avg(2)';    vars(32).name = 'v_rot';vars(32).ylabel = 'm s^{-1}';
@@ -64,8 +68,8 @@ switch datatype
                 vars(14).path = 'MainEddy.Three_Rotations.Angles.Beta';     vars(14).name = 'Beta';vars(14).ylabel = 'degrees';
                 vars(15).path = 'MiscVariables.BarometricP';                vars(15).name = 'BarometricP';vars(15).ylabel = 'kPa';
                 vars(16).path = 'MiscVariables.Tair';                       vars(16).name = 'Tair';vars(16).ylabel = '^oC';
-                vars(17).path = 'Instrument(1,3).Avg(1)';   vars(17).name = 'CO2_irga';     vars(17).ylabel = '\mumol';
-                vars(18).path = 'Instrument(1,3).Avg(2)';   vars(18).name = 'H2O_irga';vars(18).ylabel = 'mmol';
+                vars(17).path = 'Instrument(1,3).Avg(1)';   vars(17).name = 'CO2_irga';     vars(17).ylabel = '\mumol mol^{-1}';
+                vars(18).path = 'Instrument(1,3).Avg(2)';   vars(18).name = 'H2O_irga';vars(18).ylabel = 'mmol mol^{-1}';
                 vars(19).path = 'Instrument(1,4).Avg(1)';   vars(19).name = 'u'; vars(19).ylabel = 'm s^{-1}';
                 vars(20).path = 'Instrument(1,4).Avg(2)';   vars(20).name = 'v'; vars(20).ylabel = 'm s^{-1}';
                 vars(21).path = 'Instrument(1,4).Avg(3)';   vars(21).name = 'w'; vars(21).ylabel = 'm s^{-1}';
@@ -77,8 +81,8 @@ switch datatype
                 %%% Added these on June 20, 2011 (JJB):
                 vars(27).path = 'Instrument(1,3).Avg(3)';   vars(27).name = 'T_irga';vars(27).ylabel = '^oC';
                 vars(28).path = 'Instrument(1,3).Avg(4)';   vars(28).name = 'P_irga';vars(28).ylabel = 'kPa';
-                vars(29).path = 'Instrument(1,3).Std(1)';   vars(29).name = 'CO2_std';vars(29).ylabel = '\mumol';
-                vars(30).path = 'Instrument(1,3).Std(2)';   vars(30).name = 'H2O_std';vars(30).ylabel = 'mmol';
+                vars(29).path = 'Instrument(1,3).Std(1)';   vars(29).name = 'CO2_std';vars(29).ylabel = '\mumol mol^{-1}';
+                vars(30).path = 'Instrument(1,3).Std(2)';   vars(30).name = 'H2O_std';vars(30).ylabel = 'mmol mol^{-1}';
 				%%% Added these on July 30, 2019 (JJB) - rotated u, v, w and their std deviations:
                 vars(31).path = 'MainEddy.Three_Rotations.Avg(1)';   vars(31).name = 'u_rot';vars(31).ylabel = 'm s^{-1}';
                 vars(32).path = 'MainEddy.Three_Rotations.Avg(2)';    vars(32).name = 'v_rot';vars(32).ylabel = 'm s^{-1}';
@@ -104,8 +108,8 @@ switch datatype
                 vars(14).path = 'MainEddy.Three_Rotations.Angles.Beta';     vars(14).name = 'Beta';vars(14).ylabel = 'degrees';
                 vars(15).path = 'MiscVariables.BarometricP';                vars(15).name = 'BarometricP';vars(15).ylabel = 'kPa';
                 vars(16).path = 'MiscVariables.Tair';                       vars(16).name = 'Tair';vars(16).ylabel = '^oC';
-                vars(17).path = 'Instrument(1,1).Avg(1)';   vars(17).name = 'CO2_irga';     vars(17).ylabel = '\mumol';
-                vars(18).path = 'Instrument(1,1).Avg(2)';   vars(18).name = 'H2O_irga';vars(18).ylabel = 'mmol';
+                vars(17).path = 'Instrument(1,1).Avg(1)';   vars(17).name = 'CO2_irga';     vars(17).ylabel = '\mumol mol^{-1}';
+                vars(18).path = 'Instrument(1,1).Avg(2)';   vars(18).name = 'H2O_irga';vars(18).ylabel = 'mmol mol^{-1}';
                 vars(19).path = 'Instrument(1,2).Avg(1)';   vars(19).name = 'u'; vars(19).ylabel = 'm s^{-1}';
                 vars(20).path = 'Instrument(1,2).Avg(2)';   vars(20).name = 'v'; vars(20).ylabel = 'm s^{-1}';
                 vars(21).path = 'Instrument(1,2).Avg(3)';   vars(21).name = 'w'; vars(21).ylabel = 'm s^{-1}';
@@ -116,8 +120,8 @@ switch datatype
                 vars(26).path = 'Instrument(1,2).Std(4)';   vars(26).name = 'Ts_std';vars(26).ylabel = '^oC';
                 vars(27).path = 'Instrument(1,1).Avg(3)';   vars(27).name = 'T_irga';vars(27).ylabel = '^oC';
                 vars(28).path = 'Instrument(1,1).Avg(5)';   vars(28).name = 'P_irga';vars(28).ylabel = 'kPa';
-                vars(29).path = 'Instrument(1,1).Std(1)';   vars(29).name = 'CO2_std';vars(29).ylabel = '\mumol';
-                vars(30).path = 'Instrument(1,1).Std(2)';   vars(30).name = 'H2O_std';vars(30).ylabel = 'mmol';
+                vars(29).path = 'Instrument(1,1).Std(1)';   vars(29).name = 'CO2_std';vars(29).ylabel = '\mumol mol^{-1}';
+                vars(30).path = 'Instrument(1,1).Std(2)';   vars(30).name = 'H2O_std';vars(30).ylabel = 'mmol mol^{-1}';
 				%%% Added these on July 30, 2019 (JJB) - rotated u, v, w and their std deviations:
                 vars(31).path = 'MainEddy.Three_Rotations.Avg(1)';   vars(31).name = 'u_rot';vars(31).ylabel = 'm s^{-1}';
                 vars(32).path = 'MainEddy.Three_Rotations.Avg(2)';    vars(32).name = 'v_rot';vars(32).ylabel = 'm s^{-1}';
@@ -145,8 +149,8 @@ switch datatype
                 vars(14).path = 'MainEddy.Three_Rotations.Angles.Beta';     vars(14).name = 'Beta';vars(14).ylabel = 'degrees';
                 vars(15).path = 'MiscVariables.BarometricP';                vars(15).name = 'BarometricP';vars(15).ylabel = 'kPa';
                 vars(16).path = 'MiscVariables.Tair';                       vars(16).name = 'Tair';vars(16).ylabel = '^oC';
-                vars(17).path = 'Instrument(1,1).Avg(1)';   vars(17).name = 'CO2_irga';vars(17).ylabel = '\mumol';
-                vars(18).path = 'Instrument(1,1).Avg(2)';   vars(18).name = 'H2O_irga';vars(18).ylabel = 'mmol';
+                vars(17).path = 'Instrument(1,1).Avg(1)';   vars(17).name = 'CO2_irga';vars(17).ylabel = '\mumol mol^{-1}';
+                vars(18).path = 'Instrument(1,1).Avg(2)';   vars(18).name = 'H2O_irga';vars(18).ylabel = 'mmol mol^{-1}';
                 vars(19).path = 'Instrument(1,2).Avg(1)';   vars(19).name = 'u';vars(19).ylabel = 'm s^{-1}';
                 vars(20).path = 'Instrument(1,2).Avg(2)';   vars(20).name = 'v';vars(20).ylabel = 'm s^{-1}';
                 vars(21).path = 'Instrument(1,2).Avg(3)';   vars(21).name = 'w';vars(21).ylabel = 'm s^{-1}';
@@ -158,8 +162,8 @@ switch datatype
                 %%% Added these on June 20, 2011 (JJB):
                 vars(27).path = 'Instrument(1,1).Avg(3)';   vars(27).name = 'T_irga';vars(27).ylabel = '^oC';
                 vars(28).path = 'Instrument(1,1).Avg(4)';   vars(28).name = 'P_irga';vars(28).ylabel = 'kPa';
-                vars(29).path = 'Instrument(1,1).Std(1)';   vars(29).name = 'CO2_std';vars(29).ylabel = '\mumol';
-                vars(30).path = 'Instrument(1,1).Std(2)';   vars(30).name = 'H2O_std';vars(30).ylabel = 'mmol';
+                vars(29).path = 'Instrument(1,1).Std(1)';   vars(29).name = 'CO2_std';vars(29).ylabel = '\mumol mol^{-1}';
+                vars(30).path = 'Instrument(1,1).Std(2)';   vars(30).name = 'H2O_std';vars(30).ylabel = 'mmol mol^{-1}';
 				%%% Added these on July 30, 2019 (JJB) - rotated u, v, w and their std deviations:
                 vars(31).path = 'MainEddy.Three_Rotations.Avg(1)';   vars(31).name = 'u_rot';vars(31).ylabel = 'm s^{-1}';
                 vars(32).path = 'MainEddy.Three_Rotations.Avg(2)';    vars(32).name = 'v_rot';vars(32).ylabel = 'm s^{-1}';
