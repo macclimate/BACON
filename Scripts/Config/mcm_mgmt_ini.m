@@ -1,6 +1,6 @@
 function [out] = mcm_mgmt_ini
 %%% List of all sites (Change here to manually alter site list:):
-out.site_list = {'TP39';'TP74';'TP89';'TP02';'TP_PPT';'MCM_WX'; 'TPD';'TPAg'};
+out.site_list = {'TP39';'TP74';'TP89';'TP02';'TP_PPT';'MCM_WX'; 'TPD';'TPAg'; 'TP_VDT'};
 
 %%% List of all data types (Change here to manually alter site list:):
 out.type_list = {'general';'met';'chamber';'CPEC';'OPEC';'sapflow';'trenched';'OTT';'NRL';'WX'; 'TP_PPT';'PPT'};
@@ -17,6 +17,7 @@ out.types_available = {...
 'MCM_WX', [10];... % MCM_WX has some types of data available: 
 'TPD', [1:2 4 12];... % MCM_WX has some types of data available: 
 'TPAg', [1:2 4]; ... 
+'TP_VDT', [1:2 4]; ... 
 };
 
 out.proc_list = {...

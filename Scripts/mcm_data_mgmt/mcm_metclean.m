@@ -164,7 +164,7 @@ for year_ctr = year_start:1:year_end
         j = 1;
         while j <= length(vars30)
             temp_var = save_output(:,j);
-            figure(1)
+            f1 = figure(1); set(f1,'WindowStyle','docked');
             clf;
             plot(temp_var);
             hold on;
@@ -274,7 +274,7 @@ for year_ctr = year_start:1:year_end
         for i = 1:1:length(vars30)
             accept = 1;
             %         temp_var = load([load_path site '_' year '.' vars30_ext(i,:)]);
-            figure(1)
+           f1 = figure(1); set(f1,'WindowStyle','docked');
             clf;
             plot(save_output(:,i));
             hold on;
@@ -378,7 +378,7 @@ for year_ctr = year_start:1:year_end
                 
                 thresh(thresh_row,3) = up_lim;
                 %%% plot again
-                figure (1)
+               f1 = figure (1); set(f1,'WindowStyle','docked');
                 clf;
                 plot(save_output(:,i))
                 hold on

@@ -14,7 +14,9 @@ for i = 1:1:size(site_list,1)
         case 'TP89'; pref = {'TP89';'TP39';'TP74';'TP02'};
         case 'TP02'; pref = {'TP02';'TP39';'TP74';'TP89'};
         case 'TPD'; pref = {'TP02';'TP39';'TP74'};
-        case 'TPAg'; SM_fill(i).SM30a = SM_in(i).SM30a; SMfill(i).SM30b = NaN.*ones(size(SM_in(i).SM30a,1),1);disp('SM not filled for TPAg - refer to mcm_fill_SM.m to change this'); continue ;
+        case 'TPAg'; SMfill(i).SM30a = SM_in(i).SM30a; SMfill(i).SM30b = NaN.*ones(size(SM_in(i).SM30a,1),1);disp('SM not filled for TPAg - refer to mcm_fill_SM.m to change this'); continue ;
+        case 'TP_VDT'; SMfill(i).SM30a = SM_in(i).SM30a; SMfill(i).SM30b = NaN.*ones(size(SM_in(i).SM30a,1),1);disp('SM not filled for TP_VDT - refer to mcm_fill_SM.m to change this'); continue ;
+            
     end
     
     %%% Figure out what order in SM we are going to fill data from:

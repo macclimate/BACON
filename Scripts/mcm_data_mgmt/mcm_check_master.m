@@ -63,7 +63,7 @@ while j <= size(master.labels,1)
         
         dt_plot = master.data(ind,1)+master.data(ind,6)./367;
         %         f1 = figure('Name', tag_name, 'OuterPosition', op);
-        figure(1);
+        f1 = figure(1); set(f1,'WindowStyle','docked');
         plot(dt_plot,master.data(ind,j),'b.-');
         ylabel(master.labels{j,2});
         xlabel('Date');

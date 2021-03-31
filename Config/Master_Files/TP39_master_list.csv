@@ -42,8 +42,8 @@ CNR1_GlobalShortwaveRad_AbvCnpy_28m,W/m2,DownShortwaveRad,met,Final_Cleaned,Met2
 CNR1_UpShortwaveRad_AbvCnpy_28m,W/m2,UpShortwaveRad,met,Final_Cleaned,Met2,%7.3f,NaN,NaN,NaN,NaN,NaN,Rgout,SW_OUT
 CNR1_DownLongwaveRad_AbvCnpy_28m,W/m2,DownLongwaveRad_AbvCnpy,met,Final_Cleaned,Met2,%7.3f,NaN,NaN,NaN,NaN,NaN,,LW_IN
 CNR1_UpLongwaveRad_AbvCnpy_28m,W/m2,UpLongwaveRad_AbvCnpy,met,Final_Cleaned,Met2,%7.3f,NaN,NaN,NaN,NaN,NaN,,LW_OUT
-CNR1_DownLongwaveRad_AbvCnpy_28m_uncorrected,W/m2,DownLongwaveRad_BlwCnpy,met,Final_Cleaned,NaN,NaN,NaN,NaN,NaN,NaN,NaN,,NaN
-CNR1_UpLongwaveRad_AbvCnpy_28m_uncorrected,W/m2,UpLongwaveRad_BlwCnpy,met,Final_Cleaned,NaN,NaN,NaN,NaN,NaN,NaN,NaN,,NaN
+CNR1_DownLongwaveRad_BlwCnpy_2m,W/m2,DownLongwaveRad_BlwCnpy,met,Final_Cleaned,NaN,NaN,NaN,NaN,NaN,NaN,NaN,,NaN
+CNR1_UpLongwaveRad_BlwCnpy_2m,W/m2,UpLongwaveRad_BlwCnpy,met,Final_Cleaned,NaN,NaN,NaN,NaN,NaN,NaN,NaN,,NaN
 DownPAR_AbvCnpy_28m,umol/m2/s,DownPAR_AbvCnpy,met,Final_Cleaned,Met2,%8.3f,NaN,NaN,NaN,NaN,PARdn,,PPFD_IN
 UpPAR_AbvCnpy_28m,umol/m2/s,UpPAR_AbvCnpy,met,Final_Cleaned,Met2,%8.3f,NaN,NaN,NaN,NaN,PARup,PARout,PPFD_OUT
 DownPAR_BlwCnpy_2m,umol/m2/s,DownPAR_BlwCnpy,met,Final_Cleaned,Met2,%8.3f,NaN,NaN,NaN,NaN,PAR2dn,,PPFD_BC_IN

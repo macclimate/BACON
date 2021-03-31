@@ -184,7 +184,7 @@ for year_ctr = year_start:1:year_end
         
         switch scrollflag
             case 1
-                figure(1)
+                f1=figure(1); set(f1,'WindowStyle','docked');
                 clf;
                 plot(temp_var,'b.-');
                 %     hold on;
@@ -630,8 +630,12 @@ for year_ctr = year_start:1:year_end
                     % Sap 3, 9, 13, 24 Max
                     output([3247],[32 44 52 74]) = NaN;
                                  
+                case '2018'
                     
-                    
+                case '2019'
+                    output(:,[4 7]) = NaN;
+                    output([15893:15896],11) = NaN;
+                    output([6409 6417],12) = NaN;
             end
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         case 'TP74_sapflow'
@@ -792,6 +796,8 @@ for year_ctr = year_start:1:year_end
                 case '2019' 
                    output(7330,[10:15]) = NaN; 
                    output(4872,[14:15]) = NaN; 
+                   
+                case '2020'
             end
             %%% Call mcm_PPTfixer to Calculate event-based precipitation at
             %%% TP_PPT:
@@ -1125,7 +1131,7 @@ for year_ctr = year_start:1:year_end
                     output(:,6)=RH_abv_orig(:,1);
                     clear *abv_org *gnd_orig *cpy_orig;
                     % Set whether RH > 100 should be set to 100 or NaN:
-                    RH_max = NaN;
+                    RH_max = 100;
                     % Invert sign for LW BC Up- and Down-welling
                     output(:,[16,17]) = output(:,[16,17]).*-1;
                 case '2009' % TP39 2009
@@ -1829,15 +1835,43 @@ for year_ctr = year_start:1:year_end
                     RH_max = 100; 
 				
 				case '2020' % TP39 2020
-				%%% Proactively correct PAR down data that is not scaled properly -- THIS WILL NEED TO BE ADJUSTED when corrections are made to the dataloggers
+                    RH_max = 100;
+				%%% Proactively correct PAR down data that is not scaled
+				%%% properly -- Updated by JJB on 2021-03-07
 					% According to this test, p1 (before re-wiring the PARdn sensor) coefficients are [1.960128445238033,1.224844308758671]
 					%						p2 (after re-wiring the sensor) coefficients are [3.687950947587812,6.966335856351974];
 				p1 = [1.960128445238033,1.224844308758671]; p2 = [3.687950947587812,6.966335856351974];
-					PAR_corr = output(:,9); 
+					PAR_corr = output(1:10549,9); 
 					PAR_corr(1:end) = (p1(1).*PAR_corr(1:end))./p2(1) - (p1(1).*p1(2))./p2(1) + p1(2);
-					output(:,9) = PAR_corr; 
+					output(1:10549,9) = PAR_corr; 
 					clear p1 p2 PAR_corr; 
-
+                    
+                    output([10540 5212:5213],10) = NaN;
+                    output(:,11) = NaN; % removing all RMY Rain
+                    output(:,12) = NaN; % removing all NetRadBlwCnpy
+                    output([522:523 11747],18) = NaN;
+                    output([1292 12027],25) = NaN; %spikes in albedo
+                    output([856 1226 4269 8298 10552 11514 11648 16152 17240 17245],[27 28]) = NaN;%snow depth
+                    output([4269 8298 897 10552 11514 11648],[29 30]) = NaN; %ground temp
+                    output(11485,31) = NaN;
+                    
+                    %soil heat flux bad data
+                    output([4796 4800],66) = NaN;
+                    output([856:858 4269:4272 6459:6462 14502 14947:14952 8292:8298 11388:11394 11648:11652 15351:15372],[69 70]) = NaN;
+                    
+                    output([11460 14346 15347:15370 15824],71) = NaN; %canopy Co2
+                    %%%%% Pressure
+                    output([4132:4154 4255:4559 4755:4821 5478:5584 5778:5792 5803:5804 5933:5939 8885:8973 9097:9785 11112:11113 10545:10552 12665 12669 13217:13293 14521],76) = NaN; %pressure
+                    % Fix offset in pressure toward end of year
+                    output(16550:end,76) = output(16550:end,76) + (output(16549,76)-output(16550,76));
+                    
+                    % Invert sign for LW BC Up- and Down-welling
+                    output(:,[16,17]) = output(:,[16,17]).*-1;
+                    
+                    
+                    output([11390:11485],79) = NaN; %bad soil temp data
+                    output(11485,[83 87 91 92 96 97]) = NaN; %soil temp and moisture spike
+                    output(:,93) = NaN; % Remove all SM_A_20cm
                     
             end
             %%% Corrections applied to all years of data:
@@ -2370,6 +2404,47 @@ for year_ctr = year_start:1:year_end
                     TP74_PAR_est = polyval([1.057383953687917,-0.667374133564968],TP39_PAR);
                     output(:,7) = TP74_PAR_est;
                     clear tmp TP39_PAR TP74_PAR_est
+                    
+                case '2020' %TP74 2020 (Nur and Alanna)
+                    RH_max = 100;
+                    output(15353,4) = NaN; %wind speed
+                    
+                    %%%%%%%%%%%%%%%%% Scaling PAR DOWN %%%%%%%%%%
+                    tmp = load([loadstart 'Matlab/Data/Met/Final_Cleaned/TP39/TP39_met_cleaned_2020.mat']);
+                    TP39_PAR = tmp.master.data(1:9779,9); % Load TP39 PAR Down
+                    TP74_PAR = output(1:9779,7);
+%                     TP39_PAR_2 = tmp.master.data(10500:end,9);
+%                     TP74_PAR_2 = output(10500:end,7);
+%                     ind2 = find(~isnan(TP39_PAR_2.*TP74_PAR_2));
+%                     p2 = polyfit(TP39_PAR_2(ind2),TP74_PAR_2(ind2),1);
+                    ind = find(~isnan(TP39_PAR.*TP74_PAR));
+%                     figure(65); clf;
+%                     plot(TP39_PAR(ind),TP74_PAR(ind),'k.');
+                    p = polyfit(TP74_PAR(ind),TP39_PAR(ind),1);
+                    TP74_PAR_corr = polyval(p,TP74_PAR);
+                    output(1:9779,7) = TP74_PAR_corr;
+                    %%%%%%%%%%%%%%%%% Scaling PAR UP %%%%%%%%%%
+                    TP39_PAR = tmp.master.data(1:10171,10); % Load TP39 PAR Up
+                    TP74_PAR = output(1:10171,6);
+                    ind = find(~isnan(TP39_PAR.*TP74_PAR));
+                    p = polyfit(TP74_PAR(ind),TP39_PAR(ind),1);
+                    TP74_PAR_corr = polyval(p,TP74_PAR);
+                    output(1:10171,6) = TP74_PAR_corr;
+                    clear tmp TP39_PAR TP74_PAR* p;
+                    
+                    % Random Spikes in all soil data
+                    output([8776 9681 10175 11649 11838],[12:32 48:51]) = NaN;
+                    output([4797 6951 6999 13064 13937],11) = NaN;
+                    output(9243,16) = NaN;
+                    output(9205,[12:32 48:51]) = NaN;
+                    %PAR sensors were fixed/replaced this year on July 30th
+                    %(half hour point 10166)
+                    %correction factor can be applied (I believe values
+                    %need to be doubled but can check site report sent July
+                    %30 by Keegan) - AB
+                    
+                    
+                    
             end
             %% Corrections applied to all years of data:
             % 1: Set any negative PAR and nighttime PAR to zero:
@@ -2634,8 +2709,8 @@ for year_ctr = year_start:1:year_end
             %%%%%%%%%%%%%%%%%%%%%%%% TP02  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%% PAR Correction factors for 2002, 2013--2017 % Determined from TP02_par_correction_factor.m
-            par_correction_factor = [2002, 1.23; 2013, 1.38199647061725; 2014, 1.26172364359607; 2015,1.03313933608525; 2016,0.874165785537350; 2017,0.659991285147933; 2018,0.585666951857723; 2019,1; ...
-									2020, 1; 2021, 1; 2022, 1];
+            par_correction_factor = [2002, 1.23; 2013, 1.38199647061725; 2014, 1.26172364359607; 2015,1.03313933608525; 2016,0.874165785537350; 2017,0.659991285147933; 2018,0.585666951857723; 2019,0.568972797317526; ...
+									2020, 0.560100471025222; 2021, 1; 2022, 1];
             par_correction_factor = par_correction_factor(par_correction_factor(:,1)==year_ctr,2);
             switch yr_str
                 case '2002'
@@ -3190,6 +3265,36 @@ for year_ctr = year_start:1:year_end
                     output_tmp = [end_2018; output(1:1990,:); NaN.*ones(6,length(vars30)); output(1991:2809,:); output(2824:end,:)]; 
                     output = output_tmp; 
                     clear output_tmp end_2018;
+                    
+                case '2020'
+                    RH_max = 100;
+                    % Perform a scaling correction for PAR (use correction
+                    % factor that was derived by inter-year comparison at
+                    % the site).
+                    output(:,5) = output(:,5).*par_correction_factor;
+                    
+                    % col 6. Up par has spikes with multiple points. I
+                    % can't figure out if its bad data or perhaps
+                    % reflection from recent snowfall
+                    
+                    output([3325 3956 7357 14253],7) = NaN; %net radiation (JJB changed point 142535 to 14253 
+                    
+                    %bad soil data
+                    
+                    output([4102 4163:4185 4283 4430 4458:4486 4522:4707 5030:5094 5241 5242 5256 5258 5367 5383 5563 5566 5622:5635 5977:5987 6002 6004 6036 6061 6126 6324 6364:6367 6453 6616 6624 6720 6727 6739 6782 6791],[17 18 22]) = NaN;
+                    output ([4737 4751 4753 4780 4783 4848 4850 4863 4868 4921 5699],[17 18]) = NaN;
+                    output ([4735:4783 4845:4945 5010:5016 5365 5388 5389 5417:5472 5482 5527:5587 5615:5641 5681 5740:5742 5966:5972 6001:6447 6740 6761:6794 6817:6862],22) = NaN;
+                    output ([4202:9242],25) = NaN;
+                    output ([4417:6871],26) = NaN;
+                    output (15808:17568,29) = NaN;
+                    %all data from column 20 is bad but don't know what to
+                    %do with it | Update - deleting
+                    output(:,20) = NaN; 
+                   output(15364,21) = NaN;
+                   
+                   
+                   output([14500:14512 14785:14793 15800:17568],29) = NaN;
+                    
             end
             %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3728,7 +3833,52 @@ for year_ctr = year_start:1:year_end
                      output(:,12)=output(:,13);
                      output(:,13)=tmp;
                      RH_max = 100;
+                     
+                case '2020'
+                    %%% Try to correct shifts in Up LW Rad
+                    %%% UPDATE: The shifts look to be offset + gain errors.
+                    %%% I think they're all going to have to go.
+%                     output([6947:7371],12) = output([6947:7371],12)+(output(6946,12)-output(6947,12));
+%                     output([12018:12491],12) = output([12018:12491],12)+(output(12017,12)-output(12018,12)); 
+%                     output([1896:2112],12) = output([1896:2112],12)-(output(1896,12)-output(1894,12));
+%                     output([1895 12492 2113],12) = NaN;
+                    output([1895:2113 6947:7371 12018:12492],12) = NaN;
+                    %%% Try to correct shifts in Down LW Rad
+                    %%% UPDATE: The shifts look to be offset + gain errors.
+                    %%% I think they're all going to have to go.
+%                     output([6947:7371],13) = output([6947:7371],13)+(output(6946,13)-output(6947,13));
+%                     output([12018:12491],13) = output([12018:12491],13)+(output(12017,13)-output(12018,13)); 
+%                     output([1896:2112],13) = output([1896:2112],13)-(output(1896,13)-output(1894,13));
+%                     output([1895 12492 2113],13) = NaN;   
+                    output([1895:2113 6947:7371 12018:12492],13) = NaN;
+                    
+                    %%% Swap reversed SW and LW data (up & down are reversed) %%%%%%%
+                     tmp = output(:,10);
+                     output(:,10)=output(:,11);
+                     output(:,11)=tmp;
+                    
+                    %soil variable spikes  
+                    output([9237:9238 11039],26) = NaN;
+                    output([11036 12019],29) = NaN;
+                    output([9237 11245 11488 12019 12285],30) = NaN;
+                    output(8306,32) = NaN;
+                    output(13817,34) = NaN;
+                    output(12005,35) = NaN;
+                    output(9237:9238,37) = NaN;
+                    output([9237 9238 11039],38) = NaN;
+                    output([11036 12019],41) = NaN;
+                    output([12019 12285 11488],42) = NaN;
+                    output(8306,44) = NaN;
+                    output(12005,47) = NaN;
+                    RH_max = 100;
+                    %Co2 Canopy
+                    output([235 374:376 2513 3738 3740 5515 7380 13522 15457 15796],86) = NaN;
 %                      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                case '2021'
+%                     %%% Swap reversed SW and LW data (up & down are reversed) %%%%%%%
+%                      tmp = output(:,10);
+%                      output(:,10)=output(:,11);
+%                      output(:,11)=tmp;
             end
             %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3817,9 +3967,10 @@ for year_ctr = year_start:1:year_end
             title('Corrected RH');
             
             
-            %% %%%%%%%%%%%%%%%%% TPD_PPT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
         case 'TPD_PPT'
+            %%%%%%%%%%%%%%%%%%% TPD_PPT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%            
             switch yr_str
                 case '2012'
                 case '2013'
@@ -3835,12 +3986,13 @@ for year_ctr = year_start:1:year_end
                     output(2821:2824,1:2) = NaN;
             end
 
-            %% %%%%%%%%%%%%%%%%% TPAg %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
         case 'TPAg'
+            %% %%%%%%%%%%%%%%%%% TPAg %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%            
             switch yr_str
                 case '2020'
+                    RH_max = 100;
                 % Load WS and WDir from Flux (CSAT data): 
                 CPEC_tmp = load([loadstart 'Matlab\Data\Flux\CPEC\TPAg\Final_Cleaned\TPAg_CPEC_cleaned_2020.mat']);
                 output(:,26) = CPEC_tmp.master.data(:,38); output(12311,26) = NaN;% wind speed
@@ -3873,6 +4025,69 @@ for year_ctr = year_start:1:year_end
                %%% Correct wind direction offset 
                 output(:,27) = output(:,27) - nanmean(dir_diff);
                 output(output(:,27)<0,27) = output(output(:,27)<0,27)+360;
+                
+               %TPAg point cleaning with Nur and Elizabeth
+               %                                                                                                                 
+               output(15199:15207,3) = NaN; 
+               output ([9151:9327 9781:9834],6) = NaN; %Down PAR issues
+               output ([9151:9327 15225:15329],8) = NaN; %Up longwave
+               output ([9152:9327 9781:9834 15225:15329],9) = NaN; %Down longwave
+               output ([9152:9327 15225:15389 15499:end],11) = NaN; %Net Longwave
+               
+               %%%% Remove all data points before 8400 - these belong to TP_VDT
+               output(1:8400,:) = NaN;
+            end
+
+        case 'TP_VDT'
+            %% %%%%%%%%%%%%%%%%% TP_VDT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            
+            switch yr_str
+                case '2020'
+                    RH_max = 100;
+                % Load WS and WDir from Flux (CSAT data): 
+                CPEC_tmp = load([loadstart 'Matlab\Data\Flux\CPEC\TP_VDT\Final_Cleaned\TP_VDT_CPEC_cleaned_2020.mat']);
+                output(:,26) = CPEC_tmp.master.data(:,38); output(12311,26) = NaN;% wind speed
+                output(:,27) = CPEC_tmp.master.data(:,39); % wind direction
+                output(:,28) = CPEC_tmp.master.data(:,15); output(11531:11543,28) = NaN; % Pressure
+               
+                % "D:\Matlab\Data\Flux\CPEC\TPAg\Final_Cleaned\TP_VDT_CPEC_cleaned_2020.mat"
+                clear CPEC_tmp
+               %%% Investigate wind direction offset between TP_VDT and TP74
+                CPEC_TP74 = load([loadstart 'Matlab\Data\Met\Final_Cleaned\TP74\TP74_met_cleaned_2020.mat']);
+                TP74_WDir = CPEC_TP74.master.data(:,5);
+                dir_diff = output(:,27) - TP74_WDir;
+
+                % Plot timeseries of TP_VDT and TP74 Wind Dir
+%                 figure(73);clf;
+%                 plot(output(:,27),'b'); hold on;
+%                 plot(TP74_WDir,'r');
+%                 legend('TP_VDT','TP74');
+                % Plot histogram of TP_VDT - TP74 wind dir
+                dir_diff(dir_diff<-180) = dir_diff(dir_diff<-180)+360; % Transform when TP_VDT when difference spans 0/360 boundary
+                xbins = -200:10:200;
+                figure(74);
+                hist(dir_diff,xbins);
+                axis([-100 100 0 3100]); hold on;
+                h1(1) = plot([nanmean(dir_diff) nanmean(dir_diff)],[0 3100],'r-');
+                h1(2) = plot([nanmedian(dir_diff) nanmedian(dir_diff)],[0 3100],'g--');
+                legend(h1,{['mean = ' num2str(round(nanmean(dir_diff)))],['median = ' num2str(round(nanmedian(dir_diff)))]});
+                xlabel('WDir Offset (TP_VDT - TP74)');
+                ylabel('count');
+               %%% Correct wind direction offset 
+                output(:,27) = output(:,27) - nanmean(dir_diff);
+                output(output(:,27)<0,27) = output(output(:,27)<0,27)+360;
+                
+               %TP_VDT point cleaning with Nur and Elizabeth
+               %                                                                                                                 
+               output(15199:15207,3) = NaN; 
+               output ([9151:9327 9781:9834],6) = NaN; %Down PAR issues
+               output ([9151:9327 15225:15329],8) = NaN; %Up longwave
+               output ([9152:9327 9781:9834 15225:15329],9) = NaN; %Down longwave
+               output ([9152:9327 15225:15389 15499:end],11) = NaN; %Net Longwave
+               
+               %%%% Remove all data points after 8400 - these belong to TPAg
+               output(8400:end,:) = NaN;
             end
     end
     
@@ -3899,10 +4114,10 @@ for year_ctr = year_start:1:year_end
     end
     %%%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     %% Plot corrected/non-corrected data to make sure it looks right:
-    figure(10);
+    f10 = figure(10); set(f10,'WindowStyle','docked')
     j = 1;
     while j <= length(vars30)
-        figure(10);clf;
+        figure(f10);clf;
         plot(input_data(:,j),'r.-'); hold on;
         plot(output(:,j),'b.-');
         grid on;

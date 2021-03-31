@@ -80,6 +80,7 @@ sitename_converter = ...
     'TPD' 'ON-TPD'; ...
     'MCM_WX' 'MCM_WX'; ...   
     'TPAg' 'ON-TPAg'; ...
+    'TP_VDT' 'ON-TP_VPD'; ...
     };
 
 if strcmp(data_type,'sapflow')==1
@@ -114,6 +115,7 @@ master_out_path =           [ls 'Matlab/Data/Master_Files/'];
 %     gdrive_path = '\\130.113.210.243\arainlab\Google Drive/TPFS Data/Master_Files/';
 % else
 gdrive_path = [gdrive_loc '03 - TPFS Data/Master_Files/'];
+jjb_check_dirs([gdrive_path site]);
 % end
 
 %%%% Master Header Path:
@@ -183,9 +185,12 @@ switch site
     case 'TPD'
        time_int = 30;
         yr_start = 2011;   
-     case 'TPAg'
+     case 'TP_VDT'
        time_int = 30;
-        yr_start = 2019;         
+        yr_start = 2019;
+    case 'TPAg'
+       time_int = 30;
+        yr_start = 2020;         
     case 'TP_PPT'
        time_int = 30;
         yr_start = 2008;  
@@ -854,7 +859,7 @@ for k = 1:1:length(year)
     % The following variables will be consolidated at this point:
     % NEE, FC, LE, H, Ustar (more can be added later if required):
     switch site 
-        case {'TP39','TP74','TP89','TP02','TPD', 'TPAg'}
+        case {'TP39','TP74','TP89','TP02','TPD', 'TPAg','TP_VDT'}
                
     num_errs = 0;
     %     try
@@ -910,7 +915,7 @@ for k = 1:1:length(year)
     %% Make NEP Field
     %%% Flip the sign of NEE_all and put it into NEP_all:
         switch site 
-        case {'TP39','TP74','TP89','TP02','TPD','TPAg'}
+        case {'TP39','TP74','TP89','TP02','TPD','TPAg','TP_VDT'}
     try
         master_col_in = mcm_find_right_col(header(:,3), 'NEE_all');
         master_col_out = mcm_find_right_col(header(:,3), 'NEP_all');
@@ -924,7 +929,14 @@ for k = 1:1:length(year)
     end
         end  
         
-        
+%% Trim unwanted halfhours from data, if 'data_remove' variable is set in params.m
+data_remove = params(year,site,'Trim');
+if ~isempty(data_remove)
+    tmp = master.data(master.data(:,1)==year,:);
+    tmp(data_remove(1):data_remove(2),7:end) = NaN;
+    master.data(master.data(:,1)==year,:) = tmp;
+    clear tmp
+end
 end
 
 %%

@@ -77,7 +77,8 @@ end
 for site = 1:1:length(good_sites)  % This will cycle through only site data that are unempty
 
     [a, ix] = sort(master_r2_adj(good_sites(site),:),'descend'); % sort the r2 values to find best site data to fill it with:
-    best(:,1) = ix(a>0);
+%     best(:,1) = ix(a>0);
+    best = (ix(find(a>0 & ~isnan(a))))';
 
     for kk = 1:1:length(best)
         

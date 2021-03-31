@@ -114,7 +114,7 @@ for year_ctr = year_start:1:year_end
         j = 1;
         while j <= num_vars
             temp_var = save_output(:,j);
-            figure(1)
+            f1 = figure(1); set(f1,'WindowStyle','docked');
             clf;
             plot(temp_var);
             hold on;

@@ -48,14 +48,14 @@ site_labels = {'TP39'; 'TP74'; 'TP02'};
 site_refs = [1;2;4];
 TP39 = []; TP74 = []; TP02 = [];
 elseif year_ctr >=2012 && year_ctr <=2019
-site_labels = {'TP39'; 'TP74'; 'TP02';'TPD'};
-site_refs = [1;2;4;5];
-TP39 = []; TP74 = []; TP02 = []; TPD = [];
+site_labels = {'TP39'; 'TP74'; 'TP02';'TPD';'TP_VDT'};
+site_refs = [1;2;4;5;7];
+TP39 = []; TP74 = []; TP02 = []; TPD = []; TP_VDT = [];
 
 else
-site_labels = {'TP39'; 'TP74'; 'TP02';'TPD';'TPAg'};
-site_refs = [1;2;4;5;6];
-TP39 = []; TP74 = []; TP02 = []; TPD = []; TPAg = [];
+site_labels = {'TP39'; 'TP74'; 'TP02';'TPD';'TPAg';'TP_VDT'};
+site_refs = [1;2;4;5;6;7];
+TP39 = []; TP74 = []; TP02 = []; TPD = []; TPAg = []; TP_VDT = [];
 
 end
 num_sites = size(site_labels,1);
@@ -157,30 +157,30 @@ for i = 1:1:num_sites
     temp(1).WS = master.data(:,mcm_find_right_col(master.labels,'WindSpd'));
     temp(1).Wdir = master.data(:,mcm_find_right_col(master.labels,'WindDir'));
     
-    try Ts(i).Ts2a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_2cm')); catch Ts(i).Ts2a = NaN.*ones(length(temp(1).Ta),1);end
-    try Ts(i).Ts2b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_2cm')); catch Ts(i).Ts2b = NaN.*ones(length(temp(1).Ta),1);end
-    try Ts(i).Ts5a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_5cm')); catch Ts(i).Ts5a = NaN.*ones(length(temp(1).Ta),1);end
-    try Ts(i).Ts5b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_5cm')); catch Ts(i).Ts5b = NaN.*ones(length(temp(1).Ta),1);end
-    try Ts(i).Ts10a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_10cm')); catch Ts(i).Ts10a = NaN.*ones(length(temp(1).Ta),1);end
-    try Ts(i).Ts10b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_10cm')); catch Ts(i).Ts10b = NaN.*ones(length(temp(1).Ta),1);end
-    try Ts(i).Ts20a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_20cm')); catch Ts(i).Ts20a = NaN.*ones(length(temp(1).Ta),1);end
-    try Ts(i).Ts20b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_20cm')); catch Ts(i).Ts20b = NaN.*ones(length(temp(1).Ta),1);end
-    try Ts(i).Ts50a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_50cm')); catch Ts(i).Ts50a = NaN.*ones(length(temp(1).Ta),1);end
-    try Ts(i).Ts50b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_50cm')); catch Ts(i).Ts50b = NaN.*ones(length(temp(1).Ta),1);end
-    try Ts(i).Ts100a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_100cm')); catch Ts(i).Ts100a = NaN.*ones(length(temp(1).Ta),1);end
-    try Ts(i).Ts100b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_100cm')); catch Ts(i).Ts100b = NaN.*ones(length(temp(1).Ta),1);end
+    Ts(i).Ts2a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_2cm')); if isempty(Ts(i).Ts2a)==1; Ts(i).Ts2a = NaN.*ones(length(temp(1).Ta),1);end
+    Ts(i).Ts2b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_2cm')); if isempty(Ts(i).Ts2b)==1; Ts(i).Ts2b = NaN.*ones(length(temp(1).Ta),1);end
+    Ts(i).Ts5a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_5cm')); if isempty(Ts(i).Ts5a)==1; Ts(i).Ts5a = NaN.*ones(length(temp(1).Ta),1);end
+    Ts(i).Ts5b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_5cm')); if isempty(Ts(i).Ts5b)==1; Ts(i).Ts5b = NaN.*ones(length(temp(1).Ta),1);end
+    Ts(i).Ts10a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_10cm')); if isempty(Ts(i).Ts10a)==1; Ts(i).Ts10a = NaN.*ones(length(temp(1).Ta),1);end
+    Ts(i).Ts10b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_10cm')); if isempty(Ts(i).Ts10b)==1; Ts(i).Ts10b = NaN.*ones(length(temp(1).Ta),1);end
+    Ts(i).Ts20a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_20cm')); if isempty(Ts(i).Ts20a)==1; Ts(i).Ts20a = NaN.*ones(length(temp(1).Ta),1);end
+    Ts(i).Ts20b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_20cm')); if isempty(Ts(i).Ts20b)==1; Ts(i).Ts20b = NaN.*ones(length(temp(1).Ta),1);end
+    Ts(i).Ts50a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_50cm')); if isempty(Ts(i).Ts50a)==1; Ts(i).Ts50a = NaN.*ones(length(temp(1).Ta),1);end
+    Ts(i).Ts50b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_50cm')); if isempty(Ts(i).Ts50b)==1; Ts(i).Ts50b = NaN.*ones(length(temp(1).Ta),1);end
+    Ts(i).Ts100a = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_A_100cm')); if isempty(Ts(i).Ts100a)==1; Ts(i).Ts100a = NaN.*ones(length(temp(1).Ta),1);end
+    Ts(i).Ts100b = master.data(:,mcm_find_right_col(master.labels,'SoilTemp_B_100cm')); if isempty(Ts(i).Ts100b)==1; Ts(i).Ts100b = NaN.*ones(length(temp(1).Ta),1);end
     
-    try SM(i).SM5a = master.data(:,mcm_find_right_col(master.labels,'SM_A_5cm')); catch SM(i).SM5a = NaN.*ones(length(temp(1).Ta),1);end
-    try SM(i).SM5b = master.data(:,mcm_find_right_col(master.labels,'SM_B_5cm')); catch SM(i).SM5b = NaN.*ones(length(temp(1).Ta),1);end
-    try SM(i).SM10a = master.data(:,mcm_find_right_col(master.labels,'SM_A_10cm')); catch SM(i).SM10a = NaN.*ones(length(temp(1).Ta),1);end
-    try SM(i).SM10b = master.data(:,mcm_find_right_col(master.labels,'SM_B_10cm')); catch SM(i).SM10b = NaN.*ones(length(temp(1).Ta),1);end
-    try SM(i).SM20a = master.data(:,mcm_find_right_col(master.labels,'SM_A_20cm')); catch SM(i).SM20a = NaN.*ones(length(temp(1).Ta),1);end
-    try SM(i).SM20b = master.data(:,mcm_find_right_col(master.labels,'SM_B_20cm')); catch SM(i).SM20b = NaN.*ones(length(temp(1).Ta),1);end
-    try SM(i).SM50a = master.data(:,mcm_find_right_col(master.labels,'SM_A_50cm')); catch SM(i).SM50a = NaN.*ones(length(temp(1).Ta),1);end
-    try SM(i).SM50b = master.data(:,mcm_find_right_col(master.labels,'SM_B_50cm')); catch SM(i).SM50b = NaN.*ones(length(temp(1).Ta),1);end
+    SM(i).SM5a = master.data(:,mcm_find_right_col(master.labels,'SM_A_5cm')); if isempty(SM(i).SM5a)==1; SM(i).SM5a = NaN.*ones(length(temp(1).Ta),1);end
+    SM(i).SM5b = master.data(:,mcm_find_right_col(master.labels,'SM_B_5cm')); if isempty(SM(i).SM5b)==1; SM(i).SM5b = NaN.*ones(length(temp(1).Ta),1);end
+    SM(i).SM10a = master.data(:,mcm_find_right_col(master.labels,'SM_A_10cm')); if isempty(SM(i).SM10a)==1; SM(i).SM10a = NaN.*ones(length(temp(1).Ta),1);end
+    SM(i).SM10b = master.data(:,mcm_find_right_col(master.labels,'SM_B_10cm')); if isempty(SM(i).SM10b)==1; SM(i).SM10b = NaN.*ones(length(temp(1).Ta),1);end
+    SM(i).SM20a = master.data(:,mcm_find_right_col(master.labels,'SM_A_20cm')); if isempty(SM(i).SM20a)==1; SM(i).SM20a = NaN.*ones(length(temp(1).Ta),1);end
+    SM(i).SM20b = master.data(:,mcm_find_right_col(master.labels,'SM_B_20cm')); if isempty(SM(i).SM20b)==1; SM(i).SM20b = NaN.*ones(length(temp(1).Ta),1);end
+    SM(i).SM50a = master.data(:,mcm_find_right_col(master.labels,'SM_A_50cm')); if isempty(SM(i).SM50a)==1; SM(i).SM50a = NaN.*ones(length(temp(1).Ta),1);end
+    SM(i).SM50b = master.data(:,mcm_find_right_col(master.labels,'SM_B_50cm')); if isempty(SM(i).SM50b)==1; SM(i).SM50b = NaN.*ones(length(temp(1).Ta),1);end
     
     %%% Added 2021-01-01 by JJB - Loading SM data for TPAg
-    if strcmp(site,'TPAg')==1
+    if strcmp(site,'TPAg')==1 || strcmp(site,'TP_VDT')==1
     SM(i).SM10_40a = master.data(:,mcm_find_right_col(master.labels,'SM_A_10-40cm'));
     end
     
@@ -223,7 +223,7 @@ end
 for i = 1:1:num_sites
         site = site_labels{i,1};
         right_col = site_refs(i);
-    figure('Name',[site ': Ts'],'NumberTitle','off'); clf;
+    fsoil(i) = figure('Name',[site ': Ts'],'NumberTitle','off'); clf; set(fsoil(i),'WindowStyle','Docked');
         subplot(3,2,1); plot(Ts(i).Ts2a,'b'); hold on; plot(Ts(i).Ts2b,'c');title('2cm'); legend('Pit A', 'Pit B');
         subplot(3,2,2); plot(Ts(i).Ts5a,'b'); hold on; plot(Ts(i).Ts5b,'c');title('5cm')
         subplot(3,2,3); plot(Ts(i).Ts10a,'b'); hold on; plot(Ts(i).Ts10b,'c');title('10cm')
@@ -276,11 +276,15 @@ disp('soil tracker saved');
 %% Step 3: Do 30cm averaging for SM:
 
 for  i = 1:1:num_sites
-        site = site_labels{i,1};    
+        site = site_labels{i,1};   
+        disp(site);
         switch site 
-            case 'TPAg'
+            case {'TPAg';'TP_VDT'}
                 SM_ina = [SM(i).SM5a, SM(i).SM10_40a];
-                [SM(i).SM30a SM(i).flag_a]= mcm_SM30cm_avg(SM_ina,2);
+                [SM(i).SM30a SM(i).flag_a]= mcm_SM30cm_avg(SM_ina,2);   
+                SM(i).SM30b = NaN.*ones(size(SM_ina,1),1);
+%             case {'TP_VDT'}
+                
             otherwise
                 SM_ina = [SM(i).SM5a, SM(i).SM10a, SM(i).SM20a, SM(i).SM50a];
                 SM_inb = [SM(i).SM5b, SM(i).SM10b, SM(i).SM20b, SM(i).SM50b];
@@ -315,6 +319,32 @@ for i = 1:1:num_sites
     site = site_labels{i,1};
 eval([site '=[' site ' data(i).APR Ts(i).Ts2 Ts(i).Ts5 Ts(i).Ts10 Ts(i).Ts20 Ts(i).Ts50 Ts(i).Ts100 SM(i).SM30a SM(i).SM30b SMfill(i).SM30a SMfill(i).SM30b data(i).Rn data(i).SW];']);    
 end
+
+%% Fill Ts2 and Ts5 gaps (1 or 2 points) with linear interpolation.
+for i = 1:1:num_sites
+    site = site_labels{i,1};
+    %%% Linear interpolation first (max 2 consecutive data points)
+    eval([ '[' site '_Ts2_pred] = jjb_interp_gap2(' site '(:,6),2);']);
+    eval([ '[' site '_Ts5_pred] = jjb_interp_gap2(' site '(:,7),2);']);
+    ind_Ts2 = eval(['find(isnan(' site '(:,6))==1);']);
+    ind_Ts5 = eval(['find(isnan(' site '(:,7))==1);']);
+    
+    eval ([site '(ind_Ts2,6) = ' site '_Ts2_pred(ind_Ts2,1);']);
+    eval ([site '(ind_Ts5,7) = ' site '_Ts5_pred(ind_Ts5,1);']);
+    clear ind_Ts2 ind_Ts5 *_Ts2_pred *_Ts5_pred;
+
+    %%% Testing
+%     switch site
+%         case 'TP02'
+%     
+%     figure(99);clf;
+%     plot(eval([site '_Ts2_pred']),'r');hold on;
+%     plot(eval([site '_filled(:,6)']),'b');
+%     end
+   %%%%%
+end
+
+
 
 %% Fill Ta, RH, PAR, WS using regression between sites:
 %%% I am still not decided whether to parameterize these comparisons on one
@@ -397,20 +427,23 @@ eval([site '_filled(:,18) = VPD_calc(' site '_filled(:,2),' site '_filled(:,1),2
 
 %% We can try to fill Ts within sites by a regression with air temperature:
  % loops through Ts5 and Ts2
- 
+%  TP02_Ts2_pred = [];
+%  TP02_filled = [];
  for i = 1:1:num_sites
     site = site_labels{i,1};
+    
+
+    %%% Now fill the rest using regression with Ta
     eval([ '[' site '_Ts2_px_y ' site '_Ts2_pred] = Ts_fit(' site '_filled(:,1), ' site '_filled(:,6),''pw'');']);
     eval([ '[' site '_Ts5_px_y ' site '_Ts5_pred] = Ts_fit(' site '_filled(:,1), ' site '_filled(:,7),''pw'');']);
        
+    ind_Ts2 = eval(['find(isnan(' site '_filled(:,6))==1);']);
+    ind_Ts5 = eval(['find(isnan(' site '_filled(:,7))==1);']);
     
- ind_Ts2 = eval(['find(isnan(' site '_filled(:,6))==1);']);
- ind_Ts5 = eval(['find(isnan(' site '_filled(:,7))==1);']);
- 
- eval ([site '_filled(ind_Ts2,6) = ' site '_Ts2_pred(ind_Ts2,1);']);
- eval ([site '_filled(ind_Ts5,7) = ' site '_Ts5_pred(ind_Ts5,1);']);
+    eval ([site '_filled(ind_Ts2,6) = ' site '_Ts2_pred(ind_Ts2,1);']);
+    eval ([site '_filled(ind_Ts5,7) = ' site '_Ts5_pred(ind_Ts5,1);']);
     
- clear ind_Ts2 ind_Ts5;
+    clear ind_Ts2 ind_Ts5;
     
  end
 
@@ -476,7 +509,7 @@ for i = 1:1:num_sites
             try eval (['plot(' site '_filled(:,plot_list(j)),''r'')']); hold on; catch; end
             try eval (['plot(' site '(:,plot_list(j)),''b'')']); catch; end
             try title(char(varnames(plot_list(j),1))); catch; end
-        else
+        else % soil moisture
             eval (['plot(' site '_filled(:,j),''r'')']); hold on;
             eval (['plot(' site '_filled(:,j+1),''b'')']); hold on;
             legend('Pit A', 'Pit B');
