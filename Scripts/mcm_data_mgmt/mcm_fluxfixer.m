@@ -1217,6 +1217,9 @@ for year_ctr = year_start:1:year_end
                     output([450:547 8564:8570 3803 9248 9252 2971:3013 4961 13873 17000:17028 17219:17272],22) = NaN;
                     output([1097 9108],29) = NaN;
                     output(9108,30) = NaN;
+                    
+                case '2021'
+                    
             end
     case 'TPAg'
         %% ********************** TPAg *********************************
@@ -1267,7 +1270,27 @@ for year_ctr = year_start:1:year_end
         %% ********************** TP_VDT *********************************
 
         switch yr_str
-        case '2020'
+            
+            case '2019'
+        bad_co2 = find(output(:,17) > 32.9995 & output(:,17) < 33.0005);
+        bad_h2o = find(output(:,18) > 747.498 & output(:,18) < 747.502);
+        output(bad_co2,[1 17]) = NaN;
+        output(bad_h2o,[5 18]) = NaN;
+        bad_csat = find(output(:,19) > -0.001 & output(:,19) < 0.001);
+        output(bad_csat,[19:26 38:39]) = NaN;
+        bad_Tirga = find(output(:,27) > 4.9995 & output(:,27) < 5.0005);
+        output(bad_Tirga,[27]) = NaN;
+        
+        % Try to clean out some spikes in Wind Speed and Direction
+        bad_u_std = find(output(:,23) > 3);
+        output(bad_u_std,[38:39]) = NaN;
+        
+        output(7876:7877,1) = NaN;
+        output([1078:1154 2059:2088 2458 3514 6358:6359],2) = NaN;
+        output([1678 1827 2619 3508 3518 4996 6309 7875 13850:13852],3) = NaN;
+        output([3514 6076:6081 6342 7845 7878],19) = NaN;
+        
+            case '2020'
         bad_co2 = find(output(:,17) > 32.9995 & output(:,17) < 33.0005);
         bad_h2o = find(output(:,18) > 747.498 & output(:,18) < 747.502);
         output(bad_co2,[1 17]) = NaN;

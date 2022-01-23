@@ -18,12 +18,12 @@ year_end = max(year);
 
 %% Declare Paths and Load the data:
 %%% Paths:
-ls = addpath_loadstart;
-load_path = [ls 'Matlab/Data/Master_Files/' site '/'];
-save_path = [ls 'Matlab/Data/Flux/Gapfilling/' site '/'];
-footprint_path = [ls 'Matlab/Data/Flux/Footprint/'];
-fig_path = [ls 'Matlab/Figs/Gapfilling/'];
-log_path = [ls 'Documentation/Logs/mcm_Gapfill_main/' site '/'];
+loadstart = addpath_loadstart;
+load_path = [loadstart 'Matlab/Data/Master_Files/' site '/'];
+save_path = [loadstart 'Matlab/Data/Flux/Gapfilling/' site '/'];
+footprint_path = [loadstart 'Matlab/Data/Flux/Footprint/'];
+fig_path = [loadstart 'Matlab/Figs/Gapfilling/'];
+log_path = [loadstart 'Documentation/Logs/mcm_Gapfill_main/' site '/'];
 jjb_check_dirs(log_path);
 %%% Load gapfilling file and make appropriate adjustments:
 load([load_path site '_gapfill_data_in.mat']);

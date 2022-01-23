@@ -1347,6 +1347,17 @@ switch site
        elev = 236; % elevation of the site 
         
         switch year 
+            case '2019' %%% Copied from TPAg -- need to be update
+                z_meas = 5; % Height of EC system from ground
+%                 z_tree = 3; % Mean tree height from ground
+                z_tree = 15; % Mean tree height from ground [JJB modified 2021-03-31; think this makes more sense from a footprint perspective] 
+                z = 5;
+                ztop = 5; % Height of the column that is represented by the top CO2 sensor (ztop = z if only one sensor)
+                zcpy = 0; % Height of the column that is represented by the bottom CO2 sensor (zcpy + ztop = z if two sensors are used)
+                col_flag = 1; % =1 for one-height CO2 storage measurement, =2 for two-height
+                gs_start = 125; % This is inferred from the Fc plot; should be revisited
+                gs_end = 300; % This is inferred from the Fc plot; should be revisited
+
             case '2020' %%% Copied from TPAg -- need to be update
                 z_meas = 5; % Height of EC system from ground
 %                 z_tree = 3; % Mean tree height from ground

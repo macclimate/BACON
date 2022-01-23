@@ -50,9 +50,9 @@ for i = begin_year:1:end_year
     %%% MET DATA
     % Take the average availability of Ta, WS, PAR, Ts
     Ta = master.data(ind2,sites{1,4}(1));
-    WS = master.data(ind2,sites{1,4}(2));
-    PAR = master.data(ind2,sites{1,4}(3));
-    Ts = master.data(ind2,sites{1,4}(4));
+    WS = master.data(ind2,sites{j,4}(2));
+    PAR = master.data(ind2,sites{j,4}(3));
+    Ts = master.data(ind2,sites{j,4}(4));
 %     all_met = [Ta;WS;PAR;Ts];
     table_out(ctr,5:8) = [length(find(~isnan(Ta)))./length(Ta) length(find(~isnan(WS)))./length(WS) length(find(~isnan(PAR)))./length(PAR) length(find(~isnan(Ts)))./length(Ts) ];
     
@@ -63,7 +63,7 @@ end
 %%% 
 variable_names = {'year' 'flux_pMeasured' 'flux_pFPpassing' 'flux_pUstarThpassing' 'Ta_pPassing'  'WS_pPassing'  'PAR_pPassing' 'Ts_pPassing'};
 T = array2table(table_out,'VariableNames',variable_names);
-
+clear table_out prop_meas prop_fp_pass prop_ustar_pass ind ind2;
 writetable(T,[load_path 'Diagnostic/gap_analysis/' site '.csv']);
 end
 

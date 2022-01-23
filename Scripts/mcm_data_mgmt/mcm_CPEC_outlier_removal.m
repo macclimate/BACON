@@ -43,6 +43,8 @@ switch var_type
                 top_cut = 800; bot_cut = -200; z = 15; win_size = 30; sdev_mult = 6;
             case 'TPAg'
                 top_cut = 800; bot_cut = -200; z = 15; win_size = 30; sdev_mult = 6;  
+            case 'TP_VDT'
+                top_cut = 800; bot_cut = -200; z = 15; win_size = 30; sdev_mult = 6;  
         end
         
     case 'LE'
@@ -60,7 +62,8 @@ switch var_type
             case 'TPAg'
                 top_cut = 800; bot_cut = -100; z = 15; win_size = 30; sdev_mult = 5.5;
             case 'TP_VDT'
-                top_cut = 800; bot_cut = -100; z = 15; win_size = 30; sdev_mult = 5.5;                
+                top_cut = 800; bot_cut = -100; z = 15; win_size = 30; sdev_mult = 5.5;       
+                
         end
         
     case 'ET'

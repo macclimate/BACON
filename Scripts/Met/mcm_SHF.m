@@ -46,10 +46,16 @@ SHF3 = load_from_master(cleaned.master,'SoilHeatFlux_HFT_3');
 SHF4 = load_from_master(cleaned.master,'SoilHeatFlux_HFT_4');
 
     case 'TPAg'
-  SHF1 = load_from_master(cleaned.master,'SoilHeatFlux_HFT_1'); 
-  SHF2 = NaN.*ones(length(SHF1),1);
-  SHF3 = NaN.*ones(length(SHF1),1);
-SHF4 = NaN.*ones(length(SHF1),1);
+        SHF1 = load_from_master(cleaned.master,'SoilHeatFlux_HFT_1');
+        SHF2 = NaN.*ones(length(SHF1),1);
+        SHF3 = NaN.*ones(length(SHF1),1);
+        SHF4 = NaN.*ones(length(SHF1),1);
+    case 'TP_VDT'
+        SHF1 = load_from_master(cleaned.master,'SoilHeatFlux_HFT_1');
+        SHF2 = NaN.*ones(length(SHF1),1);
+        SHF3 = NaN.*ones(length(SHF1),1);
+        SHF4 = NaN.*ones(length(SHF1),1);
+        
     otherwise
 SHF1 = load_from_master(cleaned.master,'SoilHeatFlux_1');
 SHF2 = load_from_master(cleaned.master,'SoilHeatFlux_2');    

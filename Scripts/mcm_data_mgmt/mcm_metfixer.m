@@ -723,6 +723,17 @@ for year_ctr = year_start:1:year_end
                     output([3248],[36:43 48:50]) = NaN;
                     % Sensor Flow Spikes
                     output([3248],[52:60 65:67]) = NaN;
+                    
+                case '2018'
+                case '2019'
+                case '2020'
+                case '2021'
+                    output([391:491 1041:1308],[42 59]) = NaN;
+                    output([412:433 1098:1164],[48 65]) = NaN;
+                    output([370:397 1066:1115],[50 67]) = NaN;
+                    
+                    
+                            
             end
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         case 'TP_PPT'
@@ -798,6 +809,8 @@ for year_ctr = year_start:1:year_end
                    output(4872,[14:15]) = NaN; 
                    
                 case '2020'
+                    
+                case '2021'
             end
             %%% Call mcm_PPTfixer to Calculate event-based precipitation at
             %%% TP_PPT:
@@ -2443,7 +2456,10 @@ for year_ctr = year_start:1:year_end
                     %need to be doubled but can check site report sent July
                     %30 by Keegan) - AB
                     
-                    
+                case '2021' % done by AB and EAR
+                    output([5308 5822],8) = NaN; %Net Radiation
+                     output([408 460],10) = NaN; %soil heat flux
+                      output([2884 2331:2337],47) = NaN; %CO2 canopy  
                     
             end
             %% Corrections applied to all years of data:
@@ -4043,6 +4059,12 @@ for year_ctr = year_start:1:year_end
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             
             switch yr_str
+                case '2019'
+               output ([7036 8776 9829 9839],3) = NaN; %Air Temp
+               output (5845,4) = NaN; %RH
+               output ([8783:9840],[7:12]) = NaN; %Net Radiometer was upside-down for this period. All radiation variables NaN
+               output ([6666:6669 8409 10196:10201],[17:18]) = NaN;     % soil moisture
+               
                 case '2020'
                     RH_max = 100;
                 % Load WS and WDir from Flux (CSAT data): 
