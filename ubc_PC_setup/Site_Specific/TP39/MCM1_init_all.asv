@@ -99,96 +99,74 @@ end
 % All instruments
 %------------------------------------------------
 if dateIn < Dates(11)
-    % Before Aug 14, 2021 we used LI-7000
-    %-----------------------
-    % IRGA #1 definitions:
-    %-----------------------
-    c.Instrument(nIRGA).Name      = 'EC IRGA';
-    c.Instrument(nIRGA).Type      = '7000';
-    c.Instrument(nIRGA).SerNum    = 0;
-    c.Instrument(nIRGA).FileID    = '4';
-    %% Altaf
-    %%% Modified by JJB on June 20, 2011.  The listed column locations for P_irga and T_irga were switched for all dates after 20030414..
-    if dateIn <= Dates(2)
-        c.Instrument(nIRGA).FileType  = 'McMLI7000';            %
-        c.Instrument(nIRGA).ChanUnits =     {'umol/mol' ,'mmol/mol','kPa'   ,'degC'   ,'degC'   ,'mV'};
-        c.Instrument(nIRGA).ChanNames = 	{'co2'      ,'h2o'     ,'P_irga', 'T_irga','T_sonic','T_sonic_raw'};
-    elseif dateIn > Dates(2) & dateIn <= Dates(11)
-        c.Instrument(nIRGA).FileType  = 'Digital2';            %
-        c.Instrument(nIRGA).ChanUnits = {'umol/mol' ,'mmol/mol', 'degC',	'kPa',    'mV',      '1'};
-        c.Instrument(nIRGA).ChanNames = 	{'co2'      ,'h2o',	 'T_irga',	'P_irga', 'T_sonic', 'T_sonic_raw'};
-    end
-    
-    % c.Instrument(nIRGA).FileType  = 'Digital2';            %
-    % c.Instrument(nIRGA).ChanUnits = {'umol/mol' ,'mmol/mol','kPa'   ,'degC'   ,'mV'   ,'1'};
-    
-    if dateIn < Dates(3) % Modified 17-Jan-2014 by JJB to accomodate Motherboard change to li7000 in Feb of 2013
-        c.Instrument(nIRGA).Fs         = 20.34;               % Frequency of sampling
-    else
-        c.Instrument(nIRGA).Fs         = 20;                     % Frequency of sampling
-    end
-    %c.Instrument(nIRGA).Fs         = 20.34;               % Frequency of sampling
-    c.Instrument(nIRGA).Oversample = 6;                     %
-    %c.Instrument(nIRGA).Oversample = 61;                     %
-    c.Instrument(nIRGA).ChanNumbers = [1:6];                % chans to read from the Instrument(nIRGA)
-    c.Instrument(nIRGA).NumOfChans = length(c.Instrument(nIRGA).ChanNumbers);
-    %c.Instrument(nIRGA).ChanNames = {'co2'      ,'h2o'     ,'P_irga', 'T_irga','T_sonic','T_sonic_raw'};
-    
-    c.Instrument(nIRGA).CovChans  = [1 2];
-    c.Instrument(nIRGA).Delays.Samples = [2 4]; % Changed by JJB, may 21, 2010 -- appropriate numbers for delays
-    c.Instrument(nIRGA).Alignment.Type = 'Slave';               % this instrument (Slave) will be aligned with the Master
-    c.Instrument(nIRGA).Alignment.ChanNum = 1; % Align using co2 here and Ts with the sonic, since aux input is screwed up
-    c.Instrument(nIRGA).Alignment.Shift = 0; 			% added by JJB, July 15, 2010
-    c.Instrument(nIRGA).Alignment.Span = [-100 100]; 		% added by JJB, July 15, 2010 % Changed to current values [-100 100] on Sep 8, 2010 by JJB on advice of Zoran
-    c.Instrument(nIRGA).Alignment.MaxAutoSampleReduction = 3; 	% added by JJB, July 15, 2010 % Changed to current value 3 on Sep 8, 2010 by JJB on advice of Zoran
-    
-    c.Instrument(nIRGA).ProcessData = [];
-    % Conversion to mixing ratios - turned off in new version of program:
-    %c.Instrument(nIRGA).ProcessData = {['nIRGA = ' num2str(nIRGA) ';'],...
-    %      'Instrument_data(nIRGA).EngUnits(:,1) = Instrument_data(nIRGA).EngUnits(:,1)./(1-Instrument_data(nIRGA).EngUnits(:,2)./1000);',...
-    %      'Instrument_data(nIRGA).EngUnits(:,2) = Instrument_data(nIRGA).EngUnits(:,2)./(1-Instrument_data(nIRGA).EngUnits(:,2)./1000);',...
-    %   };
-    %-----------------------
-    % TC definitions:
-    %-----------------------
-    %c.Instrument(nTC).Name          = 'Thermocouples';
-    %c.Instrument(nTC).Type          = 'E';
-    %c.Instrument(nTC).SerNum        = 0;
-    %c.Instrument(nTC).FileID        = '6';
-    %c.Instrument(nTC).FileType      = 'McMTC';               %
-    %c.Instrument(nTC).Fs            = 20;                    % Frequency of sampling
-    %c.Instrument(nTC).Oversample    = 6;                     %
-    %c.Instrument(nTC).ChanNumbers   = [1:2];                 % chans to read from the Instrument(nIRGA)
-    %c.Instrument(nTC).NumOfChans    = length(c.Instrument(nTC).ChanNumbers);
-    % c.Instrument(nTC).ChanNames     = {'Tc1'      ,'Tc2' };
-    % c.Instrument(nTC).ChanUnits     = {'degC'     ,'degC'};
-    % c.Instrument(nTC).CovChans      = [];
-    % c.Instrument(nTC).Delays.Samples = [0 0];
-    % c.Instrument(nTC).Alignment.Type = 'Slave';               % this instrument (Slave) will be aligned with the Master
-    % c.Instrument(nTC).Alignment.ChanNum = 5;                  % chanel used for the alignment
-elseif dateIn >= Dates(11)
-    %-----------------------
-    % IRGA2 definitions (LI-7200):
-    %-----------------------
-    c.Instrument(nIRGA).Name      = 'EC IRGA';
-    c.Instrument(nIRGA).Type      = '7200';
-    c.Instrument(nIRGA).SerNum    = 1026;
-    c.Instrument(nIRGA).FileID     = '6';
-    c.Instrument(nIRGA).FileType   = 'Digital2';             %
-    c.Instrument(nIRGA).Fs         = 20;                    % Frequency of sampling
-    c.Instrument(nIRGA).Oversample = [];                     %
-    c.Instrument(nIRGA).ChanNumbers = (1:10);                % chans to read from the Instrument(nIRGA)
-    c.Instrument(nIRGA).NumOfChans = length(c.Instrument(nIRGA).ChanNumbers);
-    c.Instrument(nIRGA).ChanNames  = {'co2'     ,'h2o'     ,'Tin' ,'Tout','Ptotal','Pdiff','SignalStrength','FlowDrive','diag','FlowRate'};
-    c.Instrument(nIRGA).ChanUnits  = {'umol/mol','mmol/mol','degC','degC','kPa'  ,'kPa'  ,'%'   ,'%'    ,'1','slpm'};
-    c.Instrument(nIRGA).CovChans   = [1 2];
-    c.Instrument(nIRGA).Delays.Samples = [0 0];
-    c.Instrument(nIRGA).Alignment.Type = 'Slave';               % this instrument (Slave) will be aligned with the Master
-    c.Instrument(nIRGA).Alignment.ChanNum = 7;                  % chanel used for the alignment
-    c.Instrument(nIRGA).ProcessData = {};
-    c.Instrument(nIRGA).Alignment.Shift = 0;
-    c.Instrument(nIRGA).Alignment.Span = [-200,200];
+	% Before Aug 14, 2021 we used LI-7000
+	%-----------------------
+	% IRGA #1 definitions:
+	%-----------------------
+	c.Instrument(nIRGA).Name      = 'EC IRGA';
+	c.Instrument(nIRGA).Type      = '7000';
+	c.Instrument(nIRGA).SerNum    = 0;
+	c.Instrument(nIRGA).FileID    = '4';
+%% Altaf
+%%% Modified by JJB on June 20, 2011.  The listed column locations for P_irga and T_irga were switched for all dates after 20030414..
+if dateIn <= Dates(2) 
+   c.Instrument(nIRGA).FileType  = 'McMLI7000';            % 
+	c.Instrument(nIRGA).ChanUnits =     {'umol/mol' ,'mmol/mol','kPa'   ,'degC'   ,'degC'   ,'mV'};   
+    c.Instrument(nIRGA).ChanNames = 	{'co2'      ,'h2o'     ,'P_irga', 'T_irga','T_sonic','T_sonic_raw'};
+else
+   c.Instrument(nIRGA).FileType  = 'Digital2';            % 
+	c.Instrument(nIRGA).ChanUnits = {'umol/mol' ,'mmol/mol', 'degC',	'kPa',    'mV',      '1'};   
+c.Instrument(nIRGA).ChanNames = 	{'co2'      ,'h2o',	 'T_irga',	'P_irga', 'T_sonic', 'T_sonic_raw'};
 end
+
+% c.Instrument(nIRGA).FileType  = 'Digital2';            % 
+% c.Instrument(nIRGA).ChanUnits = {'umol/mol' ,'mmol/mol','kPa'   ,'degC'   ,'mV'   ,'1'};   
+    
+if dateIn < Dates(3) % Modified 17-Jan-2014 by JJB to accomodate Motherboard change to li7000 in Feb of 2013
+	c.Instrument(nIRGA).Fs         = 20.34;               % Frequency of sampling  
+else
+	c.Instrument(nIRGA).Fs         = 20;                     % Frequency of sampling
+end    
+%c.Instrument(nIRGA).Fs         = 20.34;               % Frequency of sampling
+c.Instrument(nIRGA).Oversample = 6;                     % 
+%c.Instrument(nIRGA).Oversample = 61;                     % 
+c.Instrument(nIRGA).ChanNumbers = [1:6];                % chans to read from the Instrument(nIRGA)
+c.Instrument(nIRGA).NumOfChans = length(c.Instrument(nIRGA).ChanNumbers);
+%c.Instrument(nIRGA).ChanNames = {'co2'      ,'h2o'     ,'P_irga', 'T_irga','T_sonic','T_sonic_raw'};
+
+c.Instrument(nIRGA).CovChans  = [1 2];
+c.Instrument(nIRGA).Delays.Samples = [2 4]; % Changed by JJB, may 21, 2010 -- appropriate numbers for delays
+c.Instrument(nIRGA).Alignment.Type = 'Slave';               % this instrument (Slave) will be aligned with the Master
+c.Instrument(nIRGA).Alignment.ChanNum = 1; % Align using co2 here and Ts with the sonic, since aux input is screwed up
+c.Instrument(nIRGA).Alignment.Shift = 0; 			% added by JJB, July 15, 2010
+c.Instrument(nIRGA).Alignment.Span = [-100 100]; 		% added by JJB, July 15, 2010 % Changed to current values [-100 100] on Sep 8, 2010 by JJB on advice of Zoran 
+c.Instrument(nIRGA).Alignment.MaxAutoSampleReduction = 3; 	% added by JJB, July 15, 2010 % Changed to current value 3 on Sep 8, 2010 by JJB on advice of Zoran 
+
+c.Instrument(nIRGA).ProcessData = [];
+% Conversion to mixing ratios - turned off in new version of program:
+%c.Instrument(nIRGA).ProcessData = {['nIRGA = ' num2str(nIRGA) ';'],...
+%      'Instrument_data(nIRGA).EngUnits(:,1) = Instrument_data(nIRGA).EngUnits(:,1)./(1-Instrument_data(nIRGA).EngUnits(:,2)./1000);',...
+%      'Instrument_data(nIRGA).EngUnits(:,2) = Instrument_data(nIRGA).EngUnits(:,2)./(1-Instrument_data(nIRGA).EngUnits(:,2)./1000);',...
+%   };  
+%-----------------------
+% TC definitions:
+%-----------------------
+%c.Instrument(nTC).Name          = 'Thermocouples';
+%c.Instrument(nTC).Type          = 'E';
+%c.Instrument(nTC).SerNum        = 0;
+%c.Instrument(nTC).FileID        = '6';
+%c.Instrument(nTC).FileType      = 'McMTC';               % 
+%c.Instrument(nTC).Fs            = 20;                    % Frequency of sampling
+%c.Instrument(nTC).Oversample    = 6;                     % 
+%c.Instrument(nTC).ChanNumbers   = [1:2];                 % chans to read from the Instrument(nIRGA)
+%c.Instrument(nTC).NumOfChans    = length(c.Instrument(nTC).ChanNumbers);
+% c.Instrument(nTC).ChanNames     = {'Tc1'      ,'Tc2' };
+% c.Instrument(nTC).ChanUnits     = {'degC'     ,'degC'};
+% c.Instrument(nTC).CovChans      = [];
+% c.Instrument(nTC).Delays.Samples = [0 0];
+% c.Instrument(nTC).Alignment.Type = 'Slave';               % this instrument (Slave) will be aligned with the Master
+% c.Instrument(nTC).Alignment.ChanNum = 5;                  % chanel used for the alignment
+
 
 
 %-----------------------
