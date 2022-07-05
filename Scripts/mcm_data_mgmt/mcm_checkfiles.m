@@ -290,7 +290,6 @@ for yr_ctr = year_start:1:year_end
     A(9,1)  = cellstr('# empty');  A(10,1)  = cellstr('# marginal');
     AA = char(A);
     format_code = '\n %6.0f\t %4.0f\t %2.0f\t %2.0f\t %3.0f\t %2.0f\t %2.0f\t %2.0f\t %3.0f\t %3.0f\t';
-    
     Preamble(1,1) =cellstr(['Completeness log file for HF data for site: ' site ', year ' num2str(yr_ctr)]);
     Pre_char = char(Preamble);
     % Preamble(2,1) =cellstr('All variables are listed in EST timecode (GMT-5)');

@@ -484,8 +484,15 @@ for year_ctr = year_start:1:year_end
                    output(output(:,15)<96,15) = NaN;
                   output([8681:9096 10545:10552 11109:11115 1186912896 14502:14523 15846],15) = NaN; %BarometricP
                    
-                   
-                   
+                case '2021'
+                   bad_co2 = find((output(:,17) > 449.9999 & output(:,17) < 450.0001) | (output(:,17) > 399.9999 & output(:,17) < 400.0001));
+                   output(bad_co2,[1 17]) = NaN; % remove for Fc and CO2 concentration                    
+                   output([607:810],17) = NaN; %IRGA Co2 
+                   output([607:618 7996:8249],18) = NaN; %IRGA h2o 
+                   badh2o = find(output(:,18)> 22.499 & output(:,18) < 22.501);
+                    output(badh2o,18) = NaN;
+                   bad_csat = find(output(:,19) > -0.001 & output(:,19) < 0.001);
+                    output(bad_csat,[19:27]) = NaN;
             end
         case 'TP74'
             %% ********************** TP74 *********************************
@@ -740,8 +747,16 @@ for year_ctr = year_start:1:year_end
                     
                     output([8773:8774 8976 9022 9984 10320 10656 10992 11328 13008 17568],15) = NaN; % Barometric P
                             
-                    
-                    
+                case '2021'  
+                     output([2573 9468:9469 9477 14512:14513 16279],2) = NaN; %Ustar
+                     output([3453 6419 9728 13770],5) = NaN; %LE-L
+                     output([8453 8456 8507:8768 8788:9407 9476 12011 12020 13260 14300 14506 16282 17338:17340],19) = NaN; %u
+                     output([8507:8768 8788:9407 9456 13497 16277],20) = NaN; %v
+                     output([4820 8219 8507:8768 8788:9407 12676:12677],21) = NaN; %w
+                     output([8507:8768 8788:9407 12733],22) = NaN; %T-s
+                     output([3057:3453 13759:13768]) = NaN; % CO2-irga
+                     output(output(:,22)>5.000001 & output(:,22)<5.000002,[22 26]) = NaN; %%% Filter out bad csat data
+                    output([10411 13759:13768],27) = NaN;
                  end
             
             %     case 'TP89'
@@ -1010,6 +1025,26 @@ for year_ctr = year_start:1:year_end
                    
                    output([8784 9984 9792 10176 10272 10464 10560 10896 11232 14064 14400 14736 15072 15792 16176 16896 17232 17568],15) = NaN; %barometric P
 
+                case '2021' 
+                    bad_co2 = find(output(:,17) > 449.9999 & output(:,17) < 450.0001);
+                    bad_h2o = find(output(:,18) > 18.9999 & output(:,18) < 19.0001);
+                    % Bad CO2 irga (flatlines @ 400)
+                    output(bad_co2,[17 1]) = NaN;
+                    % Bad H2O irga (flatlines)
+                    output(bad_h2o,[18 5]) = NaN;
+                    
+                    output([2469:2584 5152:5235],17) = NaN;
+                    
+                    
+                    bad_CSAT = find(output(:,19)==-1.5646218e-6);
+                    output(bad_CSAT,19:26)= NaN;
+                    
+                    %u spike
+                    output([832 2576 7093 1692 9488 15285 16538],19) = NaN; 
+                    %v spike
+                    output([4059 7097 7099 9065 15264 16283],20) = NaN;
+                    
+                   
             end
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TPD %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1219,6 +1254,38 @@ for year_ctr = year_start:1:year_end
                     output(9108,30) = NaN;
                     
                 case '2021'
+                    bad_co2 = find(output(:,17) > 399.9999 & output(:,17) < 400.001);
+                    bad_h2o = find(output(:,18) > 22.4999 & output(:,18) < 22.5001);
+                    output(bad_co2,[1 17]) = NaN;
+                    output(bad_h2o,[5 18]) = NaN;
+                    bad_csat = find(output(:,19) > -0.001 & output(:,19) < 0.001);
+                    output(bad_csat,[19:26]) = NaN;
+                    % Fc Spikes
+                    output([8219 16560],1) = NaN; 
+                    % Ustar Spikes
+                    output([64 14320 15790 16300 17210],2) = NaN;
+                     % Hs Spikes
+                    output([848 8465 14310 14320 15190 17210 17220],3) = NaN;
+                      % LE-L spikes
+                    output([4831],5) = NaN;
+                    % Penergy spikes 
+                    output([8219 10810 16560],7) = NaN;
+                    % H2O-irga spikes
+                    output([3812 11480:11650 14800:14870],18) = NaN;
+                    % u spikes
+                    output([4817 5931 7085 8464 8468 15190 15600 15790 16560 16890 17210 17430],19) = NaN;
+                    % w spikes
+                    output([82 844 5939 8219 8225 9058 10710 12700 13510 14300 16910 17210 17320],21) = NaN; 
+                    % T-s spikes 
+                    output([12250 12350 13240 13510 14300 14410:14430 14520 14530 14550:14570],22) = NaN; 
+                    % P-irga spikes
+                    output([3812 4768 11480:11660 12250 12350 14260 14800:14870],28) = NaN;
+                    % u-rot spikes
+                    output([7085 8468 14300 14510 15190 15600 15790 16300 16550 17210],31) = NaN;
+                    % v-rot spikes
+                    output([7085 14300 14510 17220],32) = NaN;
+                    % w-rot spikes
+                    output([720 818 835 849 7085 13520 14510 15190 15170 15600 15780 15790 16300 17210 17220 17430],33) = NaN;
                     
             end
     case 'TPAg'
@@ -1265,6 +1332,28 @@ for year_ctr = year_start:1:year_end
         
                %%%% Remove all data points before 8400 - these belong to TP_VDT
                output(1:8400,:) = NaN;
+               
+        case '2021'
+         bad_co2 = find(output(:,17) > 32.9995 & output(:,17) < 33.0005);
+        bad_h2o = find(output(:,18) > 747.498 & output(:,18) < 747.502);
+        output(bad_co2,[1 17]) = NaN;
+        output(bad_h2o,[5 18]) = NaN;
+        bad_csat = find(output(:,19) > -0.001 & output(:,19) < 0.001);
+        output(bad_csat,[19:26 38:39]) = NaN;
+        bad_Tirga = find(output(:,27) > 4.9995 & output(:,27) < 5.0005);
+        output(bad_Tirga,[27]) = NaN;
+        
+        % Hs spike 
+         output([1693 9540 14280 17320],3) = NaN;
+        % LE-L spike
+        output([1228 3571 5747 14320 17320],5) = NaN;
+        % u spike 
+        output([1692 2524 2573 11580 12780 14270 14310 15170 16550],19) = NaN;
+        % v spike 
+        output([1693 11580 14270],20) = NaN;
+        % w spike 
+        output([1694 2576 4818 5928 9043 11590 12690 12780 15180 15190:15200 15260:15290],21) = NaN;
+            
         end
         case 'TP_VDT'
         %% ********************** TP_VDT *********************************

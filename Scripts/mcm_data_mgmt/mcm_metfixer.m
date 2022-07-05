@@ -304,7 +304,9 @@ for year_ctr = year_start:1:year_end
                     output(4742:4745,1) = NaN;
                 case '2014'
                 case '2015'
-                case '2016'
+                case '2016'   
+                case '2021'
+            
             end
             %%% Convert The OTT reading to a WT depth:
             WT_Depth = 8.53 - output(:,output_cols(strcmp(output_names,'Water_Height')==1));
@@ -636,6 +638,26 @@ for year_ctr = year_start:1:year_end
                     output(:,[4 7]) = NaN;
                     output([15893:15896],11) = NaN;
                     output([6409 6417],12) = NaN;
+                    
+                case '2021'
+                    %HfluxB spikes
+                    output([9023 15170 16280],2) = NaN;
+                    % SapREF1Avg spikes 
+                    output([277:14080],3) = NaN;
+                    % SapREF4Avg spikes 
+                    output([200:3000],6) = NaN;
+                    % Sap1MAX
+                    output([0:14100],28) = NaN;
+                    % Sap2MAX
+                    output([0:14100],30) = NaN;
+                    % Sap4MAX
+                    output([0:14970],34) = NaN;
+                    % Sap5MAX
+                    output([0:14970],36) = NaN;
+                    % TsREF20AAVG
+                    output([12250 12280 12350 13230 13460 14100],85) = NaN;
+                    
+                    
             end
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         case 'TP74_sapflow'
@@ -733,6 +755,7 @@ for year_ctr = year_start:1:year_end
                     output([370:397 1066:1115],[50 67]) = NaN;
                     
                     
+                    
                             
             end
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -811,6 +834,10 @@ for year_ctr = year_start:1:year_end
                 case '2020'
                     
                 case '2021'
+                    output([9681:11816],3) = NaN;% panel temp
+                    
+                    output([4399:end],15) = NaN;% Geonor precip
+                case '2022'
             end
             %%% Call mcm_PPTfixer to Calculate event-based precipitation at
             %%% TP_PPT:
@@ -1885,8 +1912,34 @@ for year_ctr = year_start:1:year_end
                     output([11390:11485],79) = NaN; %bad soil temp data
                     output(11485,[83 87 91 92 96 97]) = NaN; %soil temp and moisture spike
                     output(:,93) = NaN; % Remove all SM_A_20cm
+               
+                case '2021' % TP39 2021   
+                    RH_max = 100;
+
+                    %AirTempAbvCnpt spike
+                    output([11660 11663 11666],1) = NaN;
+                    %AirTempCnpy spike
+                    output([11660 11663 11666],2) = NaN;
+                    %AirTempBlwCnpy spike
+                    output([11662 11666],3) = NaN;
+                    %RelHumBlwCnpy 
+                    output([11660],6) = NaN;
+                    %UpPARAbvCnpy spike
+%                     output([848 1904 5308],10) = NaN; % JJB: I don't
+%                     believe these are spikes.
+output(:,11) = NaN; % No RMY_Rain data
+                    output(:,12) = NaN; % removing all NetRadBlwCnpy
+
+                    %GroundTemp spike
+                    output([6225 7087 10200 10690 12280 13860 15460],29) = NaN;
+                    %SnowTemp
+                    output([6225 10200 13860 15460],30) = NaN;
+                    %%%%% Pressure
+                    output([1:2892 3447:4217],76) = NaN; %pressure
+                    output(:,93) = NaN; % Remove all SM_A_20cm
+             
                     
-            end
+            end                    
             %%% Corrections applied to all years of data:
             % 1: Set any negative PAR and nighttime PAR to zero:
             PAR_cols = [];
@@ -2457,10 +2510,12 @@ for year_ctr = year_start:1:year_end
                     %30 by Keegan) - AB
                     
                 case '2021' % done by AB and EAR
+                    RH_max = 100; % (will cause any RH > 100 to be set to 100
                     output([5308 5822],8) = NaN; %Net Radiation
-                     output([408 460],10) = NaN; %soil heat flux
-                      output([2884 2331:2337],47) = NaN; %CO2 canopy  
-                    
+                    output([408 460],10) = NaN; %soil heat flux
+                    output([2884 2331:2337],47) = NaN; %CO2 canopy  
+                    output([14000:end],[12:16 20 21 23]) = NaN; % removing spurious data points
+                    output(:,[33:43]) = NaN; % Remove data from Tree Thremocouples (all values = 0)
             end
             %% Corrections applied to all years of data:
             % 1: Set any negative PAR and nighttime PAR to zero:
@@ -3310,6 +3365,23 @@ for year_ctr = year_start:1:year_end
                    
                    
                    output([14500:14512 14785:14793 15800:17568],29) = NaN;
+                   
+                   case '2021' 
+                    RH_max = 100; % sets RH > 100 = 100; only do this once inspecting the data and confirming that the max data are only a few percentages over 100
+                       output ([13576],7) = NaN; %NetRadAbvCnpy
+                    output ([13578 14374 16094],8) = NaN; %Soil Heat Flux 1
+                    output ([13562],11) = NaN; %Soil Temp 100cm
+                    output ([13562],12) = NaN; %Soil Temp 50cm 
+                    output ([13562],13) = NaN; %Soil Temp 20cm 
+                    output ([13562],14) = NaN; %Soil Temp 10cm 
+                    output ([13560:13562],[15:22]) = NaN; %All soil T sensors 
+                    output(1:8525,29) = NaN ; %Bad data for SM_B_20cm 
+%                     output ([13560:13562],16) = NaN; %Soil Temp 2cm 
+%                     output ([13560:13562],17) = NaN; %Soil Temp B 100cm
+%                     output ([13560:13562],18) = NaN; %Soil Temp B 50cm 
+%                     output ([13560:13562],19) = NaN; %Soil Temp B 20cm
+%                     output ([13560:13562],21) = NaN; %Soil Temp B 5cm
+%                     output ([13560:13562],22) = NaN; %Soil Temp B 2cm
                     
             end
             %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3868,7 +3940,7 @@ for year_ctr = year_start:1:year_end
 %                     output([1895 12492 2113],13) = NaN;   
                     output([1895:2113 6947:7371 12018:12492],13) = NaN;
                     
-                    %%% Swap reversed SW and LW data (up & down are reversed) %%%%%%%
+                    %%% Swap reversed SW data (up & down are reversed) %%%%%%%
                      tmp = output(:,10);
                      output(:,10)=output(:,11);
                      output(:,11)=tmp;
@@ -3891,10 +3963,40 @@ for year_ctr = year_start:1:year_end
                     output([235 374:376 2513 3738 3740 5515 7380 13522 15457 15796],86) = NaN;
 %                      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                 case '2021'
-%                     %%% Swap reversed SW and LW data (up & down are reversed) %%%%%%%
-%                      tmp = output(:,10);
-%                      output(:,10)=output(:,11);
-%                      output(:,11)=tmp;
+                    %%% Swap reversed SW data (up & down are reversed) %%%%%%%
+                     tmp = output(:,10);
+                     output(:,10)=output(:,11);
+                     output(:,11)=tmp;
+                RH_max = 100;
+                % UpPARAbvCnpy spike
+%                 output([5309:5318],8) = NaN;
+                % UpLongwaveRadAbvCnpy Spikes
+                
+                output([1828:1860],12) = NaN;
+                % DownLongwaveRadAbvCnpy Spikes
+                output([1828:1860],13) = NaN;
+                % Albedo spikes
+                output([4042:4044 4849 5247 6493 8600 9462 11540 15430 16010 16520 17450],16) = NaN;
+                output([16110:16113],20) = NaN; % bad SHF3 data
+                % SWPA20cm spike 
+                output ([865 951 6379 6454 10540 14040],28) = NaN;
+                % SWPA50cm spikes
+                output ([3263 3508 4112 6039 10670 15610],29) = NaN;
+                % SWPA100cm spikes
+                output ([1724 2720 4109 4270],30) = NaN;
+                % SWPB20cm spike 
+                output ([11380],34) = NaN;
+                % SWPB50cm spike 
+                output ([2730],35) = NaN;
+                % SWPB100cm spike 
+                output ([6597 11280],36) = NaN;
+                % kOhmsA100cm
+                output ([1724 2720 4109 4270],42) = NaN;
+                % kOhmsB20cm
+                output ([2730],47) = NaN;
+output(12331,[79 81]) = NaN;
+output([178 4223 7430 14267],[86]) = NaN; % CO2 cnpy
+
             end
             %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -4044,7 +4146,7 @@ for year_ctr = year_start:1:year_end
                 
                %TPAg point cleaning with Nur and Elizabeth
                %                                                                                                                 
-               output(15199:15207,3) = NaN; 
+               output([15199:15207],3) = NaN; 
                output ([9151:9327 9781:9834],6) = NaN; %Down PAR issues
                output ([9151:9327 15225:15329],8) = NaN; %Up longwave
                output ([9152:9327 9781:9834 15225:15329],9) = NaN; %Down longwave
@@ -4052,6 +4154,29 @@ for year_ctr = year_start:1:year_end
                
                %%%% Remove all data points before 8400 - these belong to TP_VDT
                output(1:8400,:) = NaN;
+               
+            case '2021' 
+            % bad T_air
+            output([5264:5409 6175],3) = NaN;
+            %RelHumAbvCnpy spike
+            output([4052:8493 10455:10464 10470],4) = NaN;
+            %UpShortWaveRad
+            output([1:1816 7816 7820],6) = NaN;
+            %UpLongWaveRadAbvCnpy spike
+            output([1:1816 7813],8) = NaN;
+            %DownLongWaveRadAbvCnpy spike
+            output([1:1816 7813],9) = NaN;
+            %NetLongwaveAbvCnpy
+            output([1:1816],11) = NaN;
+            %SMA10-40cm spike
+            output([15492  15881],15) = NaN;
+            %SMA5cm spike
+            output([6175:6183 15492 15881:15882],[15 17:21 ]) = NaN;
+            %PAA5cm
+            output([15882],18) = NaN;
+            %SoilTempA50cm spike
+            output([16370],21) = NaN;
+            output([15882 16364:16365],[13 14 20 21]) = NaN;
             end
 
         case 'TP_VDT'
@@ -4073,6 +4198,8 @@ for year_ctr = year_start:1:year_end
                 output(:,27) = CPEC_tmp.master.data(:,39); % wind direction
                 output(:,28) = CPEC_tmp.master.data(:,15); output(11531:11543,28) = NaN; % Pressure
                
+                
+         
                 % "D:\Matlab\Data\Flux\CPEC\TPAg\Final_Cleaned\TP_VDT_CPEC_cleaned_2020.mat"
                 clear CPEC_tmp
                %%% Investigate wind direction offset between TP_VDT and TP74
@@ -4110,6 +4237,9 @@ for year_ctr = year_start:1:year_end
                
                %%%% Remove all data points after 8400 - these belong to TPAg
                output(8400:end,:) = NaN;
+               
+               case '2021'
+                   output([1:1815],[6 11]) = NaN;
             end
     end
     

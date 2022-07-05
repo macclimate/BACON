@@ -1661,12 +1661,6 @@ switch site
         end 
        % #################################################################
     case 'TP_PPT'
-        z_meas = 2;
-        z_tree = 0;
-        ztop = 0;
-        zcpy = 0;
-        z = 2;
-        col_flag = 0;
 end
 
 %% Modifications to height variables associated with Footprint and CO2_storage calculations,

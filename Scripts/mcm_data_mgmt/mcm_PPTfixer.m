@@ -230,7 +230,10 @@ loadstart = addpath_loadstart;
     h3(2) = plot(ind_vs,PAR(ind_vs),'s','MarkerSize',2,'MarkerFaceColor','c','MarkerEdgeColor','c');
     h3(3) = plot(ind_s,PAR(ind_s),'s','MarkerSize',4,'MarkerFaceColor','y','MarkerEdgeColor','k');
     h3(4) = plot(ind_m,PAR(ind_m),'s','MarkerSize',6,'MarkerFaceColor','m','MarkerEdgeColor','m');
+    try
     h3(5) = plot(ind_l,PAR(ind_l),'s','MarkerSize',8,'MarkerFaceColor','g','MarkerEdgeColor','g');
+    catch
+    end
     try
     h3(6) = plot(ind_vl,PAR(ind_vl),'s','MarkerSize',10,'MarkerFaceColor','r','MarkerEdgeColor','k');
     catch

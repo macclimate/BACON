@@ -1,4 +1,4 @@
-function [] = mcm_data_compiler(year, site, data_type,quickflag)
+function [] = mcm_data_compiler(year_in, site, data_type,quickflag)
 
 %%% mcm_data_compiler.m
 % The purpose of this function is to compile data from different sources:
@@ -18,7 +18,7 @@ function [] = mcm_data_compiler(year, site, data_type,quickflag)
 % 3. Cleaned and Filled fluxes
 %
 %%% Inputs:
-% year - can be single year, list of years (e.g. 2005:2008), or blank (prompts for years)
+% year_in - can be single year, list of years (e.g. 2005:2008), or blank (prompts for years)
 % site - site label ('TP39', TPD, etc.)
 % data_type - options are: 
 %%% - 'all' (compiles met and flux), or
@@ -51,14 +51,14 @@ elseif nargin == 2
     quickflag = 2;
 data_type = '';
 elseif nargin == 1
-    site = year;
-    year = [];
+    site = year_in;
+    year_in = [];
 end
 
 
 
-if nargin <=4 && isempty(year)
-    year = input('Enter Years to process, as integer (e.g. 2008) or sequence (e.g. 2003:2008): ');
+if nargin <=4 && isempty(year_in)
+    year_in = input('Enter Years to process, as integer (e.g. 2008) or sequence (e.g. 2003:2008): ');
 end
 
 %%% If data_type is 'sapflow', we'll change the site to be <site>_sapflow:
@@ -66,10 +66,10 @@ if strcmp(data_type,'sapflow')==1
     site = [site '_sapflow'];
 end
 
-% Makes sure that year is a string:
-if ischar(year)
+% Makes sure that year_in is a string:
+if ischar(year_in)
     disp('please put year into program as an integer (e.g. 2008) or set of integers (e.g. 2008:2009).')
-    year = input('Enter year: > ');
+    year_in = input('Enter year: > ');
 end
 sitename_converter = ...
     {'TP39' 'ON-WPP39'; ...
@@ -175,7 +175,7 @@ header = jjb_hdr_read([master_header_path site '_master_list.csv'],',');
 [r_header c_header] = size(header);
 % Add more rows of NaNs if header has more variables than master is aware
 % of:
-yr_end = 2020;
+yr_end = year(now) + 1;
 yr_start = 2002;  
 
 switch site
@@ -267,16 +267,16 @@ end
 %%% Load data year by year and place into appropriate spot in master file
 
 % data_type = char(header{:,4});
-for k = 1:1:length(year)
-    %year(k)
+for k = 1:1:length(year_in)
+    %year_in(k)
     disp('=============================================='); %line break
-    disp([site '. Working on year: ' num2str(year(k)) '.']);
+    disp([site '. Working on year: ' num2str(year_in(k)) '.']);
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Load met data: %%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %% 1. Data from /Final_Cleaned/
-    %     if year(k) > 2007 || (year(k) > 2006 && strcmp(site, 'TP39')==1)
+    %     if year_in(k) > 2007 || (year_in(k) > 2006 && strcmp(site, 'TP39')==1)
     %     if proceed.met_cleaned >0
     disp('---- Final Cleaned Met ----');
     %%% Find all cases where 'met' is in 4th column of header, and 'Final_Cleaned'
@@ -285,7 +285,7 @@ for k = 1:1:length(year)
     %%% Load the master file:
     if ~isempty(met_cols_final_cleaned)
         try
-            met_cleaned = load([met_final_cleaned_path site '_met_cleaned_' num2str(year(k)) '.mat']);
+            met_cleaned = load([met_final_cleaned_path site '_met_cleaned_' num2str(year_in(k)) '.mat']);
             if ~iscell(met_cleaned.master.labels)
                 met_cleaned_labels = cellstr(met_cleaned.master.labels);
             else
@@ -308,7 +308,7 @@ for k = 1:1:length(year)
                     disp('Try changing strncmp to strcmp on line ~ 190, or adjusting filenames');
                 end
                 
-                master.data(master.data(:,1)==year(k), met_cols_final_cleaned(i)) = met_cleaned.master.data(:,right_col);
+                master.data(master.data(:,1)==year_in(k), met_cols_final_cleaned(i)) = met_cleaned.master.data(:,right_col);
                 disp(['Successfully updated variable: ' char(header(met_cols_final_cleaned(i))) '.']);
                 
             catch
@@ -323,7 +323,7 @@ for k = 1:1:length(year)
     
     %     end
     %% 2. Data from /Calculated4/:
-    %     if year(k) > 2007
+    %     if year_in(k) > 2007
     %     if proceed.met_calc >0
     
     %%% Find all cases where 'met' is in 4th column of header, and 'Calculated4'
@@ -340,9 +340,9 @@ for k = 1:1:length(year)
     if ~isempty(met_cols_calc4)
         try
             if strcmp(data_type,'sapflow')==1;
-            soil_calc = load([met_calc_path site '_calculated_' num2str(year(k)) '.mat']);
+            soil_calc = load([met_calc_path site '_calculated_' num2str(year_in(k)) '.mat']);
             else
-            soil_calc = load([met_calc_path site '_SHF_master_' num2str(year(k)) '.mat']);
+            soil_calc = load([met_calc_path site '_SHF_master_' num2str(year_in(k)) '.mat']);
             end
             if ~iscell(soil_calc.master.labels)
                 soil_labels = cellstr(soil_calc.master.labels);
@@ -369,7 +369,7 @@ for k = 1:1:length(year)
                     disp(['Multiple destination columns for ' var_to_find '. Taking First Instance.']);
                     disp('Try changing strncmp to strcmp on line ~ 249, or adjusting filenames');
                 end
-                master.data(master.data(:,1)==year(k), met_cols_calc4(i)) = soil_calc.master.data(:,right_col);
+                master.data(master.data(:,1)==year_in(k), met_cols_calc4(i)) = soil_calc.master.data(:,right_col);
                 disp(['Successfully updated variable: ' char(header(met_cols_calc4(i))) '.']);
                 
             catch
@@ -389,7 +389,7 @@ for k = 1:1:length(year)
     met_cols_final_filled = find(strncmp(header(:,4),'met',length('met'))==1 & strncmp(header(:,5),'Final_Filled',length('Final_Filled'))==1);
     if ~isempty(met_cols_final_filled)
         try
-            met_filled= load([met_final_filled_path site '_met_filled_' num2str(year(k)) '.mat']);
+            met_filled= load([met_final_filled_path site '_met_filled_' num2str(year_in(k)) '.mat']);
             if ~iscell(met_filled.master.labels)
                 met_filled_labels = cellstr(met_filled.master.labels);
             else
@@ -411,7 +411,7 @@ for k = 1:1:length(year)
                     disp(['Multiple destination columns for ' var_to_find '. Taking First Instance.']);
                     disp('Try changing strncmp to strcmp on line ~ 286, or adjusting filenames');
                 end
-                master.data(master.data(:,1)==year(k), met_cols_final_filled(i)) = met_filled.master.data(:,right_col);
+                master.data(master.data(:,1)==year_in(k), met_cols_final_filled(i)) = met_filled.master.data(:,right_col);
                 disp(['Successfully updated variable: ' char(header(met_cols_final_filled(i))) '.']);
             catch
                 disp(['***Cannot find variable ' var_to_find ' in /Met/Final_Filled/ file. Master Name = ' char(header(met_cols_final_filled(i)))])
@@ -433,12 +433,12 @@ for k = 1:1:length(year)
         %%%% PART 1: OTT Data:
         %%% Try to upload Water Table Height from /Calulated4/TP39_OTT:
         try
-            WT_Depth = load([ls 'Matlab/Data/Met/Calculated4/TP39_OTT/TP39_OTT_' num2str(year(k)) '.WT_Depth']);
+            WT_Depth = load([ls 'Matlab/Data/Met/Calculated4/TP39_OTT/TP39_OTT_' num2str(year_in(k)) '.WT_Depth']);
             right_col = find(strncmp(header(:,3),'WT_Depth', length('WT_Depth'))==1 & ...
                 strncmp(header(:,4),'ott', length('ott'))==1 & strncmp(header(:,5),'Final_Calculated', length('Final_Calculated'))==1);
             if numel(right_col)>1; disp('Multiple destination columns for WT_Depth.');
                 disp('Try changing strncmp to strcmp on line ~ 286, or adjusting filenames'); end
-            master.data(master.data(:,1)==year(k), right_col) = WT_Depth;
+            master.data(master.data(:,1)==year_in(k), right_col) = WT_Depth;
             clear WT_Depth right_col;
             disp('OTT Water Table Depth Updated.');
         catch
@@ -449,7 +449,7 @@ for k = 1:1:length(year)
             strncmp(header(:,5),'Final_Cleaned',length('Final_Cleaned'))==1);
         
         try
-            ott_cleaned = load([ls 'Matlab/Data/Met/Final_Cleaned/TP39_OTT/TP39_OTT_met_cleaned_' num2str(year(k)) '.mat']);
+            ott_cleaned = load([ls 'Matlab/Data/Met/Final_Cleaned/TP39_OTT/TP39_OTT_met_cleaned_' num2str(year_in(k)) '.mat']);
             if ~iscell(ott_cleaned.master.labels)
                 ott_cleaned_labels = cellstr(ott_cleaned.master.labels);
             else
@@ -471,7 +471,7 @@ for k = 1:1:length(year)
                     disp(['Multiple destination columns for ' var_to_find '. Taking First Instance.']);
                     disp('Try changing strncmp to strcmp on line ~ 341, or adjusting filenames');
                 end
-                master.data(master.data(:,1)==year(k), ott_cols_final_cleaned(i)) = ott_cleaned.master.data(:,right_col);
+                master.data(master.data(:,1)==year_in(k), ott_cols_final_cleaned(i)) = ott_cleaned.master.data(:,right_col);
                 disp(['Successfully updated variable: ' char(header(ott_cols_final_cleaned(i))) '.']);
             catch
                 disp(['***Cannot find variable ' var_to_find ' in /Met/Final_Cleaned/TP39_OTT/ file. Master Name = ' char(header(ott_cols_final_cleaned(i)))])
@@ -486,7 +486,7 @@ for k = 1:1:length(year)
             strncmp(header(:,5),'Final_Cleaned',length('Final_Cleaned'))==1);
         
         try
-            trenched_cleaned = load([ls 'Matlab/Data/Met/Final_Cleaned/TP39_trenched/TP39_trenched_met_cleaned_' num2str(year(k)) '.mat']);
+            trenched_cleaned = load([ls 'Matlab/Data/Met/Final_Cleaned/TP39_trenched/TP39_trenched_met_cleaned_' num2str(year_in(k)) '.mat']);
             if ~iscell(trenched_cleaned.master.labels)
                 trenched_cleaned_labels = cellstr(trenched_cleaned.master.labels);
             else
@@ -509,7 +509,7 @@ for k = 1:1:length(year)
                     disp(['Multiple destination columns for ' var_to_find '. Taking First Instance.']);
                     disp('Try changing strncmp to strcmp on line ~ 378, or adjusting filenames');
                 end
-                master.data(master.data(:,1)==year(k), trenched_cols_final_cleaned(i)) = trenched_cleaned.master.data(:,right_col);
+                master.data(master.data(:,1)==year_in(k), trenched_cols_final_cleaned(i)) = trenched_cleaned.master.data(:,right_col);
                 disp(['Successfully updated variable: ' char(header(trenched_cols_final_cleaned(i))) '.']);
             catch
                 disp(['***Cannot find variable ' var_to_find ' in /Met/Final_Cleaned/TP39_trenched/ file. Master Name = ' char(header(trenched_cols_final_cleaned(i)))])
@@ -531,7 +531,7 @@ for k = 1:1:length(year)
      met_cols_ppt = find(strncmp(header(:,4),'tpd_ppt',length('tpd_ppt'))==1 & strncmp(header(:,5),'Final_Cleaned',length('Final_Cleaned'))==1);
        if ~isempty(met_cols_ppt)
         try
-            tpd_ppt = load([tpd_ppt_final_cleaned_path 'TPD_PPT_met_cleaned_' num2str(year(k)) '.mat']);
+            tpd_ppt = load([tpd_ppt_final_cleaned_path 'TPD_PPT_met_cleaned_' num2str(year_in(k)) '.mat']);
             if ~iscell(tpd_ppt.master.labels)
                 ppt_labels = cellstr(tpd_ppt.master.labels);
             else
@@ -555,7 +555,7 @@ for k = 1:1:length(year)
                 end
                 
                 %             right_col = min(find(strncmp(ppt_labels(:,1),var_to_find,length(var_to_find))==1));
-                master.data(master.data(:,1)==year(k), met_cols_ppt(i)) = tpd_ppt.master.data(:,right_col);
+                master.data(master.data(:,1)==year_in(k), met_cols_ppt(i)) = tpd_ppt.master.data(:,right_col);
                 disp(['Successfully updated variable: ' char(header(met_cols_ppt(i))) '.']);
                 
             catch
@@ -575,7 +575,7 @@ for k = 1:1:length(year)
     met_cols_ppt = find(strncmp(header(:,4),'ppt',length('ppt'))==1 & strncmp(header(:,5),'Final_Filled',length('Final_Filled'))==1);
     if ~isempty(met_cols_ppt)
         try
-            ppt_filled = load([ppt_final_filled_path 'TP_PPT_filled_' num2str(year(k)) '.mat']);
+            ppt_filled = load([ppt_final_filled_path 'TP_PPT_filled_' num2str(year_in(k)) '.mat']);
             if ~iscell(ppt_filled.master.labels)
                 ppt_labels = cellstr(ppt_filled.master.labels);
             else
@@ -599,7 +599,7 @@ for k = 1:1:length(year)
                 end
                 
                 %             right_col = min(find(strncmp(ppt_labels(:,1),var_to_find,length(var_to_find))==1));
-                master.data(master.data(:,1)==year(k), met_cols_ppt(i)) = ppt_filled.master.data(:,right_col);
+                master.data(master.data(:,1)==year_in(k), met_cols_ppt(i)) = ppt_filled.master.data(:,right_col);
                 disp(['Successfully updated variable: ' char(header(met_cols_ppt(i))) '.']);
                 
             catch
@@ -629,8 +629,8 @@ for k = 1:1:length(year)
             try
                 data_to_load = header{param_cols(i),3}; % String with name to input into params
             right_col = str2num(header{param_cols(i),5}); % column number to load
-            eval(['params_data = params(' num2str(year(k)) ',''' site ''',''' data_to_load ''');']);
-            master.data(master.data(:,1)==year(k), param_cols(i)) = params_data(:,right_col);
+            eval(['params_data = params(' num2str(year_in(k)) ',''' site ''',''' data_to_load ''');']);
+            master.data(master.data(:,1)==year_in(k), param_cols(i)) = params_data(:,right_col);
              disp(['Successfully updated variable: ' char(header(param_cols(i))) '.']);
 
             catch
@@ -655,7 +655,7 @@ for k = 1:1:length(year)
     cpec_cols_final_cleaned = find(strncmp(header(:,4),'cpec',length('cpec'))==1 & strncmp(header(:,5),'Final_Cleaned',length('Final_Cleaned'))==1);
     if ~isempty(cpec_cols_final_cleaned)
         try
-            cpec_cleaned = load([cpec_final_cleaned_path site '_CPEC_cleaned_' num2str(year(k)) '.mat']);
+            cpec_cleaned = load([cpec_final_cleaned_path site '_CPEC_cleaned_' num2str(year_in(k)) '.mat']);
             if ~iscell(cpec_cleaned.master.labels)
                 cpec_cleaned_labels = cellstr(cpec_cleaned.master.labels);
             else
@@ -678,7 +678,7 @@ for k = 1:1:length(year)
                     disp(['Multiple destination columns for ' var_to_find '. Taking First Instance.']);
                     disp('Try changing strncmp to strcmp on line ~ 461, or adjusting filenames');
                 end
-                master.data(master.data(:,1)==year(k), cpec_cols_final_cleaned(i)) = cpec_cleaned.master.data(:,right_col);
+                master.data(master.data(:,1)==year_in(k), cpec_cols_final_cleaned(i)) = cpec_cleaned.master.data(:,right_col);
                 disp(['Successfully updated variable: ' char(header(cpec_cols_final_cleaned(i))) '.']);
                 
             catch
@@ -704,8 +704,8 @@ for k = 1:1:length(year)
             tag_to_find = header{cpec_cols_final_gf(j),5};
             try
                 right_struct = find(strcmp(tag_to_find,cpec_gf_NEE.master(1).taglist)==1);
-                master.data(master.data(:,1)==year(k), cpec_cols_final_gf(j)) = ...
-                    eval(['cpec_gf_NEE.master(right_struct).' filled_type '(cpec_gf_NEE.master(right_struct).Year == year(k),1);']);
+                master.data(master.data(:,1)==year_in(k), cpec_cols_final_gf(j)) = ...
+                    eval(['cpec_gf_NEE.master(right_struct).' filled_type '(cpec_gf_NEE.master(right_struct).Year == year_in(k),1);']);
                 disp(['Successfully Updated ' filled_type ' for ' tag_to_find]);
             catch err_gf
                 if abs(quickflag)==2
@@ -731,8 +731,8 @@ for k = 1:1:length(year)
             tag_to_find = header{cpec_cols_final_gf(j),5};
             try
                 right_struct = find(strcmp(tag_to_find,cpec_gf_LE_H.master(1).taglist)==1);
-                master.data(master.data(:,1)==year(k), cpec_cols_final_gf(j)) = ...
-                    eval(['cpec_gf_LE_H.master(right_struct).' filled_type '(cpec_gf_LE_H.master(right_struct).Year == year(k),1);']);
+                master.data(master.data(:,1)==year_in(k), cpec_cols_final_gf(j)) = ...
+                    eval(['cpec_gf_LE_H.master(right_struct).' filled_type '(cpec_gf_LE_H.master(right_struct).Year == year_in(k),1);']);
                 disp(['Successfully Updated ' filled_type ' for ' tag_to_find]);
             catch err_gf
                 if abs(quickflag)==2
@@ -753,7 +753,7 @@ for k = 1:1:length(year)
     % Load the master file:
     if ~isempty(cpec_cols_final_calc)
     try
-        CPEC_calc = load([cpec_final_calc_path site '_CPEC_calculated_' num2str(year(k)) '.mat']);
+        CPEC_calc = load([cpec_final_calc_path site '_CPEC_calculated_' num2str(year_in(k)) '.mat']);
         if ~iscell(CPEC_calc.master.labels)
             CPEC_calc_labels = cellstr(CPEC_calc.master.labels);
         else
@@ -770,7 +770,7 @@ for k = 1:1:length(year)
             right_col = min(find(strncmp(CPEC_calc_labels(:,1),var_to_find,length(var_to_find))==1));
             if numel(right_col)>1; disp(['Multiple destination columns for ' var_to_find '.']);
                 disp('Try changing strncmp to strcmp on line ~ 484, or adjusting filenames'); end
-            master.data(master.data(:,1)==year(k), cpec_cols_final_calc(i)) = CPEC_calc.master.data(:,right_col);
+            master.data(master.data(:,1)==year_in(k), cpec_cols_final_calc(i)) = CPEC_calc.master.data(:,right_col);
             disp(['Successfully updated variable: ' char(header(cpec_cols_final_calc(i))) '.']);
         catch
             if isempty(findstr(var_to_find, 'filled'))
@@ -817,7 +817,7 @@ for k = 1:1:length(year)
                 disp(['Multiple destination columns for ' var_to_find '. Taking First Instance.']);
                 disp('Try changing strncmp to strcmp on line ~ 461, or adjusting filenames');
             end
-            master.data(master.data(:,1)==year(k), opec_cols_final_calc(i)) = OPEC_calc.master.data(OPEC_calc.master.data(:,2)==year(k),right_col);
+            master.data(master.data(:,1)==year_in(k), opec_cols_final_calc(i)) = OPEC_calc.master.data(OPEC_calc.master.data(:,2)==year_in(k),right_col);
             disp(['Successfully updated variable: ' char(header(opec_cols_final_calc(i))) '.']);
         catch
             if isempty(findstr(var_to_find, 'filled'))
@@ -839,8 +839,8 @@ for k = 1:1:length(year)
         for i = 1:1:length(fp_cols)
             var_to_find = char(header(fp_cols(i),3)); try var_to_find(var_to_find(1,:)==' ') = ''; catch; end
             try
-                eval(['master.data(master.data(:,1)==year(k), fp_cols(i)) = footprint_flag.' ...
-                    var_to_find '(footprint_flag.' var_to_find '(:,1)==year(k),2);';])
+                eval(['master.data(master.data(:,1)==year_in(k), fp_cols(i)) = footprint_flag.' ...
+                    var_to_find '(footprint_flag.' var_to_find '(:,1)==year_in(k),2);';])
                 disp(['Successfully loaded ' var_to_find '.']);
                 
             catch
@@ -870,9 +870,9 @@ for k = 1:1:length(year)
         err_flag = 0;
         try
             master_col = mcm_find_right_col(header(:,3), char(new_varnames(j,1)));
-            CPEC_data = master.data(master.data(:,1)==year(k), mcm_find_right_col(header(:,1), [char(vars(j,1)) '_CPEC']));
+            CPEC_data = master.data(master.data(:,1)==year_in(k), mcm_find_right_col(header(:,1), [char(vars(j,1)) '_CPEC']));
             try
-                OPEC_data = master.data(master.data(:,1)==year(k), mcm_find_right_col(header(:,1), [char(vars(j,1)) '_OPEC']));
+                OPEC_data = master.data(master.data(:,1)==year_in(k), mcm_find_right_col(header(:,1), [char(vars(j,1)) '_OPEC']));
             catch
                 err_flag = 1;
             end
@@ -880,11 +880,11 @@ for k = 1:1:length(year)
                 OPEC_data = NaN.*ones(size(CPEC_data,1),1);
             end
             
-            data_tmp = NaN.*ones(length(find(master.data(:,1)==year(k))),1);
+            data_tmp = NaN.*ones(length(find(master.data(:,1)==year_in(k))),1);
             data_tmp = CPEC_data;
             data_tmp(isnan(data_tmp),1) = OPEC_data(isnan(data_tmp),1);
             
-            master.data(master.data(:,1)==year(k),master_col) = data_tmp;
+            master.data(master.data(:,1)==year_in(k),master_col) = data_tmp;
             %         plot(master.data(:,master_col))
             clear data_tmp CPEC_data OPEC_data master_col
         catch
@@ -919,8 +919,8 @@ for k = 1:1:length(year)
     try
         master_col_in = mcm_find_right_col(header(:,3), 'NEE_all');
         master_col_out = mcm_find_right_col(header(:,3), 'NEP_all');
-        data_in_tmp = master.data(master.data(:,1)==year(k),master_col_in);
-        master.data(master.data(:,1)==year(k),master_col_out) = data_in_tmp.*-1;
+        data_in_tmp = master.data(master.data(:,1)==year_in(k),master_col_in);
+        master.data(master.data(:,1)==year_in(k),master_col_out) = data_in_tmp.*-1;
         
         clear data_in_tmp master_col_in master_col_out
         disp('Successfully created NEP from NEE');
@@ -930,11 +930,11 @@ for k = 1:1:length(year)
         end  
         
 %% Trim unwanted halfhours from data, if 'data_remove' variable is set in params.m
-data_remove = params(year,site,'Trim');
+data_remove = params(year_in(k),site,'Trim');
 if ~isempty(data_remove)
-    tmp = master.data(master.data(:,1)==year,:);
+    tmp = master.data(master.data(:,1)==year_in(k),:);
     tmp(data_remove(1):data_remove(2),7:end) = NaN;
-    master.data(master.data(:,1)==year,:) = tmp;
+    master.data(master.data(:,1)==year_in(k),:) = tmp;
     clear tmp
 end
 end
@@ -1111,7 +1111,7 @@ else
     ccp_go = input('Enter <1> to output, or <enter> to skip: > ');
     if ccp_go == 1
         try
-            mcm_CCP_output(year,site,CCP_out_path,[]);
+            mcm_CCP_output(year_in,site,CCP_out_path,[]);
             disp('CCP data ouputted successfully.');
         catch CCP_err
             disp('***Error outputting CCP data (see below):')
