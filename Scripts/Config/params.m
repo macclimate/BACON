@@ -1218,7 +1218,7 @@ switch site
                 % Final Flux Calculation (OPEC_Fluxes)
                 GEPcutstart = 151; GEPcutend = 273; corr_1 = 1; corr_2 = 0;
                 % Footprint Information (measurement and tree height)
-                z_meas = 10; z_tree = 7.28;
+                z_meas = 10; z_tree = 7.85; % Linearly interpolated between 2018 and 2021
                 
                 %%% ALL 2020 VALUES STRAIGHT UP COPIED FROM 2017 - REPLACE!!
             case '2020'
@@ -1231,7 +1231,7 @@ switch site
                 % Final Flux Calculation (OPEC_Fluxes)
                 GEPcutstart = 151; GEPcutend = 273; corr_1 = 1; corr_2 = 0;
                 % Footprint Information (measurement and tree height)
-                z_meas = 10; z_tree = 7.28;
+                z_meas = 10; z_tree = 8.42; % Linearly interpolated between 2018 and 2021
             case '2021'         % COPIED FROM 2020 - UPDATE NEEDED!
                 % CO2 storage
                 z(1:7509) = 8; z(7510:17520) = 11.1;
@@ -1244,7 +1244,7 @@ switch site
                 GEPcutstart = 151; GEPcutend = 273; corr_1 = 1; corr_2 = 0;
                 % Footprint Information (measurement and tree height)
                 z_meas(1:7509) = 10; z_meas(7510:17520) = 13.1;
-                z_tree = 8.5; % Updated for 2021
+                z_tree = 9.0; % Updated for 2021
             case '2022'         % COPIED FROM 2020 - UPDATE NEEDED!
                 % CO2 storage
                 z = 8; ztop = 8; zcpy = 0; col_flag = 1;
@@ -1255,7 +1255,7 @@ switch site
                 % Final Flux Calculation (OPEC_Fluxes)
                 GEPcutstart = 151; GEPcutend = 273; corr_1 = 1; corr_2 = 0;
                 % Footprint Information (measurement and tree height)
-                z_meas = 13.1; z_tree = 8.5; % Copied from 2021
+                z_meas = 13.1; z_tree = 9; % Copied from 2021
         end
         
         
@@ -1377,8 +1377,8 @@ switch site
                 z_meas = 36.6; z_tree = 25.7; %% REPLACE!!
                 
                 % Growing Season Start and End Dates:
-                gs_start = 120;
-                gs_end = 313;
+                gs_start = 121;
+                gs_end = 304;
                 
                 %%% ALL 2019 VALUES STRAIGHT UP COPIED FROM 2017 - REPLACE!!
             case '2019'
@@ -1389,8 +1389,8 @@ switch site
                 z_meas = 36.6; z_tree = 25.7; %% REPLACE!!
                 
                 % Growing Season Start and End Dates:
-                gs_start = 120;
-                gs_end = 313;
+                gs_start = 121;
+                gs_end = 304;
                 
                 %%% ALL 2020 VALUES STRAIGHT UP COPIED FROM 2017 - REPLACE!!
             case '2020'
@@ -1411,8 +1411,8 @@ switch site
                 z_meas = 36.6; z_tree = 26.5; %% Updated for 2021!!
                 
                 % Growing Season Start and End Dates:
-                gs_start = 120;
-                gs_end = 313;
+                gs_start = 121;
+                gs_end = 304;
             case '2022' % COPIED FROM 2020 -- UPDATE!!
                 % CO2 storage
                 z = 31; ztop = 20; zcpy = 11; col_flag = 2;
@@ -1421,8 +1421,8 @@ switch site
                 z_meas = 36.6; z_tree = 26.5; % Copied from 2021
                 
                 % Growing Season Start and End Dates:
-                gs_start = 120;
-                gs_end = 313;
+                gs_start = 121;
+                gs_end = 304;
             otherwise
         end
         
