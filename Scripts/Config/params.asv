@@ -1218,7 +1218,7 @@ switch site
                 % Final Flux Calculation (OPEC_Fluxes)
                 GEPcutstart = 151; GEPcutend = 273; corr_1 = 1; corr_2 = 0;
                 % Footprint Information (measurement and tree height)
-                z_meas = 10; z_tree = 7.85;
+                z_meas = 10; z_tree = 7.85; % Linearly interpolated between 2018 and 2021
                 
                 %%% ALL 2020 VALUES STRAIGHT UP COPIED FROM 2017 - REPLACE!!
             case '2020'
@@ -1255,7 +1255,7 @@ switch site
                 % Final Flux Calculation (OPEC_Fluxes)
                 GEPcutstart = 151; GEPcutend = 273; corr_1 = 1; corr_2 = 0;
                 % Footprint Information (measurement and tree height)
-                z_meas = 13.1; z_tree = 8.5; % Copied from 2021
+                z_meas = 13.1; z_tree = 9; % Copied from 2021
         end
         
         
@@ -1598,10 +1598,10 @@ switch site
                 
                 
             case '2021' %% NEEDS TO BE UPDATED
-                                % Coordinates updated by JJB 2021-01-01 | original (commented) by EB 9/17
+                % Coordinates updated by JJB 2021-01-01 | original (commented) by EB 9/17
                 % In UTM: 17N 553367 4727120
-                lat = 42.696126; 
-                long = 80.348781; 
+                lat = 42.696126;
+                long = 80.348781;
                 elev = 215; % Elevation in masl
                 
                 %         %%% 'fetch' defines the dimensions of the measurement site.
@@ -1626,7 +1626,7 @@ switch site
                         fetch = [[0 14 64 67 80 85 114 117 130 130 154 167 167 178 217 228]'... % sector start bearing
                             [14 64 67 80 85 114 117 130 130 154 167 167 178 217 228 360]'...         % sector end bearing
                             [157 301 350 640 523 611 516 146 152 239 286 304 411 432 262 232]'...  % sector start distance (m)
-                            [301 350 640 523 611 516 146 152 239 286 304 411 432 262 232 157]' ]; % sector end distance (m)                        
+                            [301 350 640 523 611 516 146 152 239 286 304 411 432 262 232 157]' ]; % sector end distance (m)
                 end
                 
                 
@@ -1638,7 +1638,7 @@ switch site
                 col_flag = 1; % =1 for one-height CO2 storage measurement, =2 for two-height
                 gs_start = 154; % emerged from the ground ~02 June
                 gs_end = 317; % Harvested on 12-Nov. May need to adjust this to consider that corn may have stopped photosynthesizing well before that
-%                 z_tree = 0;
+                %                 z_tree = 0;
                 %%%% Need to calculate z_tree (crop height) as a variable quantity:
                 % Corn came out of the ground and were ~5 cm tall on 02 June 2020
                 % Corn was 0.15 to 0.5 cm (~6-20 inch) high and well grown on 14 June 2020
@@ -1655,11 +1655,11 @@ switch site
                 z_tree(9362:15168,1) = z_tree(9361,1); % consistent height
                 z_tree(z_tree<0,1) = 0; % Before emergence
                 z_tree(15169:end,1) = 0; % After harvest
-               
+                
                 
             otherwise
-        end 
-       % #################################################################
+        end
+        % #################################################################
     case 'TP_PPT'
         z_meas = 2;
         z_tree = 0;
@@ -1672,23 +1672,41 @@ end
 %% Modifications to height variables associated with Footprint and CO2_storage calculations,
 %%% to make them half-hourly values instead of a single value for a year
 %%% Added 30-Jan-2015 by JJB
-if numel(z_meas)==1
-    z_meas = repmat(z_meas,yr_length(str2num(year),options.time_int),1);
+if exist(z_meas,'var')==1; if numel(z_meas)==1; z_meas = repmat(z_meas,yr_length(str2num(year),options.time_int),1); end; else; end;
+
+if exist(z_tree,'var')==1
+    if numel(z_tree)==1
+        z_tree = repmat(z_tree,yr_length(str2num(year),options.time_int),1);
+    end
+else
 end
-if numel(z_tree)==1
-    z_tree = repmat(z_tree,yr_length(str2num(year),options.time_int),1);
+
+if exist(z,'var')==1
+    if numel(z)==1
+        z = repmat(z,yr_length(str2num(year),options.time_int),1);
+    end
+else
 end
-if numel(z)==1
-    z = repmat(z,yr_length(str2num(year),options.time_int),1);
+
+if exist(ztop,'var')==1
+    if numel(ztop)==1
+        ztop = repmat(ztop,yr_length(str2num(year),options.time_int),1);
+    end
+else
 end
-if numel(ztop)==1
-    ztop = repmat(ztop,yr_length(str2num(year),options.time_int),1);
+
+if exist(zcpy,'var')==1
+    if numel(zcpy)==1
+        zcpy = repmat(zcpy,yr_length(str2num(year),options.time_int),1);
+    end
+else
 end
-if numel(zcpy)==1
-    zcpy = repmat(zcpy,yr_length(str2num(year),options.time_int),1);
-end
-if numel(col_flag)==1
-    col_flag = repmat(col_flag,yr_length(str2num(year),options.time_int),1);
+
+if exist(col_flag,'var')==1
+    if numel(col_flag)==1
+        col_flag = repmat(col_flag,yr_length(str2num(year),options.time_int),1);
+    end
+else
 end
 
 %% This Section controls the parameters outputted, based on which program calls it

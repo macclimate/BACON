@@ -132,3 +132,9 @@ Kljun_SiteOnly_75flag,flag,Kljun75,footprint,Final_Calculated,NaN,NaN,Kljun_Site
 Kljun_SiteOnly_80flag,flag,Kljun80,footprint,Final_Calculated,NaN,NaN,Kljun_SiteOnly_80flag,Kljun_SiteOnly_80flag,Kljun_SiteOnly_80flag,NaN,Kljun_SiteOnly_80flag,,NaN
 TBRG_Rain_Clearing_2m,mm,TP02_PPT,ppt,Final_Filled,NaN,%6.4f,TP02_PPT_filled,TP02_PPT_filled,TP02_PPT_filled,TP02_PPT_filled,TP02_PPT_filled,PREC,P_RAIN_F_2_1_1
 VapourPressureDeficit_AbvCnpy,hPa,VPD,met,Final_Filled,NaN,%6.4f,VPD,VPD,VPD,VPD,VPD,VPD,VPD_F
+GapFilledREPool_GEP,umol/m2/s,GEP_filled,gapfilled_NEE,SiteSpec_REPool_region,NaN,NaN,NaN,GEP_filled_REPool_region,GEP_filled_REPool_region,NaN,GEP_filled_REPool_region,,NaN
+GapFilledREPool_R,umol/m2/s,RE_filled,gapfilled_NEE,SiteSpec_REPool_region,NaN,NaN,NaN,R_filled_REPool_region,R_filled_REPool_region,NaN,R_filled_REPool_region,,NaN
+GapFilledREPool_NEE,umol/m2/s,NEE_filled,gapfilled_NEE,SiteSpec_REPool_region,NaN,NaN,NaN,NEE_filled_REPool_region,NEE_filled_REPool_region,NaN,NEE_filled_REPool_region,,NaN
+GapFilledREPool_SiteOnly_GEP,umol/m2/s,GEP_filled,gapfilled_NEE,SiteSpec_REPool_inbnds,NaN,NaN,NaN,GEP_filled_REPool_inbounds,GEP_filled_REPool_inbounds,NaN,GEP_filled_REPool_inbounds,,NaN
+GapFilledREPool_SiteOnly_R,umol/m2/s,RE_filled,gapfilled_NEE,SiteSpec_REPool_inbnds,NaN,NaN,NaN,R_filled_REPool_inbounds,R_filled_REPool_inbounds,NaN,R_filled_REPool_inbounds,,NaN
+GapFilledREPool_SiteOnly_NEE,umol/m2/s,NEE_filled,gapfilled_NEE,SiteSpec_REPool_inbnds,NaN,NaN,NaN,NEE_filled_REPool_inbounds,NEE_filled_REPool_inbounds,NaN,NEE_filled_REPool_inbounds,,NaN

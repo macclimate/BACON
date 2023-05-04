@@ -368,6 +368,14 @@ for year_ctr = year_start:1:year_end
                     output([8270 10658 10693:10697 10733 10805 10970 13819 14166 14660:14726 15465:15536 15565:15582 15605 15606 16272:16275 16303:16329 16868 16878 16879 16890 16929 16966 17032 17123:17125 17143 17447],[1:3]) = NaN;
                     % SMDR 2 20cm
                     output([8105:10000 13819],15) = NaN;
+                case '2022'
+                     output([7331 7709],11) = NaN;
+                     output([5313],13) = NaN;
+                     output([5363 6494 7332 7709 10390 11220 12500],29) = NaN;
+                     output([6494 7431 10390 12500],30) = NaN;
+                     output([1650 2378 15530 17270],31) = NaN;
+                     output([7331 7709],32) = NaN;
+                     output([5313 5363 7711 16190 17230],78) = NaN;
             end
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         case 'TP39_sapflow'
@@ -4177,6 +4185,42 @@ output([178 4223 7430 14267],[86]) = NaN; % CO2 cnpy
             %SoilTempA50cm spike
             output([16370],21) = NaN;
             output([15882 16364:16365],[13 14 20 21]) = NaN;
+            
+            %%% Fill in wind speed data with 
+            % Load WS and WDir from Flux (CSAT data):
+                CPEC_tmp = load([loadstart 'Matlab\Data\Flux\CPEC\TPAg\Final_Cleaned\TPAg_CPEC_cleaned_2021.mat']);
+                output(:,26) = CPEC_tmp.master.data(:,38); %output(12311,26) = NaN;% wind speed
+                output(:,27) = CPEC_tmp.master.data(:,39); % wind direction
+                output(:,28) = CPEC_tmp.master.data(:,15); %output(11531:11543,28) = NaN; % Pressure
+               
+                % "D:\Matlab\Data\Flux\CPEC\TPAg\Final_Cleaned\TPAg_CPEC_cleaned_2020.mat"
+                clear CPEC_tmp
+               %%% Investigate wind direction offset between TPAg and TP74
+                CPEC_TP74 = load([loadstart 'Matlab\Data\Met\Final_Cleaned\TP74\TP74_met_cleaned_2021.mat']);
+                TP74_WDir = CPEC_TP74.master.data(:,5);
+                dir_diff = output(:,27) - TP74_WDir;
+
+                % Plot timeseries of TPAg and TP74 Wind Dir
+%                 figure(73);clf;
+%                 plot(output(:,27),'b'); hold on;
+%                 plot(TP74_WDir,'r');
+%                 legend('TPAg','TP74');
+                % Plot histogram of TPAg - TP74 wind dir
+                dir_diff(dir_diff<-180) = dir_diff(dir_diff<-180)+360; % Transform when TPAg when difference spans 0/360 boundary
+                xbins = -200:10:200;
+                figure(74);
+                hist(dir_diff,xbins);
+                axis([-100 100 0 3100]); hold on;
+                h1(1) = plot([nanmean(dir_diff) nanmean(dir_diff)],[0 3100],'r-');
+                h1(2) = plot([nanmedian(dir_diff) nanmedian(dir_diff)],[0 3100],'g--');
+                legend(h1,{['mean = ' num2str(round(nanmean(dir_diff)))],['median = ' num2str(round(nanmedian(dir_diff)))]});
+                xlabel('WDir Offset (TPAg - TP74)');
+                ylabel('count');
+               %%% Correct wind direction offset 
+                output(:,27) = output(:,27) - nanmean(dir_diff);
+                output(output(:,27)<0,27) = output(output(:,27)<0,27)+360;
+
+            
             end
 
         case 'TP_VDT'

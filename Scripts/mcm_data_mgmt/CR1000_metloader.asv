@@ -307,12 +307,12 @@ for fn = 1:1:length(load_files)
                 end
                 %%%%% Added 14-March, 2023 by JJB
                 if iscell(tmp_data{1,k})==1
-                data(row_ctr:row_ctr+rows_to_add-1,k) = datenum(cell2mat(tmp_data{1,k})); % start at column 2 and then add timevec back in later
+                    
                 else
+                
+                
                 data(row_ctr:row_ctr+rows_to_add-1,k) = tmp_data{1,k}; % start at column 2 and then add timevec back in later
                 end
-%               data(row_ctr:row_ctr+rows_to_add-1,k) = tmp_data{1,k}; % start at column 2 and then add timevec back in later
-                %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             end
             row_ctr = row_ctr + rows_to_add;
             clear tmp_data rows_to_add;

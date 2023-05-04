@@ -253,9 +253,9 @@ for year_ctr = year_start:1:year_end
             
             lim_range = up_lim - low_lim;
 
-            axis([1   length(save_output(:,i))    low_lim-0.5*lim_range     up_lim+0.5*lim_range]);
+            axis([1 length(save_output(:,i)) low_lim-0.5*lim_range up_lim+0.5*lim_range]);
             title(var_names(i,:));
-%              title([var_names(vars30(i),:) ', col: ' num2str(vars30(i))]);
+            %title([var_names(vars30(i),:) ', col: ' num2str(vars30(i))]);
             
             %%%% Do a survey of # points above/below the threshold:
             ind_above = find(save_output(:,i)> up_lim);

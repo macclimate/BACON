@@ -65,6 +65,15 @@ while j <= size(master.labels,1)
         %         f1 = figure('Name', tag_name, 'OuterPosition', op);
         f1 = figure(1); set(f1,'WindowStyle','docked');
         plot(dt_plot,master.data(ind,j),'b.-');
+        %%%%% Added 2023-04-16 by JJB to plot red 'x' where there are NaNs.
+        % Look for NaNs
+        ind_nan = find(isnan(master.data(ind,j)));
+        if ~isempty(ind_nan)
+            hold on;
+            plot(dt_plot(ind_nan),repmat(nanmean(master.data(ind,j)),length(ind_nan),1),'rx')
+        end
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        
         ylabel(master.labels{j,2});
         xlabel('Date');
         title([tag_name ' -- C:' num2str(j) ' of ' num2str(size(master.labels,1))]);
