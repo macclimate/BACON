@@ -46,7 +46,7 @@ j = 1;
 % op = [723   304   518   465];
 while j <= size(master.labels,1)
     
-    tag_name = master.labels{j,1};
+    tag_name = [master.labels{j,1} ' (' master.labels{j,5} ')'];
 %     min_year = master.data(find(~isnan(master.data(:,j)),1,'first'),1);
 %     max_year = master.data(find(~isnan(master.data(:,j)),1,'last'),1);
 %     if isempty(min_year) || isempty(max_year)

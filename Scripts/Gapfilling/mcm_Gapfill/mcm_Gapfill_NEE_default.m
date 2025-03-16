@@ -324,10 +324,11 @@ format compact;
             fprintf(fid, '%s\t',sum_labels{i,1});
         end
         %%% Set up the format code:
-        format_code = '\n %4.0f\t ';
+        format_code = '%4.0f\t';
         for i = 2:1:size(master(k).sums,2)
-            format_code = [format_code '%7.1f\t '];
+            format_code = [format_code ' %7.1f\t'];
         end
+        format_code = ['\n ' format_code];
         %6.1f\t  %6.1f\t  %6.1f\t  %6.1f\t  %6.1f\t  %6.1f\t
         %%% Output the data to file:
         for i = 1:1:size(master(k).sums,1)

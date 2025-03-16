@@ -52,10 +52,15 @@ site_labels = {'TP39'; 'TP74'; 'TP02';'TPD';'TP_VDT'};
 site_refs = [1;2;4;5;7];
 TP39 = []; TP74 = []; TP02 = []; TPD = []; TP_VDT = [];
 
-else
+elseif year_ctr >=2020 && year_ctr <=2021
 site_labels = {'TP39'; 'TP74'; 'TP02';'TPD';'TPAg';'TP_VDT'};
 site_refs = [1;2;4;5;6;7];
 TP39 = []; TP74 = []; TP02 = []; TPD = []; TPAg = []; TP_VDT = [];
+
+elseif year_ctr >=2022
+site_labels = {'TP39'; 'TP74'; 'TP02';'TPD';'TPAg'};
+site_refs = [1;2;4;5;6];
+TP39 = []; TP74 = []; TP02 = []; TPD = []; TPAg = [];
 
 end
 num_sites = size(site_labels,1);
@@ -211,6 +216,9 @@ for i = 1:1:num_sites
     % making_Rn_nnet_filling.m
     data(i).net = load([save_path 'Rn_nnet/' site '_nnet.mat']);
         
+
+    
+    
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% This command restructures all the variables from temp into one
@@ -219,6 +227,7 @@ for i = 1:1:num_sites
         eval([site ' = [' site ' ;  temp(1).Ta temp(1).RH temp(1).PAR temp(1).WS];' ]);
         clear temp master;     
 end
+
 %% Step 2:  Do Some averaging for Ts 2--100cm:
 for i = 1:1:num_sites
         site = site_labels{i,1};
@@ -485,7 +494,8 @@ end
 %     site = site_labels{i,1};
 % eval([site '_filled =[' site '_filled data(i).Rn data(i).SW];']);    
 % end 
- 
+
+
 
  %% Plot data for each site and Determine if there's any data still missing:
 % varnames(1,1) = cellstr('Ta'); varnames(2,1) = cellstr('RH'); varnames(3,1) = cellstr('PAR');

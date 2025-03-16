@@ -2,7 +2,7 @@ function [q] = RH_to_SpecHum(Ta, RH, APR)
 %%% This function converts RH to Specific humidity, (in kg/kg).
 %%% Written Jan-15-2010 by JJB
 %%% usage:  [q] = RH_to_SpecHum(Ta, RH, APR)
-
+%%% where Ta is in Celsius
 
 %% Calculate VP using RH:
 

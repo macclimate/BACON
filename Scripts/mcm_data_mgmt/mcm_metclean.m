@@ -302,8 +302,21 @@ for year_ctr = year_start:1:year_end
                     thresh(thresh_row,3) = up_lim;
                     
             end
-            
+            disp(['Plotting ' var_names(vars30(i),:) '; Current thresholds: [' num2str(low_lim) ', ' num2str(up_lim) ']']);
+           
             lim_range = up_lim - low_lim;
+            %%% Inserted by JJB 2023-11-20 to flag issue when lower threshold is not lower than upper threshold.
+            if lim_range <=0
+               disp('WARNING. Lower threshold is equal to or greater than upper threshold.REVISE.');
+               disp('Resetting thresholds to min and max values. PLEASE REVISE.');
+
+               low_lim = nanmin(save_output(:,i));
+               up_lim = nanmax(save_output(:,i));
+
+            end            
+            
+            
+            
             %%% Plot lower limit
             line([1 length(save_output(:,i))],[low_lim low_lim],'Color',[1 0 0], 'LineStyle','--')
             %%% Plot upper limit

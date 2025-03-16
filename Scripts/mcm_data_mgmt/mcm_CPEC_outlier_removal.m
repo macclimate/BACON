@@ -14,19 +14,19 @@ switch var_type
     case 'Fc'
         switch site
             case 'TP39'
-                top_cut = 25; bot_cut = -45; z = 5; win_size = 30; sdev_mult = 3;
+                top_cut = 45; bot_cut = -55; z = 5; win_size = 30; sdev_mult = 3;
             case 'TP74'
-                top_cut = 25; bot_cut = -45; z = 5; win_size = 30; sdev_mult = 3;
+                top_cut = 45; bot_cut = -55; z = 5; win_size = 30; sdev_mult = 3;
             case 'TP89'
-                top_cut = 25; bot_cut = -55; z = 5; win_size = 30; sdev_mult = 3;
+                top_cut = 45; bot_cut = -55; z = 5; win_size = 30; sdev_mult = 3;
             case 'TP02'
-                top_cut = 15; bot_cut = -30; z = 5; win_size = 30; sdev_mult = 3;
+                top_cut = 45; bot_cut = -55; z = 5; win_size = 30; sdev_mult = 3;
             case 'TPD'
-                top_cut = 25; bot_cut = -45; z = 5; win_size = 30; sdev_mult = 3;
+                top_cut = 45; bot_cut = -55; z = 5; win_size = 30; sdev_mult = 3;
             case 'TPAg'
-                top_cut = 25; bot_cut = -85; z = 5; win_size = 30; sdev_mult = 3;    
+                top_cut = 45; bot_cut = -85; z = 5; win_size = 30; sdev_mult = 3;    
             case 'TP_VDT'
-                top_cut = 25; bot_cut = -85; z = 5; win_size = 30; sdev_mult = 3;    
+                top_cut = 45; bot_cut = -85; z = 5; win_size = 30; sdev_mult = 3;    
         end
         
     case 'H'
@@ -34,11 +34,11 @@ switch var_type
             case 'TP39'
                 top_cut = 800; bot_cut = -200; z = 15; win_size = 30; sdev_mult = 3;
             case 'TP74'
-                top_cut = 700; bot_cut = -100; z = 9; win_size = 30; sdev_mult = 3;
+                top_cut = 800; bot_cut = -100; z = 9; win_size = 30; sdev_mult = 3;
             case 'TP89'
                 top_cut = 800; bot_cut = -200; z = 9; win_size = 30; sdev_mult = 3;
             case 'TP02'
-                top_cut = 500; bot_cut = -100; z = 9; win_size = 30; sdev_mult = 3;
+                top_cut = 800; bot_cut = -100; z = 9; win_size = 30; sdev_mult = 3;
             case 'TPD'
                 top_cut = 800; bot_cut = -200; z = 15; win_size = 30; sdev_mult = 6;
             case 'TPAg'
@@ -50,15 +50,15 @@ switch var_type
     case 'LE'
         switch site
             case 'TP39'
-                top_cut = 700; bot_cut = -100; z = 15; win_size = 30; sdev_mult = 5.5;
+                top_cut = 800; bot_cut = -100; z = 15; win_size = 30; sdev_mult = 5.5;
             case 'TP74'
-                top_cut = 650; bot_cut = -100; z = 11; win_size = 30; sdev_mult = 5.5;
+                top_cut = 800; bot_cut = -100; z = 11; win_size = 30; sdev_mult = 5.5;
             case 'TP89'
                 top_cut = 800; bot_cut = -100; z = 9; win_size = 30; sdev_mult = 3.5;
             case 'TP02'
-                top_cut = 650; bot_cut = -100; z = 11; win_size = 30; sdev_mult = 5.5;
+                top_cut = 800; bot_cut = -100; z = 11; win_size = 30; sdev_mult = 5.5;
             case 'TPD'
-                top_cut = 650; bot_cut = -100; z = 15; win_size = 30; sdev_mult = 5.5;
+                top_cut = 800; bot_cut = -100; z = 15; win_size = 30; sdev_mult = 5.5;
             case 'TPAg'
                 top_cut = 800; bot_cut = -100; z = 15; win_size = 30; sdev_mult = 5.5;
             case 'TP_VDT'
@@ -87,11 +87,11 @@ switch var_type
             case 'TP39'
                 top_cut = 800; bot_cut = -200; %z = 9; win_size = 30; sdev_mult = 3;
             case 'TP74'
-                top_cut = 700; bot_cut = -100; %z = 9; win_size = 30; sdev_mult = 3;
+                top_cut = 800; bot_cut = -100; %z = 9; win_size = 30; sdev_mult = 3;
             case 'TP89'
                 top_cut = 800; bot_cut = -200; %z = 9; win_size = 30; sdev_mult = 3;
             case 'TP02'
-                top_cut = 500; bot_cut = -100; %z = 9; win_size = 30; sdev_mult = 3;
+                top_cut = 800; bot_cut = -100; %z = 9; win_size = 30; sdev_mult = 3;
             case 'TPD'
                 top_cut = 800; bot_cut = -200; %z = 11; win_size = 30; sdev_mult = 4;
             case 'TPAg'

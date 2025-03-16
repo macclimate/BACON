@@ -295,7 +295,18 @@ for fn = 1:1:length(load_files)
             tmp_data = textscan(fid2,format_string,200,'Delimiter',',','EmptyValue', NaN,'CommentStyle', {'N', 'N'});
             %%% Timestamp from data:
             rows_to_add = length(tmp_data{1,1});
+            %%%% 2023-11-17 - JJB - adding a catch to remove null values 
+            try 
             timestamp(row_ctr:row_ctr+rows_to_add-1,:) = char(tmp_data{1,1});
+            catch
+                disp('encountered an error on line ~300 [timestamp(row_ctr:row_ctr+rows_to_add-1,:) = char(tmp_data{1,1});]. Attempting to fix.');
+                %% attempting to scrub null values out of cell array of timestamps in tmp_data{1,1}:
+                tmp_data{1,1} = strrep(tmp_data{1,1},char(0),'');
+                % Try again. See if it resolves the issue
+                timestamp(row_ctr:row_ctr+rows_to_add-1,:) = char(tmp_data{1,1});
+                disp('error corrected by removing null values from timestamp field. Proceeding.');
+            end
+            
             for k = 2:1:length(tmp_data)
                 % fixes the case where one column may be shorter than the rest
                 % (I don't know why this would happen, but it does).
@@ -318,7 +329,7 @@ for fn = 1:1:length(load_files)
             clear tmp_data rows_to_add;
             eofstat = feof(fid2);
         catch
-            disp(['Error on row ' num2str(row_ctr) ' of file ' filedata(fn).filename ', skipping file.']);
+            disp(['Error around row ' num2str(row_ctr) ' of file ' filedata(fn).filename ', skipping file.']);
             %             disp(row_ctr);
             %             s = input('error');
             eofstat = 1;
