@@ -216,6 +216,9 @@ for year_ctr = year_start:1:year_end
         %%@@@@@@@@@@@@@@@@@@ SOIL PROBES @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         %%% Plot Soil Temperature and Moisture data from each pit to make sure that
         %%% all data is in the right place:
+%         clrs = colormap(lines(7));
+        [clrs,~] = jjb_get_plot_colors;
+        lwidths = (1:0.2:2.2)';
         
         % A. Soil Temperature:
         %Check to see where soil temperature data starts:
@@ -223,24 +226,39 @@ for year_ctr = year_start:1:year_end
         Ts_cols_B = find(strncmpi(names30(:,1),'SoilTemp_B',10)==1);
         TsA_labels = char(names30(Ts_cols_A,1));
         TsB_labels = char(names30(Ts_cols_B,1));
-        clrs = colormap(lines(7));
+        % Added 2026-11-13 %%%%%%%%%%%
+        try
+        Ts_cols_C = find(strncmpi(names30(:,1),'SoilTemp_C',10)==1);
+        TsC_labels = char(names30(Ts_cols_C,1));
+        catch
+        Ts_cols_C = [];
+        TsA_labels = '';
+        end
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
         % Uncorrected
         figure(2);clf;
         for i = 1:1:length(Ts_cols_A)
-            subplot(2,1,1)
-            hTsA(i) = plot(input_data(:,Ts_cols_A(i)),'Color',clrs(i,:)); hold on;
+            subplot(3,1,1)
+            hTsA(i) = plot(input_data(:,Ts_cols_A(i)),'Color',clrs(i,:),'LineWidth',lwidths(i,1)); hold on;
         end
         legend(hTsA,TsA_labels(:,12:end))
         title('Pit A - Temperatures -- uncorrected')
         
         for i = 1:1:length(Ts_cols_B)
-            subplot(2,1,2)
-            hTsB(i) = plot(input_data(:,Ts_cols_B(i)),'Color',clrs(i,:)); hold on;
+            subplot(3,1,2)
+            hTsB(i) = plot(input_data(:,Ts_cols_B(i)),'Color',clrs(i,:),'LineWidth',lwidths(i,1)); hold on;
         end
-        % legend(hTsB,TsB_labels(:,12:end))
-        % Current Error at Line 240 so commented out
+        try legend(hTsB,TsB_labels(:,12:end)); catch; end
         title('Pit B - Temperatures -- uncorrected')
+
+        for i = 1:1:length(Ts_cols_C)
+            subplot(3,1,3)
+            hTsC(i) = plot(input_data(:,Ts_cols_C(i)),'Color',clrs(i,:),'LineWidth',lwidths(i,1)); hold on;
+        end
+        try legend(hTsC,TsC_labels(:,12:end)); catch; end
+
+        title('Pit C - Temperatures -- uncorrected')
         
        
         % B. Soil Moisture:
@@ -249,24 +267,44 @@ for year_ctr = year_start:1:year_end
         SMA_labels = char(names30(SM_cols_A,1));
         SMB_labels = char(names30(SM_cols_B,1));
         
+        % Added 2026-11-13 %%%%%%%%%%%
+        try
+        SM_cols_C = find(strncmpi(names30(:,1),'SM_C',4)==1);
+        SMC_labels = char(names30(SM_cols_C,1));
+        catch
+        SM_cols_C = [];
+        SMC_labels = '';
+        end
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
         figure(3);clf;
         
         for i = 1:1:length(SM_cols_A)
-            subplot(2,1,1)
+            subplot(3,1,1)
             hSMA(i) = plot(input_data(:,SM_cols_A(i)),'Color',clrs(i,:)); hold on;
         end
         legend(hSMA,SMA_labels(:,6:end))
         title('Pit A - Moisture -- uncorrected')
         
         for i = 1:1:length(SM_cols_B)
-            subplot(2,1,2)
+            subplot(3,1,2)
             hSMB(i) = plot(input_data(:,SM_cols_B(i)),'Color',clrs(i,:)); hold on;
         end
 %         legend(hSMB,SMB_labels(:,6:end))
         try legend(hSMB,SMB_labels(:,6:end)); catch; end
-
         % Same as Line 240 - not working
         title('Pit B - Moisture -- uncorrected')
+        
+        for i = 1:1:length(SM_cols_C)
+            subplot(3,1,3)
+            hSMC(i) = plot(input_data(:,SM_cols_C(i)),'Color',clrs(i,:)); hold on;
+        end
+%         legend(hSMB,SMB_labels(:,6:end))
+        try legend(hSMC,SMC_labels(:,6:end)); catch; end
+        % Same as Line 240 - not working
+        title('Pit C - Moisture -- uncorrected')       
+        
+        
     end
     
     %% @@@@@@@@@@@@@@@@@@@@ SPECIFIC CLEANS TO DATA @@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -5708,39 +5746,52 @@ output([178 4223 7430 14267],[86]) = NaN; % CO2 cnpy
         %% Plot Soil variables for final inspection:
         figure(5);clf;
         for i = 1:1:length(Ts_cols_A)
-            subplot(2,1,1)
+            subplot(3,1,1)
             hTsA(i) = plot(output(:,Ts_cols_A(i)),'Color',clrs(i,:)); hold on;
         end
         legend(hTsA,TsA_labels(:,12:end))
         title('Pit A - Temperatures -- Corrected')
         
         for i = 1:1:length(Ts_cols_B)
-            subplot(2,1,2)
+            subplot(3,1,2)
             hTsB(i) = plot(output(:,Ts_cols_B(i)),'Color',clrs(i,:)); hold on;
         end
-        % legend(hTsB,TsB_labels(:,12:end))
+        try legend(hTsB,TsB_labels(:,12:end)); catch; end
         title('Pit B - Temperatures -- Corrected')
         
+        for i = 1:1:length(Ts_cols_C)
+            subplot(3,1,3)
+            hTsC(i) = plot(output(:,Ts_cols_C(i)),'Color',clrs(i,:),'LineWidth',lwidths(i,1)); hold on;
+        end
+        try legend(hTsC,TsC_labels(:,12:end)); catch; end
+        title('Pit C - Temperatures -- uncorrected')
         
         % B. Soil Moisture:
         figure(6);clf;
         
         for i = 1:1:length(SM_cols_A)
-            subplot(2,1,1)
+            subplot(3,1,1)
             hSMA(i) = plot(output(:,SM_cols_A(i)),'Color',clrs(i,:)); hold on;
         end
         
         try legend(hSMA,SMA_labels(:,6:end));  catch; end
-        
         title('Pit A - Moisture -- Corrected')
         
         for i = 1:1:length(SM_cols_B)
-            subplot(2,1,2)
+            subplot(3,1,2)
             hSMB(i) = plot(output(:,SM_cols_B(i)),'Color',clrs(i,:)); hold on;
         end
         try legend(hSMB,SMB_labels(:,6:end)); catch; end
-        
         title('Pit B - Moisture -- Corrected')
+        
+        for i = 1:1:length(SM_cols_C)
+            subplot(3,1,3)
+            hSMC(i) = plot(input_data(:,SM_cols_C(i)),'Color',clrs(i,:)); hold on;
+        end
+        try legend(hSMC,SMC_labels(:,6:end)); catch; end
+        title('Pit C - Moisture -- uncorrected')       
+        
+        
     end
     %% Output
     % Here is the problem with outputting the data:  Right now, all data in
