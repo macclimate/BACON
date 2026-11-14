@@ -141,3 +141,17 @@ Kljun_SiteOnly_70flag,flag,Kljun70,footprint,Final_Calculated,NaN,NaN,Kljun_Site
 Kljun_SiteOnly_75flag,flag,Kljun75,footprint,Final_Calculated,NaN,NaN,Kljun_SiteOnly_75flag,Kljun_SiteOnly_75flag,Kljun_SiteOnly_75flag,NaN,Kljun_SiteOnly_75flag,,NaN
 Kljun_SiteOnly_80flag,flag,Kljun80,footprint,Final_Calculated,NaN,NaN,Kljun_SiteOnly_80flag,Kljun_SiteOnly_80flag,Kljun_SiteOnly_80flag,NaN,Kljun_SiteOnly_80flag,,NaN
 VapourPressureDeficit_AbvCnpy,hPa,VPD,met,Final_Filled,NaN,%6.4f,VPD,VPD,VPD,VPD,VPD,VPD,VPD_F
+SoilTemp_C_2cm,degC,SoilTemp_C_2cm,met,Final_Cleaned,Met2,%6.3f,Ts2cmC,Ts2cmC,NaN,NaN,Ts2cmC,,TS_3_1_1
+SoilTemp_C_5cm,degC,SoilTemp_C_5cm,met,Final_Cleaned,Met2,%6.3f,Ts5cmC,Ts5cmC,NaN,NaN,Ts5cmC,,TS_3_2_1
+SoilTemp_C_10cm,degC,SoilTemp_C_10cm,met,Final_Cleaned,Met2,%6.3f,Ts10cmC,Ts10cmC,NaN,NaN,Ts10cmC,,TS_3_3_1
+SoilTemp_C_20cm,degC,SoilTemp_C_20cm,met,Final_Cleaned,Met2,%6.3f,Ts20cmC,Ts20cmC,NaN,NaN,Ts20cmC,,TS_3_4_1
+SoilTemp_C_50cm,degC,SoilTemp_C_50cm,met,Final_Cleaned,Met2,%6.3f,Ts50cmC,Ts50cmC,NaN,NaN,Ts50cmC,,TS_3_5_1
+SoilTemp_C_100cm,degC,SoilTemp_C_100cm,met,Final_Cleaned,Met2,%6.3f,Ts100cmC,Ts100cmC,NaN,NaN,Ts100cmC,,TS_3_6_1
+VWC_C_2cm,m3/m3,SM_C_2cm,met,Final_Cleaned,SM2,%6.4f,SM5cmC,SM5cmC,NaN,NaN,SM5cmC,,SWC_3_1_1
+VWC_C_5cm,m3/m3,SM_C_5cm,met,Final_Cleaned,SM2,%6.4f,SM5cmC,SM5cmC,NaN,NaN,SM5cmC,SWC1c,SWC_3_2_1
+VWC_C_10cm,m3/m3,SM_C_10cm,met,Final_Cleaned,SM2,%6.4f,SM10cmC,SM10cmC,NaN,NaN,SM10cmC,SWC2c,SWC_3_3_1
+VWC_C_20cm,m3/m3,SM_C_20cm,met,Final_Cleaned,SM2,%6.4f,SM20cmC,SM20cmC,NaN,NaN,SM20cmC,,SWC_3_4_1
+VWC_C_50cm,m3/m3,SM_C_50cm,met,Final_Cleaned,SM2,%6.4f,SM50cmC,SM50cmC,NaN,NaN,SM50cmC,,SWC_3_5_1
+VWC_C_100cm,m3/m3,SM_C_100cm,met,Final_Cleaned,SM2,%6.4f,SM100cmC,SM100cmC,NaN,NaN,SM100cmC,,SWC_3_6_1
+VWC_C_0_30cm_avg,m3/m3,SM_C_30_avg,met,Final_Filled,NaN,NaN,SM_c,SM_c,SM_c,SM_c,SM_c,,NaN
+VWC_C_0_30cm,m3/m3,SM_C_30_filled,met,Final_Filled,SM3,%6.4f,SM_c_filled,SM_c_filled,SM_c_filled,SM_c_filled,SM_c_filled,,NaN

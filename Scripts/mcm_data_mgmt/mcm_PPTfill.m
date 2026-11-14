@@ -69,12 +69,17 @@ for year_ctr = year_start:1:year_end
     
     %% Load data from different rain guages:
     [~, ~, ~, dt] = jjb_makedate(year_ctr, 30);
-    % A: TP_PPT
-    %%% GEONOR guage
+    % A: TP_PPT (Up to 2025):
+    if year_ctr <= 2025
     GEO_PPT = load([load_dir 'TP_PPT/TP_PPT_' yr_str '.GN_Precip']);
     TX_PPT =  load([load_dir 'TP_PPT/TP_PPT_' yr_str '.TX_Rain']);
-    % B: TP39:
+    else
+        GEO_PPT = NaN.*ones(length(dt),1);
+        TX_PPT = NaN.*ones(length(dt),1);
+    end
+    
     try
+        % B: TP39:
         TP39 = load([load_dir 'TP39/TP39_met_cleaned_' yr_str '.mat']);
         if year_ctr >=2007
             TP39_PPT = load_from_master(TP39.master,'CS_Rain');
@@ -82,21 +87,45 @@ for year_ctr = year_start:1:year_end
             TP39_PPT = load_from_master(TP39.master,'RMY_Rain');
         end
         Ta = load_from_master(TP39.master,'AirTemp_AbvCnpy');
-        % C. TP02:
+        
+        % C. TP02 (up to 2026):
+        if year <=2026
         TP02 = load([load_dir 'TP02/TP02_met_cleaned_' yr_str '.mat']);
         TP02_PPT = load_from_master(TP02.master,'Rain');
+        else
+            TP02_PPT = NaN.*ones(length(dt),1);
+        end
+
         % D. TPD:
         if year_ctr >=2013
         TPD = load([load_dir 'TPD_PPT/TPD_PPT_met_cleaned_' yr_str '.mat']);
         TPD_PPT = load_from_master(TPD.master,'PrecipA');
         else
-        TPD_PPT = NaN.*ones(length(TP02_PPT),1);
+        TPD_PPT = NaN.*ones(length(dt),1);
         end
+        
+        % E. TPAg (2025 onwards):
+        if year_ctr >=2025
+            TPAg = load([load_dir 'TPAg/TPAg_met_cleaned_' yr_str '.mat']);
+            TPAg_PPT = load_from_master(TPAg.master,'Rain');
+        else
+        TPAg_PPT = NaN.*ones(length(dt),1);
+        end
+        
     catch
-        disp('Error.  Please make sure you''ve run mcm_metfixer on TP02 and TP39 before you try to run this');
+        disp('Error.  Please make sure you''ve run mcm_metfixer on TP02, TP39, TPAg before you try to run this');
     end
     
-    %% Fill TP_PPT from TP39 when precip is likely rain (Ta >= 5 degrees, not
+    %% From 2025 onwards, move TPAg into TP_PPT GEO_PPT data (as the sensor was moved from TP_Ag to TP_PPT in Spring 2025)
+    if year_ctr==2025
+        GEO_PPT(isnan(GEO_PPT),1) = TPAg_PPT(isnan(GEO_PPT),1);
+    elseif year_ctr>=2026
+        GEO_PPT = TPAg_PPT;
+    else
+    end
+    
+    
+    %% Fill GEONOR from TP39 when precip is likely rain (Ta >= 5 degrees, not
     %%% winter).  Otherwise, fill from TPD, then TP02;
     fill_rain = find(dt > 90 & dt<330 & Ta > 5 & isnan(GEO_PPT));
     GEO_PPT(fill_rain,1) = TX_PPT(fill_rain,1);
@@ -159,6 +188,7 @@ disp(['A total of ' num2str(length(fill_other)-length(fill_left_GEO)) ' filled f
         disp(['A total of ' num2str(length(fill_left_TX)) ' gaps remain in TX_PPT data.']);
     end
     
+    
     %% Fill TP39, TP02, TPD with GEONOR data
     TP39_PPT(isnan(TP39_PPT)) = GEO_PPT(isnan(TP39_PPT));
     disp(['TP39 PPT filled.  A total of ' num2str(length(find(isnan(TP39_PPT)))) ' gaps remain.']);
@@ -175,6 +205,10 @@ disp(['A total of ' num2str(length(fill_other)-length(fill_left_GEO)) ' filled f
     TPD_PPT(isnan(TPD_PPT)) = GEO_PPT(isnan(TPD_PPT));
     disp(['TPD PPT filled.  A total of ' num2str(length(find(isnan(TPD_PPT)))) ' gaps remain.']);
     
+    %% From 2025 onwards, TPAg is GEO_PPT
+    if year_ctr >=2025
+       TPAg_PPT = GEO_PPT; 
+    end   
     
     %% Plot the final results:
     % 1. GEONOR DATA
@@ -200,6 +234,7 @@ disp(['A total of ' num2str(length(fill_other)-length(fill_left_GEO)) ' filled f
     fill_left_TP39 = find(isnan(TP39_PPT));
     fill_left_TP02 = find(isnan(TP02_PPT));
     fill_left_TPD = find(isnan(TPD_PPT));
+    fill_left_TPAg = find(isnan(TPAg_PPT));
     
     figure('Name', 'Met Sites filled Precipitation data'); clf;
     subplot(2,1,1);
@@ -209,11 +244,15 @@ disp(['A total of ' num2str(length(fill_other)-length(fill_left_GEO)) ' filled f
     plot(dt(fill_left_TP02),zeros(length(fill_left_TP02),1),'rx');
     [h3] = plot(dt, TPD_PPT,'k');
     plot(dt(fill_left_TPD),zeros(length(fill_left_TPD),1),'rx');
-    legend([h1 h2 h3],'TP39', 'TP02','TPD','Location','NorthWest');
+    [h4] = plot(dt, TPAg_PPT,'c');
+    plot(dt(fill_left_TPAg),zeros(length(fill_left_TPAg),1),'rx');
+    legend([h1 h2 h3 h4],'TP39', 'TP02','TPD','TPAg','Location','NorthWest');
     
     cum_TP39_PPT = nancumsum(TP39_PPT);
     cum_TP02_PPT = nancumsum(TP02_PPT);
     cum_TPD_PPT = nancumsum(TPD_PPT);   
+    cum_TPAg_PPT = nancumsum(TPAg_PPT);   
+    
     
     subplot(2,1,2);
     [h1] = plot(dt,cum_TP39_PPT,'b'); hold on;
@@ -222,13 +261,15 @@ disp(['A total of ' num2str(length(fill_other)-length(fill_left_GEO)) ' filled f
     plot(dt(fill_left_TP02),cum_TP02_PPT(fill_left_TP02),'rx');
     [h3] = plot(dt,cum_TPD_PPT,'k');
     plot(dt(fill_left_TPD),cum_TPD_PPT(fill_left_TPD),'rx');
+    [h3] = plot(dt,cum_TPAg_PPT,'c');
+    plot(dt(fill_left_TPAg),cum_TPAg_PPT(fill_left_TPAg),'rx');
     
-     legend([h1 h2 h3],'TP39', 'TP02','TPD','Location','NorthWest');
+    legend([h1 h2 h3 h4],'TP39', 'TP02','TPD','TPAg','Location','NorthWest');
 
    
     %% Save the final data:
-    master.data = [GEO_PPT TX_PPT TP39_PPT TP02_PPT cum_GEO_PPT TPD_PPT];
-    master.labels = {'GEO_PPT';'TX_PPT';'TP39_PPT';'TP02_PPT'; 'GEO_PPT_cum';'TPD_PPT'};
+    master.data = [GEO_PPT TX_PPT TP39_PPT TP02_PPT cum_GEO_PPT TPD_PPT TPAg_PPT];
+    master.labels = {'GEO_PPT';'TX_PPT';'TP39_PPT';'TP02_PPT'; 'GEO_PPT_cum';'TPD_PPT';'TPAg_PPT'};
     
     save([output_path 'TP_PPT_' yr_str '.GEO_PPT'],'GEO_PPT','-ASCII');
     save([output_path 'TP_PPT_' yr_str '.TX_PPT'],'TX_PPT','-ASCII');
@@ -236,6 +277,7 @@ disp(['A total of ' num2str(length(fill_other)-length(fill_left_GEO)) ' filled f
     save([output_path 'TP_PPT_' yr_str '.TP02_PPT'],'TP02_PPT','-ASCII');
     save([output_path 'TP_PPT_' yr_str '.GEO_PPT_cum'],'cum_GEO_PPT','-ASCII');
     save([output_path 'TP_PPT_' yr_str '.TPD_PPT'],'TPD_PPT','-ASCII');
+    save([output_path 'TP_PPT_' yr_str '.TPAg_PPT'],'TPAg_PPT','-ASCII');
     
     save([output_path 'TP_PPT_filled_' yr_str '.mat'],'master');
     disp('done!');

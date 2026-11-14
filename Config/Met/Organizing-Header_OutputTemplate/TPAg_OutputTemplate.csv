@@ -30,3 +30,19 @@
 30,WindSpd,30
 31,WindDir,30
 32,Pressure,30
+33,UpPAR_AbvCnpy,30
+34,Rain ,30
+35,GN_Depth_AVG,30
+36,Post_SD,30
+37,Post_FREQ,30
+38,WindSpd_AVG,30
+39,WindSpd_MIN,30
+40,WindSpd_MAX,30
+41,SoilTemp_C_7cm,30
+42,SoilTemp_C_20cm,30
+43,SoilTemp_C_50cm,30
+44,SoilTemp_C_100cm,30
+45,SM_C_7cm,30
+46,SM_C_20cm,30
+47,SM_C_50cm,30
+48,SM_C_100cm,30

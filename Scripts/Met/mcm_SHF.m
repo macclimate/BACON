@@ -63,21 +63,43 @@ SHF3 = NaN.*ones(length(SHF2),1);
 SHF4 = NaN.*ones(length(SHF2),1);
 end
 
+try
 filled = load([filled_path site '/' site '_met_filled_' year '.mat']);
-
-try 
-Ts2 = load_from_master(filled.master,'SoilTemp_2cm'); 
-catch 
-Ts2 = NaN.*ones(length(SHF1),1);
-disp('Ts_{2cm} did not load');
+catch
+disp(['filled data cannot be loaded for site = ' site ', year = ' year '. Will continue with cleaned data.'])    
 end
 
-try 
-Ts5 = load_from_master(filled.master,'SoilTemp_5cm');
-catch 
-Ts5 = NaN.*ones(length(SHF1),1);
-disp('Ts_{5cm} did not load');
+try
+    Ts2 = load_from_master(filled.master,'SoilTemp_2cm');
+catch
+    Ts2 = NaN.*ones(length(SHF1),1);
+    disp('Ts_{2cm} did not load from filled data. Trying to load from cleaned data (Pit A)');
+    try
+        Ts2 = load_from_master(cleaned.master,'SoilTemp_A_2cm');
+    catch
+        disp('Ts_{2cm} did not load from cleaned data.');
+    end
+    
 end
+
+try
+    Ts5 = load_from_master(filled.master,'SoilTemp_A_5cm');
+catch
+    Ts5 = NaN.*ones(length(SHF1),1);
+    disp('Ts_{5cm} did not load from filled data. Trying to load from cleaned data (Pit A)');
+    try
+        Ts5 = load_from_master(cleaned.master,'SoilTemp_A_5cm');
+    catch
+        disp('Ts_{5cm} did not load from cleaned data.');
+    end
+end
+
+% try 
+% Ts5 = load_from_master(filled.master,'SoilTemp_5cm');
+% catch 
+% Ts5 = NaN.*ones(length(SHF1),1);
+% disp('Ts_{5cm} did not load');
+% end
 
 
 %% Fill in Gaps for specific years:

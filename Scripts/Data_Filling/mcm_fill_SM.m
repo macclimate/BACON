@@ -14,9 +14,11 @@ for i = 1:1:size(site_list,1)
         case 'TP89'; pref = {'TP89';'TP39';'TP74';'TP02'};
         case 'TP02'; pref = {'TP02';'TP39';'TP74';'TP89'};
         case 'TPD'; pref = {'TP02';'TP39';'TP74'};
-        case 'TPAg'; SMfill(i).SM30a = SM_in(i).SM30a; SMfill(i).SM30b = NaN.*ones(size(SM_in(i).SM30a,1),1);disp('SM not filled for TPAg - refer to mcm_fill_SM.m to change this'); continue ;
-        case 'TP_VDT'; SMfill(i).SM30a = SM_in(i).SM30a; SMfill(i).SM30b = NaN.*ones(size(SM_in(i).SM30a,1),1);disp('SM not filled for TP_VDT - refer to mcm_fill_SM.m to change this'); continue ;
-            
+        otherwise
+            SMfill(i).SM30a = SM_in(i).SM30a; SMfill(i).SM30b = NaN.*ones(size(SM_in(i).SM30a,1),1);disp(['SM not filled for ' site ' - refer to mcm_fill_SM.m to change this']); continue ;
+%         case 'TPAg'; SMfill(i).SM30a = SM_in(i).SM30a; SMfill(i).SM30b = NaN.*ones(size(SM_in(i).SM30a,1),1);disp('SM not filled for TPAg - refer to mcm_fill_SM.m to change this'); continue ;
+%         case 'TP_VDT'; SMfill(i).SM30a = SM_in(i).SM30a; SMfill(i).SM30b = NaN.*ones(size(SM_in(i).SM30a,1),1);disp('SM not filled for TP_VDT - refer to mcm_fill_SM.m to change this'); continue ;
+%         case 'TPU'; SMfill(i).SM30a = SM_in(i).SM30a; SMfill(i).SM30b = NaN.*ones(size(SM_in(i).SM30a,1),1);disp('SM not filled for TPU - refer to mcm_fill_SM.m to change this'); continue ;
     end
     
     %%% Figure out what order in SM we are going to fill data from:
@@ -29,22 +31,28 @@ for i = 1:1:size(site_list,1)
     %%% Filled data starts as input data:
     SMfill(i).SM30a = SM_in(i).SM30a;
     SMfill(i).SM30b = SM_in(i).SM30b;
-    %%% Report the number of gaps for each pit:
-    nan(1,1) = length(find(isnan(SMfill(i).SM30a)));
-    disp(['Original data for Pit A has ' num2str(nan(1,1)) ' gaps']);
-    nan(1,2) = length(find(isnan(SMfill(i).SM30b)));
-    disp(['Original data for Pit B has ' num2str(nan(1,2)) ' gaps']);
+    SMfill(i).SM30c = SM_in(i).SM30c;
     
+    %%% Report the number of gaps for each pit:
+    numnan(1,1) = length(find(isnan(SMfill(i).SM30a)));
+    disp(['Original data for Pit A has ' num2str(numnan(1,1)) ' gaps']);
+    numnan(1,2) = length(find(isnan(SMfill(i).SM30b)));
+    disp(['Original data for Pit B has ' num2str(numnan(1,2)) ' gaps']);
+    numnan(1,3) = length(find(isnan(SMfill(i).SM30c)));
+    disp(['Original data for Pit C has ' num2str(numnan(1,3)) ' gaps']);    
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%% Step 1: Use interpolation to fill gaps as large as 3 data points:
     try SMfill(i).SM30a = jjb_interp_gap(SMfill(i).SM30a); catch; SMfill(i).SM30a = SMfill(i).SM30a; end
-    try SMfill(i).SM30b = jjb_interp_gap(SMfill(i).SM30b); catch; SMfill(i).SM30a = SMfill(i).SM30a; end
+    try SMfill(i).SM30b = jjb_interp_gap(SMfill(i).SM30b); catch; SMfill(i).SM30b = SMfill(i).SM30b; end
+    try SMfill(i).SM30c = jjb_interp_gap(SMfill(i).SM30c); catch; SMfill(i).SM30c = SMfill(i).SM30c; end
+
     % Report numbers missing now:
-    nan(2,1) = length(find(isnan(SMfill(i).SM30a)));
-    disp(['After Interp, Pit A has ' num2str(nan(2,1)) ' gaps']);
-    nan(2,2) = length(find(isnan(SMfill(i).SM30b)));
-    disp(['After Interp, Pit B has ' num2str(nan(2,2)) ' gaps']);
-    
+    numnan(2,1) = length(find(isnan(SMfill(i).SM30a)));
+    disp(['After Interp, Pit A has ' num2str(numnan(2,1)) ' gaps']);
+    numnan(2,2) = length(find(isnan(SMfill(i).SM30b)));
+    disp(['After Interp, Pit B has ' num2str(numnan(2,2)) ' gaps']);
+    numnan(2,3) = length(find(isnan(SMfill(i).SM30c)));
+    disp(['After Interp, Pit C has ' num2str(numnan(2,3)) ' gaps']);    
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%% Step 2: Fill first from one pit to another (from same site), and then
     %%% from the other sites, using a linear regression to correct for offsets
@@ -55,6 +63,8 @@ for i = 1:1:size(site_list,1)
         if i == order(j,1) % Case where we're filling back on same site:
             [coeff_SM30a tmp_est_SM30a] = est_regress(SMfill(order(j,1)).SM30b, SMfill(i).SM30a);
             [coeff_SM30b tmp_est_SM30b] = est_regress(SMfill(order(j,1)).SM30a, SMfill(i).SM30b);
+            [coeff_SM30c tmp_est_SM30c] = est_regress(SMfill(order(j,1)).SM30a, SMfill(i).SM30c);
+            
             %%% Fill Pit A with estimated from Pit B (if slope is OK):
             if coeff_SM30a(2,1) > 0.59 && coeff_SM30a(2,1) < 1.5
                 SMfill(i).SM30a(isnan(SMfill(i).SM30a),1) = tmp_est_SM30a(isnan(SMfill(i).SM30a),1);
@@ -70,10 +80,10 @@ for i = 1:1:size(site_list,1)
                 SMfill(i).SM30b = SMfill(i).SM30b;
             end
             % Report numbers missing now:
-            nan(3,1) = length(find(isnan(SMfill(i).SM30a)));
-            disp(['After fill from Pit B, Pit A has ' num2str(nan(3,1)) ' gaps']);
-            nan(3,2) = length(find(isnan(SMfill(i).SM30b)));
-            disp(['After fill from Pit A, Pit B has ' num2str(nan(3,2)) ' gaps']);
+            numnan(3,1) = length(find(isnan(SMfill(i).SM30a)));
+            disp(['After fill from Pit B, Pit A has ' num2str(numnan(3,1)) ' gaps']);
+            numnan(3,2) = length(find(isnan(SMfill(i).SM30b)));
+            disp(['After fill from Pit A, Pit B has ' num2str(numnan(3,2)) ' gaps']);
             
         else
             %%% Fill from other sites:
@@ -125,10 +135,10 @@ for i = 1:1:size(site_list,1)
     end
     
     % Report numbers missing now:
-    nan(4,1) = length(find(isnan(SMfill(i).SM30a)));
-    disp(['After filling from other sites, Pit A has ' num2str(nan(4,1)) ' gaps']);
-    nan(4,2) = length(find(isnan(SMfill(i).SM30b)));
-    disp(['After filling from other sites, Pit B has ' num2str(nan(4,2)) ' gaps']);
+    numnan(4,1) = length(find(isnan(SMfill(i).SM30a)));
+    disp(['After filling from other sites, Pit A has ' num2str(numnan(4,1)) ' gaps']);
+    numnan(4,2) = length(find(isnan(SMfill(i).SM30b)));
+    disp(['After filling from other sites, Pit B has ' num2str(numnan(4,2)) ' gaps']);
       
 end
 end

@@ -1,2 +1,6 @@
 rows = depths (2,5,10,20,50,100)
 columns = sites [TP39 TP74 TP89 TP02 TPD TPAg TP_VDT];
+1 = keep pit 1 only
+2 - keep put 2 only
+12 = average pits 1 and 2
+123 = average pits 1, 2, 3

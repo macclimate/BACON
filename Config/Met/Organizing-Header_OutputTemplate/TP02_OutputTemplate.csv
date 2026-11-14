@@ -44,3 +44,13 @@
 44,Tank_Pres_CO2_Cal,30
 45,Tank_Pres_N2_Cal,30
 46,Tank_Pres_N2_Ref,30
+47,SoilTemp_C_100cm,30
+48,SoilTemp_C_50cm,30
+49,SoilTemp_C_20cm,30
+50,SoilTemp_C_10cm,30
+51,SoilTemp_C_7cm,30
+52,SM_C_100cm,30
+53,SM_C_50cm,30
+54,SM_C_20cm,30
+55,SM_C_10cm,30
+56,SM_C_7cm,30

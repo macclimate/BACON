@@ -118,15 +118,6 @@ else
     else
         met_master(1:yr_len*6,1:num_cols) = NaN;                                % create a matrix with 60 (0r 110) empty NaN columns for every 5 minutes in a year
     end
-    %%%% Added August 20, 2010 by JJB & SLM - Program checks the size
-    %%%% of met_master against the size of the output template, and
-    %%%% adds columns to the master file if needed.
-    if size(met_master,2) < num_cols
-        cols2add = num_cols - size(met_master,2);
-        met_master = [met_master NaN.*ones(size(met_master,1),cols2add)];
-    end
-    
-    
     
     % make a time vector using make_tv function, place it into the first
     % column of master file
@@ -142,6 +133,15 @@ else
     met_master(:,3) = JD(:,1);
     met_master(:,4) = HHMM(:,1);
 end
+
+%%%% Added August 20, 2010 by JJB & SLM - Program checks the size
+%%%% of met_master against the size of the output template, and
+%%%% adds columns to the master file if needed.
+if size(met_master,2) < num_cols
+    cols2add = num_cols - size(met_master,2);
+    met_master = [met_master NaN.*ones(size(met_master,1),cols2add)];
+end
+    
 
 %% **************************** LOAD data files from selected directory:
 D = dir(dir_data);

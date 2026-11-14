@@ -22,6 +22,8 @@ Column 11 (K) - Names for outputting into Jay's factorial project files (if left
 Column 12 (L) - Names for outputting Janelle's data  (if left blank (or NaN), then not processed into file)
 COlumn 13 (M) - Names for outputting Fluxnet Level 2 files  (if left blank or NaN, then not processed into file)
 Column 14 (N) - Names for new Ameriflux files (if cells are left blank or NaN, then not processed into file)
+Column 15 (O) - Names for outputting Jenny's data  (if left blank (or NaN), then not processed into file)
+
 
 %%%%%%%% Old: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Column 1 - CCP name for all variables

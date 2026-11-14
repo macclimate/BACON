@@ -17,7 +17,7 @@ if field_ID == 'all'
         disp(['loading ' load_path]);       %% confirms load path and comma delimited
         disp('comma delimited');
         met_file = dlmread(load_path,',');
-    elseif file type == 2
+    elseif file_type == 2
         disp ('this function is not enabled yet')
     end
     

@@ -22,18 +22,23 @@ switch site
     case 'TP39'
         a_divs = [1.44 1.42];
         b_divs = [1.44 1.6];
+        c_divs = [1 1]; % Correction coefficients have not been calculated 
     case 'TP74'
         a_divs = [1.76 1.53];
         b_divs = [1.67 1.6];
+        c_divs = [1 1]; % Correction coefficients have not been calculated 
     case 'TP89' % These need to be added!!!!!
         a_divs = [1 1];
         b_divs = [1 1];
+        c_divs = [1 1]; % Correction coefficients have not been calculated 
     case 'TP02'
         a_divs = [1.31 1.24];
         b_divs = [1.29 1.23];
+        c_divs = [1 1]; % Correction coefficients have not been calculated 
     case 'TPD'
         a_divs = [1 1];
-        b_divs = [1 1];        
+        b_divs = [1 1];   
+        c_divs = [1 1]; % Correction coefficients have not been calculated 
     otherwise
         disp('function not set up for this site');
 end
@@ -43,6 +48,9 @@ switch pit_ID
         divs = a_divs;
     case 'B'
         divs = b_divs;
+    case 'C'
+        divs = b_divs;
+        disp('mcm_adjust_SM.m is using default correction coefficients for missing 5,10 cm SM data. To be corrected once we have more data.')
     otherwise
         disp('error with pit_ID');
 end

@@ -259,7 +259,7 @@ loadstart = addpath_loadstart;
 
     save([loadstart 'Matlab/Data/Met/Final_Cleaned/TP_PPT/TP_PPT_' yr_str '.GN_Precip' ],'PPT_out','-ASCII');
     save([loadstart 'Matlab/Data/Met/Final_Cleaned/TP_PPT/TP_PPT_' yr_str '.TX_Rain' ],'PPT_tx','-ASCII');
-mcm_start_mgmt;
+% mcm_start_mgmt;
 end
 %{
 function [PPT_out] = PPT_diurnal_clean(PPT_in)

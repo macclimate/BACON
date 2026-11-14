@@ -60,6 +60,11 @@ function [c_hat, y_hat, y_pred, stats, sigma, err, exitflag, num_iter] = ...
 %%% *** Note here that we need to have stdev be actual numbers, since we're
 %%% using WSS.  In options.f_coeff, we only give a number to the
 %%% coefficient we want to fix, and leave the rest as NaNs.
+% fitresp_1A: 
+% fitresp_1B: 
+% fitresp_1C
+% fitresp_1D
+% fitresp_1E
 
 clear global;
 %%% Set the Cost function name:

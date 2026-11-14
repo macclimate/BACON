@@ -1,5 +1,10 @@
-TIMESTAMP,
+﻿TIMESTAMP,
 RECORD,
+PAR_up_5_AVG,UpPAR_AbvCnpy_5min
+PAR_down_5_AVG,DownPAR_AbvCnpy_5min
+Pres_tank_Avg(1),Tank_Pres_CO2_Cal
+Pres_tank_Avg(2),Tank_Pres_N2_Cal
+Pres_tank_Avg(3),Tank_Pres_N2_Ref
 WS_ms_S_WVT,WindSpd
 WindDir_D1_WVT,WindDir
 AirTC_Avg,AirTemp_AbvCnpy
@@ -37,13 +42,3 @@ SWC_Avg(9),SM_B_10cm
 SWC_Avg(10),
 SWC_Avg(11),
 SWC_Avg(12),
-Pres_tank_Avg(1),Tank_Pres_CO2_Cal
-Pres_tank_Avg(2),Tank_Pres_N2_Cal
-Pres_tank_Avg(3),Tank_Pres_N2_Ref
-rTime(1),
-rTime(2),
-rTime(3),
-rTime(9),
-rTime(4),
-rTime(5),
-rTime(6),

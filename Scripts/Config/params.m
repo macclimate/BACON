@@ -1856,6 +1856,214 @@ switch site
                 z_tree(14137:end,1) = 0;% After harvest
                 z_tree(z_tree>2.25) = 2.25;
                 z_tree(z_tree<0,1) = 0; % Before emergence
+                %%%%%%
+                
+                case '2024' %% NEEDS TO BE UPDATED
+                % Coordinates updated by JJB 2021-01-01 | original (commented) by EB 9/17
+                % In UTM: 17N 553367 4727120
+                lat = 42.696126;
+                long = 80.348781;
+                elev = 215; % Elevation in masl
+                
+                %         %%% 'fetch' defines the dimensions of the measurement site.
+                %         %%% Columns (shown here as rows) 1 and 2 specify the starting and
+                %         %%% ending mathematical direction from the tower for each sector (0 = North,
+                %         %%% increasing counter-clockwise), while Columns 3 and 4 (shown as
+                %         %%% rows 3 & 4 here), specify the distance from the tower at each
+                %         %%% bearing.  This data is structured to create quadrants that may
+                %         %%% be redrawn to represent the dimensions of the field site, and
+                %         %%% for work in footprint filtering.
+                switch options.fetch_type
+                    case 'tight'
+                        fetch = [[0 14 64 67 80 85 114 117 130 130 154 167 167 178 217 228]'... % sector start bearing
+                            [14 64 67 80 85 114 117 130 130 154 167 167 178 217 228 360]'...         % sector end bearing
+                            [157 301 350 640 523 611 516 146 152 239 286 304 411 432 262 232]'...  % sector start distance (m)
+                            [301 350 640 523 611 516 146 152 239 286 304 411 432 262 232 157]' ]; % sector end distance (m)
+                    case 'all'
+                        % For the time being, the fetches have been made
+                        % equal--it's uncear whether we would want to define a
+                        % broader representative area when the cover type will
+                        % change from year to year.
+                        fetch = [[0 14 64 67 80 85 114 117 130 130 154 167 167 178 217 228]'... % sector start bearing
+                            [14 64 67 80 85 114 117 130 130 154 167 167 178 217 228 360]'...         % sector end bearing
+                            [157 301 350 640 523 611 516 146 152 239 286 304 411 432 262 232]'...  % sector start distance (m)
+                            [301 350 640 523 611 516 146 152 239 286 304 411 432 262 232 157]' ]; % sector end distance (m)
+                end
+                
+                
+                z_meas = 4.71; % Height of EC system from ground
+                %                 z_tree = 3; % Mean tree height from ground
+                z = 4.71;
+                ztop = 4.71; % Height of the column that is represented by the top CO2 sensor (ztop = z if only one sensor)
+                zcpy = 0; % Height of the column that is represented by the bottom CO2 sensor (zcpy + ztop = z if two sensors are used)
+                col_flag = 1; % =1 for one-height CO2 storage measurement, =2 for two-height
+                gs_start = 154; % ***NEEDS UPDATING*** emerged from the ground
+                gs_end = 274; % Harvested by 101-Oct. 
+                %                 z_tree = 0;
+                %%%% Need to calculate z_tree (crop height) as a variable quantity:
+                % Winter grass was planted at site. It was about 10 cm tall when mowed back in the soil in late April, 2022.
+                %
+                % Tobacco on July 1, 2023. Plants were 0.3 m high.
+                %
+                % Tobacco on 31 August 2023. Plant were 1.5 to 1.75 m tall. 2nd harvest was being conducted.
+                %
+                % Tobacco on 16 Sept 2023. Plant were 2 to 2.5 m tall.
+                %
+                % Tobacco was fully harvested by 1-2 October. Only stem about 0.3 m tall standing on the ground as on 3 October 2023.
+                %
+                % Field plowed on 22 Oct 2023 and seems seeded with grass.
+
+                
+                %                 z_tree = zeroes(yr_length(str2num(year),options.time_int),1);
+                spot_heights = [8689, 0.3; 11617, 1.625; 12385, 2.25; 13465, 2.25; 13466, 0.3; 14136, 0.3; 14137, 0];
+                % Need to fill in linearly between these points (and
+                % extrapolate backwards to zero)
+                p = polyfit(spot_heights(1:3,1), spot_heights(1:3,2), 1);
+                z_tree(:,1) = polyval(p,(1:1:yr_length(str2num(year),options.time_int))');
+                z_tree(12385:13466,1) = 2.25; % consistent height
+                z_tree(13466:14136,1) = 0.3;
+                z_tree(14137:end,1) = 0;% After harvest
+                z_tree(z_tree>2.25) = 2.25;
+                z_tree(z_tree<0,1) = 0; % Before emergence   
+            %%%%
+            
+            case '2025' %% NEEDS TO BE UPDATED
+                % Coordinates updated by JJB 2021-01-01 | original (commented) by EB 9/17
+                % In UTM: 17N 553367 4727120
+                lat = 42.696126;
+                long = 80.348781;
+                elev = 215; % Elevation in masl
+                
+                %         %%% 'fetch' defines the dimensions of the measurement site.
+                %         %%% Columns (shown here as rows) 1 and 2 specify the starting and
+                %         %%% ending mathematical direction from the tower for each sector (0 = North,
+                %         %%% increasing counter-clockwise), while Columns 3 and 4 (shown as
+                %         %%% rows 3 & 4 here), specify the distance from the tower at each
+                %         %%% bearing.  This data is structured to create quadrants that may
+                %         %%% be redrawn to represent the dimensions of the field site, and
+                %         %%% for work in footprint filtering.
+                switch options.fetch_type
+                    case 'tight'
+                        fetch = [[0 14 64 67 80 85 114 117 130 130 154 167 167 178 217 228]'... % sector start bearing
+                            [14 64 67 80 85 114 117 130 130 154 167 167 178 217 228 360]'...         % sector end bearing
+                            [157 301 350 640 523 611 516 146 152 239 286 304 411 432 262 232]'...  % sector start distance (m)
+                            [301 350 640 523 611 516 146 152 239 286 304 411 432 262 232 157]' ]; % sector end distance (m)
+                    case 'all'
+                        % For the time being, the fetches have been made
+                        % equal--it's uncear whether we would want to define a
+                        % broader representative area when the cover type will
+                        % change from year to year.
+                        fetch = [[0 14 64 67 80 85 114 117 130 130 154 167 167 178 217 228]'... % sector start bearing
+                            [14 64 67 80 85 114 117 130 130 154 167 167 178 217 228 360]'...         % sector end bearing
+                            [157 301 350 640 523 611 516 146 152 239 286 304 411 432 262 232]'...  % sector start distance (m)
+                            [301 350 640 523 611 516 146 152 239 286 304 411 432 262 232 157]' ]; % sector end distance (m)
+                end
+                
+                
+                z_meas = 4.71; % Height of EC system from ground
+                %                 z_tree = 3; % Mean tree height from ground
+                z = 4.71;
+                ztop = 4.71; % Height of the column that is represented by the top CO2 sensor (ztop = z if only one sensor)
+                zcpy = 0; % Height of the column that is represented by the bottom CO2 sensor (zcpy + ztop = z if two sensors are used)
+                col_flag = 1; % =1 for one-height CO2 storage measurement, =2 for two-height
+                gs_start = 154; % ***NEEDS UPDATING*** emerged from the ground
+                gs_end = 274; % Harvested by 101-Oct. 
+                %                 z_tree = 0;
+                %%%% Need to calculate z_tree (crop height) as a variable quantity:
+                % Winter grass was planted at site. It was about 10 cm tall when mowed back in the soil in late April, 2022.
+                %
+                % Tobacco on July 1, 2023. Plants were 0.3 m high.
+                %
+                % Tobacco on 31 August 2023. Plant were 1.5 to 1.75 m tall. 2nd harvest was being conducted.
+                %
+                % Tobacco on 16 Sept 2023. Plant were 2 to 2.5 m tall.
+                %
+                % Tobacco was fully harvested by 1-2 October. Only stem about 0.3 m tall standing on the ground as on 3 October 2023.
+                %
+                % Field plowed on 22 Oct 2023 and seems seeded with grass.
+
+                
+                %                 z_tree = zeroes(yr_length(str2num(year),options.time_int),1);
+                spot_heights = [8689, 0.3; 11617, 1.625; 12385, 2.25; 13465, 2.25; 13466, 0.3; 14136, 0.3; 14137, 0];
+                % Need to fill in linearly between these points (and
+                % extrapolate backwards to zero)
+                p = polyfit(spot_heights(1:3,1), spot_heights(1:3,2), 1);
+                z_tree(:,1) = polyval(p,(1:1:yr_length(str2num(year),options.time_int))');
+                z_tree(12385:13466,1) = 2.25; % consistent height
+                z_tree(13466:14136,1) = 0.3;
+                z_tree(14137:end,1) = 0;% After harvest
+                z_tree(z_tree>2.25) = 2.25;
+                z_tree(z_tree<0,1) = 0; % Before emergence   
+                %%%% 
+
+            case '2026' %% NEEDS TO BE UPDATED
+                % Coordinates updated by JJB 2021-01-01 | original (commented) by EB 9/17
+                % In UTM: 17N 553367 4727120
+                lat = 42.696126;
+                long = 80.348781;
+                elev = 215; % Elevation in masl
+                
+                %         %%% 'fetch' defines the dimensions of the measurement site.
+                %         %%% Columns (shown here as rows) 1 and 2 specify the starting and
+                %         %%% ending mathematical direction from the tower for each sector (0 = North,
+                %         %%% increasing counter-clockwise), while Columns 3 and 4 (shown as
+                %         %%% rows 3 & 4 here), specify the distance from the tower at each
+                %         %%% bearing.  This data is structured to create quadrants that may
+                %         %%% be redrawn to represent the dimensions of the field site, and
+                %         %%% for work in footprint filtering.
+                switch options.fetch_type
+                    case 'tight'
+                        fetch = [[0 14 64 67 80 85 114 117 130 130 154 167 167 178 217 228]'... % sector start bearing
+                            [14 64 67 80 85 114 117 130 130 154 167 167 178 217 228 360]'...         % sector end bearing
+                            [157 301 350 640 523 611 516 146 152 239 286 304 411 432 262 232]'...  % sector start distance (m)
+                            [301 350 640 523 611 516 146 152 239 286 304 411 432 262 232 157]' ]; % sector end distance (m)
+                    case 'all'
+                        % For the time being, the fetches have been made
+                        % equal--it's uncear whether we would want to define a
+                        % broader representative area when the cover type will
+                        % change from year to year.
+                        fetch = [[0 14 64 67 80 85 114 117 130 130 154 167 167 178 217 228]'... % sector start bearing
+                            [14 64 67 80 85 114 117 130 130 154 167 167 178 217 228 360]'...         % sector end bearing
+                            [157 301 350 640 523 611 516 146 152 239 286 304 411 432 262 232]'...  % sector start distance (m)
+                            [301 350 640 523 611 516 146 152 239 286 304 411 432 262 232 157]' ]; % sector end distance (m)
+                end
+                
+                
+                z_meas = 4.71; % Height of EC system from ground
+                %                 z_tree = 3; % Mean tree height from ground
+                z = 4.71;
+                ztop = 4.71; % Height of the column that is represented by the top CO2 sensor (ztop = z if only one sensor)
+                zcpy = 0; % Height of the column that is represented by the bottom CO2 sensor (zcpy + ztop = z if two sensors are used)
+                col_flag = 1; % =1 for one-height CO2 storage measurement, =2 for two-height
+                gs_start = 154; % ***NEEDS UPDATING*** emerged from the ground
+                gs_end = 274; % Harvested by 101-Oct. 
+                %                 z_tree = 0;
+                %%%% Need to calculate z_tree (crop height) as a variable quantity:
+                % Winter grass was planted at site. It was about 10 cm tall when mowed back in the soil in late April, 2022.
+                %
+                % Tobacco on July 1, 2023. Plants were 0.3 m high.
+                %
+                % Tobacco on 31 August 2023. Plant were 1.5 to 1.75 m tall. 2nd harvest was being conducted.
+                %
+                % Tobacco on 16 Sept 2023. Plant were 2 to 2.5 m tall.
+                %
+                % Tobacco was fully harvested by 1-2 October. Only stem about 0.3 m tall standing on the ground as on 3 October 2023.
+                %
+                % Field plowed on 22 Oct 2023 and seems seeded with grass.
+
+                
+                %                 z_tree = zeroes(yr_length(str2num(year),options.time_int),1);
+                spot_heights = [8689, 0.3; 11617, 1.625; 12385, 2.25; 13465, 2.25; 13466, 0.3; 14136, 0.3; 14137, 0];
+                % Need to fill in linearly between these points (and
+                % extrapolate backwards to zero)
+                p = polyfit(spot_heights(1:3,1), spot_heights(1:3,2), 1);
+                z_tree(:,1) = polyval(p,(1:1:yr_length(str2num(year),options.time_int))');
+                z_tree(12385:13466,1) = 2.25; % consistent height
+                z_tree(13466:14136,1) = 0.3;
+                z_tree(14137:end,1) = 0;% After harvest
+                z_tree(z_tree>2.25) = 2.25;
+                z_tree(z_tree<0,1) = 0; % Before emergence   
+
             otherwise
         end
         % #################################################################
@@ -1866,8 +2074,78 @@ switch site
         zcpy = 0;
         z = 2;
         col_flag = 0;
+    case 'TPU'
+        % TPU (Urban Site), located at McMaster forest
+        
+        z_shf = 0.03; %% %UPDATE and remove this note
+        Ts_to_use = 2; % Use 7.5 cm sensor to calculate dT/dt
+        theta_w = 0.13;%UPDATE and remove this note
+        theta_m = 0.01;%UPDATE and remove this note
+        theta_o = 160/1300;%UPDATE and remove this note
+        lat = 43.248915772173916;%UPDATE and remove this note. These are estimates from Google Maps
+        long = 79.95171454418514;%UPDATE and remove this note. These are estimates from Google Maps
+        elev = 100;%UPDATE and remove this note. These are estimates from Google Maps
+        wdir_keep = [0 360]; % exclude angles less than first number, exclude greater than second
+        %           42, 39', 39.37'' N
+        %           80, 33', 34.27'' W
+        
+        %%% 'fetch' defines the dimensions of the measurement site.%%%%%%%%%%%%%
+        %%% Columns (shown here as rows) 1 and 2 specify the starting and
+        %%% ending mathematical direction from the tower for each sector (0 = North,
+        %%% increasing counter-clockwise), while Columns 3 and 4 (shown as
+        %%% rows 3 & 4 here), specify the distance from the tower at each
+        %%% bearing.  This data is structured to create quadrants that may
+        %%% be redrawn to represent the dimensions of the field site, and
+        %%% for work in footprint filtering.
+        
+        switch options.fetch_type
+            case 'tight'
+%                 fetch = [[0  30  60  80  90 117 120 140 148 150 170 180 194 210 234 240 270 300 330 352]'...
+%                     [30  60  80  90 117 120 140 148 150 170 180 194 210 234 240 270 300 330 352 360]' ...
+%                     [360 306 340 434 757 492 487 530 390 397 540 481 325 307 225 155  97 258 282 398]' ...
+%                     [306 340 434 757 587 487 530 390 397 540 481 434 307 343 155  97  82 282 398 360]'];
+            case 'all'
+                %%% Below are the "no-agriculture" fetches; this includes all types of 'forest', but removes from the fetch any area that is
+                %%% agricultural or newly-planted forest or grassland
+%                 fetch = [[0  17   42   54   56       157 175 184  232  258  273  284  355]'...
+%                     [17  42   54   56   157      175 184 232  258  273  284  355  360]' ...
+%                     [504 1753 1891 1812 1520     842 592 823 1872 2525 1125 1678  439]' ...
+%                     [1080 1720 1812 1520 842     592 823 795 2525 1932 1041  439  504]'];
+        end
+        %%%%%%%%%%%%%%%%%%%%
+        
+        switch year
+            case '2025'
+                % CO2 Storage
+                z = 5; ztop = 5; zcpy = 0; col_flag = 1;
+                % Respiration
+%                 gsstart = 88; gsend = 329; NEE_cap = 7; ustar_crit = 0.325;
+                % Photosynthesis
+%                 Qthresh = 10; Awa = 0.62; ka = 0.540; kh = 0.756; alpha = 0.03;
+                % Final Flux Calculation (OPEC_Fluxes)
+%                 GEPcutstart = 151; GEPcutend = 273; corr_1 = 1; corr_2 = 0;
+                % Footprint Information (measurement and tree height)
+                    % Measurement and Tree height 
+                 z_meas = 5; z_tree = 1.5;
+                %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            case '2026'
+                % CO2 Storage
+                z = 5; ztop = 5; zcpy = 0; col_flag = 1;
+                % Respiration
+%                 gsstart = 88; gsend = 329; NEE_cap = 7; ustar_crit = 0.325;
+                % Photosynthesis
+%                 Qthresh = 10; Awa = 0.62; ka = 0.540; kh = 0.756; alpha = 0.03;
+                % Final Flux Calculation (OPEC_Fluxes)
+%                 GEPcutstart = 151; GEPcutend = 273; corr_1 = 1; corr_2 = 0;
+                % Footprint Information (measurement and tree height)
+                    % Measurement and Tree height 
+                 z_meas = 5; z_tree = 1.5;
+                %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                
+                
+        end
 end
 
+    
 %% Modifications to height variables associated with Footprint and CO2_storage calculations,
 %%% to make them half-hourly values instead of a single value for a year
 %%% Added 30-Jan-2015 by JJB
