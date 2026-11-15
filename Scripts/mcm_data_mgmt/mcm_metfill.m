@@ -379,6 +379,7 @@ for i = 1:1:num_sites
             commandwindow;
            
 disp(['Please look at Ts data for ' site_labels{i,1}]);
+disp('Pit A = 1, Pit B = 2, Pit C = 3'); 
 resp2 = input('2cm -- enter (no commas) all pits to use [e.g., 13 for pits 1 and 3; 123 to average 1,2,3]: ');
 resp5 = input('5cm -- enter (no commas) all pits to use [e.g., 13 for pits 1 and 3; 123 to average 1,2,3]: ');
 resp10 = input('10cm -- enter (no commas) all pits to use [e.g., 13 for pits 1 and 3; 123 to average 1,2,3]: ');
@@ -394,13 +395,12 @@ resp100 = input('100cm -- enter (no commas) all pits to use [e.g., 13 for pits 1
 %         num2pit = {1,'a';2,'b';3,'c';4,'d';5,'e';6,'f';7,'g';8,'h';9,'i'};
         % Conver the response from a multidigit number to multiple
         % single-digit numbers (e.g., 123 to [1,2,3]
-        resp2 = dec2base(resp2,10) - '0';
-        Ts2_tmp = [Ts(i).Ts2a,Ts(i).Ts2b,Ts(i).Ts2c]; Ts(i).Ts2 = row_nanmean(Ts2_tmp(:,resp2));
-        Ts5_tmp = [Ts(i).Ts5a,Ts(i).Ts5b,Ts(i).Ts5c]; Ts(i).Ts5 = row_nanmean(Ts5_tmp(:,resp5));
-        Ts10_tmp = [Ts(i).Ts10a,Ts(i).Ts10b,Ts(i).Ts10c]; Ts(i).Ts10 = row_nanmean(Ts10_tmp(:,resp10));
-        Ts20_tmp = [Ts(i).Ts20a,Ts(i).Ts20b,Ts(i).Ts20c]; Ts(i).Ts20 = row_nanmean(Ts20_tmp(:,resp20));
-        Ts50_tmp = [Ts(i).Ts50a,Ts(i).Ts50b,Ts(i).Ts50c]; Ts(i).Ts50 = row_nanmean(Ts50_tmp(:,resp50));
-        Ts100_tmp = [Ts(i).Ts100a,Ts(i).Ts100b,Ts(i).Ts100c]; Ts(i).Ts100 = row_nanmean(Ts100_tmp(:,resp100));
+        resp2 = dec2base(resp2,10) - '0'; Ts2_tmp = [Ts(i).Ts2a,Ts(i).Ts2b,Ts(i).Ts2c]; Ts(i).Ts2 = row_nanmean(Ts2_tmp(:,resp2));
+        resp5 = dec2base(resp5,10) - '0'; Ts5_tmp = [Ts(i).Ts5a,Ts(i).Ts5b,Ts(i).Ts5c]; Ts(i).Ts5 = row_nanmean(Ts5_tmp(:,resp5));
+        resp10 = dec2base(resp10,10) - '0'; Ts10_tmp = [Ts(i).Ts10a,Ts(i).Ts10b,Ts(i).Ts10c]; Ts(i).Ts10 = row_nanmean(Ts10_tmp(:,resp10));
+        resp20 = dec2base(resp20,10) - '0'; Ts20_tmp = [Ts(i).Ts20a,Ts(i).Ts20b,Ts(i).Ts20c]; Ts(i).Ts20 = row_nanmean(Ts20_tmp(:,resp20));
+        resp50 = dec2base(resp50,10) - '0'; Ts50_tmp = [Ts(i).Ts50a,Ts(i).Ts50b,Ts(i).Ts50c]; Ts(i).Ts50 = row_nanmean(Ts50_tmp(:,resp50));
+        resp100 = dec2base(resp100,10) - '0'; Ts100_tmp = [Ts(i).Ts100a,Ts(i).Ts100b,Ts(i).Ts100c]; Ts(i).Ts100 = row_nanmean(Ts100_tmp(:,resp100));
 
         %%%% The old method
 % switch resp2;   case 1; Ts(i).Ts2 = Ts(i).Ts2a;      case 2; Ts(i).Ts2 = Ts(i).Ts2b;    case 3; Ts(i).Ts2 = row_nanmean([Ts(i).Ts2a Ts(i).Ts2b]); end
@@ -429,7 +429,7 @@ resp100 = input('100cm -- enter (no commas) all pits to use [e.g., 13 for pits 1
 % ind_Ts100 = find(isnan(Ts(i).Ts100) & (~isnan(Ts(i).Ts100a) | ~isnan(Ts(i).Ts100b)));
 % if ~isempty(ind_Ts100);   Ts(i).Ts100(ind_Ts100) = row_nanmean([Ts(i).Ts100a(ind_Ts100) Ts(i).Ts100b(ind_Ts100)]); end
 % clear resp2 resp5 resp10 resp20 resp50 resp100;
-% end
+end
 
 %%% Save soil_tracker:
 csvwrite([soil_tracker_path 'soil_pit_keep_' yr_str '.dat'],soil_tracker)
@@ -445,6 +445,7 @@ for  i = 1:1:num_sites
                 SM_ina = [SM(i).SM5a, SM(i).SM10_40a];
                 [SM(i).SM30a SM(i).flag_a]= mcm_SM30cm_avg(SM_ina,2);   
                 SM(i).SM30b = NaN.*ones(size(SM_ina,1),1);
+                
 %             case {'TP_VDT'}
                 
             otherwise
@@ -749,5 +750,4 @@ end
 function [data_out] = sf_load_from_master(year, data_in,var_name)
 right_col = find(strcmp(data_in.labels(:,3),var_name)==1 & strcmp(data_in.labels(:,5),'Final_Cleaned')==1);
 data_out = data_in.data(data_in.data(:,1) == year,right_col);
-end
 end
