@@ -40,7 +40,11 @@ switch site
         b_divs = [1 1];   
         c_divs = [1 1]; % Correction coefficients have not been calculated 
     otherwise
-        disp('function not set up for this site');
+        disp('function not set up for this site. No corrections applied.');
+
+        a_divs = [1 1];
+        b_divs = [1 1];   
+        c_divs = [1 1]; % Correction coefficients have not been calculated 
 end
 
 switch pit_ID

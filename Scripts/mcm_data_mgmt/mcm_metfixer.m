@@ -232,7 +232,7 @@ for year_ctr = year_start:1:year_end
         TsC_labels = char(names30(Ts_cols_C,1));
         catch
         Ts_cols_C = [];
-        TsA_labels = '';
+        TsC_labels = '';
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
@@ -242,23 +242,21 @@ for year_ctr = year_start:1:year_end
             subplot(3,1,1)
             hTsA(i) = plot(input_data(:,Ts_cols_A(i)),'Color',clrs(i,:),'LineWidth',lwidths(i,1)); hold on;
         end
-        legend(hTsA,TsA_labels(:,12:end))
-        title('Pit A - Temperatures -- uncorrected')
+        try legend(hTsA,TsA_labels(:,12:end));  title('Pit A - Temperatures -- uncorrected'); catch; end
         
         for i = 1:1:length(Ts_cols_B)
             subplot(3,1,2)
             hTsB(i) = plot(input_data(:,Ts_cols_B(i)),'Color',clrs(i,:),'LineWidth',lwidths(i,1)); hold on;
         end
-        try legend(hTsB,TsB_labels(:,12:end)); catch; end
-        title('Pit B - Temperatures -- uncorrected')
-
+        try legend(hTsB,TsB_labels(:,12:end)); title('Pit B - Temperatures -- uncorrected'); catch; end
+        
         for i = 1:1:length(Ts_cols_C)
             subplot(3,1,3)
             hTsC(i) = plot(input_data(:,Ts_cols_C(i)),'Color',clrs(i,:),'LineWidth',lwidths(i,1)); hold on;
         end
-        try legend(hTsC,TsC_labels(:,12:end)); catch; end
+        try legend(hTsC,TsC_labels(:,12:end)); title('Pit C - Temperatures -- uncorrected'); catch; end
 
-        title('Pit C - Temperatures -- uncorrected')
+        
         
        
         % B. Soil Moisture:
@@ -283,26 +281,21 @@ for year_ctr = year_start:1:year_end
             subplot(3,1,1)
             hSMA(i) = plot(input_data(:,SM_cols_A(i)),'Color',clrs(i,:)); hold on;
         end
-        legend(hSMA,SMA_labels(:,6:end))
-        title('Pit A - Moisture -- uncorrected')
+        try legend(hSMA,SMA_labels(:,6:end));  title('Pit A - Moisture -- uncorrected'); catch; end
         
         for i = 1:1:length(SM_cols_B)
             subplot(3,1,2)
             hSMB(i) = plot(input_data(:,SM_cols_B(i)),'Color',clrs(i,:)); hold on;
         end
-%         legend(hSMB,SMB_labels(:,6:end))
-        try legend(hSMB,SMB_labels(:,6:end)); catch; end
-        % Same as Line 240 - not working
-        title('Pit B - Moisture -- uncorrected')
+        try legend(hSMB,SMB_labels(:,6:end));  title('Pit B - Moisture -- uncorrected'); catch; end
         
         for i = 1:1:length(SM_cols_C)
             subplot(3,1,3)
             hSMC(i) = plot(input_data(:,SM_cols_C(i)),'Color',clrs(i,:)); hold on;
         end
-%         legend(hSMB,SMB_labels(:,6:end))
-        try legend(hSMC,SMC_labels(:,6:end)); catch; end
-        % Same as Line 240 - not working
-        title('Pit C - Moisture -- uncorrected')       
+        try legend(hSMC,SMC_labels(:,6:end)); title('Pit C - Moisture -- uncorrected'); catch; end
+        
+           
         
         
     end
@@ -5787,47 +5780,47 @@ output([178 4223 7430 14267],[86]) = NaN; % CO2 cnpy
             subplot(3,1,1)
             hTsA(i) = plot(output(:,Ts_cols_A(i)),'Color',clrs(i,:)); hold on;
         end
-        legend(hTsA,TsA_labels(:,12:end))
-        title('Pit A - Temperatures -- Corrected')
+        try legend(hTsA,TsA_labels(:,12:end)); title('Pit A - Temperatures -- Corrected'); catch; end
         
         for i = 1:1:length(Ts_cols_B)
             subplot(3,1,2)
             hTsB(i) = plot(output(:,Ts_cols_B(i)),'Color',clrs(i,:)); hold on;
         end
-        try legend(hTsB,TsB_labels(:,12:end)); catch; end
-        title('Pit B - Temperatures -- Corrected')
+        try legend(hTsB,TsB_labels(:,12:end)); title('Pit B - Temperatures -- Corrected'); catch; end
+        
         
         for i = 1:1:length(Ts_cols_C)
             subplot(3,1,3)
             hTsC(i) = plot(output(:,Ts_cols_C(i)),'Color',clrs(i,:),'LineWidth',lwidths(i,1)); hold on;
         end
-        try legend(hTsC,TsC_labels(:,12:end)); catch; end
-        title('Pit C - Temperatures -- Corrected')
+        try legend(hTsC,TsC_labels(:,12:end)); title('Pit C - Temperatures -- Corrected'); catch; end
+        
         
         % B. Soil Moisture:
         figure(6);clf;
         
+        %%% Pit A
         for i = 1:1:length(SM_cols_A)
             subplot(3,1,1)
             hSMA(i) = plot(output(:,SM_cols_A(i)),'Color',clrs(i,:)); hold on;
         end
         
-        try legend(hSMA,SMA_labels(:,6:end));  catch; end
-        title('Pit A - Moisture -- Corrected')
+        try legend(hSMA,SMA_labels(:,6:end)); title('Pit A - Moisture -- Corrected'); catch; end
         
+        %%% Pit B        
         for i = 1:1:length(SM_cols_B)
             subplot(3,1,2)
             hSMB(i) = plot(output(:,SM_cols_B(i)),'Color',clrs(i,:)); hold on;
         end
-        try legend(hSMB,SMB_labels(:,6:end)); catch; end
-        title('Pit B - Moisture -- Corrected')
-        
+        try legend(hSMB,SMB_labels(:,6:end)); title('Pit B - Moisture -- Corrected'); catch; end
+                
+        %%% Pit C
         for i = 1:1:length(SM_cols_C)
             subplot(3,1,3)
             hSMC(i) = plot(input_data(:,SM_cols_C(i)),'Color',clrs(i,:)); hold on;
         end
-        try legend(hSMC,SMC_labels(:,6:end)); catch; end
-        title('Pit C - Moisture -- Corrected')       
+        try legend(hSMC,SMC_labels(:,6:end)); title('Pit C - Moisture -- Corrected'); catch; end
+             
         
         
     end

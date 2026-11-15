@@ -232,7 +232,7 @@ for year_ctr = year_start:1:year_end
         TsC_labels = char(names30(Ts_cols_C,1));
         catch
         Ts_cols_C = [];
-        TsA_labels = '';
+        TsC_labels = '';
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
@@ -242,15 +242,14 @@ for year_ctr = year_start:1:year_end
             subplot(3,1,1)
             hTsA(i) = plot(input_data(:,Ts_cols_A(i)),'Color',clrs(i,:),'LineWidth',lwidths(i,1)); hold on;
         end
-        legend(hTsA,TsA_labels(:,12:end))
-        title('Pit A - Temperatures -- uncorrected')
+        try legend(hTsA,TsA_labels(:,12:end));  title('Pit A - Temperatures -- uncorrected'); catch; end
         
         for i = 1:1:length(Ts_cols_B)
             subplot(3,1,2)
             hTsB(i) = plot(input_data(:,Ts_cols_B(i)),'Color',clrs(i,:),'LineWidth',lwidths(i,1)); hold on;
         end
-        try legend(hTsB,TsB_labels(:,12:end)); catch; end
-        title('Pit B - Temperatures -- uncorrected')
+        try legend(hTsB,TsB_labels(:,12:end)); title('Pit B - Temperatures -- uncorrected'); catch; end
+        
 
         for i = 1:1:length(Ts_cols_C)
             subplot(3,1,3)
@@ -2553,7 +2552,7 @@ for year_ctr = year_start:1:year_end
                     TsA100 = output(:,84);   
                     output(4505:17520,83) = TsA50(4505:17520); % Fixing 5cm
                     output(4505:17520,80) = TsA5(4505:17520); % Fixing 50cm
-                    clear TsA*
+                    clear TsA2 TsA5 TsA10 TsA20 TsA50 TsA100
                     %    Ts - Pit B:
                     % 		- Before 4500: All are in the right place
                     % 		- 4500-6750:
@@ -2576,7 +2575,7 @@ for year_ctr = year_start:1:year_end
                     output(4505:17520,87) = TsB10(4505:17520); % Fix 20cm
                     output(4505:17520,86) = TsB5(4505:17520); % Fix 50cm
                     output(4505:17520,85) = TsB2(4505:17520); % Fix 100cm
-                    
+                    clear TsB2 TsB5 TsB10 TsB20 TsB50 TsB100
             end                    
             %%% Corrections applied to all years of data:
             % 1: Set any negative PAR and nighttime PAR to zero:
@@ -5802,7 +5801,7 @@ output([178 4223 7430 14267],[86]) = NaN; % CO2 cnpy
             hTsC(i) = plot(output(:,Ts_cols_C(i)),'Color',clrs(i,:),'LineWidth',lwidths(i,1)); hold on;
         end
         try legend(hTsC,TsC_labels(:,12:end)); catch; end
-        title('Pit C - Temperatures -- uncorrected')
+        title('Pit C - Temperatures -- Corrected')
         
         % B. Soil Moisture:
         figure(6);clf;
@@ -5827,7 +5826,7 @@ output([178 4223 7430 14267],[86]) = NaN; % CO2 cnpy
             hSMC(i) = plot(input_data(:,SM_cols_C(i)),'Color',clrs(i,:)); hold on;
         end
         try legend(hSMC,SMC_labels(:,6:end)); catch; end
-        title('Pit C - Moisture -- uncorrected')       
+        title('Pit C - Moisture -- Corrected')       
         
         
     end

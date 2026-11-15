@@ -395,12 +395,12 @@ resp100 = input('100cm -- enter (no commas) all pits to use [e.g., 13 for pits 1
 %         num2pit = {1,'a';2,'b';3,'c';4,'d';5,'e';6,'f';7,'g';8,'h';9,'i'};
         % Conver the response from a multidigit number to multiple
         % single-digit numbers (e.g., 123 to [1,2,3]
-        resp2 = dec2base(resp2,10) - '0'; Ts2_tmp = [Ts(i).Ts2a,Ts(i).Ts2b,Ts(i).Ts2c]; Ts(i).Ts2 = row_nanmean(Ts2_tmp(:,resp2));
-        resp5 = dec2base(resp5,10) - '0'; Ts5_tmp = [Ts(i).Ts5a,Ts(i).Ts5b,Ts(i).Ts5c]; Ts(i).Ts5 = row_nanmean(Ts5_tmp(:,resp5));
-        resp10 = dec2base(resp10,10) - '0'; Ts10_tmp = [Ts(i).Ts10a,Ts(i).Ts10b,Ts(i).Ts10c]; Ts(i).Ts10 = row_nanmean(Ts10_tmp(:,resp10));
-        resp20 = dec2base(resp20,10) - '0'; Ts20_tmp = [Ts(i).Ts20a,Ts(i).Ts20b,Ts(i).Ts20c]; Ts(i).Ts20 = row_nanmean(Ts20_tmp(:,resp20));
-        resp50 = dec2base(resp50,10) - '0'; Ts50_tmp = [Ts(i).Ts50a,Ts(i).Ts50b,Ts(i).Ts50c]; Ts(i).Ts50 = row_nanmean(Ts50_tmp(:,resp50));
-        resp100 = dec2base(resp100,10) - '0'; Ts100_tmp = [Ts(i).Ts100a,Ts(i).Ts100b,Ts(i).Ts100c]; Ts(i).Ts100 = row_nanmean(Ts100_tmp(:,resp100));
+        resp2 = dec2base(resp2,10) - '0'; Ts2_tmp = [Ts(i).Ts2a,Ts(i).Ts2b,Ts(i).Ts2c]; Ts(i).Ts2 = nanmean(Ts2_tmp(:,resp2),2);
+        resp5 = dec2base(resp5,10) - '0'; Ts5_tmp = [Ts(i).Ts5a,Ts(i).Ts5b,Ts(i).Ts5c]; Ts(i).Ts5 = nanmean(Ts5_tmp(:,resp5),2);
+        resp10 = dec2base(resp10,10) - '0'; Ts10_tmp = [Ts(i).Ts10a,Ts(i).Ts10b,Ts(i).Ts10c]; Ts(i).Ts10 = nanmean(Ts10_tmp(:,resp10),2);
+        resp20 = dec2base(resp20,10) - '0'; Ts20_tmp = [Ts(i).Ts20a,Ts(i).Ts20b,Ts(i).Ts20c]; Ts(i).Ts20 = nanmean(Ts20_tmp(:,resp20),2);
+        resp50 = dec2base(resp50,10) - '0'; Ts50_tmp = [Ts(i).Ts50a,Ts(i).Ts50b,Ts(i).Ts50c]; Ts(i).Ts50 = nanmean(Ts50_tmp(:,resp50),2);
+        resp100 = dec2base(resp100,10) - '0'; Ts100_tmp = [Ts(i).Ts100a,Ts(i).Ts100b,Ts(i).Ts100c]; Ts(i).Ts100 = nanmean(Ts100_tmp(:,resp100),2);
 
         %%%% The old method
 % switch resp2;   case 1; Ts(i).Ts2 = Ts(i).Ts2a;      case 2; Ts(i).Ts2 = Ts(i).Ts2b;    case 3; Ts(i).Ts2 = row_nanmean([Ts(i).Ts2a Ts(i).Ts2b]); end
@@ -441,13 +441,23 @@ for  i = 1:1:num_sites
         site = site_labels{i,1};   
         disp(site);
         switch site 
-            case {'TPAg';'TP_VDT'}
+            case {'TPAg'}
+                SM_ina = [SM(i).SM5a, SM(i).SM10_40a];
+                [SM(i).SM30a SM(i).flag_a]= mcm_SM30cm_avg(SM_ina,2);  
+                SM(i).SM30b = NaN.*ones(size(SM_ina,1),1);     
+                SM(i).flag_b = NaN.*ones(size(SM_ina,1),1);     
+                SM_inc = [SM(i).SM7c, SM(i).SM20c];
+                [SM(i).SM30c SM(i).flag_c]= mcm_SM30cm_avg(SM_inc,3);  
+                
+                
+            case {'TP_VDT'}
                 SM_ina = [SM(i).SM5a, SM(i).SM10_40a];
                 [SM(i).SM30a SM(i).flag_a]= mcm_SM30cm_avg(SM_ina,2);   
-                SM(i).SM30b = NaN.*ones(size(SM_ina,1),1);
-                
-%             case {'TP_VDT'}
-                
+                SM(i).SM30b = NaN.*ones(size(SM_ina,1),1);    
+                SM(i).flag_b = NaN.*ones(size(SM_ina,1),1);
+                SM(i).SM30c = NaN.*ones(size(SM_ina,1),1);
+                SM(i).flag_c = NaN.*ones(size(SM_ina,1),1);
+
             otherwise
                 SM_ina = [SM(i).SM5a, SM(i).SM10a, SM(i).SM20a, SM(i).SM50a];
                 SM_inb = [SM(i).SM5b, SM(i).SM10b, SM(i).SM20b, SM(i).SM50b];
@@ -456,12 +466,11 @@ for  i = 1:1:num_sites
    [SM(i).SM30a SM(i).flag_a]= mcm_SM30cm_avg(SM_ina,1);
    [SM(i).SM30b SM(i).flag_b]= mcm_SM30cm_avg(SM_inb,1);
    [SM(i).SM30c SM(i).flag_c]= mcm_SM30cm_avg(SM_inc,1);
-
-   SM(i).SM30a = mcm_adjust_SM(site, 'A', SM(i).SM30a, SM(i).flag_a);
-   SM(i).SM30b = mcm_adjust_SM(site, 'B', SM(i).SM30b, SM(i).flag_b);
-   SM(i).SM30c = mcm_adjust_SM(site, 'C', SM(i).SM30c, SM(i).flag_c);
    
         end
+        SM(i).SM30a = mcm_adjust_SM(site, 'A', SM(i).SM30a, SM(i).flag_a);
+        SM(i).SM30b = mcm_adjust_SM(site, 'B', SM(i).SM30b, SM(i).flag_b);
+        SM(i).SM30c = mcm_adjust_SM(site, 'C', SM(i).SM30c, SM(i).flag_c);
 end
 %%% Use SMfill to fill gaps in SM values:
 SMfill = mcm_fill_SM(site_labels, SM);
@@ -485,7 +494,7 @@ end
 
 for i = 1:1:num_sites
     site = site_labels{i,1};
-eval([site '=[' site ' data(i).APR Ts(i).Ts2 Ts(i).Ts5 Ts(i).Ts10 Ts(i).Ts20 Ts(i).Ts50 Ts(i).Ts100 SM(i).SM30a SM(i).SM30b SM(i).SM30c SMfill(i).SM30a SMfill(i).SM30b SMfill(i).SM30c data(i).Rn data(i).SW];']);    
+    eval([site '=[' site ' data(i).APR Ts(i).Ts2 Ts(i).Ts5 Ts(i).Ts10 Ts(i).Ts20 Ts(i).Ts50 Ts(i).Ts100 SM(i).SM30a SM(i).SM30b SM(i).SM30c SMfill(i).SM30a SMfill(i).SM30b SMfill(i).SM30c data(i).Rn data(i).SW];']);
 end
 
 %% Fill Ts2 and Ts5 gaps (1 or 2 points) with linear interpolation.

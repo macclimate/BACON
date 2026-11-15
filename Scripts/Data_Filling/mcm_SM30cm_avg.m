@@ -62,6 +62,17 @@ end
         SM_avg = SM10_40; % Use the 10-40cm measurement as a default
         SM_avg(~isnan(SM5),1) = 0.333333.*SM5(~isnan(SM5),1) + 0.666666.*SM10_40(~isnan(SM5),1);
         use_flag = ones(length(SM5),1);
+
+
+    case 3 % Used for TPAg Pit C, where sensors only exist at 7cm and 20
+        % Need to add a new 30 cm averaging case for TPAg pit C, which has a sensor at 7 cm and 20 cm
+        % - 7 cm represents 0 - 13.5 [weight: 13.5/30]; 20 represents 13.5 to 30 [weight: 16.5/30];
+        SM7 = SM_in(:,1);
+        SM20 = SM_in(:,2);
+        
+        % depth-weighted average
+        SM_avg = (13.5/30)*SM7 + (16.5/30).*SM20;
+        use_flag = ~isnan(SM_avg);
 end
         
         
