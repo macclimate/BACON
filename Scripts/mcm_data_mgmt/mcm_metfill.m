@@ -290,23 +290,23 @@ SM_mapping = {
 for k = 1:1:size(Ts_mapping,1)
     try
         Ts(i).(Ts_mapping{k,1}) = master.data(:,mcm_find_right_col(master.labels,Ts_mapping{k,2}));
-           disp(['Variable ' Ts_mapping{k,2} ' not found for site ' site ' and year ' yr_str '.']);
     catch
         Ts(i).(Ts_mapping{k,1}) = NaN.*ones(length(temp(1).Ta),1);
+        disp(['Variable ' Ts_mapping{k,2} ' not found for site ' site ' and year ' yr_str '.']);
     end
     if isempty(Ts(i).(Ts_mapping{k,1}))==1; Ts(i).(Ts_mapping{k,1}) = NaN.*ones(length(temp(1).Ta),1);end
 end
 
 for k = 1:1:size(SM_mapping,1)
     try
-    SM(i).(SM_mapping{k,1}) = master.data(:,mcm_find_right_col(master.labels,SM_mapping{k,2}));
-    disp(['Variable ' SM_mapping{k,2} ' not found for site ' site ' and year ' yr_str '.']);
+        SM(i).(SM_mapping{k,1}) = master.data(:,mcm_find_right_col(master.labels,SM_mapping{k,2}));
     catch
         SM(i).(SM_mapping{k,1}) = NaN.*ones(length(temp(1).Ta),1);
+        disp(['Variable ' SM_mapping{k,2} ' not found for site ' site ' and year ' yr_str '.']);
     end
     if isempty(SM(i).(SM_mapping{k,1}))==1; SM(i).(SM_mapping{k,1}) = NaN.*ones(length(temp(1).Ta),1);end
 end
-    
+
 %%%%%%%%%%%%%%%%%%%%% 
     %%% Added 2021-01-01 by JJB - Loading SM data for TPAg
     if strcmp(site,'TPAg')==1 || strcmp(site,'TP_VDT')==1
